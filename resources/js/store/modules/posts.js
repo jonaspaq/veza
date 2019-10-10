@@ -4,14 +4,22 @@ export default {
     namespaced:true,
 
     state:{
-        posts:''
+        posts:[]
     },
     mutations:{
         SET_POSTS_DATA: function(state, data){
             state.posts = data
         },
         APPEND_TO_POSTS_DATA(state, data){
-            state.posts.unshift(data)
+
+            // Checks if posts is empty
+            // If empty, it uses unshift method, if not it uses push method
+            if(state.posts!==''){
+                state.posts.unshift(data)
+            }
+            else{
+                state.posts.push(data)
+            }
         }
     },
     actions:{
@@ -25,12 +33,10 @@ export default {
                     }
                 })
                 .then((response)=>{
-                    // console.log(response.data)
                     commit('SET_POSTS_DATA', response.data)
                     resolve(response)
                 })
                 .catch((err)=>{
-                    // console.log(err.response.data.message)
                     reject(err)
                 })
             });
@@ -49,7 +55,6 @@ export default {
                     }
                 })
                 .then((response)=>{
-                    // console.log(response.data.data)
                     commit('APPEND_TO_POSTS_DATA', response.data.data)
                     resolve(response)
                 })

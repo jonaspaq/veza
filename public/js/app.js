@@ -2360,7 +2360,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n*{\n    font-family: 'Nunito', sans-serif;\n}\n.btn{\n    background-image: linear-gradient(90deg, rgb(21, 42, 51), #203A43, #2C5364);\n    color: white;\n    border-color: transparent;\n}\n.btn:hover{\n    background-image: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255));\n    /* background-image: linear-gradient(90deg, rgb(43, 84, 102),rgb(63, 116, 133), rgb(75, 139, 167)); */\n    color: rgb(21, 42, 51);\n    /* color:white; */\n    border: 1px solid rgb(56, 108, 131);\n}\n.btn:active, .btn:focus{\n    border: 1px solid #2C5364 !important;\n    box-shadow: 0 0 4px #2C5364 !important;\n}\n.anchorColor, .anchorColor:hover{\n    color: #487E97;\n}\n.emptyBtn, .emptyBtn:active, .emptyBtn:focus{\n    outline-color: #2C5364;\n    border:0;\n    background: transparent;\n}\n", ""]);
+exports.push([module.i, "\n*{\r\n    font-family: 'Nunito', sans-serif;\n}\n.btn{\r\n    background-image: linear-gradient(90deg, rgb(21, 42, 51), #203A43, #2C5364);\r\n    color: white;\r\n    border-color: transparent;\n}\n.btn:hover{\r\n    background-image: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255));\r\n    /* background-image: linear-gradient(90deg, rgb(43, 84, 102),rgb(63, 116, 133), rgb(75, 139, 167)); */\r\n    color: rgb(21, 42, 51);\r\n    /* color:white; */\r\n    border: 1px solid rgb(56, 108, 131);\n}\n.btn:active, .btn:focus{\r\n    border: 1px solid #2C5364 !important;\r\n    box-shadow: 0 0 4px #2C5364 !important;\n}\n.anchorColor, .anchorColor:hover{\r\n    color: #487E97;\n}\n.emptyBtn, .emptyBtn:active, .emptyBtn:focus{\r\n    outline-color: #2C5364;\r\n    border:0;\r\n    background: transparent;\n}\r\n", ""]);
 
 // exports
 
@@ -21330,14 +21330,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    posts: ''
+    posts: []
   },
   mutations: {
     SET_POSTS_DATA: function SET_POSTS_DATA(state, data) {
       state.posts = data;
     },
     APPEND_TO_POSTS_DATA: function APPEND_TO_POSTS_DATA(state, data) {
-      state.posts.unshift(data);
+      // Checks if posts is empty
+      // If empty, it uses unshift method, if not it uses push method
+      if (state.posts !== '') {
+        state.posts.unshift(data);
+      } else {
+        state.posts.push(data);
+      }
     }
   },
   actions: {
@@ -21350,11 +21356,9 @@ __webpack_require__.r(__webpack_exports__);
             Authorization: 'Bearer ' + token
           }
         }).then(function (response) {
-          // console.log(response.data)
           commit('SET_POSTS_DATA', response.data);
           resolve(response);
         })["catch"](function (err) {
-          // console.log(err.response.data.message)
           reject(err);
         });
       });
@@ -21376,7 +21380,6 @@ __webpack_require__.r(__webpack_exports__);
 
           }
         }).then(function (response) {
-          // console.log(response.data.data)
           commit('APPEND_TO_POSTS_DATA', response.data.data);
           resolve(response);
         })["catch"](function (err) {
@@ -21412,8 +21415,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\user\Desktop\folder\vuespa\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\user\Desktop\folder\vuespa\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Paquibot\Desktop\Junjay Folder\myProjects\vuespa\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Paquibot\Desktop\Junjay Folder\myProjects\vuespa\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

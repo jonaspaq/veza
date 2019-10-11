@@ -4,7 +4,7 @@
             <div class="row justify-content-center">
                 <div class="col-12 d-flex justify-content-center">
                     <div class="border rounded-circle overflow-hidden" style="height:150px; width:150px;">
-                        <img src="https://img.icons8.com/clouds/2x/user.png" width="100%" alt="">
+                        <img src="/images/user.png" width="100%" alt="">
                     </div>
                 </div>
                 <div class="col-12 mt-2">

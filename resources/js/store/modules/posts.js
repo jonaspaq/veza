@@ -20,6 +20,9 @@ export default {
             else{
                 state.posts.push(data)
             }
+        },
+        REMOVE_ITEM_FROM_POSTS_DATA(state, post){
+            state.posts.splice(post, 1)
         }
     },
     actions:{
@@ -63,6 +66,9 @@ export default {
                 })
 
             });
+        },
+        deletePost({commit}, post){
+            commit('REMOVE_ITEM_FROM_POSTS_DATA', post)
         }
     },
     getters:{

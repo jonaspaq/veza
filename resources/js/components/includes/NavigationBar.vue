@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar navbar-expand-lg navbar-dark shadow" style="background-image: linear-gradient(90deg, #1B3A47, #203A43, #2C5364);">
     <a class="navbar-brand" href="#">
-        <img src="https://img.icons8.com/material/4ac144/256/user-male.png" width="30px" alt="">
+        <img src="/images/user-male.png" width="30px" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"    aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

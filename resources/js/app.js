@@ -2,6 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 
+// Bootstrap Files
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle'
+
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
@@ -28,16 +32,17 @@ const router = new VueRouter({
 
 // Middleware
 router.beforeEach((to, from, next) => {
+    // Checks if route needs authentication
     if(to.meta.requiresAuth == true){
         if(store.getters['auth/token']!='' && store.getters['auth/user']!=null){
-            // console.log('Auth')
             next()
         }
         else{
-            // console.log('Unauth')
             next({name:'login'})
         }
-    }else if(to.meta.guestOnly == true){
+    }
+    // Checks if route is for guest only, redirect to home if authenticated
+    else if(to.meta.guestOnly == true){
         if(store.getters['auth/token']!='' && store.getters['auth/user']!=null){
             next({name:'home'})
         }

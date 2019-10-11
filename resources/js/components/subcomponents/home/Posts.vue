@@ -3,21 +3,20 @@
         <div v-for="post in posts" v-bind:key="post.id" class="card-body bg-white border mt-2">
             <div class="row pl-2 pr-3">
                 <div class="border rounded-circle" style="height:40px; width:40px;">
-                    <img src="https://img.icons8.com/clouds/2x/user.png" width="100%">
+                    <img src="/images/user.png" width="100%">
                 </div>
                 <div class="col-8 align-self-center">
                     <span class="d-block">{{post.user.name}}</span>
                     <small class="d-block text-muted">{{post.created_at}}</small>
                 </div>
                 <div class="ml-auto">
-                    <!-- <button class="emptyBtn"><i class="fas fa-chevron-down"></i></button> -->
                     <div class="dropleft">
                         <button class="emptyBtn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="javascript:;">Edit</a>
-                            <a class="dropdown-item" href="javascript:;">Delete</a>
+                            <a class="dropdown-item" href="javascript:;" v-on:click.prevent="deletePost(post)">Delete</a>
                         </div>
                         </div>
                 </div>
@@ -48,6 +47,9 @@ export default {
             .catch((err)=>{
                 console.log('Getting post list failed!')
             })
+        },
+        deletePost(id){
+            this.$store.dispatch('posts/deletePost', id)
         }
     },
 

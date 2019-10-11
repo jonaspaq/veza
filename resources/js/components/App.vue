@@ -43,4 +43,7 @@ export default {
     border:0;
     background: transparent;
 }
+.dropdown-item:active{
+    background-color: #203A43;
+}
 </style>

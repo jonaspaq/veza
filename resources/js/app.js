@@ -2,9 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 
-// Bootstrap Files
+// Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.bundle'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import 'popper.js/dist/umd/popper'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)

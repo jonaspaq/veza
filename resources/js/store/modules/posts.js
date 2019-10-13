@@ -4,7 +4,7 @@ export default {
     namespaced:true,
 
     state:{
-        posts:[]
+        posts:[],
     },
     mutations:{
         SET_POSTS_DATA: function(state, data){
@@ -21,18 +21,18 @@ export default {
                 state.posts.push(data)
             }
         },
-        REMOVE_ITEM_FROM_POSTS_DATA(state, post){
-            state.posts.splice(post, 1)
-        }
+        REMOVE_ITEM_FROM_POSTS_DATA(state, post){  
+            state.posts.splice(state.posts.indexOf(post), 1)
+        },
     },
     actions:{
-        getAllPost({commit}, token){
+        getAllPost({commit, rootGetters}){
             return new Promise((resolve,reject)=>{
 
                 axios.get('/api/post', {
                     headers:{
                         Accept: 'application/json',
-                        Authorization:'Bearer '+token
+                        Authorization:'Bearer '+rootGetters['auth/token']
                     }
                 })
                 .then((response)=>{
@@ -67,8 +67,24 @@ export default {
 
             });
         },
-        deletePost({commit}, post){
-            commit('REMOVE_ITEM_FROM_POSTS_DATA', post)
+        deletePost({commit, rootGetters}, post){
+            return new Promise((resolve, reject)=>{
+
+                axios({
+                    headers:{
+                        Accept: 'application/json',
+                        Authorization:'Bearer '+rootGetters['auth/token'],
+                    },
+                    method:'DELETE',
+                    url:'/api/post/'+post.id,
+                })
+                .then((response)=>{
+                    commit('REMOVE_ITEM_FROM_POSTS_DATA', post)
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
+            })
         }
     },
     getters:{

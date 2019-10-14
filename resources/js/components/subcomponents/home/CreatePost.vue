@@ -1,15 +1,15 @@
 <template>
     <div class="card mt-2 mt-lg-0">
-        <div class="card-header">
+        <!-- <div class="card-header">
             Create post 
-        </div>
+        </div> -->
         <div class="card-body bg-white">
             <div class="row">
                 <div class="col-lg-12">
                     <form v-on:submit.prevent="addPost">
-                    <textarea v-model="content" placeholder="What's on your mind?" class="form-control"></textarea> 
+                    <textarea v-model="content" placeholder="How's your day?" class="form-control"></textarea> 
                     <div class="d-flex flex-row-reverse">
-                        <button v-if="!loadingStatus" class="btn d-block mt-2">Post</button>
+                        <button v-if="!loadingStatus" class="btn d-block mt-2 shadow-sm">Post</button>
                         <PleaseWaitLoader v-if="loadingStatus" />
                     </div>     
                     </form>                         
@@ -54,3 +54,8 @@ export default {
     }
 }
 </script>
+
+
+<style scoped>
+
+</style>

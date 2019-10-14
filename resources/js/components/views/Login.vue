@@ -3,10 +3,9 @@
     <div class="row justify-content-center">
         <div class="col-lg-4 mt-5">
             <div class="card">
-                <div class="card-header">
-                    <h4>Login</h4>
-                </div>
                 <div class="card-body">
+                    <h4>Login</h4> 
+                    <hr>
                     <p v-if="loginError" class="alert alert-danger">Incorrect email or password</p>
                     <form v-on:submit.prevent="login">
                         <div class="form-group">
@@ -25,7 +24,7 @@
                         </div>
                     </form>
                     <hr>
-                    <span class="d-block text-muted mt-3">Don't have an account? Register <router-link :to="{name:'register'}">here </router-link></span>
+                    <span class="d-block text-muted mt-3">Don't have an account? Register <router-link :to="{name:'register'}" class="anchorColor">here </router-link></span>
                 </div>
             </div>
         </div>

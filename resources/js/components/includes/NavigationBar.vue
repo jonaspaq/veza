@@ -1,12 +1,12 @@
 <template>
-<nav class="navbar navbar-expand-lg navbar-dark shadow" style="background-image: linear-gradient(90deg, #1B3A47, #203A43, #2C5364);">
-    <a class="navbar-brand" href="#">
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+    <a class="navbar-brand" href="javascript:;">
         <img src="/images/user-male.png" width="30px" alt="">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"    aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>   
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="menu">
         <ul class="navbar-nav mr-0 mr-lg-auto">
             <li class="nav-item active">
               <router-link :to="{name:'login'}" class="nav-link">Home</router-link>
@@ -64,3 +64,14 @@ export default {
     }
 }
 </script>
+
+
+<style scoped>
+.navbar{
+    /* background-image: linear-gradient(90deg, #1B3A47, #203A43, #2C5364) !important; */
+    background-image: linear-gradient(180deg, #54E4B1, #71E6BC);
+}
+.navbar-toggler{
+    outline-color: transparent;
+}
+</style>

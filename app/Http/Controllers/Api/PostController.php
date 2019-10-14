@@ -16,7 +16,6 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        // return $request->user();
         $data = Post::where('user_id', $request->user()->id)
                 ->with('user:id,name')
                 ->orderBy('id', 'desc')
@@ -26,7 +25,7 @@ class PostController extends Controller
         if( $count >= 1 ){
             return response()->json($data, 200);
         }else{
-            return response()->json(['message' => 'No posts yet!'], 404);
+            return response()->json(['message' => 'No posts yet'], 204);
         }
 
         // return $request->user()->token();

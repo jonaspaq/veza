@@ -5,30 +5,30 @@ export default {
 
     state:{
         posts:[],
+        toDeletePost:''
     },
     mutations:{
         SET_POSTS_DATA: function(state, data){
             state.posts = data
         },
         APPEND_TO_POSTS_DATA(state, data){
-
             // Checks if posts is empty
             // If empty, it uses unshift method, if not it uses push method
-            if(state.posts!==''){
-                state.posts.unshift(data)
-            }
-            else{
-                state.posts.push(data)
-            }
+            (state.posts) ? state.posts.unshift(data) : state.posts.push(data)
         },
         REMOVE_ITEM_FROM_POSTS_DATA(state, post){  
             state.posts.splice(state.posts.indexOf(post), 1)
         },
+        SET_TO_DELETE_POST(state, data){
+            state.toDeletePost = data;
+        },
+        UNSET_TO_DELETE_POST(state){
+            state.toDeletePost = null;
+        }
     },
     actions:{
         getAllPost({commit, rootGetters}){
             return new Promise((resolve,reject)=>{
-
                 axios.get('/api/post', {
                     headers:{
                         Accept: 'application/json',
@@ -36,7 +36,9 @@ export default {
                     }
                 })
                 .then((response)=>{
-                    commit('SET_POSTS_DATA', response.data)
+                    // Checks if it retrieved atleast 1 post
+                    // If yes it sets the posts state, if not it sets empty array
+                    (response.status==200) ? commit('SET_POSTS_DATA', response.data) : commit('SET_POSTS_DATA', [])
                     resolve(response)
                 })
                 .catch((err)=>{
@@ -67,29 +69,35 @@ export default {
 
             });
         },
-        deletePost({commit, rootGetters}, post){
+        deletePost({commit, getters, rootGetters}){
             return new Promise((resolve, reject)=>{
-
                 axios({
                     headers:{
                         Accept: 'application/json',
                         Authorization:'Bearer '+rootGetters['auth/token'],
                     },
                     method:'DELETE',
-                    url:'/api/post/'+post.id,
+                    url:'/api/post/'+getters.toDeletePost.id,
                 })
                 .then((response)=>{
-                    commit('REMOVE_ITEM_FROM_POSTS_DATA', post)
+                    resolve(response)
+                    commit('REMOVE_ITEM_FROM_POSTS_DATA', getters.toDeletePost)
                 })
                 .catch((err)=>{
-                    console.log(err)
+                    reject(err)
                 })
             })
+        },
+        toDeletePost({commit}, data){
+            commit('SET_TO_DELETE_POST', data)
         }
     },
     getters:{
         posts:(state)=>{
             return state.posts
+        },
+        toDeletePost(state){
+            return state.toDeletePost
         }
     }
 }

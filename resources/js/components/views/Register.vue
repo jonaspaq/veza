@@ -3,10 +3,9 @@
     <div class="row justify-content-center">
         <div class="col-lg-4 mt-5">
             <div class="card">
-                <div class="card-header">
-                    <h4>Register</h4>
-                </div>
                 <div class="card-body">
+                    <h4>Register account</h4> 
+                    <hr>
                     <form v-on:submit.prevent="register">
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -36,7 +35,7 @@
                         </div>
                     </form>
                     <hr>
-                    <span class="d-block text-muted mt-3">Click <router-link :to="{name:'login'}">here</router-link> to sign in</span>
+                    <span class="d-block text-muted mt-3">Have an account? Click <router-link :to="{name:'login'}" class="anchorColor">here</router-link> to sign in</span>
                 </div>
             </div>
         </div>

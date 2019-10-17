@@ -22,25 +22,16 @@ export default {
 *{
     font-family: 'Nunito', sans-serif;
 }
-.bg-primary{
-    background-color: rgb(84, 228, 177) !important;
-    color: white;
-}
-.btn-primary{
-    background-color: rgb(79, 212, 166);
+.btn{
+    background-color: rgb(84, 228, 177);
     border-radius: 2.5px;
     padding: 6px 20px;
     color: white;
     border-color: transparent;
 }
-.btn-primary:hover, .btn-primary:active, .btn-primary:focus{
-    background-color: rgb(84, 228, 177) !important;
-    border-color: rgb(84, 228, 177) !important;
+.btn:hover{
     color:white;
     opacity: 0.9;
-}
-.btn-primary:focus{
-    box-shadow: 0 0 0px 2px rgb(78, 212, 165) !important;   
 }
 .anchorColor, .anchorColor:hover{
     color: rgb(84, 228, 177);

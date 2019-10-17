@@ -7,22 +7,18 @@
             
         </div>
 
-            <!-- Post Delete Modal -->
+        <!-- Post Delete Modal -->
             <PostDeleteModal />
-
-            <!-- Post Edit Modal -->
-            <PostEditModal />
     </div>
 </template>
 
 <script>
 import PostItem from './PostItem'
 import PostDeleteModal from './PostDeleteModal'
-import PostEditModal from './PostEditModal'
 
 export default {
     name:'Posts',
-    components:{ PostItem, PostDeleteModal, PostEditModal },
+    components:{ PostItem, PostDeleteModal },
 
     created(){
         this.getAllPost()

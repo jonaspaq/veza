@@ -8,9 +8,9 @@
                 <div class="col-lg-12">
                     <form v-on:submit.prevent="addPost">
                     <textarea v-model="content" placeholder="How's your day?" class="form-control"></textarea> 
-                    <div class="d-flex flex-row-reverse pt-2">
-                        <button v-if="!loadingStatus" class="btn btn-primary d-block shadow-sm">Post</button>
-                        <PleaseWaitLoader v-if="loadingStatus" message="Posting. . ." />
+                    <div class="d-flex flex-row-reverse">
+                        <button v-if="!loadingStatus" class="btn d-block mt-2 shadow-sm">Post</button>
+                        <PleaseWaitLoader v-if="loadingStatus" />
                     </div>     
                     </form>                         
                 </div>   

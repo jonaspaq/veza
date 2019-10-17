@@ -5,8 +5,7 @@ export default {
 
     state:{
         posts:[],
-        toDeletePost:'',
-        toEditPost:''
+        toDeletePost:''
     },
     mutations:{
         SET_POSTS_DATA: function(state, data){
@@ -25,12 +24,6 @@ export default {
         },
         UNSET_TO_DELETE_POST(state){
             state.toDeletePost = null;
-        },
-        SET_TO_EDIT_POST(state, data){
-            state.toEditPost = Object.assign({}, data)
-        },
-        UNSET_TO_EDIT_POST(state){
-            state.toEditPost = ''
         }
     },
     actions:{
@@ -97,15 +90,14 @@ export default {
         },
         toDeletePost({commit}, data){
             commit('SET_TO_DELETE_POST', data)
-        },
-        toEditPost({commit}, data){
-            Object.freeze(data)
-            commit('SET_TO_EDIT_POST', data)
         }
     },
     getters:{
-        posts:(state)=>state.posts,
-        toDeletePost:(state) => state.toDeletePost,
-        toEditPost: (state) => state.toEditPost
+        posts:(state)=>{
+            return state.posts
+        },
+        toDeletePost(state){
+            return state.toDeletePost
+        }
     }
 }

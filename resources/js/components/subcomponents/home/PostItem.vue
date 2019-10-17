@@ -10,11 +10,11 @@
             </div>
             <div class="ml-auto">
                 <div class="dropdown dropleft">
-                    <button class="emptyBtn" type="button" data-toggle="dropdown" @click.prevent>
+                    <button class="emptyBtn" type="button" data-toggle="dropdown">
                         <i class="fas fa-chevron-down"></i> ...
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="javascript:;">Edit</a>
+                        <a class="dropdown-item" href="javascript:;" v-on:click.prevent="editPost(post)" data-toggle="modal" data-target="#postEditModal">Edit</a>
                         <a class="dropdown-item" href="javascript:;" v-on:click.prevent="deletePost(post)" data-toggle="modal" data-target="#postDeleteModal">Delete</a>
                     </div>
                     </div>
@@ -36,6 +36,9 @@ export default {
     methods:{
         deletePost(post){
             this.$store.dispatch('posts/toDeletePost', post)
+        },
+        editPost(post){
+            this.$store.dispatch('posts/toEditPost', post)
         }
     },
 }

@@ -69,7 +69,8 @@ export default {
 <style scoped>
 .navbar{
     /* background-image: linear-gradient(90deg, #1B3A47, #203A43, #2C5364) !important; */
-    background-image: linear-gradient(180deg, #54E4B1, #71E6BC);
+    /* background-image: linear-gradient(180deg, #54E4B1, #71E6BC); */
+    background-color: #71E6BC;
 }
 .navbar-toggler{
     outline-color: transparent;

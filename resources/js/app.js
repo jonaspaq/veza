@@ -10,8 +10,6 @@ import 'popper.js/dist/umd/popper'
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
-import App from './components/App'
-
 // Route List
 import routes from './routes'
 
@@ -56,6 +54,8 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+
+import App from './components/App'
 
 // Main Vue instance
 const app = new Vue({

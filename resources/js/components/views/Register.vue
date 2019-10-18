@@ -27,7 +27,7 @@
                             <input v-model="password_confirmation" type="password" class="form-control" id="password_confirmation" placeholder="Confirm password">
                             <small v-if="errors.password_confirmation" class="form-text text-danger">{{ String(errors.password_confirmation)}}</small>
                         </div>
-                        <button v-if="!loadingStatus" type="submit" class="btn btn-block">Register</button>
+                        <button v-if="!loadingStatus" type="submit" class="btn btn-primary btn-block">Register</button>
                         <div v-if="loadingStatus" class="d-flex align-items-center">
                             <div class="spinner-border spinner-border-sm text-info mr-1" role="status">
                             </div>

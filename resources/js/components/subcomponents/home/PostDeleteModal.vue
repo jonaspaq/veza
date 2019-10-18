@@ -6,13 +6,16 @@
                 <span class="text-center">Are you sure you want to delete this post?</span>
             </div>
             <hr class="m-0">
-            <div class="row no-gutters">
+            <div class="row no-gutters" v-show="!deleteStatus">
                 <div class="col d-flex justify-content-center">
-                    <button type="button" class="emptyBtn p-2 w-100" data-dismiss="modal" ref="cancelPostDeletion"> Cancel </button>
+                    <button type="button" class="emptyBtn p-2 w-100" data-dismiss="modal" @click="unsetDeletePost" ref="cancelPostDeletion"> Cancel </button>
                 </div>
                 <div class="col border-left d-flex justify-content-center">
-                    <button type="button" class="emptyBtn p-2 w-100 text-danger" :class="{'disableBtn':deleteStatus}" @click.prevent="deletePost()"> {{deleteText}} </button>
+                    <button type="button" class="emptyBtn p-2 w-100 anchorColor" @click.prevent="deletePost()"> Delete </button>
                 </div>
+            </div>
+            <div class="row d-flex justify-content-center py-2" v-if="deleteStatus">
+                <PleaseWaitLoader message="Deleting post. . ." />
             </div>
             </div>
         </div>
@@ -20,12 +23,14 @@
 </template>
 
 <script>
+import PleaseWaitLoader from '../PleaseWaitLoader'
+
 export default {
     name:'PostDeleteModal',
+    components: { PleaseWaitLoader },
 
     data(){
         return {
-            deleteText: 'Delete',
             deleteStatus: false
         }
     },
@@ -46,6 +51,9 @@ export default {
                 self.deleteText = 'Delete'
                 console.log('Something went wrong')
             })
+        },
+        unsetDeletePost(){
+            this.$store.commit('posts/UNSET_TO_DELETE_POST')
         }
     },
 
@@ -58,9 +66,6 @@ export default {
 </script>
 
 <style scoped>
-.disableBtn{
-    pointer-events: none;
-}
 .modalShadow{
     box-shadow: 0 0 2px rgb(84, 228, 177);
 }

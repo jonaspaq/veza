@@ -16,7 +16,7 @@
                             <label for="password">Password</label>
                             <input v-model="password" type="password" class="form-control" id="password" placeholder="Password" required>
                         </div>
-                        <button v-if="!loadingStatus" type="submit" class="btn btn-block">Sign In</button>
+                        <button v-if="!loadingStatus" type="submit" class="btn btn-primary btn-block">Sign In</button>
                         <div v-if="loadingStatus" class="d-flex align-items-center">
                             <div class="spinner-border spinner-border-sm text-info mr-1" role="status">
                             </div>

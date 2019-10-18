@@ -5,7 +5,8 @@ export default {
 
     state:{
         posts:[],
-        toDeletePost:''
+        toDeletePost:'',
+        toEditPost:''
     },
     mutations:{
         SET_POSTS_DATA: function(state, data){
@@ -24,7 +25,14 @@ export default {
         },
         UNSET_TO_DELETE_POST(state){
             state.toDeletePost = null;
-        }
+        },
+        SET_TO_EDIT_POST(state, data){
+            state.toEditPost = null
+            state.toEditPost = Object.assign({}, data);
+        },
+        UNSET_TO_EDIT_POST(state){
+            state.toEditPost = '';
+        },
     },
     actions:{
         getAllPost({commit, rootGetters}){
@@ -69,6 +77,9 @@ export default {
 
             });
         },
+        toDeletePost({commit}, data){
+            commit('SET_TO_DELETE_POST', data)
+        },
         deletePost({commit, getters, rootGetters}){
             return new Promise((resolve, reject)=>{
                 axios({
@@ -88,16 +99,35 @@ export default {
                 })
             })
         },
-        toDeletePost({commit}, data){
-            commit('SET_TO_DELETE_POST', data)
+        toEditPost({commit}, data){
+            commit('SET_TO_EDIT_POST', data)
+        },
+        editPost({commit, getters, rootGetters}, data){
+            return new Promise((resolve, reject) => {
+                axios({
+                    headers:{
+                        Accept: 'application/json',
+                        Authorization:'Bearer '+rootGetters['auth/token'],
+                    },
+                    method:'PATCH',
+                    url:'/api/post/'+getters.toEditPost.id,
+                    data:{
+                        id: getters.toEditPost.id,
+                        content: getters.toEditPost.content
+                    }
+                })
+                .then((response)=>{
+                    resolve(response)
+                })
+                .catch((err)=>{
+                    reject(err)
+                })
+            })
         }
     },
     getters:{
-        posts:(state)=>{
-            return state.posts
-        },
-        toDeletePost(state){
-            return state.toDeletePost
-        }
+        posts: (state) => state.posts,
+        toDeletePost: (state) => state.toDeletePost,
+        toEditPost: (state) => state.toEditPost
     }
 }

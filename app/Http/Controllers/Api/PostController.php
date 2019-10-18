@@ -101,7 +101,7 @@ class PostController extends Controller
      */
     public function update(Posts $request, $id)
     {
-        //Warning! when using this function please add (_method: PUT) in parameters of http request
+        //Warning! when using this function please add (_method: PUT or PATCH) in parameters of http request
         $dataUpdate = $request->validated();
 
         // Checks if post exist
@@ -114,8 +114,10 @@ class PostController extends Controller
 
         $presentData->update($dataUpdate);
 
-        if($presentData){
-            return response()->json(['message' => 'Successful Updating Post', 'data' => $presentData], 200);
+        $updatedData = Post::where('id', $presentData->id)->with('user')->first();
+
+        if($updatedData){
+            return response()->json(['message' => 'Successful Updating Post', 'data' => $updatedData], 200);
         }
         else{
             return reponse()->json(['message' => 'Post not found or user unauthorized'], 401);

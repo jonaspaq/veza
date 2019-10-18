@@ -11,6 +11,7 @@
 <script>
 import NavigationBar from './includes/NavigationBar'
 
+
 export default {
     name: 'App',
     components:{ NavigationBar },
@@ -22,16 +23,25 @@ export default {
 *{
     font-family: 'Nunito', sans-serif;
 }
-.btn{
+.bg-primary{
+    background-color: rgb(84, 228, 177) !important;
+    color: white;
+}
+.btn-primary{
     background-color: rgb(84, 228, 177);
     border-radius: 2.5px;
     padding: 6px 20px;
     color: white;
     border-color: transparent;
 }
-.btn:hover{
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+    background-color: rgb(84, 228, 177) !important;
+    border-color: transparent !important;
     color:white;
     opacity: 0.9;
+}
+.btn-primary:focus{
+    box-shadow: 0 0 0 1.5px rgb(78, 212, 166) !important;
 }
 .anchorColor, .anchorColor:hover{
     color: rgb(84, 228, 177);

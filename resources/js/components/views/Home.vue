@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-lg-3">
-                <div class="card-body bg-white rounded shadow-sm">
+                <div class="card-body bg-white rounded shadow-sm sticky-top" style="top:20px">
                     <span>Coming soon! <i class="fas fa-smile-beam"></i></span>
                 </div>
             </div>

@@ -20,6 +20,9 @@ export default {
         REMOVE_ITEM_FROM_POSTS_DATA(state, post){  
             state.posts.splice(state.posts.indexOf(post), 1)
         },
+        EDIT_ITEM_FROM_POSTS_DATA(state, data){
+            state.posts.splice(data.indexToBeDeleted, 1, data.editedPost)
+        },
         SET_TO_DELETE_POST(state, data){
             state.toDeletePost = data;
         },
@@ -29,6 +32,7 @@ export default {
         SET_TO_EDIT_POST(state, data){
             state.toEditPost = null
             state.toEditPost = Object.assign({}, data);
+            state.toEditPost.indexToEdit = state.posts.indexOf(data) // Creates a property with value of the index of the post based in the vuex state
         },
         UNSET_TO_EDIT_POST(state){
             state.toEditPost = '';
@@ -118,6 +122,10 @@ export default {
                 })
                 .then((response)=>{
                     resolve(response)
+                    commit('EDIT_ITEM_FROM_POSTS_DATA', {
+                        indexToBeDeleted: getters.toEditPost.indexToEdit,
+                        editedPost: response.data.data
+                    })
                 })
                 .catch((err)=>{
                     reject(err)

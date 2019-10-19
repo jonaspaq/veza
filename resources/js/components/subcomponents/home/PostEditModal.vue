@@ -13,8 +13,8 @@
                     <textarea v-model="toEditPost.content" v-on:keyup="setTextAreaHeightOnType" ref="setTextAreaHeightOnType" placeholder="How's your day?" class="form-control"></textarea> 
                 </form>
             </div>
-            <div class="modal-footer" v-if="!updateStatus">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="modal-footer" v-show="!updateStatus">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="unsetEditPost" ref="cancelPostEdit"> Cancel </button>
                 <button type="submit" class="btn btn-primary" @click="editPost">Save changes</button>
             </div>
             <div class="modal-footer" v-if="updateStatus">
@@ -57,13 +57,16 @@ export default {
             self.updateStatus = true
             self.$store.dispatch('posts/editPost')
             .then((response)=>{
+                self.$refs.cancelPostEdit.click()
                 self.updateStatus = false
-                console.table(response.data.data)
             })
             .catch((err)=>{
                 self.updateStatus = false
                 console.log('Something went wrong')
             })
+        },
+        unsetEditPost(){
+            this.$store.commit('posts/UNSET_TO_EDIT_POST')
         }
     },
 

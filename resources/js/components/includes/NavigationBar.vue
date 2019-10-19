@@ -30,7 +30,12 @@
                 <button class="btn my-2 my-sm-0" type="submit" v-on:click.prevent>Search</button>
             </form> -->
         </ul>
-        <span v-if="loginStatus" class="text-white"> Hello, {{ user.name }} </span>
+        <span v-if="loginStatus" class="text-white d-flex align-items-center"> 
+            <div class="border rounded-circle bg-white mr-2" style="height:35px; width:35px;">
+                <img src="/images/user.png" width="100%">
+            </div>
+            {{ user.name }} 
+        </span>
         <a v-if="loginStatus" class="nav-link text-white px-0 px-lg-3" v-on:click.prevent="logout" href="javascript:;"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 </nav>

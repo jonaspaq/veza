@@ -114,7 +114,7 @@ class PostController extends Controller
 
         $presentData->update($dataUpdate);
 
-        $updatedData = Post::where('id', $presentData->id)->with('user')->first();
+        $updatedData = Post::where('id', $presentData->id)->with('user:id,name')->first();
 
         if($updatedData){
             return response()->json(['message' => 'Successful Updating Post', 'data' => $updatedData], 200);

@@ -1906,6 +1906,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'NavigationBar',
   methods: {
@@ -1999,7 +2004,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addPost: function addPost() {
-      alert(window.location.href);
       this.loadingStatus = true;
       var self = this;
       this.$store.dispatch('posts/addPost', {
@@ -2194,12 +2198,15 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
       self.updateStatus = true;
       self.$store.dispatch('posts/editPost').then(function (response) {
+        self.$refs.cancelPostEdit.click();
         self.updateStatus = false;
-        console.table(response.data.data);
       })["catch"](function (err) {
         self.updateStatus = false;
         console.log('Something went wrong');
       });
+    },
+    unsetEditPost: function unsetEditPost() {
+      this.$store.commit('posts/UNSET_TO_EDIT_POST');
     }
   },
   computed: {
@@ -19933,9 +19940,16 @@ var render = function() {
           ]),
           _vm._v(" "),
           _vm.loginStatus
-            ? _c("span", { staticClass: "text-white" }, [
-                _vm._v(" Hello, " + _vm._s(_vm.user.name) + " ")
-              ])
+            ? _c(
+                "span",
+                { staticClass: "text-white d-flex align-items-center" },
+                [
+                  _vm._m(2),
+                  _vm._v(
+                    "\r\n            " + _vm._s(_vm.user.name) + " \r\n        "
+                  )
+                ]
+              )
             : _vm._e(),
           _vm._v(" "),
           _vm.loginStatus
@@ -19995,6 +20009,19 @@ var staticRenderFns = [
         }
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "border rounded-circle bg-white mr-2",
+        staticStyle: { height: "35px", width: "35px" }
+      },
+      [_c("img", { attrs: { src: "/images/user.png", width: "100%" } })]
     )
   }
 ]
@@ -20136,33 +20163,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-fluid m-0 p-0" }, [
-    _c("div", { staticClass: "card-body bg-white rounded shadow" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-12 mt-2" }, [
-          _c(
-            "div",
-            { staticClass: "col d-flex justify-content-center" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "text-dark text-decoration-none",
-                  attrs: { to: "/walapa" }
-                },
-                [_c("h5", [_vm._v("User Name")])]
-              )
-            ],
-            1
-          ),
+  return _c(
+    "div",
+    {
+      staticClass: "container-fluid m-0 p-0 sticky-top",
+      staticStyle: { top: "20px" }
+    },
+    [
+      _c("div", { staticClass: "card-body bg-white rounded shadow" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _vm._m(0),
           _vm._v(" "),
-          _vm._m(1)
+          _c("div", { staticClass: "col-12 mt-2" }, [
+            _c(
+              "div",
+              { staticClass: "col d-flex justify-content-center" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "text-dark text-decoration-none",
+                    attrs: { to: "/walapa" }
+                  },
+                  [_c("h5", [_vm._v("User Name")])]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(1)
+          ])
         ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -20395,28 +20429,42 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          !_vm.updateStatus
-            ? _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "submit" },
-                    on: { click: _vm.editPost }
-                  },
-                  [_vm._v("Save changes")]
-                )
-              ])
-            : _vm._e(),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.updateStatus,
+                  expression: "!updateStatus"
+                }
+              ],
+              staticClass: "modal-footer"
+            },
+            [
+              _c(
+                "button",
+                {
+                  ref: "cancelPostEdit",
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button", "data-dismiss": "modal" },
+                  on: { click: _vm.unsetEditPost }
+                },
+                [_vm._v(" Cancel ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "submit" },
+                  on: { click: _vm.editPost }
+                },
+                [_vm._v("Save changes")]
+              )
+            ]
+          ),
           _vm._v(" "),
           _vm.updateStatus
             ? _c(
@@ -20506,10 +20554,7 @@ var render = function() {
                 }
               }
             },
-            [
-              _c("i", { staticClass: "fas fa-chevron-down" }),
-              _vm._v(" ...\n                ")
-            ]
+            [_c("i", { staticClass: "fas fa-chevron-down" })]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "dropdown-menu" }, [
@@ -20658,12 +20703,19 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-lg-3" }, [
-      _c("div", { staticClass: "card-body bg-white rounded shadow-sm" }, [
-        _c("span", [
-          _vm._v("Coming soon! "),
-          _c("i", { staticClass: "fas fa-smile-beam" })
-        ])
-      ])
+      _c(
+        "div",
+        {
+          staticClass: "card-body bg-white rounded shadow-sm sticky-top",
+          staticStyle: { top: "20px" }
+        },
+        [
+          _c("span", [
+            _vm._v("Coming soon! "),
+            _c("i", { staticClass: "fas fa-smile-beam" })
+          ])
+        ]
+      )
     ])
   }
 ]
@@ -38319,6 +38371,9 @@ __webpack_require__.r(__webpack_exports__);
     REMOVE_ITEM_FROM_POSTS_DATA: function REMOVE_ITEM_FROM_POSTS_DATA(state, post) {
       state.posts.splice(state.posts.indexOf(post), 1);
     },
+    EDIT_ITEM_FROM_POSTS_DATA: function EDIT_ITEM_FROM_POSTS_DATA(state, data) {
+      state.posts.splice(data.indexToBeDeleted, 1, data.editedPost);
+    },
     SET_TO_DELETE_POST: function SET_TO_DELETE_POST(state, data) {
       state.toDeletePost = data;
     },
@@ -38328,6 +38383,7 @@ __webpack_require__.r(__webpack_exports__);
     SET_TO_EDIT_POST: function SET_TO_EDIT_POST(state, data) {
       state.toEditPost = null;
       state.toEditPost = Object.assign({}, data);
+      state.toEditPost.indexToEdit = state.posts.indexOf(data); // Creates a property with value of the index of the post based in the vuex state
     },
     UNSET_TO_EDIT_POST: function UNSET_TO_EDIT_POST(state) {
       state.toEditPost = '';
@@ -38423,6 +38479,10 @@ __webpack_require__.r(__webpack_exports__);
           }
         }).then(function (response) {
           resolve(response);
+          commit('EDIT_ITEM_FROM_POSTS_DATA', {
+            indexToBeDeleted: getters.toEditPost.indexToEdit,
+            editedPost: response.data.data
+          });
         })["catch"](function (err) {
           reject(err);
         });

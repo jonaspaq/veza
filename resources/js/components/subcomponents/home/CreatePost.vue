@@ -36,7 +36,6 @@ export default {
     },
     methods:{
         addPost(){
-            alert(window.location.href)
             this.loadingStatus = true
             let self = this
             this.$store.dispatch('posts/addPost', {

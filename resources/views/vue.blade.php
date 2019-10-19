@@ -14,7 +14,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
 
-    <!-- <script src="https://kit.fontawesome.com/0c7710f8d0.js" crossorigin="anonymous"></script> -->
+    <script src="https://kit.fontawesome.com/0c7710f8d0.js" crossorigin="anonymous"></script>
     
     <style>
     *{

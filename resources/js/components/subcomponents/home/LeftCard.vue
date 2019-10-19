@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid m-0 p-0">
+    <div class="container-fluid m-0 p-0 sticky-top" style="top:20px">
         <div class="card-body bg-white rounded shadow">
             <div class="row justify-content-center">
                 <div class="col-12 d-flex justify-content-center">

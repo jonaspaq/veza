@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-lg-3">
-                <div class="card-body bg-white rounded shadow-sm sticky-top" style="top:20px">
+                <div class="card-body bg-white rounded shadow-sm d-none d-lg-block position-lg-sticky" style="top:80px">
                     <span>Coming soon! <i class="fas fa-smile-beam"></i></span>
                 </div>
             </div>
@@ -49,4 +49,12 @@ export default {
 
 
 <style scoped>
+
+ /* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .position-lg-sticky{
+        position:sticky;
+        top: 80px;
+    }
+}
 </style>

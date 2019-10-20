@@ -1,5 +1,5 @@
 <template>
-<nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top">
     <a class="navbar-brand" href="javascript:;">
         <img src="/images/user-male.png" width="30px" alt="">
     </a>
@@ -31,7 +31,7 @@
             </form> -->
         </ul>
         <span v-if="loginStatus" class="text-white d-flex align-items-center"> 
-            <div class="border rounded-circle bg-white mr-2" style="height:35px; width:35px;">
+            <div class="border rounded-circle bg-white mr-2" style="height:28px; width:28px;">
                 <img src="/images/user.png" width="100%">
             </div>
             {{ user.name }} 
@@ -75,6 +75,7 @@ export default {
 .navbar{
     /* background-image: linear-gradient(90deg, #1B3A47, #203A43, #2C5364) !important; */
     background-image: linear-gradient(180deg, #54E4B1, #71E6BC);
+    z-index: 100;
 }
 .navbar-toggler{
     outline-color: transparent;

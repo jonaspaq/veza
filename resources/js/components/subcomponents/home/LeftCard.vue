@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid m-0 p-0 sticky-top" style="top:20px">
+    <div class="container-fluid m-0 p-0 position-lg-sticky d-none d-lg-block">
         <div class="card-body bg-white rounded shadow">
             <div class="row justify-content-center">
                 <div class="col-12 d-flex justify-content-center">
@@ -26,3 +26,14 @@ export default {
     name:'LeftCard'
 }
 </script>
+
+<style scoped>
+
+ /* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .position-lg-sticky{
+        position:sticky;
+        top: 80px;
+    }
+}
+</style>

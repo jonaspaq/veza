@@ -1,5 +1,5 @@
 <template>
-<div class="container-fluid m-0 p-0 vh-100">
+<div class="container-fluid m-0 p-0 vh-100 overflow-auto">
     <NavigationBar/>
 
     <div class="container-fluid m-0 p-0 viewHolderFluid mx-auto">

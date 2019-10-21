@@ -20,9 +20,7 @@
                     </div>
             </div>
         </div>
-        <div class="row pl-3 pr-3 mt-2 text-break">
-            {{post.content}} 
-        </div>
+        <div class="row pl-3 pr-3 mt-2 text-break">{{post.content}}</div>
     </div>
 </template>
 
@@ -47,5 +45,8 @@ export default {
 <style scoped>
 .disableBtn{
     pointer-events: none;
+}
+.text-break{
+     white-space: pre-wrap;
 }
 </style>

@@ -1,6 +1,7 @@
 import Login from './components/views/Login'
 import Register from './components/views/Register'
 import Home from './components/views/Home'
+import EditProfile from './components/views/EditProfile'
 
 export default [
     {
@@ -25,6 +26,14 @@ export default [
         component: Register,
         meta:{
             guestOnly: true
+        }
+    },
+    {
+        path: '/user/edit/profile',
+        name: 'editProfile',
+        component: EditProfile,
+        meta:{
+            requiresAuth: true
         }
     },
     {

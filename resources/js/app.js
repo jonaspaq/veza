@@ -19,6 +19,8 @@ import routes from './routes'
 import auth from './store/modules/auth.js'
 import posts from './store/modules/posts.js'
 
+
+
 const store = new Vuex.Store({
     modules: {
         auth: auth,
@@ -56,7 +58,6 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-
 // Main Vue instance
 const app = new Vue({
     el: '#app',
@@ -64,5 +65,5 @@ const app = new Vue({
         App
     },
     router,
-    store
+    store,
 });

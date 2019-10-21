@@ -3,6 +3,7 @@
         <div class="row mt-4">
 
             <div class="col-lg-3">
+                <!-- Left side of home  -->
                 <LeftCard />
             </div>
 
@@ -16,9 +17,7 @@
             </div>
 
             <div class="col-lg-3">
-                <div class="card-body bg-white rounded shadow-sm d-none d-lg-block position-lg-sticky" style="top:80px">
-                    <span>Coming soon! <i class="fas fa-smile-beam"></i></span>
-                </div>
+                <RightCard />
             </div>
 
         </div>
@@ -27,34 +26,19 @@
 
 <script>
 import LeftCard from '../subcomponents/home/LeftCard'
+import RightCard from '../subcomponents/home/RightCard'
 import Posts from '../subcomponents/home/Posts'
 import CreatePost from '../subcomponents/home/CreatePost'
 
 export default {
     name:'Home',
+
     components:{
-        Posts, CreatePost, LeftCard
+        Posts, CreatePost, LeftCard, RightCard
     },
 
     beforeCreate: function(){
         this.$store.dispatch('auth/setUserDetails')
-    },
-
-    computed: {
-
     }
-
 }
 </script>
-
-
-<style scoped>
-
- /* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-    .position-lg-sticky{
-        position:sticky;
-        top: 80px;
-    }
-}
-</style>

@@ -11,10 +11,9 @@
 <script>
 import NavigationBar from './includes/NavigationBar'
 
-
 export default {
     name: 'App',
-    components:{ NavigationBar },
+    components:{ NavigationBar }
 }
 </script>
 
@@ -46,6 +45,9 @@ export default {
 .anchorColor, .anchorColor:hover{
     color: rgb(84, 228, 177);
 }
+.anchorUnstyled, .anchorUnstyled:hover{
+    text-decoration:none;
+}
 .emptyBtn, .emptyBtn:active, .emptyBtn:focus{
     outline-color: rgb(84, 228, 177);
     border:0;
@@ -53,6 +55,10 @@ export default {
 }
 .dropdown-item:active{
     background-color: rgb(84, 228, 177);
+}
+
+.text-danger{
+    color:rgb(230, 142, 142) !important;
 }
 </style>
 

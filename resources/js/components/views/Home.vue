@@ -1,9 +1,9 @@
 <template>
-    <div class="container-fluid" v-show="userDetailsLoaded">
+    <div class="container-fluid">
         <div class="row mt-4">
 
             <div class="col-lg-3">
-                <!-- Left side of home  -->
+                <!-- Left side of home component  -->
                 <LeftCard />
             </div>
 
@@ -17,6 +17,7 @@
             </div>
 
             <div class="col-lg-3">
+                <!-- Right side of home component  -->
                 <RightCard />
             </div>
 
@@ -35,22 +36,5 @@ export default {
     components:{
         Posts, CreatePost, LeftCard, RightCard
     },
-
-    data() {
-        return {
-            userDetailsLoaded: false
-        }
-    },
-
-    beforeCreate: function() {
-        this.$store.dispatch('auth/setUserDetails')
-        .then(response => {
-            this.userDetailsLoaded = true
-        })
-        .catch(err => {
-            localStorage.removeItem('Session')
-            location.reload()
-        })
-    }
 }
 </script>

@@ -2505,6 +2505,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2516,21 +2517,6 @@ __webpack_require__.r(__webpack_exports__);
     CreatePost: _subcomponents_home_CreatePost__WEBPACK_IMPORTED_MODULE_3__["default"],
     LeftCard: _subcomponents_home_LeftCard__WEBPACK_IMPORTED_MODULE_0__["default"],
     RightCard: _subcomponents_home_RightCard__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
-  data: function data() {
-    return {
-      userDetailsLoaded: false
-    };
-  },
-  beforeCreate: function beforeCreate() {
-    var _this = this;
-
-    this.$store.dispatch('auth/setUserDetails').then(function (response) {
-      _this.userDetailsLoaded = true;
-    })["catch"](function (err) {
-      localStorage.removeItem('Session');
-      location.reload();
-    });
   }
 });
 
@@ -2581,9 +2567,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Login',
-  beforCreate: function beforCreate() {
-    this.$store.commit('auth/UNSET_USER_DETAILS');
-  },
   data: function data() {
     return {
       email: '',
@@ -21204,34 +21187,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      directives: [
-        {
-          name: "show",
-          rawName: "v-show",
-          value: _vm.userDetailsLoaded,
-          expression: "userDetailsLoaded"
-        }
-      ],
-      staticClass: "container-fluid"
-    },
-    [
-      _c("div", { staticClass: "row mt-4" }, [
-        _c("div", { staticClass: "col-lg-3" }, [_c("LeftCard")], 1),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-lg-6" },
-          [_c("CreatePost"), _vm._v(" "), _c("Posts")],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-3" }, [_c("RightCard")], 1)
-      ])
-    ]
-  )
+  return _c("div", { staticClass: "container-fluid" }, [
+    _c("div", { staticClass: "row mt-4" }, [
+      _c("div", { staticClass: "col-lg-3" }, [_c("LeftCard")], 1),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-lg-6" },
+        [_c("CreatePost"), _vm._v(" "), _c("Posts")],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3" }, [_c("RightCard")], 1)
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -37733,8 +37702,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 router.beforeEach(function (to, from, next) {
   // Checks if route needs authentication
   if (to.meta.requiresAuth == true) {
-    if (store.getters['auth/token'] != '' && store.getters['auth/user'] != null) {
-      next();
+    if (store.getters['auth/token'] !== '') {
+      // Checks if user details is set and if token is revoked
+      // If token is revoked redirect to login page
+      if (store.getters['auth/user'].id != null) {
+        next();
+      } else {
+        store.dispatch('auth/setUserDetails').then(function (response) {
+          next();
+        })["catch"](function (err) {
+          localStorage.removeItem('Session');
+          location.replace("/user/login?auth=false");
+        });
+      }
     } else {
       next({
         name: 'login'
@@ -37742,7 +37722,7 @@ router.beforeEach(function (to, from, next) {
     }
   } // Checks if route is for guest only, redirect to home if authenticated
   else if (to.meta.guestOnly == true) {
-      if (store.getters['auth/token'] != '' && store.getters['auth/user'] != null) {
+      if (store.getters['auth/token'] !== '') {
         next({
           name: 'home'
         });

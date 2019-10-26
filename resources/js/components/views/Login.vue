@@ -36,10 +36,6 @@
 export default {
     name: 'Login',
 
-    beforCreate(){
-        this.$store.commit('auth/UNSET_USER_DETAILS')
-    },
-
     data(){
         return {
             email:'',

@@ -58,22 +58,24 @@ export default {
             });
         },
         setUserDetails({commit, getters}){
-            axios.get('/api/userDetails',{
-                headers:{
-                    Accept:'application/json',
-                    Authorization:'Bearer '+getters.token
-                }
-            })
-            .then((response)=>{
-                commit('SET_USER_DETAILS', response.data)
-            })
-            .catch((err)=>{
-                console.log(err)
+            return new Promise((resolve, reject)=>{
+                axios.get('/api/userDetails',{
+                    headers:{
+                        Accept:'application/json',
+                        Authorization:'Bearer '+getters.token
+                    }
+                })
+                .then((response)=>{
+                    resolve(response)
+                    commit('SET_USER_DETAILS', response.data)
+                })
+                .catch((err)=>{
+                    reject(err)
+                })
             })
         },
         initiateLogout({commit}){
             commit('UNSET_ACCESS_TOKEN')
-            commit('UNSET_USER_DETAILS')
         }
     },
     
@@ -91,7 +93,7 @@ export default {
             return state.loginErrors
         },
         loginStatus(state){
-            return (state.user && state.access_token) ? true : false
+            return (state.user) ? true : false
         }
     }
 }

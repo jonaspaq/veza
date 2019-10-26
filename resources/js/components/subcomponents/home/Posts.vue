@@ -33,7 +33,7 @@ export default {
             let self = this
             this.$store.dispatch('posts/getAllPost')
             .catch((err)=>{
-                console.log('Something went wrong')
+                console.log(err)
             })
         }
     },

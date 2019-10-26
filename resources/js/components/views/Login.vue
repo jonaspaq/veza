@@ -35,9 +35,14 @@
 <script>
 export default {
     name: 'Login',
+
+    beforCreate(){
+        this.$store.commit('auth/UNSET_USER_DETAILS')
+    },
+
     data(){
         return {
-            email:'nbrown@example.org',
+            email:'ieffertz@example.com',
             password:'password'
         }
     },

@@ -2353,7 +2353,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllPost: function getAllPost() {
       var self = this;
       this.$store.dispatch('posts/getAllPost')["catch"](function (err) {
-        console.log('Something went wrong');
+        console.log(err);
       });
     }
   },
@@ -2517,8 +2517,20 @@ __webpack_require__.r(__webpack_exports__);
     LeftCard: _subcomponents_home_LeftCard__WEBPACK_IMPORTED_MODULE_0__["default"],
     RightCard: _subcomponents_home_RightCard__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  data: function data() {
+    return {
+      userDetailsLoaded: false
+    };
+  },
   beforeCreate: function beforeCreate() {
-    this.$store.dispatch('auth/setUserDetails');
+    var _this = this;
+
+    this.$store.dispatch('auth/setUserDetails').then(function (response) {
+      _this.userDetailsLoaded = true;
+    })["catch"](function (err) {
+      localStorage.removeItem('Session');
+      location.reload();
+    });
   }
 });
 
@@ -2569,9 +2581,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Login',
+  beforCreate: function beforCreate() {
+    this.$store.commit('auth/UNSET_USER_DETAILS');
+  },
   data: function data() {
     return {
-      email: 'nbrown@example.org',
+      email: 'ieffertz@example.com',
       password: 'password'
     };
   },
@@ -21189,20 +21204,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-fluid" }, [
-    _c("div", { staticClass: "row mt-4" }, [
-      _c("div", { staticClass: "col-lg-3" }, [_c("LeftCard")], 1),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-lg-6" },
-        [_c("CreatePost"), _vm._v(" "), _c("Posts")],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-3" }, [_c("RightCard")], 1)
-    ])
-  ])
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.userDetailsLoaded,
+          expression: "userDetailsLoaded"
+        }
+      ],
+      staticClass: "container-fluid"
+    },
+    [
+      _c("div", { staticClass: "row mt-4" }, [
+        _c("div", { staticClass: "col-lg-3" }, [_c("LeftCard")], 1),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-lg-6" },
+          [_c("CreatePost"), _vm._v(" "), _c("Posts")],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-3" }, [_c("RightCard")], 1)
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38971,21 +39000,23 @@ __webpack_require__.r(__webpack_exports__);
     setUserDetails: function setUserDetails(_ref2) {
       var commit = _ref2.commit,
           getters = _ref2.getters;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/userDetails', {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + getters.token
-        }
-      }).then(function (response) {
-        commit('SET_USER_DETAILS', response.data);
-      })["catch"](function (err) {
-        console.log(err);
+      return new Promise(function (resolve, reject) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/userDetails', {
+          headers: {
+            Accept: 'application/json',
+            Authorization: 'Bearer ' + getters.token
+          }
+        }).then(function (response) {
+          resolve(response);
+          commit('SET_USER_DETAILS', response.data);
+        })["catch"](function (err) {
+          reject(err);
+        });
       });
     },
     initiateLogout: function initiateLogout(_ref3) {
       var commit = _ref3.commit;
       commit('UNSET_ACCESS_TOKEN');
-      commit('UNSET_USER_DETAILS');
     }
   },
   getters: {
@@ -39002,7 +39033,7 @@ __webpack_require__.r(__webpack_exports__);
       return state.loginErrors;
     },
     loginStatus: function loginStatus(state) {
-      return state.user && state.access_token ? true : false;
+      return state.user ? true : false;
     }
   }
 });
@@ -39191,8 +39222,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Nexseed\Desktop\vuespa\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Nexseed\Desktop\vuespa\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Paquibot\Desktop\JunjayFolder\myProjects\vuespa\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Paquibot\Desktop\JunjayFolder\myProjects\vuespa\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

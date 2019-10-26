@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid" v-show="userDetailsLoaded">
         <div class="row mt-4">
 
             <div class="col-lg-3">
@@ -32,13 +32,25 @@ import CreatePost from '../subcomponents/home/CreatePost'
 
 export default {
     name:'Home',
-
     components:{
         Posts, CreatePost, LeftCard, RightCard
     },
 
-    beforeCreate: function(){
+    data() {
+        return {
+            userDetailsLoaded: false
+        }
+    },
+
+    beforeCreate: function() {
         this.$store.dispatch('auth/setUserDetails')
+        .then(response => {
+            this.userDetailsLoaded = true
+        })
+        .catch(err => {
+            localStorage.removeItem('Session')
+            location.reload()
+        })
     }
 }
 </script>

@@ -2353,7 +2353,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllPost: function getAllPost() {
       var self = this;
       this.$store.dispatch('posts/getAllPost')["catch"](function (err) {
-        console.log('Something went wrong');
+        console.log(err);
       });
     }
   },
@@ -2505,6 +2505,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2516,9 +2517,6 @@ __webpack_require__.r(__webpack_exports__);
     CreatePost: _subcomponents_home_CreatePost__WEBPACK_IMPORTED_MODULE_3__["default"],
     LeftCard: _subcomponents_home_LeftCard__WEBPACK_IMPORTED_MODULE_0__["default"],
     RightCard: _subcomponents_home_RightCard__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
-  beforeCreate: function beforeCreate() {
-    this.$store.dispatch('auth/setUserDetails');
   }
 });
 
@@ -2571,7 +2569,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Login',
   data: function data() {
     return {
-      email: 'nbrown@example.org',
+      email: '',
       password: 'password'
     };
   },
@@ -37704,8 +37702,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 router.beforeEach(function (to, from, next) {
   // Checks if route needs authentication
   if (to.meta.requiresAuth == true) {
-    if (store.getters['auth/token'] != '' && store.getters['auth/user'] != null) {
-      next();
+    if (store.getters['auth/token'] !== '') {
+      // Checks if user details is set and if token is revoked
+      // If token is revoked redirect to login page
+      if (store.getters['auth/user'].id != null) {
+        next();
+      } else {
+        store.dispatch('auth/setUserDetails').then(function (response) {
+          next();
+        })["catch"](function (err) {
+          localStorage.removeItem('Session');
+          location.replace("/user/login?auth=false");
+        });
+      }
     } else {
       next({
         name: 'login'
@@ -37713,7 +37722,7 @@ router.beforeEach(function (to, from, next) {
     }
   } // Checks if route is for guest only, redirect to home if authenticated
   else if (to.meta.guestOnly == true) {
-      if (store.getters['auth/token'] != '' && store.getters['auth/user'] != null) {
+      if (store.getters['auth/token'] !== '') {
         next({
           name: 'home'
         });
@@ -38971,21 +38980,23 @@ __webpack_require__.r(__webpack_exports__);
     setUserDetails: function setUserDetails(_ref2) {
       var commit = _ref2.commit,
           getters = _ref2.getters;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/userDetails', {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + getters.token
-        }
-      }).then(function (response) {
-        commit('SET_USER_DETAILS', response.data);
-      })["catch"](function (err) {
-        console.log(err);
+      return new Promise(function (resolve, reject) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/userDetails', {
+          headers: {
+            Accept: 'application/json',
+            Authorization: 'Bearer ' + getters.token
+          }
+        }).then(function (response) {
+          resolve(response);
+          commit('SET_USER_DETAILS', response.data);
+        })["catch"](function (err) {
+          reject(err);
+        });
       });
     },
     initiateLogout: function initiateLogout(_ref3) {
       var commit = _ref3.commit;
       commit('UNSET_ACCESS_TOKEN');
-      commit('UNSET_USER_DETAILS');
     }
   },
   getters: {
@@ -39002,7 +39013,7 @@ __webpack_require__.r(__webpack_exports__);
       return state.loginErrors;
     },
     loginStatus: function loginStatus(state) {
-      return state.user && state.access_token ? true : false;
+      return state.user ? true : false;
     }
   }
 });
@@ -39191,8 +39202,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\Nexseed\Desktop\Folder\vuespa\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\Nexseed\Desktop\Folder\vuespa\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! C:\Users\Paquibot\Desktop\JunjayFolder\myProjects\vuespa\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Paquibot\Desktop\JunjayFolder\myProjects\vuespa\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> 8a44e275177d9bcebc35a07e8aabd58d0fe0f87c
 
 
 /***/ })

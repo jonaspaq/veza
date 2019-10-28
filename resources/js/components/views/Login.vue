@@ -35,9 +35,10 @@
 <script>
 export default {
     name: 'Login',
+
     data(){
         return {
-            email:'nbrown@example.org',
+            email:'',
             password:'password'
         }
     },

@@ -3,7 +3,7 @@
         <div class="row mt-4">
 
             <div class="col-lg-3">
-                <!-- Left side of home  -->
+                <!-- Left side of home component  -->
                 <LeftCard />
             </div>
 
@@ -17,6 +17,7 @@
             </div>
 
             <div class="col-lg-3">
+                <!-- Right side of home component  -->
                 <RightCard />
             </div>
 
@@ -32,13 +33,8 @@ import CreatePost from '../subcomponents/home/CreatePost'
 
 export default {
     name:'Home',
-
     components:{
         Posts, CreatePost, LeftCard, RightCard
     },
-
-    beforeCreate: function(){
-        this.$store.dispatch('auth/setUserDetails')
-    }
 }
 </script>

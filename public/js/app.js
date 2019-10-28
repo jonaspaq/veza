@@ -2909,7 +2909,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n /* Large devices (desktops, 992px and up) */\n@media (min-width: 992px) {\n.position-lg-sticky[data-v-264a79c0]{\n        position:-webkit-sticky;\n        position:sticky;\n        top: 80px;\n}\n}\n", ""]);
+exports.push([module.i, "\n.fa-trash[data-v-264a79c0]{\r\n    cursor: pointer;\n}\r\n\r\n /* Large devices (desktops, 992px and up) */\n@media (min-width: 992px) {\n.position-lg-sticky[data-v-264a79c0]{\r\n        position:-webkit-sticky;\r\n        position:sticky;\r\n        top: 80px;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -21030,7 +21030,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "row pb-3" }, [
           _c("div", { staticClass: "col" }, [
             _c("span", { staticClass: "pb-2 anchorColor" }, [
-              _vm._v("Friend Recommendations")
+              _vm._v("Friend Suggestions")
             ])
           ])
         ]),
@@ -21087,7 +21087,7 @@ var staticRenderFns = [
                 _c("span", [_vm._v("Friend Name")])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-1" }, [
+              _c("div", { staticClass: "col-1 removeFriendSuggestion" }, [
                 _c("span", [_c("i", { staticClass: "fas fa-trash" })])
               ]),
               _vm._v(" "),
@@ -39191,8 +39191,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Nexseed\Desktop\vuespa\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Nexseed\Desktop\vuespa\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Nexseed\Desktop\Folder\vuespa\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Nexseed\Desktop\Folder\vuespa\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

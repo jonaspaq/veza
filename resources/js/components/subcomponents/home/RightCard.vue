@@ -2,7 +2,7 @@
     <div class="card-body bg-white shadow-sm rounded position-lg-sticky">
         <div class="row pb-3">
             <div class="col">
-                <span class="pb-2 anchorColor">Friend Recommendations</span>
+                <span class="pb-2 anchorColor">Friend Suggestions</span>
             </div>
         </div>
         <div class="media align-items-center">
@@ -33,7 +33,7 @@
                     <div class="col-10">
                         <span>Friend Name</span>
                     </div>
-                    <div class="col-1">
+                    <div class="col-1 removeFriendSuggestion">
                         <span><i class="fas fa-trash"></i></span>
                     </div>
                     <div class="col-12">
@@ -72,6 +72,9 @@ export default {
 
 
 <style scoped>
+.fa-trash{
+    cursor: pointer;
+}
 
  /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {

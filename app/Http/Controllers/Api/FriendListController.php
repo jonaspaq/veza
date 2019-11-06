@@ -14,13 +14,15 @@ class FriendListController extends Controller
 {
     public function friendSuggestions(){
         $data = User::
-                    whereNotExists(function ($query) {
-                        $query->select(DB::raw(1))
-                                ->from('friend_list')
-                                ->whereRaw('friend_list.user_one = users.id AND friend_list.user_two ='.Auth::id())
-                                ->orWhereRaw('friend_list.user_two = users.id AND friend_list.user_one ='.Auth::id());
-                    })
-                    ->where('id', '<>', Auth::id())->get()->random(5);
+            whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                        ->from('friend_list')
+                        ->whereRaw('friend_list.user_one = users.id AND friend_list.user_two ='.Auth::id())
+                        ->orWhereRaw('friend_list.user_two = users.id AND friend_list.user_one ='.Auth::id());
+            })
+            ->where('id', '<>', Auth::id())
+            ->get()
+            ->random(20);
 
        
 

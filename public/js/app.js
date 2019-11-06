@@ -2086,11 +2086,18 @@ __webpack_require__.r(__webpack_exports__);
         method: 'POST',
         url: '/api/addFriend/' + id
       }).then(function (response) {
-        console.log(response.data);
         _this.requestStatus = true;
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    addAnimationRemove: function addAnimationRemove(friend) {
+      var _this2 = this;
+
+      this.$refs.media.className += "animated hinge";
+      setTimeout(function (e) {
+        _this2.$emit('removeSuggestion', friend);
+      }, 1000);
     }
   }
 });
@@ -2492,6 +2499,9 @@ var _this2 = undefined;
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    removeSuggestion: function removeSuggestion(value) {
+      this.friendSuggestion.splice(this.friendSuggestion.indexOf(value), 1);
     }
   },
   computed: {
@@ -2887,7 +2897,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.fa-trash[data-v-3f831da6]:hover{\r\n    cursor: pointer;\r\n\r\n    transform-origin: top center;\r\n    -webkit-animation-name: swing;\r\n            animation-name: swing;\r\n    -webkit-animation-duration: 0.4s;\r\n            animation-duration: 0.4s;\n}\r\n", ""]);
+exports.push([module.i, "\nspan > .fa-trash[data-v-3f831da6]:hover{\r\n    cursor: pointer;\r\n\r\n    transform-origin: top center;\r\n    -webkit-animation-name: swing;\r\n            animation-name: swing;\r\n    -webkit-animation-duration: 0.4s;\r\n            animation-duration: 0.4s;\n}\r\n", ""]);
 
 // exports
 
@@ -2982,7 +2992,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n /* Large devices (desktops, 992px and up) */\n@media (min-width: 992px) {\n.position-lg-sticky[data-v-264a79c0]{\n        position:-webkit-sticky;\n        position:sticky;\n        top: 80px;\n}\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n /* Large devices (desktops, 992px and up) */\n@media (min-width: 992px) {\n.position-lg-sticky[data-v-264a79c0]{\n        position:-webkit-sticky;\n        position:sticky;\n        top: 80px;\n}\n}\n", ""]);
 
 // exports
 
@@ -20518,41 +20528,62 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "media align-items-center pb-3 pt-2" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "media-body pl-2" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-10" }, [
-          _c("span", [_vm._v(_vm._s(_vm.friend.name))])
-        ]),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-12" }, [
-          !_vm.requestStatus
-            ? _c(
-                "a",
-                {
-                  staticClass: "anchorColor",
-                  attrs: { href: "javascript:;" },
-                  on: {
-                    click: function($event) {
-                      return _vm.addFriend(_vm.friend.id)
-                    }
-                  }
-                },
-                [_c("small", [_vm._v("Add Friend")])]
-              )
-            : _vm._e(),
+  return _c(
+    "div",
+    { ref: "media", staticClass: "media align-items-center pb-3 pt-2" },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "media-body pl-2" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-10" }, [
+            _c("span", [_vm._v(_vm._s(_vm.friend.name))])
+          ]),
           _vm._v(" "),
-          _vm.requestStatus
-            ? _c("span", { staticClass: "anchorColor" }, [_vm._m(2)])
-            : _vm._e()
+          _c("div", { staticClass: "col-1" }, [
+            _c("span", [
+              _c("img", {
+                staticClass: "fa-trash",
+                attrs: {
+                  src: "images/garbage.png",
+                  alt: "marketplace",
+                  width: "19px",
+                  height: "19px"
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.addAnimationRemove(_vm.friend)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12" }, [
+            !_vm.requestStatus
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "anchorColor",
+                    attrs: { href: "javascript:;" },
+                    on: {
+                      click: function($event) {
+                        return _vm.addFriend(_vm.friend.id)
+                      }
+                    }
+                  },
+                  [_c("small", [_vm._v("Add Friend")])]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.requestStatus
+              ? _c("span", { staticClass: "anchorColor" }, [_vm._m(1)])
+              : _vm._e()
+          ])
         ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -20567,24 +20598,6 @@ var staticRenderFns = [
       },
       [_c("img", { attrs: { src: "/images/user.png", width: "100%" } })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-1" }, [
-      _c("span", [
-        _c("img", {
-          staticClass: "fa-trash",
-          attrs: {
-            src: "images/garbage.png",
-            alt: "marketplace",
-            width: "19px",
-            height: "19px"
-          }
-        })
-      ])
-    ])
   },
   function() {
     var _vm = this
@@ -21242,7 +21255,12 @@ var render = function() {
         return _c(
           "div",
           { key: friend.id },
-          [_c("FriendItem", { attrs: { friend: friend } })],
+          [
+            _c("FriendItem", {
+              attrs: { friend: friend },
+              on: { removeSuggestion: _vm.removeSuggestion }
+            })
+          ],
           1
         )
       })

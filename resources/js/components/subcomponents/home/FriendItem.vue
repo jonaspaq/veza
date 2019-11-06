@@ -1,5 +1,5 @@
 <template>
-    <div class="media align-items-center pb-3 pt-2">
+    <div class="media align-items-center pb-3 pt-2" ref="media">
         <div class="border rounded-circle" style="height:40px; width:40px;">
         <img src="/images/user.png" width="100%">
         </div>
@@ -11,7 +11,7 @@
                 <div class="col-1">
                     <span>
                         <!-- <i class="fas fa-trash"></i> -->
-                        <img class="fa-trash" src="images/garbage.png" alt="marketplace" width="19px" height="19px">
+                        <img @click="addAnimationRemove(friend)" class="fa-trash" src="images/garbage.png" alt="marketplace" width="19px" height="19px">
                     </span>
                 </div>
                 <div class="col-12">
@@ -33,7 +33,7 @@ export default {
     data: () => ({
         requestStatus: false
     }),
-
+    
     methods: {
         addFriend(id){
             axios({
@@ -45,19 +45,24 @@ export default {
                 url: '/api/addFriend/'+id
             })
             .then( response => {
-                console.log(response.data)
                 this.requestStatus = true
             })
             .catch( err => {
                 console.log(err)
             })
+        },
+        addAnimationRemove(friend){
+            this.$refs.media.className += "animated hinge"
+            setTimeout(e =>{
+                this.$emit('removeSuggestion', friend)
+            }, 1000)
         }
     }
 }
 </script>
 
 <style scoped>
-.fa-trash:hover{
+span > .fa-trash:hover{
     cursor: pointer;
 
     transform-origin: top center;

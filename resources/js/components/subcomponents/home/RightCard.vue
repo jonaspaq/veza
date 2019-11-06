@@ -6,7 +6,7 @@
             </div>
         </div>
         <div v-for="friend in friendSuggestion" v-bind:key="friend.id">
-            <FriendItem v-bind:friend="friend" />
+            <FriendItem v-bind:friend="friend" @removeSuggestion="removeSuggestion" />
         </div>
     </div>
 </template>
@@ -41,6 +41,9 @@ export default {
             .catch( err => {
                 console.log(err)
             })
+        },
+        removeSuggestion(value){
+            this.friendSuggestion.splice(this.friendSuggestion.indexOf(value), 1)
         }
     },
 

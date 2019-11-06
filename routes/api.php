@@ -26,4 +26,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::apiResource('post', 'Api\PostController');
 
+    Route::get('/friendSuggestions', 'Api\FriendListController@friendSuggestions');
+    Route::post('/addFriend/{id}', 'Api\FriendListController@addFriend');
+
 });

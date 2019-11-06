@@ -5,76 +5,53 @@
                 <span class="pb-2 anchorColor">Friend Suggestions</span>
             </div>
         </div>
-        <div class="media align-items-center">
-            <div class="border rounded-circle" style="height:40px; width:40px;">
-                <img src="/images/user.png" width="100%">
-            </div>
-            <div class="media-body pl-2">
-                <div class="row">
-                    <div class="col-10">
-                        <span>Friend Name</span>
-                    </div>
-                    <div class="col-1">
-                        <span><i class="fas fa-trash"></i></span>
-                    </div>
-                    <div class="col-12">
-                        <a href="javascript:;" class="anchorColor"><small>Add Friend</small></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="media align-items-center">
-            <div class="border rounded-circle" style="height:40px; width:40px;">
-                <img src="/images/user.png" width="100%">
-            </div>
-            <div class="media-body pl-2">
-                <div class="row">
-                    <div class="col-10">
-                        <span>Friend Name</span>
-                    </div>
-                    <div class="col-1 removeFriendSuggestion">
-                        <span><i class="fas fa-trash"></i></span>
-                    </div>
-                    <div class="col-12">
-                        <a href="javascript:;" class="anchorColor"><small>Add Friend</small></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="media align-items-center">
-            <div class="border rounded-circle" style="height:40px; width:40px;">
-                <img src="/images/user.png" width="100%">
-            </div>
-            <div class="media-body pl-2">
-                <div class="row">
-                    <div class="col-10">
-                        <span>Friend Name</span>
-                    </div>
-                    <div class="col-1">
-                        <span><i class="fas fa-trash"></i></span>
-                    </div>
-                    <div class="col-12">
-                        <a href="javascript:;" class="anchorColor"><small>Add Friend</small></a>
-                    </div>
-                </div>
-            </div>
+        <div v-for="friend in friendSuggestion" v-bind:key="friend.id">
+            <FriendItem v-bind:friend="friend" />
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+import FriendItem from './FriendItem'
+
 export default {
-    name: 'RightCard'
+    name: 'RightCard',
+    components: { FriendItem },
+
+    created(){
+        this.getFriendSuggestions()
+    },
+
+    data: () => ({
+        friendSuggestion: ''
+    }),
+
+    methods:{
+        getFriendSuggestions(){
+            axios.get('/api/friendSuggestions', {
+                headers:{
+                    Accept: 'applications/json',
+                    Authorization: 'Bearer '+this.$store.getters['auth/token']
+                }
+            })
+            .then( response => {
+                this.friendSuggestion = response.data
+            })
+            .catch( err => {
+                console.log(err)
+            })
+        }
+    },
+
+    computed: {
+        friendSuggestions: () => this.friendSuggestion
+    }
 }
 </script>
 
 
 <style scoped>
-.fa-trash{
-    cursor: pointer;
-}
 
  /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {

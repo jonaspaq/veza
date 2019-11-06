@@ -21,9 +21,28 @@ class User extends Authenticatable
     ];
 
 
+    // Scope Methods
+    // public function scopeFriendable($query)
+    // {
+    //     return $query->where();
+    // }
+
+
+
+    // Relationships
     public function posts()
     {
         return $this->hasMany('App\Post');
+    }
+
+    public function friendSender()
+    {
+        return $this->hasMany('App\FriendList', 'user_one');
+    }
+
+    public function friendReciever()
+    {
+        return $this->hasMany('App\FriendList', 'user_two');
     }
 
 }

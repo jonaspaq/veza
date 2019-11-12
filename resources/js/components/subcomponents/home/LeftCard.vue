@@ -52,6 +52,13 @@
 export default {
     name:'LeftCard',
 
+    mounted(){    
+        Echo.private('friendRequest.'+this.user.id)
+            .listen('NewFriendRequest', (e) => {
+                console.log(e.friendRequest);
+            });
+    },
+
     computed:{
         user(){
             return this.$store.getters['auth/user']

@@ -18,6 +18,8 @@
 
     <script src="https://kit.fontawesome.com/0c7710f8d0.js" crossorigin="anonymous"></script>
     
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <style>
     *{
         margin:0;

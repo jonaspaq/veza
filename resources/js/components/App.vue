@@ -13,7 +13,7 @@ import NavigationBar from './includes/NavigationBar'
 
 export default {
     name: 'App',
-    components:{ NavigationBar },
+    components:{ NavigationBar }
 }
 </script>
 

@@ -15,19 +15,22 @@ import App from './components/App'
 // Route List
 import routes from './routes'
 
+// Bootstrapper
+import './bootstrap.js'
+
 // Vuex Modules
 import auth from './store/modules/auth.js'
 import posts from './store/modules/posts.js'
 
-
-
-const store = new Vuex.Store({
+// Store initialize
+export const store = new Vuex.Store({
     modules: {
         auth: auth,
         posts: posts
     }
 });
 
+// Router Initialize
 const router = new VueRouter({
     mode: 'history',
     routes: routes

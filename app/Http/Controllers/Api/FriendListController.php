@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\FriendList;
+use App\Events\NewFriendRequest;
 use Auth;
 use DB;
-use Illuminate\Database\Query\Builder;
 
 class FriendListController extends Controller
 {
@@ -21,11 +21,8 @@ class FriendListController extends Controller
                         ->orWhereRaw('friend_list.user_two = users.id AND friend_list.user_one ='.Auth::id());
             })
             ->where('id', '<>', Auth::id())
-            ->get()
-            ->random(20);
-
-       
-
+            ->get();
+            // ->random(20);
         
         return response()->json($data);
     }
@@ -51,12 +48,14 @@ class FriendListController extends Controller
                 'user_two' => $id
             ];
             $data = FriendList::create($toData);
+
+            broadcast(new NewFriendRequest($data))->toOthers();
+            
             return response()->json($data, 200);
         }else{
             return response()->json(['message' => 'Request pending or already friends with this user'], 200);;
         }
         
-
         return $friendCheck;
     }
 }

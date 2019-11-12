@@ -52,7 +52,7 @@ export default {
             })
         },
         addAnimationRemove(friend){
-            this.$refs.media.className += "animated hinge"
+            this.$refs.media.className += " animated zoomOutLeft"
             setTimeout(e =>{
                 this.$emit('removeSuggestion', friend)
             }, 1000)

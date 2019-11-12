@@ -5,7 +5,7 @@
                 <span class="pb-2 anchorColor">Friend Suggestions</span>
             </div>
         </div>
-        <div v-for="friend in friendSuggestion" v-bind:key="friend.id">
+        <div v-for="friend in friendSuggestions" v-bind:key="friend.id">
             <FriendItem v-bind:friend="friend" @removeSuggestion="removeSuggestion" />
         </div>
     </div>
@@ -48,7 +48,10 @@ export default {
     },
 
     computed: {
-        friendSuggestions: () => this.friendSuggestion
+        friendSuggestions(){
+            return this.friendSuggestion.slice(0,5)
+        }
+        
     }
 }
 </script>

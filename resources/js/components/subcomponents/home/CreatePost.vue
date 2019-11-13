@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <form v-on:submit.prevent="addPost">
-                    <textarea v-model="content" placeholder="How's your day?" class="form-control"></textarea> 
+                    <textarea v-model="content" placeholder="How's your day?" class="form-control" required></textarea> 
                     <div class="d-flex flex-row-reverse pt-2">
                         <button v-if="!loadingStatus" class="btn btn-primary d-block shadow-sm"><i class="far fa-share-square"></i> Post</button>
                         <PleaseWaitLoader message="Please wait. . ." v-if="loadingStatus" />

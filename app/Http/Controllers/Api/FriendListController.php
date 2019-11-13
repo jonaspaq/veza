@@ -21,8 +21,8 @@ class FriendListController extends Controller
                         ->orWhereRaw('friend_list.user_two = users.id AND friend_list.user_one ='.Auth::id());
             })
             ->where('id', '<>', Auth::id())
-            ->get();
-            // ->random(20);
+            ->get()
+            ->random(20);
         
         return response()->json($data);
     }

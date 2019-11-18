@@ -20,7 +20,9 @@
                     </div>
             </div>
         </div>
-        <div class="row pl-3 pr-3 mt-2 text-break">{{post.content}}</div>
+        <div class="row pl-3 pr-3 mt-2">
+            <p class="m-0 p-0 text-break">{{post.content}}</p>
+        </div>
     </div>
 </template>
 

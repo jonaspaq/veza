@@ -5,8 +5,15 @@
                 <span class="pb-2 anchorColor">Friend Suggestions</span>
             </div>
         </div>
-        <div v-for="friend in friendSuggestions" v-bind:key="friend.id">
-            <FriendItem v-bind:friend="friend" @removeSuggestion="removeSuggestion" />
+        <div v-if="Object.entries(friendSuggestions).length === 0">
+            <div v-for="n in 5" :key="n.id">
+                <FriendSuggestionLoader />
+            </div>
+        </div>
+        <div v-else>
+            <div v-for="friend in friendSuggestions" v-bind:key="friend.id">
+                <FriendItem v-bind:friend="friend" @removeSuggestion="removeSuggestion" />
+            </div>
         </div>
     </div>
 </template>
@@ -14,10 +21,11 @@
 <script>
 import axios from 'axios'
 import FriendItem from './FriendItem'
+import FriendSuggestionLoader from '../../loading_animations/FriendSuggestionLoader'
 
 export default {
     name: 'RightCard',
-    components: { FriendItem },
+    components: { FriendSuggestionLoader, FriendItem },
 
     created(){
         this.getFriendSuggestions()

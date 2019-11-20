@@ -2245,6 +2245,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'LeftCard',
   mounted: function mounted() {
@@ -2252,6 +2256,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(e.friendRequest);
     });
   },
+  methods: {},
   computed: {
     user: function user() {
       return this.$store.getters['auth/user'];
@@ -4895,7 +4900,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".list-group-item[data-v-33ea8813]:hover {\n  cursor: pointer;\n  transition: background 0.4s ease;\n  background: rgba(240, 247, 242, 0.815);\n}\n@media (max-width: 767.98px) {\n.leftCardNav[data-v-33ea8813] {\n    position: fixed !important;\n    bottom: 0px;\n    left: 0px;\n    z-index: 5;\n    width: 100vw;\n}\n.list-group[data-v-33ea8813] {\n    flex-direction: row;\n}\n.list-group-item[data-v-33ea8813] {\n    width: 100%;\n    justify-content: center;\n}\n}\n/* Large devices (desktops, 992px and up) */\n@media (min-width: 992px) {\n.position-lg-sticky[data-v-33ea8813] {\n    position: -webkit-sticky;\n    position: sticky;\n    top: 80px;\n}\n}", ""]);
+exports.push([module.i, ".leftCardNav[data-v-33ea8813] {\n  z-index: 5;\n}\n.list-group-item[data-v-33ea8813]:hover {\n  cursor: pointer;\n  transition: background 0.4s ease;\n  background: #f3f8f4;\n}\n@media (max-width: 768.98px) {\n.leftCardNav[data-v-33ea8813] {\n    position: fixed !important;\n    bottom: 0px;\n    left: 0px;\n    z-index: 5;\n    width: 100vw;\n}\n.list-group[data-v-33ea8813] {\n    flex-direction: row;\n}\n.list-group-item[data-v-33ea8813] {\n    width: 100%;\n    justify-content: center;\n}\n.notificationHolder[data-v-33ea8813] {\n    transform: translate3d(-12.5vw, -20vh, 0px) !important;\n    position: absolute;\n    height: 45vh;\n    width: 100vw;\n    z-index: -1;\n    border: 1px solid red;\n}\n}\n/* Large devices (desktops, 992px and up) */\n@media (min-width: 992px) {\n.position-lg-sticky[data-v-33ea8813] {\n    position: -webkit-sticky;\n    position: sticky;\n    top: 80px;\n}\n}", ""]);
 
 // exports
 
@@ -30513,7 +30518,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "col-4" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-12 dummyColHead load-placeholder" })
+            _c("div", { staticClass: "col-8 dummyColHead load-placeholder" })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
@@ -30529,7 +30534,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "col-12 dummyCol load-placeholder" }),
         _vm._v(" "),
-        _c("div", { staticClass: "col-10 dummyCol load-placeholder" })
+        _c("div", { staticClass: "col-12 dummyCol load-placeholder" })
       ])
     ])
   }
@@ -30887,7 +30892,7 @@ var staticRenderFns = [
       },
       [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12 overflow-auto" }, [
+          _c("div", { staticClass: "col-12" }, [
             _c("ul", { staticClass: "list-group w-100 list-unstyled" }, [
               _c(
                 "li",
@@ -30896,7 +30901,7 @@ var staticRenderFns = [
                   _c("img", {
                     attrs: {
                       src: "images/home.png",
-                      alt: "Home",
+                      alt: "home",
                       width: "19px",
                       height: "19px"
                     }
@@ -30929,12 +30934,15 @@ var staticRenderFns = [
               _vm._v(" "),
               _c(
                 "li",
-                { staticClass: "list-group-item d-flex align-items-center" },
+                {
+                  staticClass:
+                    "list-group-item d-flex align-items-center dropdown"
+                },
                 [
                   _c("img", {
                     attrs: {
                       src: "images/bell.png",
-                      alt: "marketplace",
+                      alt: "bell",
                       width: "19px",
                       height: "19px"
                     }
@@ -30946,7 +30954,20 @@ var staticRenderFns = [
                   _vm._v(" "),
                   _c("span", { staticClass: "badge badge-primary ml-auto" }, [
                     _vm._v("4")
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "rounded-top rounded-lg notificationHolder bg-white"
+                    },
+                    [
+                      _c("p", { staticStyle: { height: "800px" } }, [
+                        _vm._v("hi")
+                      ])
+                    ]
+                  )
                 ]
               ),
               _vm._v(" "),
@@ -30957,9 +30978,9 @@ var staticRenderFns = [
                   _c("img", {
                     attrs: {
                       src: "images/store.png",
-                      alt: "marketplace",
-                      width: "18px",
-                      height: "18px"
+                      alt: "store",
+                      width: "19px",
+                      height: "19px"
                     }
                   }),
                   _vm._v(" "),

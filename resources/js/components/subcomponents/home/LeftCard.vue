@@ -21,10 +21,10 @@
 
         <div class="card-body bg-white rounded shadow-sm mt-2 p-0 leftCardNav">
             <div class="row">
-                <div class="col-12 overflow-auto">
+                <div class="col-12">
                     <ul class="list-group w-100 list-unstyled">
                         <li class="list-group-item d-flex align-items-center">
-                            <img src="images/home.png" alt="Home" width="19px" height="19px">
+                            <img src="images/home.png" alt="home" width="19px" height="19px">
                             <span class="ml-1 d-none d-lg-block">Home</span>  
                         </li> 
                         <li class="list-group-item d-flex align-items-center">
@@ -32,13 +32,17 @@
                             <span class="ml-1 d-none d-lg-block">Friends</span>  
                             <!-- <span class="badge badge-primary ml-auto">1</span> -->
                         </li>
-                        <li class="list-group-item d-flex align-items-center">
-                            <img src="images/bell.png" alt="marketplace" width="19px" height="19px">
+                        <li class="list-group-item d-flex align-items-center dropdown">
+                            <img src="images/bell.png" alt="bell" width="19px" height="19px">
                             <span class="ml-1 d-none d-lg-block">Notifications</span>  
                             <span class="badge badge-primary ml-auto">4</span>
+
+                            <div class="rounded-top rounded-lg notificationHolder bg-white">
+                                <p style="height:800px">hi</p>                                
+                            </div>
                         </li> 
                         <li class="list-group-item d-flex align-items-center">
-                            <img src="images/store.png" alt="marketplace" width="18px" height="18px">
+                            <img src="images/store.png" alt="store" width="19px" height="19px">
                             <span class="ml-1 d-none d-lg-block">Marketplace</span>  
                             <!-- <span class="badge badge-primary ml-auto">1</span> -->
                         </li>
@@ -61,6 +65,10 @@ export default {
             });
     },
 
+    methods:{
+        
+    },
+
     computed:{
         user(){
             return this.$store.getters['auth/user']
@@ -70,13 +78,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.leftCardNav{
+    z-index: 5;
+}
 .list-group-item:hover{
     cursor: pointer;
     transition: background 0.4s ease;
-    background: rgba(240, 247, 242, 0.815);
+    // background: rgba(240, 247, 242, 0.815);
+    background: #f3f8f4;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 768.98px) {
     .leftCardNav{
         position:fixed !important;
         bottom: 0px;
@@ -91,6 +103,18 @@ export default {
             width: 100%;
             justify-content: center;
         }
+    }
+
+    .notificationHolder{
+        transform: translate3d(-12.5vw, -20vh, 0px) !important;
+        position: absolute;
+        // left: 0;
+        height: 45vh;
+        width: 100vw;
+        z-index: -1;
+        // border: 1px solid rgb(202, 202, 202);
+        border: 1px solid red;
+        // box-shadow: 0 0 0 1px rgb(170, 170, 170);
     }
 }
 

@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Free Social Interaction">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript, Laravel, VueJS">
+    <meta name="author" content="Jonas Paquibot">
+    
     <link rel="icon" href="{{ asset('images/user-male.png') }}" type="image/gif" sizes="32x32">
     <title> Title </title>
 
@@ -24,6 +28,9 @@
     *{
         margin:0;
         padding:0;
+    }
+    html{
+        scroll-behavior: smooth;
     }
     body{
         /* background-image: linear-gradient(#0F2027, #203A43, #2C5364); */

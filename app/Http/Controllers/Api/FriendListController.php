@@ -13,6 +13,8 @@ use DB;
 class FriendListController extends Controller
 {
     public function friendSuggestions(){
+
+        // Queries for users that are not a friend of the current user
         $data = User::
             whereNotExists(function ($query) {
                 $query->select(DB::raw(1))

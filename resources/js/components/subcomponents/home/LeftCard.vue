@@ -27,10 +27,13 @@
                             <img src="images/home.png" alt="home" width="19px" height="19px">
                             <span class="ml-1 d-none d-lg-block">Home</span>  
                         </li> 
-                        <li class="list-group-item d-flex align-items-center">
+                        <li class="list-group-item d-flex align-items-center" @click="openFriend" @blur="openFriend" tabindex="0">
                             <img src="images/friendship.png" alt="marketplace" width="19px" height="19px">
                             <span class="ml-1 d-none d-lg-block">Friends</span>  
                             <!-- <span class="badge badge-primary ml-auto">1</span> -->
+
+                            <FriendRequestContainer :status="friendContainer" />
+
                         </li>
                         <li class="list-group-item d-flex align-items-center dropdown">
                             <img src="images/bell.png" alt="bell" width="19px" height="19px">
@@ -55,18 +58,29 @@
 </template>
 
 <script>
+import FriendRequestContainer from './subcomponents/FriendRequestContainer'
+
 export default {
     name:'LeftCard',
+    components: { FriendRequestContainer },
+
+    data(){
+        return {
+            friendContainer: null
+        }
+    },
+
+    methods:{
+        openFriend(){
+            this.friendContainer = !this.friendContainer
+        }
+    },
 
     mounted(){    
         Echo.private('friendRequest.'+this.user.id)
             .listen('NewFriendRequest', (e) => {
                 console.log(e.friendRequest);
             });
-    },
-
-    methods:{
-        
     },
 
     computed:{
@@ -84,8 +98,8 @@ export default {
 .list-group-item:hover{
     cursor: pointer;
     transition: background 0.4s ease;
-    // background: rgba(240, 247, 242, 0.815);
     background: #f3f8f4;
+    outline: 0;
 }
 
 @media (max-width: 768.98px) {
@@ -106,15 +120,14 @@ export default {
     }
 
     .notificationHolder{
-        transform: translate3d(-12.5vw, -20vh, 0px) !important;
+        display: none;
+        transform: translate3d(-12.5vw, -25vh, 0px) !important;
+        overflow: auto;
         position: absolute;
-        // left: 0;
         height: 45vh;
         width: 100vw;
         z-index: -1;
-        // border: 1px solid rgb(202, 202, 202);
-        border: 1px solid red;
-        // box-shadow: 0 0 0 1px rgb(170, 170, 170);
+        box-shadow: 0 0 0 1px rgb(170, 170, 170);
     }
 }
 

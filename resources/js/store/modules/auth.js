@@ -42,6 +42,7 @@ export default {
         initiateLogin({commit}, data){
             return new Promise((resolve, reject)=>{
                 commit('ENABLE_LOGIN_LOADING')
+                
                 axios.post('/api/user/login', data)
                 .then((response)=>{
                     commit('SET_ACCESS_TOKEN', response.data.access_token)

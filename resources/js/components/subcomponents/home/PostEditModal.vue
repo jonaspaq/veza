@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import PleaseWaitLoader from '../PleaseWaitLoader'
+import PleaseWaitLoader from '../../loading_animations/PleaseWaitLoader'
 
 export default {
     name: 'PostEditModal',
@@ -84,7 +84,7 @@ export default {
     box-shadow: none !important;
     height: auto;
     max-height: 400px;
-
+    /* transition: 0.2s ease; */
     /* transition: 0.2s ease; AUTO TEXTAREA HEIGHT NOT WORKING IF THIS IS ACTIVE */
 }
 textarea{

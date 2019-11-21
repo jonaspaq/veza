@@ -25,7 +25,7 @@
 
 <script>
 import PostsLoader from '../../loading_animations/PostsLoader'
-import PostItem from './PostItem'
+import PostItem from './subcomponents/PostItem'
 import PostDeleteModal from './PostDeleteModal'
 import PostEditModal from './PostEditModal'
 

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import PleaseWaitLoader from '../PleaseWaitLoader'
+import PleaseWaitLoader from '../../loading_animations/PleaseWaitLoader'
 
 export default {
     name:'PostDeleteModal',

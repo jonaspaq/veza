@@ -1,0 +1,8 @@
+
+:root {
+    --primary-color-linear: linear-gradient(180deg, #54e4b1, #71e6bc);
+    --primary-color-nonlinear: #54e4b2;
+    --primaryDarker-color: rgb(78, 212, 166);
+
+    --danger-color: #d87b7b;
+}

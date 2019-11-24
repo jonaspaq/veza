@@ -12,7 +12,7 @@ vuespa is a web application that users can use to create accounts, add other use
 ## Tools Used
 
 - [Laravel Framework](https://laravel.com)
-- [Laravel Echo]
+- Laravel Echo
 - [Pusher API](https://pusher.com/)
 - [VueJS](vuejs.org)
 - [Vuex](http://vuex.vuejs.org/)

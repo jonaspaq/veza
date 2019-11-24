@@ -1,6 +1,6 @@
-<p align="center"><img src="public/images/user-male.png" width="400"></p>
+<p align="center"><img src="public/images/user-male.png" width="200"></p>
 
-<a href="https://github.com/jonaspaq/vuespa"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
+<a href="https://github.com/jonaspaq/vuespa"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
 
 ## About vuespa
 

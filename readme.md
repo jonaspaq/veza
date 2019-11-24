@@ -1,8 +1,8 @@
 <p align="center"><img src="public/images/user-male.png" width="200"></p>
 
 <p align="center">
-<a href="https://github.com/jonaspaq/vuespa"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
 <a href="https://github.com/jonaspaq/vuespa"><img src="https://img.shields.io/badge/unstable-v1.0.0-blue" alt="Latest Unstable Version"></a>
+<a href="https://github.com/jonaspaq/vuespa"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
 </p>
 
 ## About vuespa
@@ -21,6 +21,6 @@ vuespa is a web application that users can use to create accounts, add other use
 
 ## License
 
-vuespa is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+vuespa is an open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 

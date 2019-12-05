@@ -10,7 +10,7 @@
                     <form v-on:submit.prevent="login">
                         <div class="form-group">
                             <label for="email">Email address</label>
-                            <input v-model="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                            <input v-model="email" type="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter email" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
@@ -24,7 +24,7 @@
                         </div>
                     </form>
                     <hr>
-                    <span class="d-block text-muted mt-3">Don't have an account? Register <router-link :to="{name:'register'}" class="anchorColor">here </router-link></span>
+                    <span class="d-block text-muted mt-3">Don't have an account? <router-link :to="{name:'register'}" class="anchorColor">Register here </router-link></span>
                 </div>
             </div>
         </div>

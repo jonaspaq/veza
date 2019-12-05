@@ -7,8 +7,13 @@
     <meta name="description" content="Free Social Interaction">
     <meta name="keywords" content="HTML,CSS,XML,JavaScript, Laravel, VueJS">
     <meta name="author" content="Jonas Paquibot">
-    
-    <link rel="icon" href="{{ asset('images/user-male.png') }}" type="image/gif" sizes="32x32">
+    <meta name="theme-color" content="#273746">
+    @php 
+        $logoImage = "{{ asset('images/user-male.png') }}";
+    @endphp
+    <link rel="icon" href="{{ $logoImage }}" type="image/gif" sizes="32x32">
+    <link rel="shortcut icon" href="{{ $logoImage }}">
+    <link rel="apple-touch-icon" href="{{ $logoImage }}">
     <title> Title </title>
 
     <!-- Cutomized colors. Defined in root css -->
@@ -51,5 +56,9 @@
     </div>
 
     <script src=" {{ mix('js/app.js') }} "></script>
+
+    <noscript>
+        Your browser has JavaScript disabled or your browser does not support JavaScript!
+    </noscript>
 </body>
 </html>

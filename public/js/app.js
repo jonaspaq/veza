@@ -30472,7 +30472,11 @@ var staticRenderFns = [
       { staticClass: "navbar-brand", attrs: { href: "javascript:;" } },
       [
         _c("img", {
-          attrs: { src: "/images/user-male.png", width: "30px", alt: "" }
+          attrs: {
+            src: "/images/user-male.png",
+            width: "30px",
+            alt: "Brand Logo Hands Peace"
+          }
         })
       ]
     )
@@ -30507,7 +30511,15 @@ var staticRenderFns = [
         staticClass: "border rounded-circle bg-white mr-2",
         staticStyle: { height: "28px", width: "28px" }
       },
-      [_c("img", { attrs: { src: "/images/user.png", width: "100%" } })]
+      [
+        _c("img", {
+          attrs: {
+            src: "/images/user.png",
+            width: "100%",
+            alt: "User Profile Picture"
+          }
+        })
+      ]
     )
   }
 ]
@@ -31781,7 +31793,7 @@ var render = function() {
                     attrs: {
                       type: "email",
                       id: "email",
-                      "aria-describedby": "emailHelp",
+                      "aria-describedby": "email",
                       placeholder: "Enter email",
                       required: ""
                     },
@@ -31861,14 +31873,14 @@ var render = function() {
               "span",
               { staticClass: "d-block text-muted mt-3" },
               [
-                _vm._v("Don't have an account? Register "),
+                _vm._v("Don't have an account? "),
                 _c(
                   "router-link",
                   {
                     staticClass: "anchorColor",
                     attrs: { to: { name: "register" } }
                   },
-                  [_vm._v("here ")]
+                  [_vm._v("Register here ")]
                 )
               ],
               1

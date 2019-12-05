@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top">
     <a class="navbar-brand" href="javascript:;">
-        <img src="/images/user-male.png" width="30px" alt="Brand Logo Hands Peace">
+        <img src="/images/hand-peace.png" width="30px" alt="Brand Logo Hands Peace">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

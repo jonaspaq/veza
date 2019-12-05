@@ -9,11 +9,12 @@
     <meta name="author" content="Jonas Paquibot">
     <meta name="theme-color" content="#273746">
     @php 
-        $logoImage = "{{ asset('images/user-male.png') }}";
+        $logoImage = "images/hand-peace.png";
     @endphp
-    <link rel="icon" href="{{ $logoImage }}" type="image/gif" sizes="32x32">
-    <link rel="shortcut icon" href="{{ $logoImage }}">
-    <link rel="apple-touch-icon" href="{{ $logoImage }}">
+    <link rel="icon" href="{{ asset($logoImage) }}" type="image/gif" sizes="32x32">
+    <link rel="shortcut icon" href="{{ asset($logoImage) }}">
+    <link rel="apple-touch-icon" href="{{ asset($logoImage) }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
     <title> Title </title>
 
     <!-- Cutomized colors. Defined in root css -->

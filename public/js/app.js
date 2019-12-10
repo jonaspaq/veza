@@ -48282,8 +48282,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var bootstrap_dist_js_bootstrap_min_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! bootstrap/dist/js/bootstrap.min.js */ "./node_modules/bootstrap/dist/js/bootstrap.min.js");
 /* harmony import */ var bootstrap_dist_js_bootstrap_min_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_js_bootstrap_min_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var popper_js_dist_umd_popper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! popper.js/dist/umd/popper */ "./node_modules/popper.js/dist/umd/popper.js");
-/* harmony import */ var popper_js_dist_umd_popper__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(popper_js_dist_umd_popper__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! popper.js/dist/umd/popper.js */ "./node_modules/popper.js/dist/umd/popper.js");
+/* harmony import */ var popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/App */ "./resources/js/components/App.vue");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
 /* harmony import */ var _bootstrap_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./bootstrap.js */ "./resources/js/bootstrap.js");
@@ -50224,8 +50224,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Nexseed\Desktop\PersonalFolder\vuespa\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Nexseed\Desktop\PersonalFolder\vuespa\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Paquibot\Desktop\JunjayFolder\myProjects\vuespa\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Paquibot\Desktop\JunjayFolder\myProjects\vuespa\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

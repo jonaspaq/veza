@@ -1,4 +1,4 @@
-<p align="center"><img src="public/images/user-male.png" width="200"></p>
+<p align="center"><img src="public/images/hand-peace.png" width="200"></p>
 
 <p align="center">
 <a href="https://github.com/jonaspaq/vuespa"><img src="https://img.shields.io/badge/unstable-v1.0.0-blue" alt="Latest Unstable Version"></a>

@@ -11,14 +11,14 @@
     @php 
         $logoImage = "images/hand-peace.png";
     @endphp
-    <link rel="icon" href="{{ asset($logoImage) }}" type="image/gif" sizes="32x32">
-    <link rel="shortcut icon" href="{{ asset($logoImage) }}">
-    <link rel="apple-touch-icon" href="{{ asset($logoImage) }}">
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <link rel="icon" href="{{ secure_asset($logoImage) }}" type="image/gif" sizes="32x32">
+    <link rel="shortcut icon" href="{{ secure_asset($logoImage) }}">
+    <link rel="apple-touch-icon" href="{{ secure_asset($logoImage) }}">
+    <link rel="manifest" href="{{ secure_asset('manifest.json') }}">
     <title> Title </title>
 
     <!-- Cutomized colors. Defined in root css -->
-    <link rel="stylesheet" href="{{ asset('css/myRootColors.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/myRootColors.css') }}">
 
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -27,7 +27,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/animate.css') }}">
 
     <script src="https://kit.fontawesome.com/0c7710f8d0.js" crossorigin="anonymous"></script>
     

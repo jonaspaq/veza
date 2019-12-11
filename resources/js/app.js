@@ -5,7 +5,7 @@ import Vuex from 'vuex'
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
-import 'popper.js/dist/umd/popper'
+import 'popper.js/dist/umd/popper.js'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)

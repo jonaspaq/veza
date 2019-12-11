@@ -23,7 +23,7 @@ class FriendListController extends Controller
                         ->orWhereRaw('friend_list.user_two = users.id AND friend_list.user_one ='.Auth::id());
             })
             ->where('id', '<>', Auth::id())
-            ->get()
+            ->get();
             ->random(20);
         
         return response()->json($data);
@@ -52,7 +52,7 @@ class FriendListController extends Controller
             $data = FriendList::create($toData);
 
             broadcast(new NewFriendRequest($data))->toOthers();
-            
+
             return response()->json($data, 200);
         }else{
             return response()->json(['message' => 'Request pending or already friends with this user'], 200);;

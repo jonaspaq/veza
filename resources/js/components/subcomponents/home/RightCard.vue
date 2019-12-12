@@ -44,7 +44,10 @@ export default {
                 }
             })
             .then( response => {
-                this.friendSuggestion = response.data
+                if(response.data!=false){
+                    this.friendSuggestion = response.data
+                }
+                
             })
             .catch( err => {
                 console.log(err)
@@ -57,6 +60,7 @@ export default {
 
     computed: {
         friendSuggestions(){
+            // Show only 5 friend suggestions at a time
             return this.friendSuggestion.slice(0,5)
         }
         

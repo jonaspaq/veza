@@ -1,40 +1,18 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Vuex from 'vuex'
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import 'popper.js/dist/umd/popper.js'
 
-Vue.use(VueRouter)
-Vue.use(Vuex)
-
-import App from './components/App'
-
 // Route List
-import routes from './routes'
+import router from './routes'
+
+// Store (Vuex)
+import store from './store/store'
 
 // Bootstrapper
 import './bootstrap.js'
-
-// Vuex Modules
-import auth from './store/modules/auth.js'
-import posts from './store/modules/posts.js'
-
-// Store initialize
-export const store = new Vuex.Store({
-    modules: {
-        auth: auth,
-        posts: posts
-    }
-});
-
-// Router Initialize
-const router = new VueRouter({
-    mode: 'history',
-    routes: routes
-});
 
 // Middleware
 router.beforeEach((to, from, next) => {
@@ -74,6 +52,8 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+
+import App from './components/App'
 // Main Vue instance
 const app = new Vue({
     el: '#app',

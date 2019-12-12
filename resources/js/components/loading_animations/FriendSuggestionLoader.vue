@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-1">
                     <small class="dummySpan load-placeholder">
-                        TA
+                        <!-- TA -->
                         <!-- <img class="fa-trash" src="images/garbage.png" alt="marketplace" width="19px" height="19px"> -->
                     </small>
                     <!-- <div class="col-1 dummyColHead load-placeholder"></div> -->

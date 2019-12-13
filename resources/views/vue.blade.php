@@ -21,7 +21,7 @@
     <title> Title </title>
 
     <!-- animate css, variables, fonts, root colors are defined in this css -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
 
     <script src="https://kit.fontawesome.com/0c7710f8d0.js" crossorigin="anonymous"></script>
     

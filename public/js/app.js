@@ -1966,13 +1966,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FriendSuggestionLoader'
 });
@@ -2496,8 +2489,13 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: 'Bearer ' + this.$store.getters['auth/token']
         }
       }).then(function (response) {
-        if (response.data != false) {
+        var res = response.data;
+        var resCount = Object.entries(res);
+
+        if (resCount != false) {
           _this.friendSuggestion = response.data;
+        } else {
+          _this.friendSuggestion = false;
         }
       })["catch"](function (err) {
         console.log(err);
@@ -2509,8 +2507,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     friendSuggestions: function friendSuggestions() {
-      // Show only 5 friend suggestions at a time
-      return this.friendSuggestion.slice(0, 5);
+      if (this.friendSuggestion != false) {
+        // Show only 5 friend suggestions at a time
+        return this.friendSuggestion.slice(0, 5);
+      }
+
+      return this.friendSuggestion = false;
     }
   }
 });
@@ -2756,6 +2758,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _loading_animations_PleaseWaitLoader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../loading_animations/PleaseWaitLoader */ "./resources/js/components/loading_animations/PleaseWaitLoader.vue");
 //
 //
 //
@@ -2788,10 +2791,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Login',
+  components: {
+    PleaseWaitLoader: _loading_animations_PleaseWaitLoader__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       email: '',
@@ -2837,6 +2842,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _loading_animations_PleaseWaitLoader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../loading_animations/PleaseWaitLoader */ "./resources/js/components/loading_animations/PleaseWaitLoader.vue");
+//
 //
 //
 //
@@ -2883,8 +2890,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Register',
+  components: {
+    PleaseWaitLoader: _loading_animations_PleaseWaitLoader__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
       name: '',
@@ -5079,7 +5090,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.modalShadow[data-v-66dbca54]{\r\n    /* box-shadow: 0 0 2px rgb(84, 228, 177); */\r\n    box-shadow: 0 0 2px var(--primaryDarker-color);\n}\n.text-danger[data-v-66dbca54]{\r\n    color: #E74C3C !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.modalShadow[data-v-66dbca54]{\r\n    box-shadow: 0 0 5px 2px var(--primaryLighter-color);\n}\n.text-danger[data-v-66dbca54]{\r\n    color: #E74C3C !important;\n}\r\n", ""]);
 
 // exports
 
@@ -5117,7 +5128,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n /* Large devices (desktops, 992px and up) */\n@media (min-width: 992px) {\n.position-lg-sticky[data-v-264a79c0]{\n        position:-webkit-sticky;\n        position:sticky;\n        top: 80px;\n}\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n /* Large devices (desktops, 992px and up) */\n@media (min-width: 992px) {\n.position-lg-sticky[data-v-264a79c0]{\n        position:-webkit-sticky;\n        position:sticky;\n        top: 80px;\n}\n}\n", ""]);
 
 // exports
 
@@ -30623,10 +30634,6 @@ var staticRenderFns = [
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-1" }, [
-          _c("small", { staticClass: "dummySpan load-placeholder" })
-        ]),
-        _vm._v(" "),
         _c("div", { staticClass: "col-12" }, [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-4 dummyCol load-placeholder" })
@@ -31879,6 +31886,7 @@ var render = function() {
                       type: "password",
                       id: "password",
                       placeholder: "Password",
+                      autocomplete: "off",
                       required: ""
                     },
                     domProps: { value: _vm.password },
@@ -31905,15 +31913,16 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.loadingStatus
-                  ? _c("div", { staticClass: "d-flex align-items-center" }, [
-                      _c("div", {
-                        staticClass:
-                          "spinner-border spinner-border-sm text-info mr-1",
-                        attrs: { role: "status" }
-                      }),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Signing in. . .")])
-                    ])
+                  ? _c(
+                      "div",
+                      { staticClass: "d-flex align-items-center" },
+                      [
+                        _c("PleaseWaitLoader", {
+                          attrs: { message: "Signing in. . ." }
+                        })
+                      ],
+                      1
+                    )
                   : _vm._e()
               ]
             ),
@@ -32152,15 +32161,24 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.loadingStatus
-                  ? _c("div", { staticClass: "d-flex align-items-center" }, [
-                      _c("div", {
-                        staticClass:
-                          "spinner-border spinner-border-sm text-info mr-1",
-                        attrs: { role: "status" }
-                      }),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Please wait ")])
-                    ])
+                  ? _c(
+                      "div",
+                      { staticClass: "d-flex align-items-center" },
+                      [
+                        _c("div", {
+                          staticClass:
+                            "spinner-border spinner-border-sm text-info mr-1",
+                          attrs: { role: "status" }
+                        }),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Please wait ")]),
+                        _vm._v(" "),
+                        _c("PleaseWaitLoader", {
+                          attrs: { message: "Processing. . ." }
+                        })
+                      ],
+                      1
+                    )
                   : _vm._e()
               ]
             ),

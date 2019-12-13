@@ -14,7 +14,7 @@ class FriendListController extends Controller
 {
     public function friendSuggestions()
     {
-        // Queries for users that are not a friend of the current user
+        // Queries for users that is not a friend of the current user
         $data = User::
             whereNotExists(function ($query) {
                 $query->select(DB::raw(1))
@@ -28,7 +28,7 @@ class FriendListController extends Controller
             
         if(count($data)>=20) return response()->json($data);  
 
-        // return response()->json(false, 200);
+        return response()->json(false, 200);
 
     }
 
@@ -54,6 +54,7 @@ class FriendListController extends Controller
             ];
             $data = FriendList::create($toData);
 
+            // Send notification to the requested user realtime
             broadcast(new NewFriendRequest($data))->toOthers();
 
             return response()->json($data, 200);

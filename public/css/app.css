@@ -2,9 +2,10 @@
   /* --primary-color-linear: linear-gradient(180deg, #54e4b1, #71e6bc);
   --primary-color-nonlinear: #54e4b2; */
   /* --primaryDarker-color: rgb(78, 212, 166); */
-  --primary-color-linear: #273746;
-  --primary-color-nonlinear: #273746;
-  --primaryDarker-color: #273746;
+  --primary-color-linear: #1d4d4f;
+  --primary-color-nonlinear: #357376;
+  --primaryDarker-color: #1d4d4f;
+  --primaryLighter-color: #357376;
   --danger-color: #d87b7b;
 }
 

@@ -32,6 +32,7 @@
                             <div class="spinner-border spinner-border-sm text-info mr-1" role="status">
                             </div>
                             <span>Please wait </span>
+                            <PleaseWaitLoader message="Processing. . ." />
                         </div>
                     </form>
                     <hr>
@@ -45,9 +46,12 @@
 
 <script>
 import axios from 'axios'
+import PleaseWaitLoader from '../loading_animations/PleaseWaitLoader'
 
 export default {
     name: 'Register',
+    components: { PleaseWaitLoader },
+
     data(){
         return {
             name:'',

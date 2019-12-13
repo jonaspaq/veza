@@ -12,8 +12,8 @@ use DB;
 
 class FriendListController extends Controller
 {
-    public function friendSuggestions(){
-
+    public function friendSuggestions()
+    {
         // Queries for users that are not a friend of the current user
         $data = User::
             whereNotExists(function ($query) {
@@ -23,10 +23,13 @@ class FriendListController extends Controller
                         ->orWhereRaw('friend_list.user_two = users.id AND friend_list.user_one ='.Auth::id());
             })
             ->where('id', '<>', Auth::id())
-            ->get();
+            ->get()
             ->random(20);
-        
-        return response()->json($data);
+            
+        if(count($data)>=20) return response()->json($data);  
+
+        // return response()->json(false, 200);
+
     }
 
     public function addFriend(Request $request, $id){
@@ -34,7 +37,7 @@ class FriendListController extends Controller
 
         // Checks if the user added him/her self
         if($authID == $id){
-            return response()->json(['message' => 'You can\'t add yourself'], 200);
+            return response()->json(['message' => 'You cannot add yourself'], 200);
         }
 
         // Checks if the user already sent a request for this user

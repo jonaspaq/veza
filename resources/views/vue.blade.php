@@ -11,9 +11,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @php 
-        $logoImage = "images/hand-peace.png";
-    @endphp
+    @php $logoImage = "images/hand-peace.png"; @endphp
     <link rel="icon" href="{{ asset($logoImage) }}" type="image/gif" sizes="32x32">
     <link rel="shortcut icon" href="{{ asset($logoImage) }}">
     <link rel="apple-touch-icon" href="{{ asset($logoImage) }}">
@@ -22,8 +20,6 @@
 
     <!-- animate css, variables, fonts, root colors are defined in this css -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-    <script src="https://kit.fontawesome.com/0c7710f8d0.js" crossorigin="anonymous"></script>
     
     <style>
     *{
@@ -48,7 +44,8 @@
         <App />
     </div>
 
-    <script src=" {{ mix('js/app.js') }} "></script>
+    <script src=" {{ asset('js/app.js') }} "></script>
+    <script src="https://kit.fontawesome.com/0c7710f8d0.js" crossorigin="anonymous"></script>
 
     <noscript>
         Your browser has JavaScript disabled or your browser does not support JavaScript!

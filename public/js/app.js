@@ -48404,8 +48404,8 @@ __webpack_require__.r(__webpack_exports__);
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "",
-  cluster: "mt1",
+  key: "62cb0f17ea48af2df261",
+  cluster: "ap1",
   encrypted: true,
   authEndpoint: '/broadcasting/auth',
   auth: {
@@ -50264,8 +50264,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Nexseed\Desktop\PersonalFolder\vuespa\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Nexseed\Desktop\PersonalFolder\vuespa\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Paquibot\Desktop\JunjayFolder\myProjects\vuespa\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Paquibot\Desktop\JunjayFolder\myProjects\vuespa\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

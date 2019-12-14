@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Free Social Interaction">
-    <meta name="keywords" content="HTML,CSS,XML,JavaScript, Laravel, VueJS">
+    <meta name="keywords" content="HTML,CSS, JavaScript, Laravel, VueJS, SPA">
     <meta name="author" content="Jonas Paquibot">
     <meta name="theme-color" content="#273746">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     @php 
-        $logoImage = "images/hand-peace.png";
+    $static_logoImage = "images/hand-peace.png"; 
+    $servedImage = "https://jonaspaq.github.io/vuespa/public/images/hand-peace.png";
+    $servedManifest = "https://jonaspaq.github.io/vuespa/public/manifest.json";
     @endphp
+<<<<<<< HEAD
     <link rel="icon" href="{{ secure_asset($logoImage) }}" type="image/gif" sizes="32x32">
     <link rel="shortcut icon" href="{{ secure_asset($logoImage) }}">
     <link rel="apple-touch-icon" href="{{ secure_asset($logoImage) }}">
@@ -32,6 +38,17 @@
     <script src="https://kit.fontawesome.com/0c7710f8d0.js" crossorigin="anonymous"></script>
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
+=======
+    <link rel="icon" href="{{ $servedImage }}" type="image/gif" sizes="32x32">
+    <link rel="shortcut icon" href="{{ $servedImage }}">
+    <link rel="apple-touch-icon" href="{{ $servedImage }}">
+    <link rel="manifest" href="{{ $servedManifest }}">
+    <title> Title </title>
+
+    <!-- animate css, variables, fonts, root colors are defined in this css -->
+    <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
+    <link rel="stylesheet" href="https://jonaspaq.github.io/vuespa/public/css/app.css">
+>>>>>>> 319d9628befcc447e31cd165bdbb26d126fb49ba
     
     <style>
     *{
@@ -56,7 +73,8 @@
         <App />
     </div>
 
-    <script src=" {{ mix('js/app.js') }} "></script>
+    <script src="https://jonaspaq.github.io/vuespa/public/js/app.js"></script>
+    <script src="https://kit.fontawesome.com/0c7710f8d0.js" crossorigin="anonymous"></script>
 
     <noscript>
         Your browser has JavaScript disabled or your browser does not support JavaScript!

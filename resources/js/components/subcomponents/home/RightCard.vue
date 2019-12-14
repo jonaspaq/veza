@@ -44,7 +44,13 @@ export default {
                 }
             })
             .then( response => {
-                this.friendSuggestion = response.data
+                const res = response.data
+                const resCount = Object.entries(res)
+                if(resCount!=false){
+                    this.friendSuggestion = response.data
+                }else{
+                    this.friendSuggestion = false
+                }        
             })
             .catch( err => {
                 console.log(err)
@@ -57,7 +63,11 @@ export default {
 
     computed: {
         friendSuggestions(){
-            return this.friendSuggestion.slice(0,5)
+            if(this.friendSuggestion != false){
+                // Show only 5 friend suggestions at a time
+                return this.friendSuggestion.slice(0,5)
+            }
+            return this.friendSuggestion = false
         }
         
     }

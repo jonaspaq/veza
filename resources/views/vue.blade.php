@@ -11,15 +11,20 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @php $logoImage = "images/hand-peace.png"; @endphp
-    <link rel="icon" href="{{ asset($logoImage) }}" type="image/gif" sizes="32x32">
-    <link rel="shortcut icon" href="{{ asset($logoImage) }}">
-    <link rel="apple-touch-icon" href="{{ asset($logoImage) }}">
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    @php 
+    $static_logoImage = "images/hand-peace.png"; 
+    $servedImage = "https://jonaspaq.github.io/vuespa/public/images/hand-peace.png";
+    $servedManifest = "https://jonaspaq.github.io/vuespa/public/manifest.json";
+    @endphp
+    <link rel="icon" href="{{ $servedImage }}" type="image/gif" sizes="32x32">
+    <link rel="shortcut icon" href="{{ $servedImage }}">
+    <link rel="apple-touch-icon" href="{{ $servedImage }}">
+    <link rel="manifest" href="{{ $servedManifest }}">
     <title> Title </title>
 
     <!-- animate css, variables, fonts, root colors are defined in this css -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
+    <link rel="stylesheet" href="https://jonaspaq.github.io/vuespa/public/css/app.css">
     
     <style>
     *{
@@ -44,7 +49,7 @@
         <App />
     </div>
 
-    <script src=" {{ asset('js/app.js') }} "></script>
+    <script src="https://jonaspaq.github.io/vuespa/public/js/app.js"></script>
     <script src="https://kit.fontawesome.com/0c7710f8d0.js" crossorigin="anonymous"></script>
 
     <noscript>

@@ -19,7 +19,7 @@
     <link rel="icon" href="{{ $servedImage }}" type="image/gif" sizes="32x32">
     <link rel="shortcut icon" href="{{ $servedImage }}">
     <link rel="apple-touch-icon" href="{{ $servedImage }}">
-    <link rel="manifest" href="{{ $servedManifest }}">
+    <link rel="manifest" href="{{ secure_asset('manifest.json') }}">
     <title> Title </title>
 
     <!-- animate css, variables, fonts, root colors are defined in this css -->

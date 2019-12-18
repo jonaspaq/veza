@@ -7,41 +7,15 @@
     <meta name="description" content="Free Social Interaction">
     <meta name="keywords" content="HTML,CSS, JavaScript, Laravel, VueJS, SPA">
     <meta name="author" content="Jonas Paquibot">
-    <meta name="theme-color" content="#273746">
+    <meta name="theme-color" content="#1d4d4f">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    @php 
-    $static_logoImage = "images/hand-peace.png"; 
-    $servedImage = "https://jonaspaq.github.io/vuespa/public/images/hand-peace.png";
-    $servedManifest = "https://jonaspaq.github.io/vuespa/public/manifest.json";
-    @endphp
-    <link rel="icon" href="{{ $servedImage }}" type="image/gif" sizes="32x32">
-    <link rel="shortcut icon" href="{{ $servedImage }}">
-    <link rel="apple-touch-icon" href="{{ $servedImage }}">
-    <link rel="manifest" href="{{ secure_asset('manifest.json') }}">
-    <title> Title </title>
-
-    <!-- animate css, variables, fonts, root colors are defined in this css -->
-    <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
-    <link rel="stylesheet" href="https://jonaspaq.github.io/vuespa/public/css/app.css">
     
-    <style>
-    *{
-        margin:0;
-        padding:0;
-    }
-    html{
-        scroll-behavior: smooth;
-    }
-    body{
-        /* background-image: linear-gradient(#0F2027, #203A43, #2C5364); */
-        background-image: linear-gradient(#ECE9E6, #FFFFFF);
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    </style>
+    @includeWhen( config('environment.APP_ENV')=='local' , 'includes.header.development-assets')
+
+    @includeWhen( config('environment.APP_ENV')=='production' || config('environment.APP_ENV')=='staging' , 'includes.header.production-assets')
+    
+    @include('includes.header.default')
 </head>
 <body>
     
@@ -49,8 +23,9 @@
         <App />
     </div>
 
-    <script src="https://jonaspaq.github.io/vuespa/public/js/app.js"></script>
-    <script src="https://kit.fontawesome.com/0c7710f8d0.js" crossorigin="anonymous"></script>
+    @includeWhen( config('environment.APP_ENV')=='local' , 'includes.footer.development-scripts')
+
+    @includeWhen( config('environment.APP_ENV')=='production' || config('environment.APP_ENV')=='staging' , 'includes.footer.production-scripts')
 
     <noscript>
         Your browser has JavaScript disabled or your browser does not support JavaScript!

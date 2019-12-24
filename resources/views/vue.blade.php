@@ -11,8 +11,6 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    Test
-    
     @includeWhen( config('environment.APP_ENV')=='local' , 'includes.header.development-assets')
 
     @includeWhen( config('environment.APP_ENV')=='production' || config('environment.APP_ENV')=='staging' , 'includes.header.production-assets')

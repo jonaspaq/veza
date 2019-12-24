@@ -1,9 +1,10 @@
 
 @php 
-    $imagePath = "images/hand-peace.png";
+    $favicon = "icons/36-Bluegreen.png";
+    $imagePath = "icons/192-Bluegreen.png";
     $manifestJSON = "manifest.json";
 @endphp
-<link rel="icon" href="{{ asset($imagePath) }}" type="image/gif" sizes="32x32">
+<link rel="icon" href="{{ asset($favicon) }}" type="image/gif" sizes="32x32">
 <link rel="shortcut icon" href="{{ asset($imagePath) }}">
 <link rel="apple-touch-icon" href="{{ asset($imagePath) }}">
 <link rel="manifest" href="{{ asset($manifestJSON) }}">

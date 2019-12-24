@@ -20,7 +20,7 @@
 
     $manifest = "manifest.json";
 @endphp
-<link rel="icon" href="{{ secure_asset($favicon) }}" type="image/gif" sizes="32x32">
+<link rel="icon" href="{{ secure_asset($favicon) }}" type="image/png" sizes="32x32">
 <link rel="shortcut icon" href="{{ secure_asset($imagePath) }}">
 <link rel="apple-touch-icon" href="{{ secure_asset($imagePath) }}">
 <link rel="manifest" href="{{ secure_asset($manifest) }}">

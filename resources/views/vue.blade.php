@@ -10,8 +10,6 @@
     <meta name="theme-color" content="#1d4d4f">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    {{config('environment.APP_ENV')}}
     
     @includeWhen( config('environment.APP_ENV')=='local' , 'includes.header.development-assets')
 

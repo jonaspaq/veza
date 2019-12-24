@@ -1,6 +1,8 @@
 
 @php 
-    $servedImage = "https://jonaspaq.github.io/vuespa/public/images/hand-peace.png";
+    $favicon = "https://jonaspaq.github.io/vuespa/public/icons/36-Bluegreen.png";
+    $servedImage = "https://jonaspaq.github.io/vuespa/public/icons/192-Bluegreen.png";
+
     $servedManifest = "https://jonaspaq.github.io/vuespa/public/manifest.json";
 @endphp
 <link rel="icon" href="{{ $servedImage }}" type="image/gif" sizes="32x32">

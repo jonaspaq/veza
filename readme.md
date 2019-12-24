@@ -1,8 +1,8 @@
 <p align="center"><img src="public/icons/512-Bluegreen.png" width="200"></p>
 
 <p align="center">
-<a href="https://github.com/jonaspaq/vuespa"><img src="https://img.shields.io/badge/unstable-v1.0.0-blue" alt="Latest Unstable Version"></a>
-<a href="https://github.com/jonaspaq/vuespa"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
+<a href="https://github.com/jonaspaq/veza"><img src="https://img.shields.io/badge/unstable-v1.0.0-blue" alt="Latest Unstable Version"></a>
+<a href="https://github.com/jonaspaq/veza"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
 </p>
 
 ## About Veza

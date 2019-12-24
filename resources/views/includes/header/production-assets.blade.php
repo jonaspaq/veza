@@ -5,7 +5,7 @@
 
     $servedManifest = "https://jonaspaq.github.io/veza/public/manifest.json";
 @endphp
-<link rel="icon" href="{{ $servedImage }}" type="image/gif" sizes="32x32">
+<link rel="icon" href="{{ $favicon }}" type="image/gif" sizes="32x32">
 <link rel="shortcut icon" href="{{ $servedImage }}">
 <link rel="apple-touch-icon" href="{{ $servedImage }}">
 <link rel="manifest" href="{{ $servedManifest }}">

@@ -1,7 +1,7 @@
 
 @php 
-    $servedImage = "https://jonaspaq.github.io/vuespa/public/images/hand-peace.png";
-    $servedManifest = "https://jonaspaq.github.io/vuespa/public/manifest.json";
+    $servedImage = "https://jonaspaq.github.io/vuespa/tree/staging/public/images/hand-peace.png";
+    $servedManifest = "https://jonaspaq.github.io/vuespa/tree/staging/public/manifest.json";
 @endphp
 <link rel="icon" href="{{ $servedImage }}" type="image/gif" sizes="32x32">
 <link rel="shortcut icon" href="{{ $servedImage }}">
@@ -10,4 +10,4 @@
 <title> Veza </title>
 
 
-<link rel="stylesheet" href="https://jonaspaq.github.io/vuespa/public/css/app.css">
+<link rel="stylesheet" href="https://jonaspaq.github.io/vuespa/tree/staging/public/css/app.css">

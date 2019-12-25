@@ -7,32 +7,37 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\FriendList;
 use App\Events\NewFriendRequest;
-use Auth;
+
 use DB;
 
 class FriendListController extends Controller
 {
-    public function friendSuggestions()
+    public function friendSuggestions(Request $request)
     {
+        // Authenticated user's id
+        $authID = $request->user()->id;
+
         // Queries for users that is not a friend of the current user
-        $data = User::
-            whereNotExists(function ($query) {
+        $data = User::whereNotExists(function ($query) 
+            {
                 $query->select(DB::raw(1))
                         ->from('friend_list')
-                        ->whereRaw('friend_list.user_one = users.id AND friend_list.user_two ='.Auth::id())
-                        ->orWhereRaw('friend_list.user_two = users.id AND friend_list.user_one ='.Auth::id());
+                        ->whereRaw('friend_list.user_one = users.id AND friend_list.user_two ='.$authID)
+                        ->orWhereRaw('friend_list.user_two = users.id AND friend_list.user_one ='.$authID);
             })
-            ->where('id', '<>', Auth::id())
+            ->where('id', '<>', $authID)
             ->get()
             ->random(20);
             
-        if(count($data)>=20) return response()->json($data);  
+        if(count($data)>=20) return response()->json($data);
+        else return response()->json([], 204);  
 
         return response()->json(false, 200);
 
     }
 
-    public function addFriend(Request $request, $id){
+    public function addFriend(Request $request, $id)
+    {
         $authID = $request->user()->id;
 
         // Checks if the user added him/her self
@@ -61,7 +66,5 @@ class FriendListController extends Controller
         }else{
             return response()->json(['message' => 'Request pending or already friends with this user'], 200);;
         }
-        
-        return $friendCheck;
     }
 }

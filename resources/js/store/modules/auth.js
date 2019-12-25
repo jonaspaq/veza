@@ -42,8 +42,8 @@ export default {
         initiateLogin({commit}, data){
             return new Promise((resolve, reject)=>{
                 commit('ENABLE_LOGIN_LOADING')
-                
-                axios.post('https://veza-app.herokuapp.com/api/user/login', data)
+
+                axios.post('/api/user/login', data)
                 .then((response)=>{
                     commit('SET_ACCESS_TOKEN', response.data.access_token)
                     commit('SET_USER_DETAILS', response.data.user)

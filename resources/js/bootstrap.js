@@ -6,6 +6,10 @@
  * code may be modified to fit the specific needs of your application.
  */
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import 'popper.js/dist/umd/popper.js'
+
 // try {
 //     window.Popper = require('popper.js').default;
 //     window.$ = window.jQuery = require('jquery');
@@ -41,8 +45,6 @@ axios.interceptors.request.use(
       return Promise.reject(error);
     }
 );
-
-// axios.defaults.headers.common['Authorization'] = `Bearer ${ store.getters['auth/token'] }`;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

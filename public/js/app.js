@@ -31649,7 +31649,10 @@ var render = function() {
                 }
               }
             },
-            [_c("i", { staticClass: "fas fa-chevron-down" })]
+            [
+              _c("i", { staticClass: "fas fa-chevron-down" }),
+              _vm._v("i\n                ")
+            ]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "dropdown-menu" }, [
@@ -48285,21 +48288,11 @@ module.exports = g;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
-/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bootstrap_dist_js_bootstrap_min_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap/dist/js/bootstrap.min.js */ "./node_modules/bootstrap/dist/js/bootstrap.min.js");
-/* harmony import */ var bootstrap_dist_js_bootstrap_min_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_js_bootstrap_min_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! popper.js/dist/umd/popper.js */ "./node_modules/popper.js/dist/umd/popper.js");
-/* harmony import */ var popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _route_routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./route/routes */ "./resources/js/route/routes.js");
-/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/store */ "./resources/js/store/store.js");
-/* harmony import */ var _bootstrap_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./bootstrap.js */ "./resources/js/bootstrap.js");
-/* harmony import */ var _route_middleware__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./route/middleware */ "./resources/js/route/middleware.js");
-/* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/App */ "./resources/js/components/App.vue");
- // Bootstrap
-
-
-
+/* harmony import */ var _route_routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./route/routes */ "./resources/js/route/routes.js");
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./resources/js/store/store.js");
+/* harmony import */ var _bootstrap_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bootstrap.js */ "./resources/js/bootstrap.js");
+/* harmony import */ var _route_middleware__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./route/middleware */ "./resources/js/route/middleware.js");
+/* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/App */ "./resources/js/components/App.vue");
  // Route List (Vue-router)
 
  // Store (Vuex)
@@ -48313,12 +48306,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   components: {
-    App: _components_App__WEBPACK_IMPORTED_MODULE_8__["default"]
+    App: _components_App__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
-  router: _route_routes__WEBPACK_IMPORTED_MODULE_4__["default"],
-  store: _store_store__WEBPACK_IMPORTED_MODULE_5__["default"],
+  router: _route_routes__WEBPACK_IMPORTED_MODULE_1__["default"],
+  store: _store_store__WEBPACK_IMPORTED_MODULE_2__["default"],
   render: function render(h) {
-    return h(_components_App__WEBPACK_IMPORTED_MODULE_8__["default"]);
+    return h(_components_App__WEBPACK_IMPORTED_MODULE_5__["default"]);
   }
 }).$mount('#app');
 
@@ -48333,10 +48326,16 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store/store */ "./resources/js/store/store.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
+/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var bootstrap_dist_js_bootstrap_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap/dist/js/bootstrap.min.js */ "./node_modules/bootstrap/dist/js/bootstrap.min.js");
+/* harmony import */ var bootstrap_dist_js_bootstrap_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_js_bootstrap_min_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! popper.js/dist/umd/popper.js */ "./node_modules/popper.js/dist/umd/popper.js");
+/* harmony import */ var popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./resources/js/store/store.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 // window._ = require('lodash');
 
 /**
@@ -48344,7 +48343,9 @@ __webpack_require__.r(__webpack_exports__);
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
  */
-// try {
+
+
+ // try {
 //     window.Popper = require('popper.js').default;
 //     window.$ = window.jQuery = require('jquery');
 //     require('bootstrap');
@@ -48357,8 +48358,9 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-axios__WEBPACK_IMPORTED_MODULE_1___default.a.interceptors.request.use(function (config) {
-  var token = _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters['auth/token'];
+
+axios__WEBPACK_IMPORTED_MODULE_4___default.a.interceptors.request.use(function (config) {
+  var token = _store_store__WEBPACK_IMPORTED_MODULE_3__["default"].getters['auth/token'];
 
   if (token) {
     config.headers = {
@@ -48370,8 +48372,7 @@ axios__WEBPACK_IMPORTED_MODULE_1___default.a.interceptors.request.use(function (
   return config;
 }, function (error) {
   return Promise.reject(error);
-}); // axios.defaults.headers.common['Authorization'] = `Bearer ${ store.getters['auth/token'] }`;
-
+});
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -48380,7 +48381,7 @@ axios__WEBPACK_IMPORTED_MODULE_1___default.a.interceptors.request.use(function (
 
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
+window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_5__["default"]({
   broadcaster: 'pusher',
   key: "62cb0f17ea48af2df261",
   cluster: "ap1",
@@ -48388,7 +48389,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
   authEndpoint: '/broadcasting/auth',
   auth: {
     headers: {
-      Authorization: "Bearer ".concat(_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters['auth/token'])
+      Authorization: "Bearer ".concat(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"].getters['auth/token'])
     }
   }
 });

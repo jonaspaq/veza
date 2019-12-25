@@ -11,7 +11,7 @@
             <div class="ml-auto">
                 <div class="dropdown dropleft">
                     <button class="emptyBtn" type="button" data-toggle="dropdown" @click.prevent>
-                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-chevron-down"></i>i
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#postEditModal" @click="editPost(post)">Edit</a>

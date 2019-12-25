@@ -1,10 +1,5 @@
 import Vue from 'vue'
 
-// Bootstrap
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
-import 'popper.js/dist/umd/popper.js'
-
 // Route List (Vue-router)
 import router from './route/routes'
 

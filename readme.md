@@ -9,12 +9,14 @@
 <a href="https://github.com/jonaspaq/veza"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
 </p>
 
-```
-git clone https://github.com/jonaspaq/veza.git
-```
 ## About Veza
 
 Veza is a web application that users can use to create accounts, add other users as friends, post a status, message other users and so much more
+
+## Clone using git
+```
+git clone https://github.com/jonaspaq/veza.git
+```
 
 ## Tools Used
 

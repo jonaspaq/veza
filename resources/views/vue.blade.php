@@ -20,7 +20,6 @@
 <body>
     
     <div class="container-fluid vh-100 p-0 m-0" id="app">
-        <App />
     </div>
 
     @includeWhen( config('environment.APP_ENV')=='local' , 'includes.footer.development-scripts')

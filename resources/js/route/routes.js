@@ -3,10 +3,10 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import Login from './components/views/Login'
-import Register from './components/views/Register'
-import Home from './components/views/Home'
-import EditProfile from './components/views/EditProfile'
+import Login from '../components/views/Login'
+import Register from '../components/views/Register'
+import Home from '../components/views/Home'
+import EditProfile from '../components/views/EditProfile'
 
 // Router Initialize
 const router = new VueRouter({

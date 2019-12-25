@@ -27,9 +27,21 @@ class UserController extends Controller
     }
 
     /**
+     * Show a specified resource according 
+     * to the owner of the access token
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return User::class
+     */
+    public function show(Request $request)
+    {
+        return $request->user();
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -65,8 +77,9 @@ class UserController extends Controller
 
         if(Auth::attempt($data)){
             $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')->accessToken;
-            return response()->json(['message' => 'Successful Authentication', 'access_token' => $success['token'], 'user' => $user], 200);
+            $access_token =  $user->createToken('MyApp')->accessToken;
+
+            return response()->json(['message' => 'Successful Authentication', 'access_token' => $access_token, 'user' => $user], 200);
         }
         
         return response()->json(['message' => 'Invalid Credentials'], 404);

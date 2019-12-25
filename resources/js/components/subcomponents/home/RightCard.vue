@@ -37,12 +37,7 @@ export default {
 
     methods:{
         getFriendSuggestions(){
-            axios.get('/api/friendSuggestions', {
-                headers:{
-                    Accept: 'applications/json',
-                    Authorization: 'Bearer '+this.$store.getters['auth/token']
-                }
-            })
+            axios.get('/api/friendSuggestions')
             .then( response => {
                 const res = response.data
                 const resCount = Object.entries(res)

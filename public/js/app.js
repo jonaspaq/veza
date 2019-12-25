@@ -2799,7 +2799,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      email: '',
+      email: 'test@example.com',
       password: 'password'
     };
   },
@@ -49995,7 +49995,7 @@ __webpack_require__.r(__webpack_exports__);
       var commit = _ref.commit;
       return new Promise(function (resolve, reject) {
         commit('ENABLE_LOGIN_LOADING');
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('https://veza-app.herokuapp.com/api/user/login', data).then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/user/login', data).then(function (response) {
           commit('SET_ACCESS_TOKEN', response.data.access_token);
           commit('SET_USER_DETAILS', response.data.user);
           commit('UNSET_LOGIN_ERRORS');

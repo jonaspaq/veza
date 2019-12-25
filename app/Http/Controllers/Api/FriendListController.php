@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\FriendList;
 use App\Events\NewFriendRequest;
-use Auth;
+
 use DB;
 
 class FriendListController extends Controller
@@ -18,8 +18,8 @@ class FriendListController extends Controller
         $authID = $request->user()->id;
 
         // Queries for users that is not a friend of the current user
-        $data = User::
-            whereNotExists(function ($query) {
+        $data = User::whereNotExists(function ($query) 
+            {
                 $query->select(DB::raw(1))
                         ->from('friend_list')
                         ->whereRaw('friend_list.user_one = users.id AND friend_list.user_two ='.$authID)

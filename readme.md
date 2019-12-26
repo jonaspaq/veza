@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://veza-app.heroku.com">
+  <a href="https://veza-app.herokuapp.com">
     <img src="public/icons/512-Bluegreen.png" width="200">
   </a>
 </p>

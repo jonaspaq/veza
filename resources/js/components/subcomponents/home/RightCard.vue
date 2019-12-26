@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import FriendItem from './subcomponents/FriendItem'
 import FriendSuggestionLoader from '../../loading_animations/FriendSuggestionLoader'
 

@@ -27,27 +27,16 @@
                             <img src="images/home.png" alt="home" width="19px" height="19px">
                             <span class="ml-1 d-none d-lg-block">Home</span>  
                         </li> 
-                        <li class="list-group-item d-flex align-items-center" @click="openFriend" @blur="openFriend" tabindex="0">
-                            <img src="images/friendship.png" alt="marketplace" width="19px" height="19px">
-                            <span class="ml-1 d-none d-lg-block">Friends</span>  
-                            <!-- <span class="badge badge-primary ml-auto">1</span> -->
-
-                            <FriendRequestContainer :status="friendContainer" />
-
-                        </li>
+                        <FriendNavigation />
                         <li class="list-group-item d-flex align-items-center dropdown">
                             <img src="images/bell.png" alt="bell" width="19px" height="19px">
                             <span class="ml-1 d-none d-lg-block">Notifications</span>  
-                            <span class="badge badge-primary ml-auto">4</span>
-
-                            <div class="rounded-top rounded-lg notificationHolder bg-white">
-                                <p style="height:800px">hi</p>                                
-                            </div>
+                            <span class="badge ml-auto bg-primary">4</span>
                         </li> 
                         <li class="list-group-item d-flex align-items-center">
                             <img src="images/store.png" alt="store" width="19px" height="19px">
                             <span class="ml-1 d-none d-lg-block">Marketplace</span>  
-                            <!-- <span class="badge badge-primary ml-auto">1</span> -->
+                            <span class="badge badge-primary ml-auto">1</span>
                         </li>
                     </ul>
                 </div>
@@ -58,11 +47,10 @@
 </template>
 
 <script>
-import FriendRequestContainer from './subcomponents/FriendRequestContainer'
-
+import FriendNavigation from './subcomponents/FriendNavigation'
 export default {
     name:'LeftCard',
-    components: { FriendRequestContainer },
+    components:{ FriendNavigation },
 
     data(){
         return {
@@ -74,13 +62,6 @@ export default {
         openFriend(){
             this.friendContainer = !this.friendContainer
         }
-    },
-
-    mounted(){    
-        Echo.private('friendRequest.'+this.user.id)
-            .listen('NewFriendRequest', (e) => {
-                console.log(e.friendRequest);
-            });
     },
 
     computed:{
@@ -117,17 +98,6 @@ export default {
             width: 100%;
             justify-content: center;
         }
-    }
-
-    .notificationHolder{
-        display: none;
-        transform: translate3d(-12.5vw, -25vh, 0px) !important;
-        overflow: auto;
-        position: absolute;
-        height: 45vh;
-        width: 100vw;
-        z-index: -1;
-        box-shadow: 0 0 0 1px rgb(170, 170, 170);
     }
 }
 

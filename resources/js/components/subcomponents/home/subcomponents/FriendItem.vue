@@ -24,8 +24,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
     name: 'FriendItem',
     props: ['friend'],

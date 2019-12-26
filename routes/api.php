@@ -13,19 +13,20 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => 'api'], function(){
-    Route::post('user/register', 'Api\UserController@register');
-    Route::post('user/login', 'Api\UserController@login')->name('login');
+Route::group(['middleware' => 'api', 'namespace' => 'Api'], function(){
+    Route::post('user/register', 'UserController@register');
+    Route::post('user/login', 'UserController@login')->name('login');
 });
 
-Route::group(['middleware' => 'auth:api'], function(){
+Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function(){
 
-    Route::get('/user/authenticatedUserDetails', 'Api\UserController@show');
+    Route::get('/user/authenticatedUserDetails', 'UserController@show');
 
-    Route::apiResource('post', 'Api\PostController');
+    Route::apiResource('post', 'PostController');
 
-    Route::get('/friendSuggestions', 'Api\FriendListController@friendSuggestions');
-    Route::post('/addFriend/{id}', 'Api\FriendListController@addFriend');
+    Route::post('/addFriend/{id}', 'FriendListController@addFriend');
+    Route::get('/friendRequestCount', 'FriendListController@requestCount');
+    Route::get('/friendSuggestions', 'FriendListController@friendSuggestions');
 
 });
 

@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import PleaseWaitLoader from '../loading_animations/PleaseWaitLoader'
 
 export default {

@@ -25,7 +25,7 @@ import 'popper.js/dist/umd/popper.js'
 
 import store from './store/store'
 
-import axios from 'axios'
+window.axios = require('axios');
 
 axios.interceptors.request.use(
     (config) => {

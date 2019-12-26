@@ -13,31 +13,6 @@ use DB;
 class FriendListController extends Controller
 {
     /**
-     *  Used to fetch friend suggestions/recommendations for the authenticated user
-     */
-    public function friendSuggestions()
-    {  
-        // Queries for users that is not a friend of the current user
-        $data = User::whereNotExists(function ($query) 
-            {
-                $query->select(DB::raw(1))
-                        ->from('friend_list')
-                        ->whereRaw('friend_list.user_one = users.id AND friend_list.user_two ='.Auth::id())
-                        ->orWhereRaw('friend_list.user_two = users.id AND friend_list.user_one ='.Auth::id());
-            })
-            ->where('id', '<>', Auth::id())
-            ->inRandomOrder()
-            ->limit(20)
-            ->get();
-            
-        if($data) 
-            return response()->json($data);
-        else 
-            return response()->json([], 204);  
-    }
-
-
-    /**
      * Function fired when adding a friend
     */
     public function addFriend(Request $request, $id)
@@ -68,5 +43,44 @@ class FriendListController extends Controller
             return response()->json($data, 201);
         }else
             return response()->json(['message' => 'Request pending or already friends with this user'], 400);
+    }
+
+    /**
+     * Fetch how many friend request the user have
+    */
+    public function requestCount(Request $request)
+    {
+        $userID = $request->user()->id;
+
+        $data = FriendList::where('user_two', $userID)
+            ->where('status', 'pending')
+            ->count();
+
+        return $data;
+    }
+
+    /**
+     *  Used to fetch friend suggestions/recommendations for the authenticated user
+     */
+    public function friendSuggestions()
+    {  
+        // Queries for users that is not a friend of the current user
+        $data = User::whereNotExists(function ($query) 
+            {
+                $query->select(DB::raw(1))
+                        ->from('friend_list')
+                        ->whereRaw('friend_list.user_one = users.id AND friend_list.user_two ='.Auth::id())
+                        ->orWhereRaw('friend_list.user_two = users.id AND friend_list.user_one ='.Auth::id());
+            })
+            ->where('id', '<>', Auth::id())
+            // ->inRandomOrder()
+            ->limit(20)
+            ->orderBy('id', 'desc')
+            ->get();
+            
+        if($data) 
+            return response()->json($data);
+        else 
+            return response()->json([], 204);  
     }
 }

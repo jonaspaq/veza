@@ -37,10 +37,6 @@ export default {
     methods: {
         addFriend(id){
             axios({
-                headers:{
-                    Accept: 'application/json',
-                    Authorization: 'Bearer '+this.$store.getters['auth/token']
-                },
                 method: 'POST',
                 url: '/api/addFriend/'+id
             })

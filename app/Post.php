@@ -8,9 +8,11 @@ class Post extends Model
 {
     protected $table = 'posts';
     protected $primaryKey = 'id';
+    
+    public $timestamps = true;
 
-    protected $fillable = [
-        'content', 'user_id'
+    protected $guarded = [
+        'id'
     ];
 
     public function user()

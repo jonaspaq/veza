@@ -6,6 +6,10 @@
  * code may be modified to fit the specific needs of your application.
  */
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import 'popper.js/dist/umd/popper.js'
+
 // try {
 //     window.Popper = require('popper.js').default;
 //     window.$ = window.jQuery = require('jquery');
@@ -19,9 +23,28 @@
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-// window.axios = require('axios');
-// 
-// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+import store from './store/store'
+
+import axios from 'axios'
+
+axios.interceptors.request.use(
+    (config) => {
+      let token = store.getters['auth/token'];
+  
+      if (token) {
+        config.headers = {
+            'Authorization': `Bearer ${ token }`,
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+      }
+  
+      return config;
+    }, 
+  
+    (error) => {
+      return Promise.reject(error);
+    }
+);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -41,7 +64,7 @@ window.Echo = new Echo({
     authEndpoint: '/broadcasting/auth',
     auth:{
         headers:{
-            Authorization:'Bearer '+localStorage.getItem('Session')
+            Authorization: `Bearer ${ store.getters['auth/token'] }`
         }
     }
 });

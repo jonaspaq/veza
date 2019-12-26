@@ -12,6 +12,9 @@ use DB;
 
 class FriendListController extends Controller
 {
+    /**
+     *  Used to fetch friend suggestions/recommendations for the authenticated user
+     */
     public function friendSuggestions()
     {  
         // Queries for users that is not a friend of the current user
@@ -27,23 +30,23 @@ class FriendListController extends Controller
             ->limit(20)
             ->get();
             
-        // if(count($data)>=20) 
         if($data) 
             return response()->json($data);
-        else return response()->json([], 204);  
-
-        return response()->json(false, 200);
-
+        else 
+            return response()->json([], 204);  
     }
 
+
+    /**
+     * Function fired when adding a friend
+    */
     public function addFriend(Request $request, $id)
     {
         $authID = $request->user()->id;
 
         // Checks if the user added him/her self
-        if($authID == $id){
-            return response()->json(['message' => 'You cannot add yourself'], 200);
-        }
+        if($authID == $id)
+            return response()->json(['message' => 'You cannot add yourself'], 400);
 
         // Checks if the user already sent a request for this user
         // Or checks if already friend with this user
@@ -62,9 +65,8 @@ class FriendListController extends Controller
             // Send notification to the requested user realtime
             broadcast(new NewFriendRequest($data))->toOthers();
 
-            return response()->json($data, 200);
-        }else{
-            return response()->json(['message' => 'Request pending or already friends with this user'], 200);;
-        }
+            return response()->json($data, 201);
+        }else
+            return response()->json(['message' => 'Request pending or already friends with this user'], 400);
     }
 }

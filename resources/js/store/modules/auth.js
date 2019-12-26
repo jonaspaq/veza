@@ -60,15 +60,10 @@ export default {
         },
         setUserDetails({commit, getters}){
             return new Promise((resolve, reject)=>{
-                axios.get('/api/userDetails',{
-                    headers:{
-                        Accept:'application/json',
-                        Authorization:'Bearer '+getters.token
-                    }
-                })
+                axios.get('/api/user/authenticatedUserDetails')
                 .then((response)=>{
-                    resolve(response)
                     commit('SET_USER_DETAILS', response.data)
+                    resolve(response)
                 })
                 .catch((err)=>{
                     reject(err)

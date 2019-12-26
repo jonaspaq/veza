@@ -41,12 +41,7 @@ export default {
     actions:{
         getAllPost({commit, rootGetters}){
             return new Promise((resolve,reject)=>{
-                axios.get('/api/post', {
-                    headers:{
-                        Accept: 'application/json',
-                        Authorization:'Bearer '+rootGetters['auth/token']
-                    }
-                })
+                axios.get('/api/post')
                 .then((response)=>{
                     // Checks if it retrieved atleast 1 post
                     // If yes it sets the posts state, if not it sets empty array
@@ -61,10 +56,6 @@ export default {
         addPost({commit}, {content,token}){
             return new Promise((resolve, reject)=>{ 
                 axios({
-                    headers:{
-                        Accept: 'application/json',
-                        Authorization:'Bearer '+token,
-                    },
                     method:'POST',
                     url:'/api/post',
                     data:{
@@ -87,10 +78,6 @@ export default {
         deletePost({commit, getters, rootGetters}){
             return new Promise((resolve, reject)=>{
                 axios({
-                    headers:{
-                        Accept: 'application/json',
-                        Authorization:'Bearer '+rootGetters['auth/token'],
-                    },
                     method:'DELETE',
                     url:'/api/post/'+getters.toDeletePost.id,
                 })
@@ -109,10 +96,6 @@ export default {
         editPost({commit, getters, rootGetters}, data){
             return new Promise((resolve, reject) => {
                 axios({
-                    headers:{
-                        Accept: 'application/json',
-                        Authorization:'Bearer '+rootGetters['auth/token'],
-                    },
                     method:'PATCH',
                     url:'/api/post/'+getters.toEditPost.id,
                     data:{

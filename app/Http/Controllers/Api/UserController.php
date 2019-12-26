@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         $data = User::all();
 
-        return response()->json(['message' => 'Retrieved all users', $data], 200);
+        return response()->json(['message' => 'Success', $data], 200);
     }
 
     /**
@@ -92,6 +92,7 @@ class UserController extends Controller
         $data['password'] = Hash::make($data['password']);
 
         $insertedData = User::create($data);
-        return $insertedData;
+
+        return response()->json($insertedData, 201);
     }
 }

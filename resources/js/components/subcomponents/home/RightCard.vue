@@ -36,7 +36,7 @@ export default {
 
     methods:{
         getFriendSuggestions(){
-            axios.get('/api/friendSuggestions')
+            axios.get('/api/friends/suggestions')
             .then( response => {
                 const res = response.data
                 const resCount = Object.entries(res)

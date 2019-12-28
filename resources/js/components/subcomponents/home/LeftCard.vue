@@ -52,18 +52,6 @@ export default {
     name:'LeftCard',
     components:{ FriendNavigation },
 
-    data(){
-        return {
-            friendContainer: null
-        }
-    },
-
-    methods:{
-        openFriend(){
-            this.friendContainer = !this.friendContainer
-        }
-    },
-
     computed:{
         user(){
             return this.$store.getters['auth/user']

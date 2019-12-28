@@ -14,20 +14,22 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['middleware' => 'api', 'namespace' => 'Api'], function(){
-    Route::post('user/register', 'UserController@register');
-    Route::post('user/login', 'UserController@login')->name('login');
+    Route::post('register', 'UserController@register');
+    Route::post('login', 'UserController@login')->name('login');
 });
 
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function(){
 
-    Route::get('/user/authenticatedUserDetails', 'UserController@show');
+    Route::get('user/authenticatedUserDetails', 'UserController@show');
 
     Route::apiResource('post', 'PostController');
-
-    Route::post('/addFriend/{id}', 'FriendListController@addFriend');
-    Route::get('/friendRequestCount', 'FriendListController@requestCount');
-    Route::get('/friendSuggestions', 'FriendListController@friendSuggestions');
-
+    
+    Route::apiResource('friend', 'FriendListController');
+    Route::patch('friends/accept', 'FriendListController@acceptRequest');
+    Route::get('friends/sent-requests', 'FriendListController@pendingSentRequests');
+    Route::get('friends/recieved-requests', 'FriendListController@pendingRecievedRequests');
+    Route::get('friends/request-count', 'FriendListController@pendingRequestCount');
+    Route::get('friends/suggestions', 'FriendListController@friendSuggestions');
 });
 
 

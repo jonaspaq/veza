@@ -31,7 +31,7 @@ export default {
 
 	methods: {
 		friendRequestCount(){
-			axios.get('/api/friendRequestCount')
+			axios.get('/api/friends/request-count')
 			.then(res => {
 				this.setFriendRequestCountValue(res.data)
 			})

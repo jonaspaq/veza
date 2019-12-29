@@ -61,7 +61,7 @@ window.Echo = new Echo({
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     encrypted: true,
-    authEndpoint: '/broadcasting/auth',
+    authEndpoint: 'https://veza-app.herokuapp.com/broadcasting/auth',
     auth:{
         headers:{
             Authorization: `Bearer ${ store.getters['auth/token'] }`

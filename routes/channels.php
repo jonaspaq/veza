@@ -14,5 +14,5 @@
 Broadcast::channel('friendRequest.{id}', function ($user, $friendRequest)
 {
     // Checks if current user can listen to this private channel 
-    return ((int) $user->id === (int) $friendRequest) ? true:false;
+    return ((int) $user->id === (int) $friendRequest) ? true : false;
 });

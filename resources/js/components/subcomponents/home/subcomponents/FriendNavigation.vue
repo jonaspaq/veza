@@ -22,11 +22,10 @@ export default {
 	},
 
 	mounted(){    
-	    Echo.private('friendRequest.'+this.user.id)
-	        .listen('NewFriendRequest', (e) => {
+	    Echo.private('friendRequest.'+this.user.id).listen('NewFriendRequest', (e) => {
 				console.log(e.friendRequest);
 				this.setFriendRequestCountValue(1)
-	        });
+			});
 	},
 
 	methods: {

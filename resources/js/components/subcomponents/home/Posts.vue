@@ -9,7 +9,7 @@
             </div>
         </div>
         <div v-else>
-            <div v-for="n in 10" :key="n.id" class="card-body bg-white border mt-2">
+            <div v-for="n in 5" :key="n.id" class="card-body bg-white border mt-2">
                 <PostsLoader />
             </div>
         </div>

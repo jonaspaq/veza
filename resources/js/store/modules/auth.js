@@ -1,4 +1,3 @@
-import axios from 'axios'
 
 export default {
     namespaced: true, 
@@ -43,7 +42,7 @@ export default {
             return new Promise((resolve, reject)=>{
                 commit('ENABLE_LOGIN_LOADING')
 
-                axios.post('/api/user/login', data)
+                axios.post('/api/login', data)
                 .then((response)=>{
                     commit('SET_ACCESS_TOKEN', response.data.access_token)
                     commit('SET_USER_DETAILS', response.data.user)

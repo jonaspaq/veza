@@ -19,7 +19,7 @@ class CreateFriendListTable extends Migration
             $table->foreign('user_one')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('user_two');
             $table->foreign('user_two')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('status', ['pending', 'declined', 'friends'])->default('pending');
+            $table->enum('status', ['pending', 'friends'])->default('pending');
             $table->timestamps();
         });
     }

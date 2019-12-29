@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import FriendItem from './subcomponents/FriendItem'
 import FriendSuggestionLoader from '../../loading_animations/FriendSuggestionLoader'
 
@@ -37,7 +36,7 @@ export default {
 
     methods:{
         getFriendSuggestions(){
-            axios.get('/api/friendSuggestions')
+            axios.get('/api/friends/suggestions')
             .then( response => {
                 const res = response.data
                 const resCount = Object.entries(res)

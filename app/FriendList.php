@@ -10,12 +10,8 @@ class FriendList extends Model
     protected $primaryKey = 'id';
 
     protected $guarded = [
-        'status'
+        'id', 'status'
     ];
-
-    public function requestedBy(){
-        
-    }
 
     public function user()
     {

@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import PleaseWaitLoader from '../loading_animations/PleaseWaitLoader'
 
 export default {
@@ -69,7 +68,7 @@ export default {
             let self = this
             self.loadingStatus = true
 
-            axios.post('/api/user/register', {
+            axios.post('/api/register', {
                 name: self.name,
                 email: self.email,
                 password: self.password,

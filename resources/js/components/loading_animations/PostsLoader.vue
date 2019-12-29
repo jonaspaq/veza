@@ -40,10 +40,10 @@ export default {
 .load-placeholder{
   position:relative;
   overflow: hidden;
-  background-image: linear-gradient(90deg, #FFFFFF, #DEDEDE, #FFFFFF);
+  background: linear-gradient(90deg, #FFFFFF, #DEDEDE, #FFFFFF);
   background-size: 60% 100%;
   background-repeat: no-repeat;
-  animation: loadsimulate 1s infinite;
+  animation: loadsimulate 1.5s infinite;
 }
 
 @keyframes loadsimulate{
@@ -60,6 +60,6 @@ export default {
   top:0;
   width: 100%;
   height: 100%;
-  background-color: rgba(150, 150, 150    , 0.2);
+  background-color: rgba(150, 150, 150, 0.2);
 }
 </style>

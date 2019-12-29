@@ -24,8 +24,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
     name: 'FriendItem',
     props: ['friend'],
@@ -38,7 +36,10 @@ export default {
         addFriend(id){
             axios({
                 method: 'POST',
-                url: '/api/addFriend/'+id
+                url: '/api/friend/',
+                data: {
+                    id
+                }
             })
             .then( response => {
                 this.requestStatus = true

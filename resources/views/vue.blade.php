@@ -11,6 +11,8 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="preconnect" href="https://stats.pusher.com">
+    <link rel="preconnect" href="https://kit-free.fontawesome.com">
     <link rel="dns-prefetch" href="https://stats.pusher.com">
     <link rel="dns-prefetch" href="https://kit-free.fontawesome.com">
     

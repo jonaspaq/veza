@@ -22,9 +22,8 @@ export default {
 	},
 
 	mounted(){    
-		console.log(process.env.MIX_PUSHER_APP_CLUSTER)
 		Echo.private('friendRequest.'+this.user.id)
-			.listen('App\\Events\\NewFriendRequest', (e) => {
+			.listen('.NewFriendRequest', (e) => {
 				console.log('hello')
 				console.log(e.friendRequest);
 				this.setFriendRequestCountValue(1)

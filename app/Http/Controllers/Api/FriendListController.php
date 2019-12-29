@@ -126,7 +126,7 @@ class FriendListController extends Controller
             $data = FriendList::create($toData);
 
             // Send notification to the requested user realtime, Handled by Laravel Echo
-            // broadcast(new NewFriendRequest($data))->toOthers();
+            broadcast(new NewFriendRequest($data))->toOthers();
 
             return response()->json($data, 201);
         }

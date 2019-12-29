@@ -53,8 +53,6 @@ axios.interceptors.request.use(
  */
 
 import Echo from 'laravel-echo';
-console.log(process.env.MIX_PUSHER_APP_KEY);
-console.log(process.env.APP_URL);
 window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
@@ -62,8 +60,8 @@ window.Echo = new Echo({
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     encrypted: true,
-    authHost: 'https://veza-app.herokuapp.com',
-    authEndpoint: '/broadcasting/auth',
+    https: true,
+    authEndpoint: 'https://veza-app.herokuapp.com/broadcasting/auth',
     auth:{
         headers:{
             Authorization: `Bearer ${ store.getters['auth/token'] }`

@@ -12,7 +12,9 @@ class TrustProxies extends Middleware
      *
      * @var array|string
      */
-    protected $proxies;
+    protected $proxies = [
+        'https://veza-app.herokuapp.com'
+    ];
 
     /**
      * The headers that should be used to detect proxies.

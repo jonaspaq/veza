@@ -3,10 +3,13 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import Login from '../components/views/Login'
-import Register from '../components/views/Register'
+// Components that should always be loaded
 import Home from '../components/views/Home'
-import EditProfile from '../components/views/EditProfile'
+
+// Components that should be loaded only when needed
+const Login =  () => import('../components/views/Login');
+const Register =  () => import('../components/views/Register');
+const EditProfile =  () => import('../components/views/EditProfile');
 
 // Router Initialize
 const router = new VueRouter({

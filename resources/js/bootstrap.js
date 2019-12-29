@@ -53,7 +53,8 @@ axios.interceptors.request.use(
  */
 
 import Echo from 'laravel-echo';
-
+console.log(process.env.MIX_PUSHER_APP_KEY);
+console.log(process.env.APP_URL);
 window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({

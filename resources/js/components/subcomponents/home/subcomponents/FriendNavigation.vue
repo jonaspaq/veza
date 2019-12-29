@@ -23,7 +23,7 @@ export default {
 
 	mounted(){    
 		Echo.private('friendRequest.'+this.user.id)
-			.listen('NewFriendRequest', (e) => {
+			.listen('App\\Events\\NewFriendRequest', (e) => {
 				console.log(e.friendRequest);
 				this.setFriendRequestCountValue(1)
 			});

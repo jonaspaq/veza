@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-12">
                     <a v-if="!requestStatus" href="javascript:;" @click="addFriend(friend.id)" class="anchorColor"><small>Add Friend</small></a>
-                    <span v-if="requestStatus" class="anchorColor"><small class="rotateIn animated">Request sent <i class="fas fa-check"></i></small></span>
+                    <span v-if="requestStatus" class="anchorColor"><small class="fadeIn animated">Request sent <i class="fas fa-check"></i></small></span>
                 </div>
             </div>
         </div>

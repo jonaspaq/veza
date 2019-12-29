@@ -36,7 +36,7 @@ export default {
         addFriend(id){
             axios({
                 method: 'POST',
-                url: '/api/friend/',
+                url: '/api/friend',
                 data: {
                     id
                 }

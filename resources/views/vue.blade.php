@@ -10,10 +10,6 @@
     <meta name="theme-color" content="#1d4d4f">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <link rel="preload" href="https://stats.pusher.com">
-    <link rel="preconnect" href="https://stats.pusher.com">
-    <link rel="dns-prefetch" href="https://stats.pusher.com">
     
     @includeWhen( config('environment.APP_ENV')=='local' , 'includes.header.development-assets')
 

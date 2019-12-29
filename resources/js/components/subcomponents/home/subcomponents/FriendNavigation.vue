@@ -22,18 +22,14 @@ export default {
 	},
 
 	mounted(){    
-
-		this.$nextTick(function () {
-			console.log(process.env.MIX_PUSHER_APP_CLUSTER)
-			console.log(process.env.MIX_PUSHER_APP_KEY)
-			Echo.private('friendRequest.'+this.user.id)
-				.listen('.NewFriendRequest', (e) => {
-					console.log('hello')
-					console.log(e.friendRequest);
-					this.setFriendRequestCountValue(1)
-				});
-  	});
-		
+		console.log(process.env.MIX_PUSHER_APP_CLUSTER)
+		console.log(process.env.MIX_PUSHER_APP_KEY)
+		window.Echo.private('friendRequest.'+this.user.id)
+			.listen('.NewFriendRequest', (e) => {
+				console.log('hello')
+				console.log(e.friendRequest);
+				this.setFriendRequestCountValue(1)
+			});
 	},
 
 	methods: {

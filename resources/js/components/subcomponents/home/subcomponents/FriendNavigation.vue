@@ -22,7 +22,7 @@ export default {
 	},
 
 	mounted(){    
-		console.log('hello')
+		console.log(process.env.MIX_PUSHER_APP_CLUSTER)
 		Echo.private('friendRequest.'+this.user.id)
 			.listen('App\\Events\\NewFriendRequest', (e) => {
 				console.log('hello')

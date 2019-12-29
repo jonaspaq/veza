@@ -6,9 +6,7 @@
  * code may be modified to fit the specific needs of your application.
  */
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
-import 'popper.js/dist/umd/popper.js'
+import 'bootstrap'
 
 // try {
 //     window.Popper = require('popper.js').default;

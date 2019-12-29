@@ -3,6 +3,12 @@
 // Nunito Font CDN
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
+// Bootstrap 4
+@import 'bootstrap';
+
+// Modified Some Bootstrap 4 classes
+@import './customcss/custom.scss';
+
 // Cutomized colors. Defined in variables css
 // Variables (:root)
 @import 'variables';

@@ -189,7 +189,6 @@ class FriendListController extends Controller
     */
     public function destroy(Request $request, $id)
     {
-        return $request->ip();
         // Get the user id who made the request
         $authID = $request->user()->id;
 

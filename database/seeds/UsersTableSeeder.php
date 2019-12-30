@@ -1,10 +1,14 @@
 <?php
 
 use Illuminate\Database\Seeder;
+
 use App\User;
+use App\Post;
+use App\FriendList;
 
 class UsersTableSeeder extends Seeder
 {
+    public $usersToSeed = 100;
     /**
      * Run the database seeds.
      *
@@ -12,10 +16,19 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 200)
-            ->create()
+        factory(User::class, $this->usersToSeed)->create()
             ->each(function ($user) {
-                $user->posts()->createMany(factory(App\Post::class, 100)->make()->toArray());
+                // For each user created, create 5 Posts related to user
+                $user->posts()->saveMany(factory(Post::class, 5))
+                ->create([
+                    'user_id' => $user->id
+                ]);
+
+                // For each user created, create 5 Incoming Friend Requests
+                // $user->friendRecieved()->saveMany(factory(FriendList::class, 3))
+                // ->create([
+                //     'user_two' => $user->id
+                // ]);
             });
     }
 }

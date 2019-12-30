@@ -27,7 +27,10 @@ class FriendListController extends Controller
                     $query->where('user_one', $authID)
                     ->orWhere('user_two', $authID);
                 })
+                ->with('sender:id,name,email', 'reciever:id,name,email')
                 ->paginate();
+        
+
 
         return response()->json($data);
     }
@@ -38,9 +41,11 @@ class FriendListController extends Controller
     */
     public function pendingRecievedRequests(Request $request)
     {
-        $data = FriendList::where('user_two', $request->user()->id)
+        $data = $request->user()->friendRecieved()
+            ->select('id', 'user_one', 'created_at')
             ->where('status', 'pending')
-            ->paginate();
+            ->with('sender:id,name')
+            ->paginate(15);
 
         return response()->json($data);
     }
@@ -51,9 +56,11 @@ class FriendListController extends Controller
     */
     public function pendingSentRequests(Request $request)
     {
-        $data = FriendList::where('status', 'pending')
-                ->where('user_one', $request->user()->id)
-                ->paginate();
+        $data = $request->user()->friendSent()
+            ->select('id', 'user_two', 'created_at')
+            ->where('status', 'pending')
+            ->with('reciever:id,name,email')
+            ->paginate();
 
         return response()->json($data);
     }
@@ -104,13 +111,11 @@ class FriendListController extends Controller
         $authID = $request->user()->id;
         
         // Checks if the user to be added exists
-        $userToAdd = User::find($id);
-        if(!$userToAdd)
-            return response()->json(['message' => 'User not found'], 404);
+        $userToAdd = User::findOrFail($id);
 
         // Checks if the user added him/her self
         if($authID == $id)
-            return response()->json(['message' => 'You cannot add yourself'], 400);
+            return response()->json(['message' => 'You cannot add yourself'], 403);
 
         // Checks if the user already sent a request for this user
         // Or checks if already friend with this user
@@ -132,7 +137,7 @@ class FriendListController extends Controller
             return response()->json($data, 201);
         }
         
-        return response()->json(['message' => 'Request pending or already friends with this user'], 400);
+        return response()->json(['message' => 'Request pending or already friends with this user'], 403);
     }
 
     /**

@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\FriendList;
 use App\Events\NewFriendRequest;
-use Auth;
 use DB;
 
 class FriendListController extends Controller
@@ -15,9 +14,11 @@ class FriendListController extends Controller
     /**
      * Fetch all friend list which status is friends 
      * Notice: This fetches the current user friends only
-     * @param Request $request (Decoded Auth User Details by Laravel Passport)
+     * @param Request $request
     */
     public function index(Request $request){
+
+        // Get the user id who made the request
         $authID = $request->user()->id;
 
         $data = FriendList::where('status', 'friends')
@@ -33,13 +34,11 @@ class FriendListController extends Controller
 
     /**
      * Fetch all pending recieved friend requests
-     * @param Request $request (Decoded Auth User Details by Laravel Passport)
+     * @param Request $request
     */
     public function pendingRecievedRequests(Request $request)
     {
-        $authID = $request->user()->id;
-
-        $data = FriendList::where('user_two', $authID)
+        $data = FriendList::where('user_two', $request->user()->id)
             ->where('status', 'pending')
             ->paginate();
 
@@ -48,7 +47,7 @@ class FriendListController extends Controller
 
     /**
      * Fetch all pending send friend requests
-     * @param Request $request (Decoded Auth User Details by Laravel Passport)
+     * @param Request $request
     */
     public function pendingSentRequests(Request $request)
     {
@@ -62,11 +61,13 @@ class FriendListController extends Controller
     /**
      * Accept a friend request
      * Set status column to 'friends'
-     * @param Request $request (Data recieved, with decoded Auth User Details by Laravel Passport)
+     * @param Request $request
     */
     public function acceptRequest(Request $request)
     {
         $toBeAcceptedID = $request->id;
+
+        // Get the user id who made the request
         $authID = $request->user()->id;
 
         // Check if friend request exist
@@ -92,13 +93,14 @@ class FriendListController extends Controller
     /**
      * Function fired when adding a friend
      * This will add a new friend request
-     * @param Request $request (Data recieved, with decoded Auth User Details by Laravel Passport)
+     * @param Request $request
     */
     public function store(Request $request)
     {
         // The id to be requested to be a friend
         $id = $request->id;
 
+        // Get the user id who made the request
         $authID = $request->user()->id;
         
         // Checks if the user to be added exists
@@ -135,7 +137,7 @@ class FriendListController extends Controller
 
     /**
      * Fetch how many friend request the user have
-     * @param Request $request (decoded Auth User Details by Laravel Passport)
+     * @param Request $request
     */
     public function pendingRequestCount(Request $request)
     {
@@ -150,10 +152,11 @@ class FriendListController extends Controller
 
     /**
      * Used to fetch friend suggestions/recommendations for the authenticated user
-     * @param Request $request (Data recieved, with decoded Auth User Details by Laravel Passport)
+     * @param Request $request
      */
     public function friendSuggestions(Request $request)
     {  
+        // Get the user id who made the request
         $authID = $request->user()->id;
 
         // Queries for users that is not a friend of the current user
@@ -181,11 +184,13 @@ class FriendListController extends Controller
      * Delete/decline friend request
      * When a friend request is declined/deleted, it is automatically deleted in the storage
      * 
-     * @param Request $request (Data recieved, with decoded Auth User Details by Laravel Passport)
+     * @param Request $request
      * @param $id 
     */
     public function destroy(Request $request, $id)
     {
+        return $request->ip();
+        // Get the user id who made the request
         $authID = $request->user()->id;
 
         // Checks if the friend record exists

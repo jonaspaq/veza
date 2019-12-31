@@ -30,8 +30,6 @@ class FriendListController extends Controller
                 ->with('sender:id,name,email', 'reciever:id,name,email')
                 ->paginate();
         
-
-
         return response()->json($data);
     }
 
@@ -187,7 +185,7 @@ class FriendListController extends Controller
 
     /**
      * Delete/decline friend request
-     * When a friend request is declined/deleted, it is automatically deleted in the storage
+     * When a friend request is declined/deleted, it will be deleted in the storage
      * 
      * @param Request $request
      * @param $id 

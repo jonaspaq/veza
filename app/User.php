@@ -20,15 +20,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
-    // Scope Methods
-    // public function scopeFriendable($query)
-    // {
-    //     return $query->where();
-    // }
-
-
-
     // Relationships
     public function posts()
     {

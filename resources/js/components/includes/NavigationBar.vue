@@ -1,16 +1,17 @@
 <template>
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top">
-    <a class="navbar-brand" href="javascript:;">
-        <img src="/icons/144-White.png" width="30px" alt="Veza Logo">
-    </a>
+    <router-link :to="{name:'home'}" class="navbar-brand d-flex align-items-center">
+        <img src="/icons/144-White.png" width="30px" alt="Veza Logo" class="mr-2">
+        Veza
+    </router-link>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>   
     <div class="collapse navbar-collapse" id="menu">
         <ul class="navbar-nav mr-0 mr-lg-auto">
-            <li class="nav-item active">
+            <!-- <li class="nav-item active">
               <router-link :to="{name:'login'}" class="nav-link">Home</router-link>
-            </li>
+            </li> -->
             <!-- <li class="nav-item active">
               <a class="nav-link" href="#">Link</a>
             </li>

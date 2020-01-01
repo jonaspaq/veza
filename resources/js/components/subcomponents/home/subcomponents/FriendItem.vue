@@ -34,13 +34,7 @@ export default {
     
     methods: {
         addFriend(id){
-            axios({
-                method: 'POST',
-                url: '/api/friend',
-                data: {
-                    id
-                }
-            })
+            axios.post('/api/friend', {id})
             .then( response => {
                 this.requestStatus = true
             })

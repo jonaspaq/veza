@@ -29,9 +29,6 @@
                         </div>
                         <button v-if="!loadingStatus" type="submit" class="btn btn-primary btn-block">Register</button>
                         <div v-if="loadingStatus" class="d-flex align-items-center">
-                            <div class="spinner-border spinner-border-sm text-info mr-1" role="status">
-                            </div>
-                            <span>Please wait </span>
                             <PleaseWaitLoader message="Processing. . ." />
                         </div>
                     </form>

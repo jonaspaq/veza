@@ -7,9 +7,13 @@ Vue.use(VueRouter)
 import Home from '../components/views/Home'
 
 // Components that should be loaded only when needed
-const Login =  () => import('../components/views/Login');
-const Register =  () => import('../components/views/Register');
-const EditProfile =  () => import('../components/views/EditProfile');
+const Login =  () => import('../components/views/Login')
+const Register =  () => import('../components/views/Register')
+const EditProfile =  () => import('../components/views/EditProfile')
+const FriendPage =  () => import('../components/views/FriendPage')
+const FriendList = () => import('../components/views/sub_views/FriendList')
+const FriendRequests = () => import('../components/views/sub_views/FriendRequests')
+const SentFriendRequests = () => import('../components/views/sub_views/SentFriendRequests')
 
 // Router Initialize
 const router = new VueRouter({
@@ -54,6 +58,41 @@ const router = new VueRouter({
             meta: {
                 requiresAuth: true
             }
+        },
+        {
+            path: '/friends',
+            name: 'friends',
+            component: FriendPage,
+            redirect: 'friends/list',
+            meta: {
+                requiresAuth: true
+            },
+            children:[
+                {
+                    path: 'list',
+                    component: FriendList,
+                    meta: {
+                        requiresAuth: true,
+                        navSequence: 1
+                    }
+                },
+                {
+                    path: 'requests',
+                    component: FriendRequests,
+                    meta: {
+                        requiresAuth: true,
+                        navSequence: 2
+                    }
+                },
+                {
+                    path: 'sent-requests',
+                    component: SentFriendRequests,
+                    meta: {
+                        requiresAuth: true,
+                        navSequence: 3
+                    }
+                }
+            ]
         }
     ]
 });

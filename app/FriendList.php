@@ -18,7 +18,7 @@ class FriendList extends Model
         return $this->belongsTo('App\User', 'user_one');
     }
 
-    public function reciever()
+    public function receiver()
     {
         return $this->belongsTo('App\User', 'user_two');
     }

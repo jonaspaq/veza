@@ -3,7 +3,11 @@
 }
 
 .bg-primary{
-    background-color: var(--primary-color-nonlinear) !important;
+    background: var(--primary-color-linear) !important;
+    color: white;
+}
+.bg-secondary{
+    background: var(--primary-color-nonlinear) !important;
     color: white;
 }
 .btn-primary{
@@ -14,19 +18,21 @@
     border-color: transparent;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active{
-    background-color: var(--primary-color-nonlinear) !important;
+    background-color: var(--primary-color-lighter) !important;
     border-color: transparent !important;
     color:white;
     opacity: 0.9;
 }
 .btn-primary:focus{
-    box-shadow: 0 0 0 1.5px var(--primaryDarker-color) !important;
+    box-shadow: 0 0 0 1.5px var(--primary-color-darker) !important;
 }
+
 .anchorColor, .anchorColor:hover{
     color: var(--primary-color-nonlinear);
 }
 .anchorUnstyled, .anchorUnstyled:hover{
     text-decoration:none;
+    color: inherit;
 }
 .emptyBtn, .emptyBtn:active, .emptyBtn:focus{
     outline-color: var(--primary-color-nonlinear);

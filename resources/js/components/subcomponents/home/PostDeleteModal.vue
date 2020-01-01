@@ -67,7 +67,7 @@ export default {
 
 <style scoped>
 .modalShadow{
-    box-shadow: 0 0 5px 2px var(--primaryLighter-color);
+    box-shadow: 0 0 5px 2px var(--primary-color-lighter);
 }
 .text-danger{
     color: #E74C3C !important;

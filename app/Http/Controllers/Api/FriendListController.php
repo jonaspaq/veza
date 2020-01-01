@@ -34,12 +34,12 @@ class FriendListController extends Controller
     }
 
     /**
-     * Fetch all pending recieved friend requests
+     * Fetch all pending received friend requests
      * @param Request $request
     */
-    public function pendingRecievedRequests(Request $request)
+    public function pendingReceivedRequests(Request $request)
     {
-        $data = $request->user()->friendRecieved()
+        $data = $request->user()->friendReceived()
             ->select('id', 'user_one', 'created_at')
             ->where('status', 'pending')
             ->with('sender:id,name')
@@ -57,7 +57,7 @@ class FriendListController extends Controller
         $data = $request->user()->friendSent()
             ->select('id', 'user_two', 'created_at')
             ->where('status', 'pending')
-            ->with('reciever:id,name,email')
+            ->with('receiver:id,name,email')
             ->paginate();
 
         return response()->json($data);

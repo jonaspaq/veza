@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder
                 ]);
 
                 // For each user created, create 5 Incoming Friend Requests
-                // $user->friendRecieved()->saveMany(factory(FriendList::class, 3))
+                // $user->friendReceived()->saveMany(factory(FriendList::class, 3))
                 // ->create([
                 //     'user_two' => $user->id
                 // ]);

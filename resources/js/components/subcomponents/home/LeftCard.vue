@@ -3,7 +3,7 @@
         <div class="card-body bg-white rounded shadow-sm d-none d-lg-block">
             <div class="row justify-content-center">
                 <div class="col-12 d-flex justify-content-center">
-                    <div class="border rounded-circle overflow-hidden" style="height:150px; width:150px;">
+                    <div class="border rounded-circle centerImage" style="height:150px; width:150px;">
                         <img src="/images/user.png" width="100%" alt="">
                     </div>
                 </div>
@@ -23,20 +23,22 @@
             <div class="row">
                 <div class="col-12">
                     <ul class="list-group w-100 list-unstyled">
-                        <li class="list-group-item d-flex align-items-center">
-                            <img src="images/home.png" alt="home" width="19px" height="19px">
-                            <span class="ml-1 d-none d-lg-block">Home</span>  
-                        </li> 
+                        <router-link :to="{name:'home'}" class="list-group-item anchorUnstyled">
+                            <li class="d-flex align-items-center">
+                                <img src="/images/home.png" alt="home" width="19px" height="19px">
+                                <span class="ml-1 d-none d-lg-block">Home</span>  
+                            </li> 
+                        </router-link>
                         <FriendNavigation />
                         <li class="list-group-item d-flex align-items-center dropdown">
-                            <img src="images/bell.png" alt="bell" width="19px" height="19px">
+                            <img src="/images/bell.png" alt="bell" width="19px" height="19px">
                             <span class="ml-1 d-none d-lg-block">Notifications</span>  
-                            <span class="badge ml-auto bg-primary">4</span>
+                            <!-- <span class="badge ml-auto bg-secondary">4</span> -->
                         </li> 
                         <li class="list-group-item d-flex align-items-center">
-                            <img src="images/store.png" alt="store" width="19px" height="19px">
+                            <img src="/images/store.png" alt="store" width="19px" height="19px">
                             <span class="ml-1 d-none d-lg-block">Marketplace</span>  
-                            <span class="badge badge-primary ml-auto">1</span>
+                            <!-- <span class="badge bg-secondary ml-auto">1</span> -->
                         </li>
                     </ul>
                 </div>
@@ -62,13 +64,23 @@ export default {
 
 <style lang="scss" scoped>
 .leftCardNav{
-    z-index: 5;
+    z-index: 2;
 }
-.list-group-item:hover{
-    cursor: pointer;
-    transition: background 0.4s ease;
-    background: #f3f8f4;
-    outline: 0;
+.list-group-item{
+
+    @media (max-width: 768.98px) {
+        border: 0;
+        border-radius: 0;
+
+        box-shadow: 0 0 0 0.1px gray;
+    }
+
+    &:hover{
+        cursor: pointer;
+        transition: background 0.4s ease;
+        background: #f3f8f4;
+        outline: 0;
+    }
 }
 
 @media (max-width: 768.98px) {
@@ -86,6 +98,9 @@ export default {
             width: 100%;
             justify-content: center;
         }
+    }
+    .list-group-item > li {
+        justify-content: center;
     }
 }
 

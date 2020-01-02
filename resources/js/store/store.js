@@ -6,11 +6,16 @@ Vue.use(Vuex)
 // Vuex Modules
 import auth from './modules/auth.js'
 import posts from './modules/posts.js'
+import friends from './modules/friends'
 
 const store = new Vuex.Store({
     modules: {
+        // ES5 style
         auth: auth,
-        posts: posts
+        // ES6 style (only one propery if imported value is same name with property)
+        posts,
+        friends
+
     }
 })
 

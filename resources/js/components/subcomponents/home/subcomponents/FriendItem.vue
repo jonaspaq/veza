@@ -1,7 +1,7 @@
 <template>
     <div class="media align-items-center pb-3 pt-2" ref="media">
-        <div class="border rounded-circle" style="height:40px; width:40px;">
-        <img src="/images/user.png" width="100%">
+        <div class="rounded-circle centerImage" style="height:40px; width:40px;">
+            <img src="/images/user.png">
         </div>
         <div class="media-body pl-2">
             <div class="row">
@@ -15,7 +15,7 @@
                     </span>
                 </div>
                 <div class="col-12">
-                    <a v-if="!requestStatus" href="javascript:;" @click="addFriend(friend.id)" class="anchorColor"><small>Add Friend</small></a>
+                    <a v-if="!requestStatus" href="javascript:;" @click="addFriend(friend)" class="anchorColor"><small>Add Friend</small></a>
                     <span v-if="requestStatus" class="anchorColor"><small class="fadeIn animated">Request sent <i class="fas fa-check"></i></small></span>
                 </div>
             </div>
@@ -33,16 +33,13 @@ export default {
     }),
     
     methods: {
-        addFriend(id){
-            axios({
-                method: 'POST',
-                url: '/api/friend',
-                data: {
-                    id
-                }
-            })
+        addFriend(friend){
+            axios.post('/api/friend', {id: friend.id})
             .then( response => {
                 this.requestStatus = true
+                setTimeout(e =>{
+                    this.$emit('removeSuggestion', friend)
+                }, 2000)
             })
             .catch( err => {
                 console.log(err)

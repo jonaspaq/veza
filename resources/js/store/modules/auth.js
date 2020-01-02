@@ -75,18 +75,17 @@ export default {
     },
     
     getters: {
-        loginLoading(state){
-            return state.loginLoading
-        },
         user: function(state){
             return state.user
+        },
+        loginLoading(state){
+            return state.loginLoading
         },
         token: (state) => {
             return state.access_token
         },
-        loginErrors(state){
-            return state.loginErrors
-        },
+        loginErrors: state => state.loginErrors,
+    
         loginStatus(state){
             return (state.user) ? true : false
         }

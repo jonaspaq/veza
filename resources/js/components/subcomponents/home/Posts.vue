@@ -1,10 +1,10 @@
 <template>
     <div class="container-fluid m-0 p-0 mb-2">
         <div v-if="Object.entries(posts).length !== 0">
-            <div v-for="post in posts" v-bind:key="post.id" class="card-body bg-white border mt-2">
+            <div v-for="post in posts" :key="post.id" class="card-body bg-white border mt-2">
 
-             <!-- Post list -->
-            <PostItem v-bind:post="post" />
+                <!-- Post list -->
+                <PostItem v-bind:post="post" />
             
             </div>
         </div>

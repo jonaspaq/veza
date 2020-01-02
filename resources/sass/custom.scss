@@ -1,0 +1,19 @@
+*{
+    font-family: 'Nunito', sans-serif;
+}
+
+// Background Colors 
+@import './customcss/bg-colors';
+
+// Buttons, anchor tags
+@import './customcss//buttons';
+
+// Text colors
+@import './customcss/text-color';
+
+// Dropdown change background
+@import './customcss/dropdown';
+
+// Utilities
+    @import './utilities/img'; // Center an image tag (behaves like background-size: cover)
+

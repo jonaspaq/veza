@@ -47,14 +47,13 @@ export default {
             let self = this
             this.$store.dispatch('posts/addPost', {
                 content: this.content,
-                token: this.$store.getters['auth/token']
             })
             .then((response)=>{
                 self.content = ''
                 self.loadingStatus = !self.loadingStatus
             })
             .catch((err)=>{
-                console.log(err)
+                console.error('Error adding post' +err)
                 self.loadingStatus = !self.loadingStatus
             })
         }

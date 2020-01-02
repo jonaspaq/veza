@@ -52,15 +52,9 @@ export default {
                 })
             });
         },
-        addPost({commit}, {content,token}){
+        addPost({commit}, {content}){
             return new Promise((resolve, reject)=>{ 
-                axios({
-                    method:'POST',
-                    url:'/api/post',
-                    data:{
-                        content // ES6 syntax
-                    }
-                })
+                axios.post('/api/post', {content})
                 .then((response)=>{
                     commit('APPEND_TO_POSTS_DATA', response.data.data)
                     resolve(response)
@@ -72,14 +66,13 @@ export default {
             });
         },
         toDeletePost({commit}, data){
+            // Prepare the post to be deleted
+            // Since there is only 1 modal for deleting
             commit('SET_TO_DELETE_POST', data)
         },
-        deletePost({commit, getters, rootGetters}){
+        deletePost({commit, getters}){
             return new Promise((resolve, reject)=>{
-                axios({
-                    method:'DELETE',
-                    url:'/api/post/'+getters.toDeletePost.id,
-                })
+                axios.delete('/api/post/'+getters.toDeletePost.id)
                 .then((response)=>{
                     resolve(response)
                     commit('REMOVE_ITEM_FROM_POSTS_DATA', getters.toDeletePost)
@@ -90,17 +83,15 @@ export default {
             })
         },
         toEditPost({commit}, data){
+            // Prepare the post to be edited
+            // Since there is only 1 modal for editing
             commit('SET_TO_EDIT_POST', data)
         },
-        editPost({commit, getters, rootGetters}, data){
+        editPost({commit, getters}, data){
             return new Promise((resolve, reject) => {
-                axios({
-                    method:'PATCH',
-                    url:'/api/post/'+getters.toEditPost.id,
-                    data:{
-                        id: getters.toEditPost.id,
-                        content: getters.toEditPost.content
-                    }
+                axios.patch('/api/post/'+getters.toEditPost.id, {
+                    id: getters.toEditPost.id,
+                    content: getters.toEditPost.content
                 })
                 .then((response)=>{
                     resolve(response)

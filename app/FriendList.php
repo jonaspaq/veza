@@ -13,8 +13,13 @@ class FriendList extends Model
         'id', 'status'
     ];
 
-    public function user()
+    public function sender()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'user_one');
+    }
+
+    public function receiver()
+    {
+        return $this->belongsTo('App\User', 'user_two');
     }
 }

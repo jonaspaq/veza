@@ -20,27 +20,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
-    // Scope Methods
-    // public function scopeFriendable($query)
-    // {
-    //     return $query->where();
-    // }
-
-
-
     // Relationships
     public function posts()
     {
         return $this->hasMany('App\Post');
     }
 
-    public function friendSender()
+    public function friendSent()
     {
         return $this->hasMany('App\FriendList', 'user_one');
     }
 
-    public function friendReciever()
+    public function friendReceived()
     {
         return $this->hasMany('App\FriendList', 'user_two');
     }

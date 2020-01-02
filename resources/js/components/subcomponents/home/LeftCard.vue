@@ -3,7 +3,7 @@
         <div class="card-body bg-white rounded shadow-sm d-none d-lg-block">
             <div class="row justify-content-center">
                 <div class="col-12 d-flex justify-content-center">
-                    <div class="border rounded-circle overflow-hidden" style="height:150px; width:150px;">
+                    <div class="border rounded-circle centerImage" style="height:150px; width:150px;">
                         <img src="/images/user.png" width="100%" alt="">
                     </div>
                 </div>

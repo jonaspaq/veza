@@ -1,11 +1,10 @@
 <template>
-    <div class="container-fluid bg-white shadow-sm rounded py-2 px-1">
+    <div class="container-fluid py-2 px-3">
 
         <div class="row no-gutters">
-            <div class="col-12 mb-2" v-for="friend in sentRequests.data" :key="friend.id">
-                <div class="d-flex align-items-center py-2 friendItem">
-                    <img src="/images/user.png" class="friendItemImg mr-1" :alt="friend.receiver.name">
-                    <span>{{ friend.receiver.name }}</span>
+            <div v-for="friend in sentRequests.data" :key="friend.id" class="col-12 col-md-6 mb-2">
+                <div class="mr-md-2">
+                    <SentFriendRequestItem :friend="friend" />
                 </div>
             </div>
         </div>
@@ -14,8 +13,11 @@
 </template>
 
 <script>
+import SentFriendRequestItem from '../../subcomponents/SentFriendRequestItem'
+
 export default {
     name: 'SentFriendRequests',
+    components: { SentFriendRequestItem },
 
     created(){
         this.$store.dispatch('friends/fetchSentRequests')
@@ -28,18 +30,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-.friendItem{
-    border-radius: 4px;
-    // box-shadow: 0 0 2px 0.2px rgb(216, 216, 216);
-    
-    &Img{
-        border-radius: 50px;
-        width: 40px;
-        height: 40px;
-        // box-shadow: 0 0 0 0.3px gray;
-        border: 1px solid rgb(211, 211, 211);
-    }
-}
-</style>

@@ -66,9 +66,11 @@ export default {
             });
         },
         toDeletePost({commit}, data){
+            // Prepare the post to be deleted
+            // Since there is only 1 modal for deleting
             commit('SET_TO_DELETE_POST', data)
         },
-        deletePost({commit, getters, rootGetters}){
+        deletePost({commit, getters}){
             return new Promise((resolve, reject)=>{
                 axios.delete('/api/post/'+getters.toDeletePost.id)
                 .then((response)=>{
@@ -81,9 +83,11 @@ export default {
             })
         },
         toEditPost({commit}, data){
+            // Prepare the post to be edited
+            // Since there is only 1 modal for editing
             commit('SET_TO_EDIT_POST', data)
         },
-        editPost({commit, getters, rootGetters}, data){
+        editPost({commit, getters}, data){
             return new Promise((resolve, reject) => {
                 axios.patch('/api/post/'+getters.toEditPost.id, {
                     id: getters.toEditPost.id,

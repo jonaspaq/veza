@@ -1,15 +1,4 @@
-*{
-    font-family: 'Nunito', sans-serif;
-}
 
-.bg-primary{
-    background: var(--primary-color-linear) !important;
-    color: white;
-}
-.bg-secondary{
-    background: var(--primary-color-nonlinear) !important;
-    color: white;
-}
 .btn-primary{
     background-color: var(--primary-color-nonlinear);
     border-radius: 2.5px;
@@ -35,14 +24,7 @@
     color: inherit;
 }
 .emptyBtn, .emptyBtn:active, .emptyBtn:focus{
-    outline-color: var(--primary-color-nonlinear);
+    outline-color: var(--primary-color-lighter);
     border:0;
     background: transparent;
-}
-.dropdown-item:active{
-    background-color: var(--primary-color-nonlinear);
-}
-
-.text-danger{
-    color:var(--danger-color) !important;
 }

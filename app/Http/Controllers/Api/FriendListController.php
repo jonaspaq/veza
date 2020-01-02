@@ -43,6 +43,7 @@ class FriendListController extends Controller
             ->select('id', 'user_one', 'created_at')
             ->where('status', 'pending')
             ->with('sender:id,name')
+            ->orderBy('id', 'desc')
             ->paginate(15);
 
         return response()->json($data);
@@ -58,6 +59,7 @@ class FriendListController extends Controller
             ->select('id', 'user_two', 'created_at')
             ->where('status', 'pending')
             ->with('receiver:id,name,email')
+            ->orderBy('id', 'desc')
             ->paginate();
 
         return response()->json($data);

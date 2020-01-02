@@ -1,8 +1,8 @@
 <template>
     <div class="container-fluid m-0 p-0 h-100 w-100">
         <div class="row pl-2 pr-3">
-            <div class="border rounded-circle" style="height:40px; width:40px;">
-                <img src="/images/user.png" width="100%">
+            <div class="centerImage rounded-circle" style="height:40px; width:40px;">
+                <img src="/images/user.png" :alt="post.user.name">
             </div>
             <div class="col-8 align-self-center">
                 <span class="d-block">{{post.user.name}}</span>

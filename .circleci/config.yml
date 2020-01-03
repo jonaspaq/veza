@@ -59,7 +59,6 @@ jobs:
             - node_modules
 
       # prepare the database
-      - run: mysql -h 127.0.0.1 -u root -e "create database veza;"
       - run: cp .env.example .env
       - run: php artisan key:generate
       # - run: php artisan config:clear

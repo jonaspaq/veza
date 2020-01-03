@@ -8,12 +8,12 @@ jobs:
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.2-node-browsers
-      environment:
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_DB: veza
-          MYSQL_USER: root
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_PASSWORD:
+      # environment:
+      #     MYSQL_HOST: 127.0.0.1
+      #     MYSQL_DB: veza
+      #     MYSQL_USER: root
+      #     MYSQL_ALLOW_EMPTY_PASSWORD: true
+      #     MYSQL_PASSWORD:
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images

@@ -46,7 +46,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       warn: false,
-      loading: false
+      loading: false,
+      retryRequestCount: 0
     };
   },
   methods: {
@@ -54,8 +55,21 @@ __webpack_require__.r(__webpack_exports__);
       this.warn = !this.warn;
     },
     deleteRequest: function deleteRequest(data) {
-      this.loading = !this.loading;
-      this.$store.dispatch('friends/deleteSentRequest', data);
+      var _this = this;
+
+      this.loading = true;
+      this.$store.dispatch('friends/deleteSentRequest', data)["catch"](function (err) {
+        setTimeout(function () {
+          if (err.message =  true && _this.retryRequestCount <= 5) {
+            _this.retryRequestCount++;
+            console.log(_this.retryRequestCount);
+
+            _this.deleteRequest(data);
+          } else {
+            alert('Please check your network connection');
+          }
+        }, 2000);
+      });
     }
   }
 });

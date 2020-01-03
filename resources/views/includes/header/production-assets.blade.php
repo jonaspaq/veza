@@ -1,4 +1,6 @@
 
+<meta name="google-site-verification" content="UN7mJejqYi-sb5EMWh0Y0_LEea4iTuFuW7v_cvE7MRI" />
+
 @php 
     $favicon = "icons/32-Bluegreen.png";
     $imagePath = "icons/192-Bluegreen.png";

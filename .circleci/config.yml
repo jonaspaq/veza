@@ -49,8 +49,9 @@ jobs:
             - node_modules
 
       # prepare the database
+      - run: cp .env.example .env
       - run: php artisan key:generate
-      - run: php artisan config:clear
+      # - run: php artisan config:clear
       # - run: touch storage/testing.sqlite
       - run: php artisan migrate
 

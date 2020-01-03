@@ -35,7 +35,8 @@ export default {
     data(){
         return {
             warn: false,
-            loading: false
+            loading: false,
+            retryRequestCount: 0
         }
     },
 
@@ -44,8 +45,19 @@ export default {
             this.warn = !this.warn
         },
         deleteRequest(data){
-            this.loading = !this.loading
+            this.loading = true
             this.$store.dispatch('friends/deleteSentRequest', data)
+            .catch(err =>{
+                setTimeout(() =>{
+                    if(err.message="Network Error"&&this.retryRequestCount<=5){
+                        this.retryRequestCount++    
+                        console.log(this.retryRequestCount)
+                        this.deleteRequest(data)
+                    }else{
+                        alert('Please check your network connection')
+                    }
+                }, 2000)
+            })
         }
     },
 }

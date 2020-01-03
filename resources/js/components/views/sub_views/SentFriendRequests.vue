@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import SentFriendRequestItem from '../../subcomponents/SentFriendRequestItem'
+import SentFriendRequestItem from '../../subcomponents/friendpage/SentFriendRequestItem'
 
 export default {
     name: 'SentFriendRequests',

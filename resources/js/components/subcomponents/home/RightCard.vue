@@ -12,19 +12,19 @@
         </div>
         <div v-else>
             <div v-for="friend in friendSuggestions" v-bind:key="friend.id">
-                <FriendItem v-bind:friend="friend" @removeSuggestion="removeSuggestion" />
+                <FriendSuggestionItem v-bind:friend="friend" @removeSuggestion="removeSuggestion" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import FriendItem from './subcomponents/FriendItem'
+import FriendSuggestionItem from './subcomponents/FriendSuggestionItem'
 import FriendSuggestionLoader from '../../loading_animations/FriendSuggestionLoader'
 
 export default {
     name: 'RightCard',
-    components: { FriendSuggestionLoader, FriendItem },
+    components: { FriendSuggestionLoader, FriendSuggestionItem },
 
     created(){
         this.getFriendSuggestions()

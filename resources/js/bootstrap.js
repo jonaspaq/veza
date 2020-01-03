@@ -31,6 +31,7 @@ axios.interceptors.request.use(
   
       if (token) {
         config.headers = {
+            'Accept': 'application/json',
             'Authorization': `Bearer ${ token }`,
             'X-Requested-With': 'XMLHttpRequest'
         }

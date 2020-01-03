@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import PleaseWaitLoader from '../loading_animations/PleaseWaitLoader'
+import PleaseWaitLoader from '../../loading_animations/PleaseWaitLoader'
 
 export default {
     name: 'SentFriendRequestItem',

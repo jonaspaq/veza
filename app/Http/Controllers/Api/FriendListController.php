@@ -27,7 +27,7 @@ class FriendListController extends Controller
                     $query->where('user_one', $authID)
                     ->orWhere('user_two', $authID);
                 })
-                ->with('sender:id,name,email', 'reciever:id,name,email')
+                ->with('sender:id,name,email', 'receiver:id,name,email')
                 ->paginate();
         
         return response()->json($data);

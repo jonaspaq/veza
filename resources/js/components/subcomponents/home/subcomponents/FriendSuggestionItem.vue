@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    name: 'FriendItem',
+    name: 'FriendSuggestionItem',
     props: ['friend'],
 
     data: () => ({

@@ -35,7 +35,7 @@ jobs:
           - MYSQL_USER=root
           - MYSQL_PASSWORD=
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
-          - MYSQL_DATABASE=circle_test
+          - MYSQL_DATABASE=veza
     steps:
       - checkout
 

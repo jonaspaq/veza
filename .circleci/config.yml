@@ -46,7 +46,14 @@ jobs:
       - run:
       # Our primary container isn't MYSQL so run a sleep command until it's ready.
           name: Waiting for MySQL to be ready
-          command: mysql -u root -p 
+          command: mysql -u root -p ''
+
+      # prepare the database
+      - run: cp .env.example .env
+      - run: php artisan key:generate
+      # - run: php artisan config:clear
+      # - run: touch storage/testing.sqlite
+      - run: php artisan migrate
 
       # Download and cache dependencies
       - restore_cache:
@@ -71,13 +78,6 @@ jobs:
           key: node-v1-{{ checksum "package.json" }}
           paths:
             - node_modules
-
-      # prepare the database
-      - run: cp .env.example .env
-      - run: php artisan key:generate
-      # - run: php artisan config:clear
-      # - run: touch storage/testing.sqlite
-      - run: php artisan migrate
 
       # run tests with phpunit or codecept
       #- run: ./vendor/bin/phpunit

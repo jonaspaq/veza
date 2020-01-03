@@ -51,7 +51,7 @@ jobs:
       # prepare the database
       - run: php artisan config:clear
       - run: touch storage/testing.sqlite
-      - run: php artisan migrate --env=testing --database=laravel --force
+      - run: php artisan migrate --env=testing --force
 
       # run tests with phpunit or codecept
       #- run: ./vendor/bin/phpunit

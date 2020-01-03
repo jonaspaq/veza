@@ -23,17 +23,22 @@ jobs:
       # - image: circleci/mysql:5.7-ram
       #
       # - image: redis:2.8.19
-      - image: mysql:5.7
+      # - image: mysql:5.7
           # command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --innodb-large-prefix=true --innodb-file-format=Barracuda
           #   environment:
           #     MYSQL_USER: root
           #     MYSQL_ALLOW_EMPTY_PASSWORD: true
+
+      - image: circleci/postgres:9.6.2-alpine
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: veza
     steps:
       - checkout
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: sudo docker-php-ext-install zip
-      - run: sudo apt install -y mysql-client
+      - run: sudo apt install -y postgresql-client || true
 
       # Download and cache dependencies
       - restore_cache:

@@ -43,13 +43,6 @@ jobs:
       
       - run: sudo apt-get install default-mysql-client
 
-      # prepare the database
-      - run: cp .env.example .env
-      - run: php artisan key:generate
-      # - run: php artisan config:clear
-      # - run: touch storage/testing.sqlite
-      - run: php artisan migrate
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -64,6 +57,14 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
+
+      # prepare the database
+      - run: cp .env.example .env
+      - run: php artisan key:generate
+      # - run: php artisan config:clear
+      # - run: touch storage/testing.sqlite
+      - run: php artisan migrate
+      
       - restore_cache:
           keys:
             - node-v1-{{ checksum "package.json" }}

@@ -40,6 +40,7 @@ jobs:
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: sudo docker-php-ext-install zip
+      - run: sudo php-mysql
       
       - run: sudo apt-get install default-mysql-client
 
@@ -64,7 +65,7 @@ jobs:
       # - run: php artisan config:clear
       # - run: touch storage/testing.sqlite
       - run: php artisan migrate
-      
+
       - restore_cache:
           keys:
             - node-v1-{{ checksum "package.json" }}

@@ -49,6 +49,7 @@ jobs:
             - node_modules
 
       # prepare the database
+      - run: php artisan config:clear
       - run: touch storage/testing.sqlite
       - run: php artisan migrate --env=testing --database=laravel --force
 

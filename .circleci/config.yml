@@ -52,6 +52,11 @@ jobs:
           command: |
             php -v
             composer --version
+      - run: 
+          name: Check mysql
+          command: |
+            mysql.server start --default-authentication-plugin=mysql_native_password
+            ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_password';
 
       # Download and cache dependencies
       - restore_cache:

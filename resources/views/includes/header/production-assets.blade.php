@@ -1,6 +1,4 @@
 
-<meta name="google-site-verification" content="UN7mJejqYi-sb5EMWh0Y0_LEea4iTuFuW7v_cvE7MRI" />
-
 @php 
     $favicon = "icons/32-Bluegreen.png";
     $imagePath = "icons/192-Bluegreen.png";
@@ -14,4 +12,5 @@
 <title> Veza </title>
 
 
-<link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
+<!-- <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}"> -->
+<link rel="stylesheet" href="https://veza-app.herokuapp.com/css/app.css">

@@ -10,6 +10,8 @@
     <meta name="theme-color" content="#1d4d4f">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <meta name="google-site-verification" content="UN7mJejqYi-sb5EMWh0Y0_LEea4iTuFuW7v_cvE7MRI" />
     
     <link rel="preconnect" href="http://pusher.com">
     <link rel="preconnect" href="https://stats.pusher.com">

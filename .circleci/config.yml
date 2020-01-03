@@ -31,18 +31,27 @@ jobs:
 
       - image: circleci/mysql:8.0.4
         environment:
-          MYSQL_ROOT_PASSWORD: 
-          MYSQL_DATABASE: veza
-          MYSQL_USER: root
-          MYSQL_PASSWORD: 
+          - MYSQL_USER=root
+          - MYSQL_PASSWORD=
+          - MYSQL_ALLOW_EMPTY_PASSWORD=true
+          - MYSQL_DATABASE=circle_test
     steps:
       - checkout
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: sudo docker-php-ext-install zip
-      - run: sudo php-mysql
       
       - run: sudo apt-get install default-mysql-client
+
+      - run:
+          name: Install PHP extensions
+          command: sudo docker-php-ext-install pdo_mysql
+
+      - run:
+          name: Display versions
+          command: |
+            php -v
+            composer --version
 
       # Download and cache dependencies
       - restore_cache:

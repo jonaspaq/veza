@@ -1,5 +1,8 @@
 const mix = require('laravel-mix');
 
+// For PurgeCss
+require('laravel-mix-purgecss');
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -18,4 +21,5 @@ mix.webpackConfig({
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
+    .purgeCss() // Remove unused css
     .browserSync('localhost:8000');

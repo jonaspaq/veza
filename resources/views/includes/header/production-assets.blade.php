@@ -12,5 +12,4 @@
 <title> Veza </title>
 
 
-<!-- <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}"> -->
-<link rel="stylesheet" href="https://veza-app.herokuapp.com/css/app.css">
+<link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">

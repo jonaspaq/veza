@@ -32565,7 +32565,13 @@ var render = function() {
                       staticClass: "text-dark text-decoration-none",
                       attrs: { to: "/user/profile/" }
                     },
-                    [_c("h5", [_vm._v(_vm._s(_vm.user.name))])]
+                    [
+                      _c("h5", [
+                        _vm._v(
+                          _vm._s(_vm.user.name) + " " + _vm._s(_vm.user.id)
+                        )
+                      ])
+                    ]
                   )
                 ],
                 1
@@ -50918,23 +50924,23 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
  // Components that should be loaded only when needed
 
 var Login = function Login() {
-  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/views/Login */ "./resources/js/components/views/Login.vue"));
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/views/Login */ "./resources/js/components/views/Login.vue"));
 };
 
 var Register = function Register() {
-  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/views/Register */ "./resources/js/components/views/Register.vue"));
+  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/views/Register */ "./resources/js/components/views/Register.vue"));
 };
 
 var EditProfile = function EditProfile() {
-  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/views/EditProfile */ "./resources/js/components/views/EditProfile.vue"));
+  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/views/EditProfile */ "./resources/js/components/views/EditProfile.vue"));
 };
 
 var FriendPage = function FriendPage() {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/views/FriendPage */ "./resources/js/components/views/FriendPage.vue"));
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/views/FriendPage */ "./resources/js/components/views/FriendPage.vue"));
 };
 
 var FriendList = function FriendList() {
-  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/views/sub_views/FriendList */ "./resources/js/components/views/sub_views/FriendList.vue"));
+  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/views/sub_views/FriendList */ "./resources/js/components/views/sub_views/FriendList.vue"));
 };
 
 var FriendRequests = function FriendRequests() {
@@ -50942,7 +50948,7 @@ var FriendRequests = function FriendRequests() {
 };
 
 var SentFriendRequests = function SentFriendRequests() {
-  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/views/sub_views/SentFriendRequests */ "./resources/js/components/views/sub_views/SentFriendRequests.vue"));
+  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/views/sub_views/SentFriendRequests */ "./resources/js/components/views/sub_views/SentFriendRequests.vue"));
 }; // Router Initialize
 
 
@@ -50968,6 +50974,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: Register,
     meta: {
       guestOnly: true
+    }
+  }, {
+    path: '/user/profile',
+    name: 'userProfile',
+    component: EditProfile,
+    meta: {
+      requiresAuth: true
     }
   }, {
     path: '/user/edit/profile',
@@ -51140,6 +51153,9 @@ __webpack_require__.r(__webpack_exports__);
     SET_FRIENDS: function SET_FRIENDS(state, data) {
       state.friends = data;
     },
+    REMOVE_FRIEND: function REMOVE_FRIEND(state, data) {
+      state.friends.data.splice(state.friends.data.indexOf(data), 1);
+    },
     SET_SENT_REQUESTS: function SET_SENT_REQUESTS(state, data) {
       state.friendSentRequests = data;
     },
@@ -51159,8 +51175,19 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    fetchSentRequests: function fetchSentRequests(_ref2) {
+    deleteFriend: function deleteFriend(_ref2, data) {
       var commit = _ref2.commit;
+      return new Promise(function (resolve, reject) {
+        axios["delete"]('/api/friend/' + data.id).then(function (response) {
+          resolve(response);
+          commit('REMOVE_FRIEND', data);
+        })["catch"](function (err) {
+          reject(err);
+        });
+      });
+    },
+    fetchSentRequests: function fetchSentRequests(_ref3) {
+      var commit = _ref3.commit;
       return new Promise(function (resolve, reject) {
         axios.get('/api/friends/sent-requests').then(function (response) {
           commit('SET_SENT_REQUESTS', response.data);
@@ -51169,8 +51196,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    deleteSentRequest: function deleteSentRequest(_ref3, data) {
-      var commit = _ref3.commit;
+    deleteSentRequest: function deleteSentRequest(_ref4, data) {
+      var commit = _ref4.commit;
       return new Promise(function (resolve, reject) {
         axios["delete"]('/api/friend/' + data.id).then(function (response) {
           resolve(response);

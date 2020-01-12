@@ -51,7 +51,8 @@ export default {
                 password: this.password
             })
             .then((response)=>{
-                this.$router.push({name:'home'})
+                // this.$router.replace({name:'home'})
+                location.replace('/home')
             })
             .catch((err)=>{
                 console.log(err)

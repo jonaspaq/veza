@@ -56,15 +56,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     login: function login() {
-      var _this = this;
-
       this.$store.dispatch('auth/initiateLogin', {
         email: this.email,
         password: this.password
       }).then(function (response) {
-        _this.$router.push({
-          name: 'home'
-        });
+        // this.$router.replace({name:'home'})
+        location.replace('/home');
       })["catch"](function (err) {
         console.log(err);
       });

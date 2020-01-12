@@ -5,7 +5,8 @@ import store from '../store/store'
 router.beforeEach((to, from, next) => {
   // Checks if route needs authentication
   if(to.meta.requiresAuth == true){
-      if(store.getters['auth/token']!==''){
+      // Checks if token is empty
+      if(store.getters['auth/token']!=='' || store.getters['auth/token']!==null){
           // Checks if user details is set and if token is revoked
           // If token is revoked redirect to login page
           if(store.getters['auth/user'].id!=null){
@@ -17,7 +18,8 @@ router.beforeEach((to, from, next) => {
               })
               .catch(err => {
                   localStorage.removeItem('Session')
-                  location.replace("/user/login?auth=false")
+                //   location.replace("/user/login?auth=false")
+                  router.push({name: 'login', query: {auth: false} })
               })
           }
       }

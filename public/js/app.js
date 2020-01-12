@@ -50870,7 +50870,8 @@ __webpack_require__.r(__webpack_exports__);
 _routes__WEBPACK_IMPORTED_MODULE_0__["default"].beforeEach(function (to, from, next) {
   // Checks if route needs authentication
   if (to.meta.requiresAuth == true) {
-    if (_store_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters['auth/token'] !== '') {
+    // Checks if token is empty
+    if (_store_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters['auth/token'] !== '' || _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters['auth/token'] !== null) {
       // Checks if user details is set and if token is revoked
       // If token is revoked redirect to login page
       if (_store_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters['auth/user'].id != null) {
@@ -50879,8 +50880,14 @@ _routes__WEBPACK_IMPORTED_MODULE_0__["default"].beforeEach(function (to, from, n
         _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('auth/setUserDetails').then(function (response) {
           next();
         })["catch"](function (err) {
-          localStorage.removeItem('Session');
-          location.replace("/user/login?auth=false");
+          localStorage.removeItem('Session'); //   location.replace("/user/login?auth=false")
+
+          _routes__WEBPACK_IMPORTED_MODULE_0__["default"].push({
+            name: 'login',
+            query: {
+              auth: false
+            }
+          });
         });
       }
     } else {
@@ -51057,8 +51064,8 @@ __webpack_require__.r(__webpack_exports__);
       state.loginLoading = false;
     },
     SET_ACCESS_TOKEN: function SET_ACCESS_TOKEN(state, data) {
-      state.access_token = data;
       localStorage.setItem('Session', data);
+      state.access_token = data;
     },
     UNSET_ACCESS_TOKEN: function UNSET_ACCESS_TOKEN(state) {
       state.access_token = '';
@@ -51083,10 +51090,10 @@ __webpack_require__.r(__webpack_exports__);
       return new Promise(function (resolve, reject) {
         commit('ENABLE_LOGIN_LOADING');
         axios.post('/api/login', data).then(function (response) {
-          commit('SET_ACCESS_TOKEN', response.data.access_token);
-          commit('SET_USER_DETAILS', response.data.user);
-          commit('UNSET_LOGIN_ERRORS');
-          commit('DISABLE_LOGIN_LOADING');
+          commit('SET_ACCESS_TOKEN', response.data.access_token); // commit('SET_USER_DETAILS', response.data.user)
+
+          commit('UNSET_LOGIN_ERRORS'); // commit('DISABLE_LOGIN_LOADING')
+
           resolve(response);
         })["catch"](function (err) {
           commit('SET_LOGIN_ERRORS', err.response.data.message);

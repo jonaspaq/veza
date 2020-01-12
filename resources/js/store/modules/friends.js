@@ -8,6 +8,12 @@ export default {
         friendSentRequests: []
     },
     mutations:{
+        SET_FRIENDS(state, data){
+            state.friends = data
+        },
+        REMOVE_FRIEND(state, data){
+            state.friends.data.splice(state.friends.data.indexOf(data), 1)
+        },
         SET_SENT_REQUESTS(state, data){
             state.friendSentRequests = data
         },
@@ -16,6 +22,30 @@ export default {
         }
     },
     actions:{
+        fetchFriends({commit}){
+            return new Promise((resolve, reject) =>{
+                axios.get('/api/friend')
+                .then(res =>{
+                    resolve(res)
+                    commit('SET_FRIENDS', res.data)
+                })
+                .catch(err =>{
+                    reject(err)
+                })
+            })
+        },
+        deleteFriend({commit}, data){
+            return new Promise((resolve, reject) =>{
+                axios.delete('/api/friend/' + data.id)
+                .then( response =>{
+                    resolve(response)
+                    commit('REMOVE_FRIEND', data)
+                })
+                .catch(err =>{
+                    reject(err)
+                })
+            })
+        },
         fetchSentRequests({commit}){
             return new Promise( (resolve, reject) => {
                 axios.get('/api/friends/sent-requests')
@@ -41,6 +71,7 @@ export default {
         }
     },
     getters: {
+        friends: state => state.friends,
         friendSentRequests: state => state.friendSentRequests
     }
 }

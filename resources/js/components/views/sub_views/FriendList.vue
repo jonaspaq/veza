@@ -26,9 +26,6 @@ export default {
     methods:{
         fetchFriends(){
             this.$store.dispatch('friends/fetchFriends')
-            .then(res =>{
-                console.log(res)
-            })
         }
     },
 

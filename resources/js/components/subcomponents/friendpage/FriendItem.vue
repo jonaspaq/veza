@@ -3,7 +3,7 @@
         <div class="friendItemImg centerImage mr-1">
             <img src="/images/user.png" :alt="friend.receiver.name">
         </div>
-        <router-link to="/1" class="friendRecieverName anchorColor">{{ friend.receiver.name }}</router-link>
+        <router-link to="/1" class="friendRecieverName anchorColor">{{ friend.sender.name }}</router-link>
 
         <div class="dropdown dropleft ml-auto">
             <button class="dropdown-toggle emptyBtn mr-1 px-1" type="button" id="friendOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -23,6 +23,11 @@ export default {
     name: 'FriendItem',
     props: ['friend'],
 
+    computed:{
+        auth(){
+            return this.$store.getters['auth/user']
+        }
+    }
 }
 </script>
 

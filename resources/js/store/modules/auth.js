@@ -4,9 +4,9 @@ export default {
 
     state: {
         loginLoading: false,
-        loginErrors:'',
+        loginErrors: '',
         access_token: localStorage.getItem('Session') || '',
-        user:'',
+        user: '',
 
     },
     mutations: {

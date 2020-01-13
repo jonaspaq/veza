@@ -49601,8 +49601,8 @@ axios.interceptors.request.use(function (config) {
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
   broadcaster: 'pusher',
-  key: "62cb0f17ea48af2df261",
-  cluster: "ap1",
+  key: "",
+  cluster: "mt1",
   encrypted: true,
   authEndpoint: '/broadcasting/auth',
   auth: {
@@ -50918,23 +50918,23 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
  // Components that should be loaded only when needed
 
 var Login = function Login() {
-  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/views/Login */ "./resources/js/components/views/Login.vue"));
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/views/Login */ "./resources/js/components/views/Login.vue"));
 };
 
 var Register = function Register() {
-  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/views/Register */ "./resources/js/components/views/Register.vue"));
+  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/views/Register */ "./resources/js/components/views/Register.vue"));
 };
 
 var EditProfile = function EditProfile() {
-  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/views/EditProfile */ "./resources/js/components/views/EditProfile.vue"));
+  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/views/EditProfile */ "./resources/js/components/views/EditProfile.vue"));
 };
 
 var FriendPage = function FriendPage() {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/views/FriendPage */ "./resources/js/components/views/FriendPage.vue"));
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/views/FriendPage */ "./resources/js/components/views/FriendPage.vue"));
 };
 
 var FriendList = function FriendList() {
-  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/views/sub_views/FriendList */ "./resources/js/components/views/sub_views/FriendList.vue"));
+  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/views/sub_views/FriendList */ "./resources/js/components/views/sub_views/FriendList.vue"));
 };
 
 var FriendRequests = function FriendRequests() {
@@ -50942,7 +50942,7 @@ var FriendRequests = function FriendRequests() {
 };
 
 var SentFriendRequests = function SentFriendRequests() {
-  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/views/sub_views/SentFriendRequests */ "./resources/js/components/views/sub_views/SentFriendRequests.vue"));
+  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/views/sub_views/SentFriendRequests */ "./resources/js/components/views/sub_views/SentFriendRequests.vue"));
 }; // Router Initialize
 
 
@@ -51380,8 +51380,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Paquibot\Desktop\JunjayFolder\myProjects\veza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Paquibot\Desktop\JunjayFolder\myProjects\veza\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Nexseed\Desktop\PersonalFolder\veza\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Nexseed\Desktop\PersonalFolder\veza\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

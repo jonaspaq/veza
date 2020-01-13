@@ -198,13 +198,12 @@ class FriendListController extends Controller
         $authID = $request->user()->id;
 
         // Checks if the friend record exists
-        $checkExists = FriendList::find($id);
-        if(!$checkExists)
-            return response()->json(['message' => 'Resource not found'], 404);
+        $checkExists = FriendList::findOrFail($id);
         
-        // Check if the user is either the requestor or the requested
+        // Check if the user is either the requestor or the requested user
         if($checkExists->user_one == $authID || $checkExists->user_two == $authID)
-            $checkExists->delete();        
-
+            $checkExists->delete();
+        
+        return response()->json([], 204);
     }
 }

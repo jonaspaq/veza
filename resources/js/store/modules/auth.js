@@ -17,8 +17,8 @@ export default {
             state.loginLoading = false
         },
         SET_ACCESS_TOKEN(state, data){
-            state.access_token = data
             localStorage.setItem('Session', data)
+            state.access_token = data
         },
         UNSET_ACCESS_TOKEN(state){
             state.access_token = ''
@@ -45,9 +45,9 @@ export default {
                 axios.post('/api/login', data)
                 .then((response)=>{
                     commit('SET_ACCESS_TOKEN', response.data.access_token)
-                    commit('SET_USER_DETAILS', response.data.user)
+                    // commit('SET_USER_DETAILS', response.data.user)
                     commit('UNSET_LOGIN_ERRORS')
-                    commit('DISABLE_LOGIN_LOADING')
+                    // commit('DISABLE_LOGIN_LOADING')
                     resolve(response)
                 })
                 .catch((err)=>{

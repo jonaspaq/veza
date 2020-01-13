@@ -44,6 +44,14 @@ const router = new VueRouter({
             }
         },
         {
+            path: '/user/profile',
+            name: 'userProfile',
+            component: EditProfile,
+            meta:{
+                requiresAuth: true
+            }
+        },
+        {
             path: '/user/edit/profile',
             name: 'editProfile',
             component: EditProfile,

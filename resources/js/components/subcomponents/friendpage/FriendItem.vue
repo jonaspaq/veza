@@ -1,33 +1,66 @@
 <template>
     <div class="d-flex align-items-center shadow-sm py-2 friendItem bg-white px-2">
         <div class="friendItemImg centerImage mr-1">
-            <img src="/images/user.png" :alt="friend.receiver.name">
+            <img src="/images/user.png" :alt="friendData.name">
         </div>
-        <router-link to="/1" class="friendRecieverName anchorColor">{{ friend.sender.name }}</router-link>
-
-        <div class="dropdown dropleft ml-auto">
-            <button class="dropdown-toggle emptyBtn mr-1 px-1" type="button" id="friendOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <router-link :to="{name:'userProfile', query : {user: friendData.id}}" class="friendRecieverName anchorColor">{{ friendData.name }}</router-link>
+        <div v-if="!loading" class="dropdown dropleft ml-auto">
+            <button class="emptyBtn mr-1 px-1" type="button" id="friendOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="friendOptions">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <router-link :to="{name:'userProfile', query : {user: friendData.id}}" class="dropdown-item">View Profile</router-link>
+                <router-link :to="{name:'message', query : {user: friendData.id}}" class="dropdown-item">Send Message</router-link>
+                <div class="dropdown-divider"></div>
+                <button class="emptyBtn dropdown-item"> Block </button>
+                <button class="emptyBtn dropdown-item" @click="unfriend(friend)"> Unfriend </button>
             </div>
         </div>
+
+        <PleaseWaitLoader v-if="loading" class="ml-auto" />
 
     </div>
 </template>
 
 <script>
+import PleaseWaitLoader from '../../loading_animations/PleaseWaitLoader'
+
 export default {
     name: 'FriendItem',
+    components: { PleaseWaitLoader },
     props: ['friend'],
 
+<<<<<<< HEAD
     computed:{
         auth(){
             return this.$store.getters['auth/user']
         }
     }
+=======
+    data(){
+        return {
+            loading: false
+        }
+    },
+
+    methods:{
+        unfriend(friend){
+            this.loading = true
+            
+            this.$store.dispatch('friends/deleteFriend', friend)
+        }
+    },
+
+    computed:{
+        friendData(){
+            // Get the friend data according to the id
+            if (this.friend.sender.id == this.$store.getters['auth/user'].id)
+                return this.friend.receiver
+            return this.friend.sender
+        }
+    }
+
+>>>>>>> 94a98a7c81fc697b8e6b32aee58876b2f27ff7ea
 }
 </script>
 

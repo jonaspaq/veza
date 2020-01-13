@@ -51193,8 +51193,19 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    fetchSentRequests: function fetchSentRequests(_ref3) {
+    fetchFriendReceivedRequests: function fetchFriendReceivedRequests(_ref3) {
       var commit = _ref3.commit;
+      return new Promise((resolve, function (reject) {
+        axios.get('/api/friends/received-requests').then(function (response) {
+          resolve(response);
+          commit('SET_RECIEVED_REQUEST', response.data);
+        })["catch"](function (err) {
+          reject(err);
+        });
+      }));
+    },
+    fetchSentRequests: function fetchSentRequests(_ref4) {
+      var commit = _ref4.commit;
       return new Promise(function (resolve, reject) {
         axios.get('/api/friends/sent-requests').then(function (response) {
           commit('SET_SENT_REQUESTS', response.data);
@@ -51203,8 +51214,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    deleteSentRequest: function deleteSentRequest(_ref4, data) {
-      var commit = _ref4.commit;
+    deleteSentRequest: function deleteSentRequest(_ref5, data) {
+      var commit = _ref5.commit;
       return new Promise(function (resolve, reject) {
         axios["delete"]('/api/friend/' + data.id).then(function (response) {
           resolve(response);
@@ -51218,6 +51229,9 @@ __webpack_require__.r(__webpack_exports__);
   getters: {
     friends: function friends(state) {
       return state.friends;
+    },
+    friendReceivedRequests: function friendReceivedRequests(state) {
+      return state.friendReceivedRequests;
     },
     friendSentRequests: function friendSentRequests(state) {
       return state.friendSentRequests;

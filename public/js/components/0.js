@@ -5,9 +5,61 @@
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/subcomponents/friendpage/FriendItem.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\resources\\js\\components\\subcomponents\\friendpage\\FriendItem.vue: Unexpected token (33:0)\n\n\u001b[0m \u001b[90m 31 | \u001b[39m    props\u001b[33m:\u001b[39m [\u001b[32m'friend'\u001b[39m]\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 32 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 33 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 34 | \u001b[39m    computed\u001b[33m:\u001b[39m{\u001b[0m\n\u001b[0m \u001b[90m 35 | \u001b[39m        auth(){\u001b[0m\n\u001b[0m \u001b[90m 36 | \u001b[39m            \u001b[36mreturn\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39m$store\u001b[33m.\u001b[39mgetters[\u001b[32m'auth/user'\u001b[39m]\u001b[0m\n    at Parser.raise (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:6400:17)\n    at Parser.unexpected (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:7728:16)\n    at Parser.parseIdentifierName (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:9624:18)\n    at Parser.parseIdentifier (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:9598:23)\n    at Parser.parseMaybePrivateName (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:8962:19)\n    at Parser.parsePropertyName (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:9418:98)\n    at Parser.parseObjectMember (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:9319:10)\n    at Parser.parseObj (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:9253:25)\n    at Parser.parseExprAtom (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:8883:28)\n    at Parser.parseExprSubscripts (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:8507:23)\n    at Parser.parseMaybeUnary (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:8487:21)\n    at Parser.parseExprOps (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:8353:23)\n    at Parser.parseMaybeConditional (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:8326:23)\n    at Parser.parseMaybeAssign (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:8273:21)\n    at Parser.parseExportDefaultExpression (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:11113:24)\n    at Parser.parseExport (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:11008:31)\n    at Parser.parseStatementContent (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:10036:27)\n    at Parser.parseStatement (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:9932:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:10508:25)\n    at Parser.parseBlockBody (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:10495:10)\n    at Parser.parseTopLevel (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:9861:10)\n    at Parser.parse (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:11373:17)\n    at parse (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\parser\\lib\\index.js:11409:38)\n    at parser (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:168:34)\n    at normalizeFile (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:102:11)\n    at runSync (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\core\\lib\\transformation\\index.js:44:43)\n    at runAsync (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\core\\lib\\transformation\\index.js:35:14)\n    at process.nextTick (C:\\Users\\Nexseed\\Desktop\\PersonalFolder\\veza\\node_modules\\@babel\\core\\lib\\transform.js:34:34)\n    at process._tickCallback (internal/process/next_tick.js:61:11)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _loading_animations_PleaseWaitLoader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../loading_animations/PleaseWaitLoader */ "./resources/js/components/loading_animations/PleaseWaitLoader.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'FriendItem',
+  components: {
+    PleaseWaitLoader: _loading_animations_PleaseWaitLoader__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: ['friend'],
+  data: function data() {
+    return {
+      loading: false
+    };
+  },
+  methods: {
+    unfriend: function unfriend(friend) {
+      this.loading = true;
+      this.$store.dispatch('friends/deleteFriend', friend);
+    }
+  },
+  computed: {
+    friendData: function friendData() {
+      // Get the friend data according to the id
+      if (this.friend.sender.id == this.$store.getters['auth/user'].id) return this.friend.receiver;
+      return this.friend.sender;
+    }
+  }
+});
 
 /***/ }),
 
@@ -291,14 +343,15 @@ render._withStripped = true
 /*!*************************************************************************!*\
   !*** ./resources/js/components/subcomponents/friendpage/FriendItem.vue ***!
   \*************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FriendItem_vue_vue_type_template_id_0c816b1f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FriendItem.vue?vue&type=template&id=0c816b1f&scoped=true& */ "./resources/js/components/subcomponents/friendpage/FriendItem.vue?vue&type=template&id=0c816b1f&scoped=true&");
 /* harmony import */ var _FriendItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FriendItem.vue?vue&type=script&lang=js& */ "./resources/js/components/subcomponents/friendpage/FriendItem.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _FriendItem_vue_vue_type_style_index_0_id_0c816b1f_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FriendItem.vue?vue&type=style&index=0&id=0c816b1f&lang=scss&scoped=true& */ "./resources/js/components/subcomponents/friendpage/FriendItem.vue?vue&type=style&index=0&id=0c816b1f&lang=scss&scoped=true&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _FriendItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _FriendItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _FriendItem_vue_vue_type_style_index_0_id_0c816b1f_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FriendItem.vue?vue&type=style&index=0&id=0c816b1f&lang=scss&scoped=true& */ "./resources/js/components/subcomponents/friendpage/FriendItem.vue?vue&type=style&index=0&id=0c816b1f&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -330,7 +383,7 @@ component.options.__file = "resources/js/components/subcomponents/friendpage/Fri
 /*!**************************************************************************************************!*\
   !*** ./resources/js/components/subcomponents/friendpage/FriendItem.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

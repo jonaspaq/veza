@@ -9,6 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module '../../subcomponents/friendpage/'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 //
 //
 //
@@ -17,8 +18,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'FriendRequests'
+  name: 'FriendRequests',
+  components: {
+    FriendRequestItem: !(function webpackMissingModule() { var e = new Error("Cannot find module '../../subcomponents/friendpage/'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+  },
+  created: function created() {
+    this.fetchFriendRequests();
+  },
+  methods: {
+    fetchFriendRequests: function fetchFriendRequests() {
+      this.$store.dispatch('fetchFriendReceivedRequests');
+    }
+  },
+  computed: {
+    friendRequests: function friendRequests() {
+      return this.$store.getters['friends/friendReceivedRequests'];
+    }
+  }
 });
 
 /***/ }),
@@ -38,20 +62,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
+  return _c("div", { staticClass: "container-fluid py-2 px-3" }, [
+    _c(
       "div",
-      { staticClass: "container-fluid bg-white shadow-sm rounded py-2" },
-      [_c("div", [_vm._v("\n        hello\n    ")])]
+      { staticClass: "row no-gutters" },
+      _vm._l(_vm.friendRequests.data, function(friend) {
+        return _c(
+          "div",
+          { key: friend.id, staticClass: "col-12 col-md-6 mb-2" },
+          [
+            _c(
+              "div",
+              { staticClass: "mr-md-2" },
+              [_c("FriendRequestItem", { attrs: { friend: friend } })],
+              1
+            )
+          ]
+        )
+      }),
+      0
     )
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

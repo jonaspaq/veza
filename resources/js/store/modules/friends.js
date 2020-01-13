@@ -46,6 +46,18 @@ export default {
                 })
             })
         },
+        fetchFriendReceivedRequests({commit}){
+            return new Promise((resolve, reject =>{
+                axios.get('/api/friends/received-requests')
+                .then(response =>{
+                    resolve(response)
+                    commit('SET_RECIEVED_REQUEST', response.data)
+                })
+                .catch(err =>{
+                    reject(err)
+                })
+            }))
+        },
         fetchSentRequests({commit}){
             return new Promise( (resolve, reject) => {
                 axios.get('/api/friends/sent-requests')
@@ -72,6 +84,7 @@ export default {
     },
     getters: {
         friends: state => state.friends,
+        friendReceivedRequests: state => state.friendReceivedRequests,
         friendSentRequests: state => state.friendSentRequests
     }
 }

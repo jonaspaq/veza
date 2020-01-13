@@ -30,13 +30,6 @@ export default {
     components: { PleaseWaitLoader },
     props: ['friend'],
 
-<<<<<<< HEAD
-    computed:{
-        auth(){
-            return this.$store.getters['auth/user']
-        }
-    }
-=======
     data(){
         return {
             loading: false
@@ -60,7 +53,6 @@ export default {
         }
     }
 
->>>>>>> 94a98a7c81fc697b8e6b32aee58876b2f27ff7ea
 }
 </script>
 

@@ -137,7 +137,7 @@ var render = function() {
         [
           _c(
             "div",
-            { staticClass: "mb-2" },
+            { staticClass: "mb-2 ml-3" },
             [
               _c(
                 "router-link",

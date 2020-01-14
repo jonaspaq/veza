@@ -5,17 +5,17 @@
         </div>
         <router-link :to="{name:'userProfile', query:{user: friend.sender.id}}" class="senderName anchorColor">{{ friend.sender.name }}</router-link>
 
-        <button class="emptyBtn ml-auto">
+        <button v-if="!warn&&!loading" class="emptyBtn ml-auto" @click="acceptRequest(friend)">
             <i class="fas fa-user-plus"></i>
         </button>
-        <button v-if="!warn" class="emptyBtn ml-1 mr-1">
+        <button v-if="!warn&&!loading" class="emptyBtn ml-1 mr-1" @click="warnDecline">
             <i class="fas fa-user-times"></i>
         </button>
 
-        <button v-if="warn&&!loading" class="emptyBtn animated fadeIn ml-auto mr-2">
+        <button v-if="warn&&!loading" class="emptyBtn animated fadeIn ml-auto mr-2" @click="declineRequest(friend)">
             <i class="fas fa-user-times"></i>
         </button>
-        <button v-if="warn&&!loading" class="emptyBtn animated fadeIn mr-1">
+        <button v-if="warn&&!loading" class="emptyBtn animated fadeIn mr-1" @click="cancelDecline">
             <i class="fas fa-times"></i>
         </button>
 
@@ -36,6 +36,29 @@ export default {
         return {
             warn: false,
             loading: false
+        }
+    },
+
+    methods:{
+        acceptRequest(data){
+            this.loading = true
+            this.$store.dispatch('friends/acceptFriendRequest', data)
+            .then(response =>{
+                this.loading = false
+            })
+        },
+        warnDecline(){
+            this.warn = true
+        },
+        declineRequest(data){
+            this.loading = true
+            this.$store.dispatch('friends/deleteFriendRequest', data)
+            .then(response =>{
+                this.loading = false
+            })
+        },
+        cancelDecline(){
+            this.warn = false
         }
     }
 }

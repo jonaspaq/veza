@@ -14,6 +14,9 @@ export default {
         REMOVE_FRIEND(state, data){
             state.friends.data.splice(state.friends.data.indexOf(data), 1)
         },
+        REMOVE_FRIEND_REQUEST(state, data){
+            state.friendReceivedRequests.data.splice(state.friendReceivedRequests.data.indexOf(data), 1)
+        },
         SET_RECIEVED_REQUEST(state, data){
             state.friendReceivedRequests = data
         },
@@ -55,6 +58,30 @@ export default {
                 .then(response =>{
                     resolve(response)
                     commit('SET_RECIEVED_REQUEST', response.data)
+                })
+                .catch(err =>{
+                    reject(err)
+                })
+            })
+        },
+        acceptFriendRequest({commit}, friendToBeAccepted){
+            return new Promise((resolve, reject) =>{
+                axios.put('/api/friend/any', {id: friendToBeAccepted.id})
+                .then(response =>{
+                    resolve(response)
+                    commit('REMOVE_FRIEND_REQUEST', friendToBeAccepted)
+                })
+                .catch(err =>{
+                    reject(err)
+                })
+            })
+        },
+        deleteFriendRequest({commit}, data){
+            return new Promise((resolve, reject) =>{
+                axios.delete('/api/friend/' + data.id)
+                .then( response =>{
+                    resolve(response)
+                    commit('REMOVE_FRIEND_REQUEST', data)
                 })
                 .catch(err =>{
                     reject(err)

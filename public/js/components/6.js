@@ -48,6 +48,30 @@ __webpack_require__.r(__webpack_exports__);
       warn: false,
       loading: false
     };
+  },
+  methods: {
+    acceptRequest: function acceptRequest(data) {
+      var _this = this;
+
+      this.loading = true;
+      this.$store.dispatch('friends/acceptFriendRequest', data).then(function (response) {
+        _this.loading = false;
+      });
+    },
+    warnDecline: function warnDecline() {
+      this.warn = true;
+    },
+    declineRequest: function declineRequest(data) {
+      var _this2 = this;
+
+      this.loading = true;
+      this.$store.dispatch('friends/deleteFriendRequest', data).then(function (response) {
+        _this2.loading = false;
+      });
+    },
+    cancelDecline: function cancelDecline() {
+      this.warn = false;
+    }
   }
 });
 
@@ -184,26 +208,56 @@ var render = function() {
         [_vm._v(_vm._s(_vm.friend.sender.name))]
       ),
       _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      !_vm.warn
-        ? _c("button", { staticClass: "emptyBtn ml-1 mr-1" }, [
-            _c("i", { staticClass: "fas fa-user-times" })
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.warn && !_vm.loading
+      !_vm.warn && !_vm.loading
         ? _c(
             "button",
-            { staticClass: "emptyBtn animated fadeIn ml-auto mr-2" },
+            {
+              staticClass: "emptyBtn ml-auto",
+              on: {
+                click: function($event) {
+                  return _vm.acceptRequest(_vm.friend)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-user-plus" })]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.warn && !_vm.loading
+        ? _c(
+            "button",
+            {
+              staticClass: "emptyBtn ml-1 mr-1",
+              on: { click: _vm.warnDecline }
+            },
             [_c("i", { staticClass: "fas fa-user-times" })]
           )
         : _vm._e(),
       _vm._v(" "),
       _vm.warn && !_vm.loading
-        ? _c("button", { staticClass: "emptyBtn animated fadeIn mr-1" }, [
-            _c("i", { staticClass: "fas fa-times" })
-          ])
+        ? _c(
+            "button",
+            {
+              staticClass: "emptyBtn animated fadeIn ml-auto mr-2",
+              on: {
+                click: function($event) {
+                  return _vm.declineRequest(_vm.friend)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-user-times" })]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.warn && !_vm.loading
+        ? _c(
+            "button",
+            {
+              staticClass: "emptyBtn animated fadeIn mr-1",
+              on: { click: _vm.cancelDecline }
+            },
+            [_c("i", { staticClass: "fas fa-times" })]
+          )
         : _vm._e(),
       _vm._v(" "),
       _vm.loading
@@ -213,16 +267,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "emptyBtn ml-auto" }, [
-      _c("i", { staticClass: "fas fa-user-plus" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

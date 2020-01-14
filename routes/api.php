@@ -25,7 +25,6 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function(){
     Route::apiResource('post', 'PostController');
     
     Route::apiResource('friend', 'FriendListController');
-    Route::patch('friends/accept', 'FriendListController@acceptRequest');
     Route::get('friends/sent-requests', 'FriendListController@pendingSentRequests');
     Route::get('friends/received-requests', 'FriendListController@pendingReceivedRequests');
     Route::get('friends/request-count', 'FriendListController@pendingRequestCount');

@@ -42,5 +42,6 @@ class UsersTableSeeder extends Seeder
                 'user_two' => $user->id
             ]);
         });
+        
     }
 }

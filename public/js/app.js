@@ -32186,29 +32186,43 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm._m(0),
+      _vm.loginStatus
+        ? _c(
+            "button",
+            {
+              staticClass: "navbar-toggler",
+              attrs: {
+                type: "button",
+                "data-toggle": "collapse",
+                "data-target": "#menu",
+                "aria-controls": "menu",
+                "aria-expanded": "false",
+                "aria-label": "Toggle navigation"
+              }
+            },
+            [_c("span", { staticClass: "navbar-toggler-icon" })]
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "collapse navbar-collapse", attrs: { id: "menu" } },
-        [
-          _c("ul", { staticClass: "navbar-nav mr-0 mr-lg-auto" }),
-          _vm._v(" "),
-          _vm.loginStatus
-            ? _c(
+      _vm.loginStatus
+        ? _c(
+            "div",
+            { staticClass: "collapse navbar-collapse", attrs: { id: "menu" } },
+            [
+              _c("ul", { staticClass: "navbar-nav mr-0 mr-lg-auto" }),
+              _vm._v(" "),
+              _c(
                 "span",
                 { staticClass: "text-white d-flex align-items-center" },
                 [
-                  _vm._m(1),
+                  _vm._m(0),
                   _vm._v(
                     "\r\n            " + _vm._s(_vm.user.name) + " \r\n        "
                   )
                 ]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.loginStatus
-            ? _c(
+              ),
+              _vm._v(" "),
+              _c(
                 "a",
                 {
                   staticClass: "nav-link text-white px-0 px-lg-3",
@@ -32225,34 +32239,14 @@ var render = function() {
                   _vm._v(" Logout")
                 ]
               )
-            : _vm._e()
-        ]
-      )
+            ]
+          )
+        : _vm._e()
     ],
     1
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#menu",
-          "aria-controls": "menu",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
-        }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -51163,6 +51157,9 @@ __webpack_require__.r(__webpack_exports__);
     REMOVE_FRIEND: function REMOVE_FRIEND(state, data) {
       state.friends.data.splice(state.friends.data.indexOf(data), 1);
     },
+    REMOVE_FRIEND_REQUEST: function REMOVE_FRIEND_REQUEST(state, data) {
+      state.friendReceivedRequests.data.splice(state.friendReceivedRequests.data.indexOf(data), 1);
+    },
     SET_RECIEVED_REQUEST: function SET_RECIEVED_REQUEST(state, data) {
       state.friendReceivedRequests = data;
     },
@@ -51207,8 +51204,32 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    fetchSentRequests: function fetchSentRequests(_ref4) {
+    acceptFriendRequest: function acceptFriendRequest(_ref4, friendToBeAccepted) {
       var commit = _ref4.commit;
+      return new Promise(function (resolve, reject) {
+        axios.put('/api/friend/any', {
+          id: friendToBeAccepted.id
+        }).then(function (response) {
+          resolve(response);
+          commit('REMOVE_FRIEND_REQUEST', friendToBeAccepted);
+        })["catch"](function (err) {
+          reject(err);
+        });
+      });
+    },
+    deleteFriendRequest: function deleteFriendRequest(_ref5, data) {
+      var commit = _ref5.commit;
+      return new Promise(function (resolve, reject) {
+        axios["delete"]('/api/friend/' + data.id).then(function (response) {
+          resolve(response);
+          commit('REMOVE_FRIEND_REQUEST', data);
+        })["catch"](function (err) {
+          reject(err);
+        });
+      });
+    },
+    fetchSentRequests: function fetchSentRequests(_ref6) {
+      var commit = _ref6.commit;
       return new Promise(function (resolve, reject) {
         axios.get('/api/friends/sent-requests').then(function (response) {
           commit('SET_SENT_REQUESTS', response.data);
@@ -51217,8 +51238,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    deleteSentRequest: function deleteSentRequest(_ref5, data) {
-      var commit = _ref5.commit;
+    deleteSentRequest: function deleteSentRequest(_ref7, data) {
+      var commit = _ref7.commit;
       return new Promise(function (resolve, reject) {
         axios["delete"]('/api/friend/' + data.id).then(function (response) {
           resolve(response);

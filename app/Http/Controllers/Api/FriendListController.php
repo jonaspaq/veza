@@ -42,7 +42,7 @@ class FriendListController extends Controller
         $data = $request->user()->friendReceived()
             ->select('id', 'user_one', 'created_at')
             ->where('status', 'pending')
-            ->with('sender:id,name,email', 'receiver:id,name,email')
+            ->with('sender:id,name,email')
             ->orderBy('id', 'desc')
             ->paginate(15);
 

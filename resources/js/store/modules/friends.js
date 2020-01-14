@@ -14,6 +14,9 @@ export default {
         REMOVE_FRIEND(state, data){
             state.friends.data.splice(state.friends.data.indexOf(data), 1)
         },
+        SET_RECIEVED_REQUEST(state, data){
+            state.friendReceivedRequests = data
+        },
         SET_SENT_REQUESTS(state, data){
             state.friendSentRequests = data
         },
@@ -47,7 +50,7 @@ export default {
             })
         },
         fetchFriendReceivedRequests({commit}){
-            return new Promise((resolve, reject =>{
+            return new Promise((resolve, reject) =>{
                 axios.get('/api/friends/received-requests')
                 .then(response =>{
                     resolve(response)
@@ -56,7 +59,7 @@ export default {
                 .catch(err =>{
                     reject(err)
                 })
-            }))
+            })
         },
         fetchSentRequests({commit}){
             return new Promise( (resolve, reject) => {

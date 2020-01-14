@@ -130,7 +130,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".friendRecieverName[data-v-5a9be4ae] {\n  font-weight: 600;\n  font-size: 14px;\n  max-width: 200px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n@media (min-width: 768px) {\n.friendRecieverName[data-v-5a9be4ae] {\n    width: 250px;\n}\n}\n.friendItem[data-v-5a9be4ae] {\n  border-radius: 4px;\n}\n.friendItemImg[data-v-5a9be4ae] {\n  border-radius: 50px;\n  width: 30px;\n  height: 30px;\n  box-shadow: 0 0 0 0.2px lightgray;\n}\n.friendItem .fa-user-plus[data-v-5a9be4ae] {\n  color: #28B463;\n}\n.friendItem .fa-user-times[data-v-5a9be4ae] {\n  color: #EC7063;\n}\n.friendItem .fa-times[data-v-5a9be4ae] {\n  color: #ebeb6a;\n}", ""]);
+exports.push([module.i, ".friendRecieverName[data-v-5a9be4ae] {\n  font-weight: 600;\n  font-size: 14px;\n  max-width: 200px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n@media (min-width: 768px) {\n.friendRecieverName[data-v-5a9be4ae] {\n    width: 250px;\n}\n}\n.friendItem[data-v-5a9be4ae] {\n  border-radius: 4px;\n}\n.friendItemImg[data-v-5a9be4ae] {\n  border-radius: 50px;\n  width: 30px;\n  height: 30px;\n  box-shadow: 0 0 0 0.2px lightgray;\n}\n.friendItem .fa-user-times[data-v-5a9be4ae] {\n  color: #EC7063;\n}\n.friendItem .fa-times[data-v-5a9be4ae] {\n  color: #ebeb6a;\n}", ""]);
 
 // exports
 
@@ -197,7 +197,12 @@ var render = function() {
       _vm._v(" "),
       _c(
         "router-link",
-        { staticClass: "friendRecieverName anchorColor", attrs: { to: "/1" } },
+        {
+          staticClass: "friendRecieverName anchorColor",
+          attrs: {
+            to: { name: "userProfile", query: { user: _vm.friend.receiver.id } }
+          }
+        },
         [_vm._v(_vm._s(_vm.friend.receiver.name))]
       ),
       _vm._v(" "),

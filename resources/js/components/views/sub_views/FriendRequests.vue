@@ -13,20 +13,17 @@
 </template>
 
 <script>
-import FriendRequestItem from '../../subcomponents/friendpage/'
+import FriendRequestItem from '../../subcomponents/friendpage/FriendRequestItem'
 
 export default {
     name: 'FriendRequests',
     components: { FriendRequestItem },
 
     created(){
-        this.fetchFriendRequests()
-    },
-
-    methods:{
-        fetchFriendRequests(){
-            this.$store.dispatch('fetchFriendReceivedRequests')
-        }
+        this.$store.dispatch('friends/fetchFriendReceivedRequests')
+        .then(res =>{
+            // console.table(res.data.data)
+        })
     },
 
     computed:{

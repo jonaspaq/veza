@@ -8,7 +8,7 @@ use App\FriendList;
 
 class UsersTableSeeder extends Seeder
 {
-    public $usersToSeed = 10;
+    public $usersToSeed = 100;
     /**
      * Run the database seeds.
      *

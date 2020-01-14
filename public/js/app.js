@@ -51163,6 +51163,9 @@ __webpack_require__.r(__webpack_exports__);
     REMOVE_FRIEND: function REMOVE_FRIEND(state, data) {
       state.friends.data.splice(state.friends.data.indexOf(data), 1);
     },
+    SET_RECIEVED_REQUEST: function SET_RECIEVED_REQUEST(state, data) {
+      state.friendReceivedRequests = data;
+    },
     SET_SENT_REQUESTS: function SET_SENT_REQUESTS(state, data) {
       state.friendSentRequests = data;
     },
@@ -51195,14 +51198,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     fetchFriendReceivedRequests: function fetchFriendReceivedRequests(_ref3) {
       var commit = _ref3.commit;
-      return new Promise((resolve, function (reject) {
+      return new Promise(function (resolve, reject) {
         axios.get('/api/friends/received-requests').then(function (response) {
           resolve(response);
           commit('SET_RECIEVED_REQUEST', response.data);
         })["catch"](function (err) {
           reject(err);
         });
-      }));
+      });
     },
     fetchSentRequests: function fetchSentRequests(_ref4) {
       var commit = _ref4.commit;

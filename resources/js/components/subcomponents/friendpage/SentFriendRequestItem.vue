@@ -3,7 +3,7 @@
         <div class="friendItemImg centerImage mr-1">
             <img src="/images/user.png" :alt="friend.receiver.name">
         </div>
-        <router-link to="/1" class="friendRecieverName anchorColor">{{ friend.receiver.name }}</router-link>
+        <router-link :to="{name:'userProfile', query:{user: friend.receiver.id}}" class="friendRecieverName anchorColor">{{ friend.receiver.name }}</router-link>
 
         <!-- <button class="emptyBtn ml-auto mr-2">
             <i class="fas fa-user-plus"></i>
@@ -88,9 +88,6 @@ export default {
         box-shadow: 0 0 0 .2px rgb(211, 211, 211);
     }
 
-    .fa-user-plus{
-        color: #28B463;
-    }
     .fa-user-times{
         color: #EC7063;
     }

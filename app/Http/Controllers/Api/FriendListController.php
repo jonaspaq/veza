@@ -42,7 +42,7 @@ class FriendListController extends Controller
         $data = $request->user()->friendReceived()
             ->select('id', 'user_one', 'created_at')
             ->where('status', 'pending')
-            ->with('sender:id,name')
+            ->with('sender:id,name,email')
             ->orderBy('id', 'desc')
             ->paginate(15);
 
@@ -70,7 +70,7 @@ class FriendListController extends Controller
      * Set status column to 'friends'
      * @param Request $request
     */
-    public function acceptRequest(Request $request)
+    public function update(Request $request)
     {
         $toBeAcceptedID = $request->id;
 
@@ -79,22 +79,22 @@ class FriendListController extends Controller
 
         // Check if friend request exist
         $data = FriendList::
-                where('user_one', $toBeAcceptedID)
+                where('id', $toBeAcceptedID)
                 ->where('user_two', $authID)
                 ->where('status', 'pending')
-                ->exists();
+                ->get();
 
         if($data)
         {
             $update = FriendList::
                 where('user_two', $authID)
-                ->where('user_one', $toBeAcceptedID)
+                ->where('id', $toBeAcceptedID)
                 ->update(['status' => 'friends']);
 
-            return response()->json(['message' => 'Request accepted'],200);
+            return response()->json(['message' => 'Request accepted'], 200);
         }
         
-        return response()->json(['message' => 'Request not found'],404);
+        return response()->json(['message' => 'Request not found'], 404);
     }
 
     /**

@@ -7,7 +7,7 @@
             </div>
 
             <div class="col-lg-9 px-0 px-lg-2">
-                <div class="mb-2">
+                <div class="mb-2 ml-3">
                     
                     <router-link class="anchor-link" to="/friends/list" @click.native="navigateTo(1)">
                         <span class="badge badge-pill px-3 py-2" :class="{'bg-secondary': navSequence==1}">: Friends</span>

@@ -18,7 +18,7 @@ jobs:
       #
       # - image: redis:2.8.19
     
-      - image: circleci/mysql:5.7
+      - image: circleci/mysql:8.0
         environment:
           - MYSQL_USER=root
           - MYSQL_PASSWORD=

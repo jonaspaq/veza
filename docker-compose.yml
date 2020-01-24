@@ -72,29 +72,31 @@ services:
       - vezadocker
 
 # ------------------- OPTIONAL --------------------- #
-  # composer:
-  #   image: composer:1.9
-  #   container_name: composer
-  #   tty: true
-  #   depends_on: 
-  #     - php
-  #   working_dir: /app/veza
-  #   volumes: 
-  #     - .:/app/veza
-  #     - ./composer.json:/app/veza/composer.json
-  #     - ./composer.lock:/app/veza/composer.lock
-  #   command: sh -c "composer install"
-  #   networks: 
-  #     - vezadocker
+  composer:
+    image: composer:1.9
+    container_name: composer
+    tty: true
+    depends_on: 
+      - php
+    working_dir: /app/veza
+    volumes: 
+      - .:/app/veza
+      - ./composer.json:/app/veza/composer.json
+      - ./composer.lock:/app/veza/composer.lock
+    command: sh -c "composer install"
+    networks: 
+      - vezadocker
 
-  # node:
-  #   image: node:13.6-alpine
-  #   container_name: node
-  #   tty: true
-  #   working_dir: /app/veza
-  #   volumes: 
-  #     - ./package.json:/app/veza/package.json
-  #   command: sh -c "npm install"
-  #   networks:
-  #     - vezadocker
+  node:
+    image: node:13.6-alpine
+    container_name: node
+    tty: true
+    working_dir: /app/veza
+    volumes:
+      - .:/app/veza
+      - ./package.json:/app/veza/package.json
+      - ./package-lock.json:/app/veza/package-lock.json
+    command: sh -c "npm install"
+    networks:
+      - vezadocker
 # ------------------ OPTIONAL --------------------- #

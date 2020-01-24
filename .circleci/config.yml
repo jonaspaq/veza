@@ -9,7 +9,8 @@ jobs:
       # Specify the version you desire here
       - image: circleci/php:7.2-node-browsers
         environment:
-          - MYSQL_ROOT_PASSWORD=
+          - MYSQL_PASSWORD=none
+          - MYSQL_ROOT_PASSWORD=none
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -23,10 +24,10 @@ jobs:
       - image: circleci/mysql:8.0
         environment:
           - MYSQL_USER=root
-          - MYSQL_PASSWORD=
+          - MYSQL_PASSWORD=none
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
           - MYSQL_DATABASE=veza
-          - MYSQL_ROOT_PASSWORD=
+          - MYSQL_ROOT_PASSWORD=none
 
     steps:
       - checkout

@@ -1,5 +1,8 @@
 const mix = require('laravel-mix');
 
+// For PurgeCss
+// require('laravel-mix-purgecss');
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -10,6 +13,13 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+mix.webpackConfig({
+    output:{
+        chunkFilename:'js/components/[name].js',
+    }
+});
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    // .purgeCss() // Remove unused css
+    .browserSync('localhost:8000');

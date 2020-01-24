@@ -1,4 +1,8 @@
-<p align="center"><img src="public/icons/512-Bluegreen.png" width="200"></p>
+<p align="center">
+  <a href="https://veza-app.herokuapp.com">
+    <img src="public/icons/512-Bluegreen.png" width="200">
+  </a>
+</p>
 
 <p align="center">
 <a href="https://github.com/jonaspaq/veza"><img src="https://img.shields.io/badge/unstable-v1.0.0-blue" alt="Latest Unstable Version"></a>
@@ -9,10 +13,15 @@
 
 Veza is a web application that users can use to create accounts, add other users as friends, post a status, message other users and so much more
 
+## Clone using git
+```
+git clone https://github.com/jonaspaq/veza.git
+```
+
 ## Tools Used
 
 - [Laravel Framework](https://laravel.com)
-- Laravel Echo
+- [Laravel Echo]()
 - [Pusher API](https://pusher.com/)
 - [VueJS](vuejs.org)
 - [Vuex](http://vuex.vuejs.org/)

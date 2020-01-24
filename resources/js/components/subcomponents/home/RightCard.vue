@@ -12,20 +12,19 @@
         </div>
         <div v-else>
             <div v-for="friend in friendSuggestions" v-bind:key="friend.id">
-                <FriendItem v-bind:friend="friend" @removeSuggestion="removeSuggestion" />
+                <FriendSuggestionItem v-bind:friend="friend" @removeSuggestion="removeSuggestion" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
-import FriendItem from './subcomponents/FriendItem'
+import FriendSuggestionItem from './subcomponents/FriendSuggestionItem'
 import FriendSuggestionLoader from '../../loading_animations/FriendSuggestionLoader'
 
 export default {
     name: 'RightCard',
-    components: { FriendSuggestionLoader, FriendItem },
+    components: { FriendSuggestionLoader, FriendSuggestionItem },
 
     created(){
         this.getFriendSuggestions()
@@ -37,12 +36,7 @@ export default {
 
     methods:{
         getFriendSuggestions(){
-            axios.get('/api/friendSuggestions', {
-                headers:{
-                    Accept: 'applications/json',
-                    Authorization: 'Bearer '+this.$store.getters['auth/token']
-                }
-            })
+            axios.get('/api/friends/suggestions')
             .then( response => {
                 const res = response.data
                 const resCount = Object.entries(res)

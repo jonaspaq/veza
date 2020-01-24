@@ -10,15 +10,16 @@ class FriendList extends Model
     protected $primaryKey = 'id';
 
     protected $guarded = [
-        'status'
+        'id', 'status'
     ];
 
-    public function requestedBy(){
-        
+    public function sender()
+    {
+        return $this->belongsTo('App\User', 'user_one');
     }
 
-    public function user()
+    public function receiver()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'user_two');
     }
 }

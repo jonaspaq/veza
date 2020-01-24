@@ -1,4 +1,3 @@
-import axios from 'axios'
 
 export default {
     namespaced:true,
@@ -41,12 +40,7 @@ export default {
     actions:{
         getAllPost({commit, rootGetters}){
             return new Promise((resolve,reject)=>{
-                axios.get('/api/post', {
-                    headers:{
-                        Accept: 'application/json',
-                        Authorization:'Bearer '+rootGetters['auth/token']
-                    }
-                })
+                axios.get('/api/post')
                 .then((response)=>{
                     // Checks if it retrieved atleast 1 post
                     // If yes it sets the posts state, if not it sets empty array
@@ -58,19 +52,9 @@ export default {
                 })
             });
         },
-        addPost({commit}, {content,token}){
+        addPost({commit}, {content}){
             return new Promise((resolve, reject)=>{ 
-                axios({
-                    headers:{
-                        Accept: 'application/json',
-                        Authorization:'Bearer '+token,
-                    },
-                    method:'POST',
-                    url:'/api/post',
-                    data:{
-                        content // ES6 syntax
-                    }
-                })
+                axios.post('/api/post', {content})
                 .then((response)=>{
                     commit('APPEND_TO_POSTS_DATA', response.data.data)
                     resolve(response)
@@ -82,18 +66,13 @@ export default {
             });
         },
         toDeletePost({commit}, data){
+            // Prepare the post to be deleted
+            // Since there is only 1 modal for deleting
             commit('SET_TO_DELETE_POST', data)
         },
-        deletePost({commit, getters, rootGetters}){
+        deletePost({commit, getters}){
             return new Promise((resolve, reject)=>{
-                axios({
-                    headers:{
-                        Accept: 'application/json',
-                        Authorization:'Bearer '+rootGetters['auth/token'],
-                    },
-                    method:'DELETE',
-                    url:'/api/post/'+getters.toDeletePost.id,
-                })
+                axios.delete('/api/post/'+getters.toDeletePost.id)
                 .then((response)=>{
                     resolve(response)
                     commit('REMOVE_ITEM_FROM_POSTS_DATA', getters.toDeletePost)
@@ -104,21 +83,15 @@ export default {
             })
         },
         toEditPost({commit}, data){
+            // Prepare the post to be edited
+            // Since there is only 1 modal for editing
             commit('SET_TO_EDIT_POST', data)
         },
-        editPost({commit, getters, rootGetters}, data){
+        editPost({commit, getters}, data){
             return new Promise((resolve, reject) => {
-                axios({
-                    headers:{
-                        Accept: 'application/json',
-                        Authorization:'Bearer '+rootGetters['auth/token'],
-                    },
-                    method:'PATCH',
-                    url:'/api/post/'+getters.toEditPost.id,
-                    data:{
-                        id: getters.toEditPost.id,
-                        content: getters.toEditPost.content
-                    }
+                axios.patch('/api/post/'+getters.toEditPost.id, {
+                    id: getters.toEditPost.id,
+                    content: getters.toEditPost.content
                 })
                 .then((response)=>{
                     resolve(response)

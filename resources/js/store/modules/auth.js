@@ -1,13 +1,12 @@
-import axios from 'axios'
 
 export default {
     namespaced: true, 
 
     state: {
         loginLoading: false,
-        loginErrors:'',
+        loginErrors: '',
         access_token: localStorage.getItem('Session') || '',
-        user:'',
+        user: '',
 
     },
     mutations: {
@@ -18,8 +17,8 @@ export default {
             state.loginLoading = false
         },
         SET_ACCESS_TOKEN(state, data){
-            state.access_token = data
             localStorage.setItem('Session', data)
+            state.access_token = data
         },
         UNSET_ACCESS_TOKEN(state){
             state.access_token = ''
@@ -42,13 +41,13 @@ export default {
         initiateLogin({commit}, data){
             return new Promise((resolve, reject)=>{
                 commit('ENABLE_LOGIN_LOADING')
-                
-                axios.post('/api/user/login', data)
+
+                axios.post('/api/login', data)
                 .then((response)=>{
                     commit('SET_ACCESS_TOKEN', response.data.access_token)
-                    commit('SET_USER_DETAILS', response.data.user)
+                    // commit('SET_USER_DETAILS', response.data.user)
                     commit('UNSET_LOGIN_ERRORS')
-                    commit('DISABLE_LOGIN_LOADING')
+                    // commit('DISABLE_LOGIN_LOADING')
                     resolve(response)
                 })
                 .catch((err)=>{
@@ -60,15 +59,10 @@ export default {
         },
         setUserDetails({commit, getters}){
             return new Promise((resolve, reject)=>{
-                axios.get('/api/userDetails',{
-                    headers:{
-                        Accept:'application/json',
-                        Authorization:'Bearer '+getters.token
-                    }
-                })
+                axios.get('/api/user/authenticatedUserDetails')
                 .then((response)=>{
-                    resolve(response)
                     commit('SET_USER_DETAILS', response.data)
+                    resolve(response)
                 })
                 .catch((err)=>{
                     reject(err)
@@ -81,18 +75,17 @@ export default {
     },
     
     getters: {
-        loginLoading(state){
-            return state.loginLoading
-        },
         user: function(state){
             return state.user
+        },
+        loginLoading(state){
+            return state.loginLoading
         },
         token: (state) => {
             return state.access_token
         },
-        loginErrors(state){
-            return state.loginErrors
-        },
+        loginErrors: state => state.loginErrors,
+    
         loginStatus(state){
             return (state.user) ? true : false
         }

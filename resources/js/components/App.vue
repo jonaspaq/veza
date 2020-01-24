@@ -1,8 +1,8 @@
 <template>
-<div class="container-fluid m-0 p-0 vh-100 overflow-auto">
+<div class="container-fluid vh-100 m-0 p-0 overflow-auto">
     <NavigationBar/>
 
-    <div class="container-fluid m-0 p-0 viewHolderFluid mx-auto">
+    <div class="container-fluid m-0 px-0 viewHolderFluid mx-auto">
         <router-view> </router-view>
     </div>
 </div>
@@ -17,53 +17,9 @@ export default {
 }
 </script>
 
-
-<style>
-*{
-    font-family: 'Nunito', sans-serif;
-}
-.bg-primary{
-    background-color: var(--primary-color-nonlinear) !important;
-    color: white;
-}
-.btn-primary{
-    background-color: var(--primary-color-nonlinear);
-    border-radius: 2.5px;
-    padding: 6px 20px;
-    color: white;
-    border-color: transparent;
-}
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
-    background-color: var(--primary-color-nonlinear) !important;
-    border-color: transparent !important;
-    color:white;
-    opacity: 0.9;
-}
-.btn-primary:focus{
-    box-shadow: 0 0 0 1.5px var(--primaryDarker-color) !important;
-}
-.anchorColor, .anchorColor:hover{
-    color: var(--primary-color-nonlinear);
-}
-.anchorUnstyled, .anchorUnstyled:hover{
-    text-decoration:none;
-}
-.emptyBtn, .emptyBtn:active, .emptyBtn:focus{
-    outline-color: var(--primary-color-nonlinear);
-    border:0;
-    background: transparent;
-}
-.dropdown-item:active{
-    background-color: var(--primary-color-nonlinear);
-}
-
-.text-danger{
-    color:var(--danger-color) !important;
-}
-</style>
-
 <style scoped>
 .viewHolderFluid{
     max-width: 1440px;
+    padding-bottom: 60px; 
 }
 </style>

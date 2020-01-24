@@ -1,0 +1,30 @@
+
+.btn-primary{
+    background-color: var(--primary-color-nonlinear);
+    border-radius: 2.5px;
+    padding: 6px 20px;
+    color: white;
+    border-color: transparent;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+    background-color: var(--primary-color-lighter) !important;
+    border-color: transparent !important;
+    color:white;
+    opacity: 0.9;
+}
+.btn-primary:focus{
+    box-shadow: 0 0 0 1.5px var(--primary-color-darker) !important;
+}
+
+.anchorColor, .anchorColor:hover{
+    color: var(--primary-color-nonlinear);
+}
+.anchorUnstyled, .anchorUnstyled:hover{
+    text-decoration:none;
+    color: inherit;
+}
+.emptyBtn, .emptyBtn:active, .emptyBtn:focus{
+    outline-color: var(--primary-color-lighter);
+    border: 0;
+    background: transparent;
+}

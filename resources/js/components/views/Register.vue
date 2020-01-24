@@ -29,9 +29,6 @@
                         </div>
                         <button v-if="!loadingStatus" type="submit" class="btn btn-primary btn-block">Register</button>
                         <div v-if="loadingStatus" class="d-flex align-items-center">
-                            <div class="spinner-border spinner-border-sm text-info mr-1" role="status">
-                            </div>
-                            <span>Please wait </span>
                             <PleaseWaitLoader message="Processing. . ." />
                         </div>
                     </form>
@@ -45,7 +42,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import PleaseWaitLoader from '../loading_animations/PleaseWaitLoader'
 
 export default {
@@ -69,7 +65,7 @@ export default {
             let self = this
             self.loadingStatus = true
 
-            axios.post('/api/user/register', {
+            axios.post('/api/register', {
                 name: self.name,
                 email: self.email,
                 password: self.password,

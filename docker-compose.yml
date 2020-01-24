@@ -37,11 +37,14 @@ services:
       - vezadocker
 
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     container_name: mysql
     ports:
       - 3306:3306
     tty: true
+    depends_on: 
+      - php
+      - nginx
     volumes: 
       - .:/app/veza
       - .mysql:/var/lib/mysql
@@ -52,27 +55,46 @@ services:
       MYSQL_ROOT_PASSWORD: password
     networks: 
       - vezadocker
-  
-  composer:
-    image: composer:1.9
-    container_name: composer
-    tty: true
-    working_dir: /app/veza
-    volumes: 
-      - .:/app/veza
-      - ./composer.json:/app/veza/composer.json
-      - ./composer.lock:/app/veza/composer.lock
-    command: sh -c "composer install"
+    
+  phpadmin:
+    image: phpmyadmin/phpmyadmin:5.0
+    container_name: phpadmin
+    ports: 
+      - 8080:80
+    depends_on: 
+      - mysql
+    environment: 
+      PMA_HOST: mysql
+      MYSQL_USER: veza
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
     networks: 
       - vezadocker
 
-  node:
-    image: node:13.6-alpine
-    container_name: node
-    tty: true
-    working_dir: /app/veza
-    volumes: 
-      - ./package.json:/app/veza/package.json
-    command: sh -c "npm install"
-    networks:
-      - vezadocker
+# ------------------- OPTIONAL --------------------- #
+  # composer:
+  #   image: composer:1.9
+  #   container_name: composer
+  #   tty: true
+  #   depends_on: 
+  #     - php
+  #   working_dir: /app/veza
+  #   volumes: 
+  #     - .:/app/veza
+  #     - ./composer.json:/app/veza/composer.json
+  #     - ./composer.lock:/app/veza/composer.lock
+  #   command: sh -c "composer install"
+  #   networks: 
+  #     - vezadocker
+
+  # node:
+  #   image: node:13.6-alpine
+  #   container_name: node
+  #   tty: true
+  #   working_dir: /app/veza
+  #   volumes: 
+  #     - ./package.json:/app/veza/package.json
+  #   command: sh -c "npm install"
+  #   networks:
+  #     - vezadocker
+# ------------------ OPTIONAL --------------------- #

@@ -9,8 +9,7 @@ jobs:
       # Specify the version you desire here
       - image: circleci/php:7.2-node-browsers
         environment:
-          - MYSQL_PASSWORD=none
-          - MYSQL_ROOT_PASSWORD=none
+          - MYSQL_ROOT_PASSWORD=password
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -24,10 +23,10 @@ jobs:
       - image: circleci/mysql:8.0
         environment:
           - MYSQL_USER=root
-          - MYSQL_PASSWORD=none
-          # - MYSQL_ALLOW_EMPTY_PASSWORD=true
+          - MYSQL_PASSWORD=
+          - MYSQL_ALLOW_EMPTY_PASSWORD=true
           - MYSQL_DATABASE=veza
-          - MYSQL_ROOT_PASSWORD=none
+          - MYSQL_ROOT_PASSWORD=password
 
     steps:
       - checkout
@@ -59,6 +58,14 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
+
+        # prepare the database
+      - run: cp .env.example .env
+      - run: php artisan key:generate
+      - run: php artisan migrate --force
+      - run: php artisan passport:install --force
+
+      # NPM Dependencies
       - restore_cache:
           keys:
             - node-v1-{{ checksum "package.json" }}
@@ -69,11 +76,7 @@ jobs:
           paths:
             - node_modules
 
-        # prepare the database
-      - run: cp .env.example .env
-      - run: php artisan key:generate
-      - run: php artisan migrate --force
-      - run: php artisan passport:install --force
+      
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit

@@ -57,12 +57,6 @@ jobs:
           paths:
             - ./vendor
 
-        # prepare the database
-      - run: cp .env.example .env
-      - run: php artisan key:generate
-      - run: php artisan migrate --force
-      - run: php artisan passport:install --force
-
       # NPM Dependencies
       - restore_cache:
           keys:
@@ -74,7 +68,11 @@ jobs:
           paths:
             - node_modules
 
-      
+        # prepare the database
+      - run: cp .env.example .env
+      - run: php artisan key:generate
+      - run: php artisan migrate --force
+      - run: php artisan passport:install --force
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit

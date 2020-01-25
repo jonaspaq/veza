@@ -9,6 +9,9 @@ jobs:
       # Specify the version you desire here
       - image: circleci/php:7.2-node-browsers
         environment:
+          - MYSQL_USER=root
+          - MYSQL_PASSWORD=
+          - MYSQL_DATABASE=veza
           - MYSQL_ROOT_PASSWORD=password
 
       # Specify service dependencies here if necessary

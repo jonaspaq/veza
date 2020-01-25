@@ -18,7 +18,7 @@ jobs:
       #
       # - image: redis:2.8.19
     
-      - image: circleci/mysql:8.0
+      - image: circleci/mysql:5.7
         environment:
           - MYSQL_USER=root
           - MYSQL_PASSWORD=
@@ -36,11 +36,11 @@ jobs:
           name: Install PHP extensions
           command: sudo docker-php-ext-install pdo_mysql
 
-      - run:
-          name: Display versions
-          command: |
-            php -v
-            composer --version
+      # - run:
+      #     name: Display versions
+      #     command: |
+      #       php -v
+      #       composer --version
 
       # Download and cache dependencies
       - restore_cache:

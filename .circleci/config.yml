@@ -24,6 +24,7 @@ jobs:
           - MYSQL_PASSWORD=
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
           - MYSQL_DATABASE=veza
+          # - MYSQL_ROOT_PASSWORD=password
 
     steps:
       - checkout
@@ -35,11 +36,11 @@ jobs:
           name: Install PHP extensions
           command: sudo docker-php-ext-install pdo_mysql
 
-      - run:
-          name: Display versions
-          command: |
-            php -v
-            composer --version
+      # - run:
+      #     name: Display versions
+      #     command: |
+      #       php -v
+      #       composer --version
 
       # Download and cache dependencies
       - restore_cache:
@@ -55,6 +56,8 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
+
+      # NPM Dependencies
       - restore_cache:
           keys:
             - node-v1-{{ checksum "package.json" }}

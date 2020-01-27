@@ -49673,8 +49673,13 @@ axios.interceptors.request.use(function (config) {
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
   broadcaster: 'pusher',
+<<<<<<< HEAD
   key: "".concat("62cb0f17ea48af2df261"),
   cluster: "".concat("ap1"),
+=======
+  key: "62cb0f17ea48af2df261",
+  cluster: "ap1",
+>>>>>>> staging
   encrypted: true,
   authEndpoint: '/broadcasting/auth',
   auth: {
@@ -51542,8 +51547,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Nexseed\Desktop\PersonalFolder\veza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Nexseed\Desktop\PersonalFolder\veza\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Nexseed\Desktop\Personal Folder\veza\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Nexseed\Desktop\Personal Folder\veza\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

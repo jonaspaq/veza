@@ -1,0 +1,103 @@
+version: '3.6'
+
+networks: 
+  vezadocker:
+
+services:
+  php: 
+    build: 
+      context: .
+      dockerfile: .docker/Dockerfile
+    working_dir: /app/veza
+    container_name: php
+    volumes: 
+      - .:/app/veza
+    ports: 
+      - "9000:9000"
+    environment: 
+      DB_HOST: mysql
+      DB_DATABASE: veza
+      DB_USERNAME: veza
+      DB_PASSWORD: password
+    networks: 
+      - vezadocker
+  
+  nginx:
+    image: nginx:1.17
+    container_name: nginx
+    restart: always
+    ports: 
+      - 8000:80
+      - 8001:443
+    volumes: 
+      - .:/app/veza
+      - .nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - .nginx/veza-app.crt:/etc/nginx/veza-app.crt
+      - .nginx/veza-app.key:/etc/nginx/veza-app.key
+    networks: 
+      - vezadocker
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - 3306:3306
+    tty: true
+    depends_on: 
+      - php
+      # - nginx
+    volumes: 
+      - .:/app/veza
+      - .mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: veza
+      MYSQL_USER: veza
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    networks: 
+      - vezadocker
+    
+  phpadmin:
+    image: phpmyadmin/phpmyadmin:5.0
+    container_name: phpadmin
+    ports: 
+      - 8080:80
+    depends_on: 
+      - mysql
+    environment: 
+      PMA_HOST: mysql
+      MYSQL_USER: veza
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    networks: 
+      - vezadocker
+
+# ------------------- OPTIONAL --------------------- #
+  composer:
+    image: composer:1.9
+    container_name: composer
+    tty: true
+    depends_on: 
+      - php
+    working_dir: /app/veza
+    volumes: 
+      - .:/app/veza
+      - ./composer.json:/app/veza/composer.json
+      - ./composer.lock:/app/veza/composer.lock
+    command: sh -c "composer install"
+    networks: 
+      - vezadocker
+
+  node:
+    image: node:13.6-alpine
+    container_name: node
+    tty: true
+    working_dir: /app/veza
+    volumes:
+      - .:/app/veza
+      - ./package.json:/app/veza/package.json
+      - ./package-lock.json:/app/veza/package-lock.json
+    command: sh -c "npm install"
+    networks:
+      - vezadocker
+# ------------------ OPTIONAL --------------------- #

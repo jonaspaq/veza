@@ -1,4 +1,6 @@
 
+<!-- Development assets -->
+
 @php 
     $favicon = "icons/36-Bluegreen.png";
     $imagePath = "icons/192-Bluegreen.png";

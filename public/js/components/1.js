@@ -87,6 +87,10 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _subcomponents_friendpage_FriendRequestItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../subcomponents/friendpage/FriendRequestItem */ "./resources/js/components/subcomponents/friendpage/FriendRequestItem.vue");
+/* harmony import */ var _loading_animations_PleaseWaitLoader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../loading_animations/PleaseWaitLoader */ "./resources/js/components/loading_animations/PleaseWaitLoader.vue");
+//
+//
+//
 //
 //
 //
@@ -102,14 +106,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FriendRequests',
   components: {
-    FriendRequestItem: _subcomponents_friendpage_FriendRequestItem__WEBPACK_IMPORTED_MODULE_0__["default"]
+    FriendRequestItem: _subcomponents_friendpage_FriendRequestItem__WEBPACK_IMPORTED_MODULE_0__["default"],
+    PleaseWaitLoader: _loading_animations_PleaseWaitLoader__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      loading: false
+    };
   },
   created: function created() {
-    this.$store.dispatch('friends/fetchFriendReceivedRequests').then(function (res) {// console.table(res.data.data)
-    });
+    this.fetchFriendRequests();
+  },
+  methods: {
+    fetchFriendRequests: function fetchFriendRequests() {
+      var _this = this;
+
+      this.loading = true;
+      this.$store.dispatch('friends/fetchFriendReceivedRequests').then(function (res) {
+        _this.loading = false;
+      });
+    }
   },
   computed: {
     friendRequests: function friendRequests() {
@@ -293,21 +313,36 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row no-gutters" },
-      _vm._l(_vm.friendRequests.data, function(friend) {
-        return _c(
-          "div",
-          { key: friend.id, staticClass: "col-12 col-md-6 mb-2" },
-          [
-            _c(
+      [
+        _vm.loading && Object.entries(_vm.friendRequests) == 0
+          ? _c(
               "div",
-              { staticClass: "mr-md-2" },
-              [_c("FriendRequestItem", { attrs: { friend: friend } })],
+              { staticClass: "col-12 font-weight-bold" },
+              [
+                _c("PleaseWaitLoader", {
+                  staticClass: "justify-content-center py-5"
+                })
+              ],
               1
             )
-          ]
-        )
-      }),
-      0
+          : _vm._e(),
+        _vm._v(" "),
+        _vm._l(_vm.friendRequests.data, function(friend) {
+          return _c(
+            "div",
+            { key: friend.id, staticClass: "col-12 col-md-6 mb-2" },
+            [
+              _c(
+                "div",
+                { staticClass: "mr-md-2" },
+                [_c("FriendRequestItem", { attrs: { friend: friend } })],
+                1
+              )
+            ]
+          )
+        })
+      ],
+      2
     )
   ])
 }

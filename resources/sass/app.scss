@@ -13,5 +13,6 @@
 // Variables (:root)
 @import 'variables';
 
-// Animate CSS
-@import './customcss/animate.scss';
+// Animations
+@import 'animations/load-placeholder',
+        'customcss/animate.scss';

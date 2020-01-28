@@ -13,11 +13,11 @@
                     <button class="emptyBtn" type="button" data-toggle="dropdown" @click.prevent>
                         <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu fadeIn animated">
                         <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#postEditModal" @click="editPost(post)">Edit</a>
                         <a class="dropdown-item" href="javascript:;" v-on:click.prevent="deletePost(post)" data-toggle="modal" data-target="#postDeleteModal">Delete</a>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
         <div class="row pl-3 pr-3 mt-2">

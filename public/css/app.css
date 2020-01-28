@@ -10959,6 +10959,48 @@ a.text-dark:focus {
   --danger-color: #ec3737;
 }
 
+/* This is the important animation */
+
+.load-placeholder {
+  position: relative;
+  overflow: hidden;
+  background-color: #e9e9e9;
+}
+
+.load-placeholder::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #e9e9e9, #f6f6f6, #e9e9e9);
+  background-size: 60% 100%;
+  background-repeat: no-repeat;
+  -webkit-animation: loadsimulate 2s 1s infinite;
+          animation: loadsimulate 2s 1s infinite;
+}
+
+@-webkit-keyframes loadsimulate {
+  0% {
+    background-position: -140% 0;
+  }
+
+  100% {
+    background-position: 310% 0;
+  }
+}
+
+@keyframes loadsimulate {
+  0% {
+    background-position: -140% 0;
+  }
+
+  100% {
+    background-position: 310% 0;
+  }
+}
+
 /*!
  * animate.css -https://daneden.github.io/animate.css/
  * Version - 3.7.2

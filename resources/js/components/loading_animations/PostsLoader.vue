@@ -26,7 +26,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .dummyColHead{
     height: 10px;
     margin: 2px 8px;
@@ -34,32 +34,5 @@ export default {
 .dummyCol{
     height: 10px;
     margin: 4px 0;
-}
-
-/* This is the important animation */
-.load-placeholder{
-  position:relative;
-  overflow: hidden;
-  background: linear-gradient(90deg, #FFFFFF, #DEDEDE, #FFFFFF);
-  background-size: 60% 100%;
-  background-repeat: no-repeat;
-  animation: loadsimulate 1.5s infinite;
-}
-
-@keyframes loadsimulate{
-  0%{ background-position: -140% 0; }
-  100%{
-    background-position: 310% 0;
-  }
-}
-
-.load-placeholder:before{
-  content:"";
-  position: absolute;
-  left:0;
-  top:0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(150, 150, 150, 0.2);
 }
 </style>

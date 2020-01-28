@@ -239,20 +239,6 @@ var render = function() {
                   [_vm._v("View Profile")]
                 ),
                 _vm._v(" "),
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "dropdown-item",
-                    attrs: {
-                      to: {
-                        name: "message",
-                        query: { user: _vm.friendData.id }
-                      }
-                    }
-                  },
-                  [_vm._v("Send Message")]
-                ),
-                _vm._v(" "),
                 _c("div", { staticClass: "dropdown-divider" }),
                 _vm._v(" "),
                 _c("button", { staticClass: "emptyBtn dropdown-item" }, [

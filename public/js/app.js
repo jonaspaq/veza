@@ -2637,11 +2637,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FriendNavigation',
-  data: function data() {
-    return {
-      friendRequestCountValue: 0
-    };
-  },
   created: function created() {
     this.friendRequestCount();
   },
@@ -2649,33 +2644,31 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     Echo["private"]('friendRequest.' + this.user.id).listen('NewFriendRequest', function (e) {
-      console.log(e.friendRequest);
-
-      _this.setFriendRequestCountValue(1);
+      // console.log(e.friendRequest);
+      _this.setFriendRequestCountValue();
     });
   },
   methods: {
     friendRequestCount: function friendRequestCount() {
-      var _this2 = this;
-
-      axios.get('/api/friends/request-count').then(function (res) {
-        _this2.setFriendRequestCountValue(res.data);
-      })["catch"](function (err) {
-        console.log('FriendNavigation Component, method: friendRequestCount' + err);
-      });
+      this.$store.dispatch('friends/fetchFriendReceivedRequestCount');
     },
-    setFriendRequestCountValue: function setFriendRequestCountValue(value) {
-      // Set value to count, if count is greater to 99 set to string = "99+"
-      this.friendRequestCountValue += value;
+    setFriendRequestCountValue: function setFriendRequestCountValue() {
+      // Add + 1 to count if request recieved realtime
+      // If count is greater than 99, set value to string = "99+"
+      this.$store.commit('friends/SET_FRIEND_REQUEST_COUNT', this.countValue + 1);
 
-      if (this.friendRequestCountValue > 99) {
-        this.friendRequestCountValue = "99+";
+      if (this.countValue > 99) {
+        this.$store.commit('SET_FRIEND_REQUEST_COUNT', "99+");
       }
     }
   },
   computed: {
+    countValueChecker: function countValueChecker() {
+      /// Display counter badge in UI if count > 0
+      return this.$store.getters['friends/friendRecievedRequestCount'] != 0 ? true : false;
+    },
     countValue: function countValue() {
-      return this.friendRequestCountValue != 0 ? true : false;
+      return this.$store.getters['friends/friendRecievedRequestCount'];
     },
     user: function user() {
       return this.$store.getters['auth/user'];
@@ -32621,13 +32614,7 @@ var render = function() {
                       staticClass: "text-dark text-decoration-none",
                       attrs: { to: "/user/profile/" }
                     },
-                    [
-                      _c("h5", [
-                        _vm._v(
-                          _vm._s(_vm.user.name) + " " + _vm._s(_vm.user.id)
-                        )
-                      ])
-                    ]
+                    [_c("h5", [_vm._v(_vm._s(_vm.user.name))])]
                   )
                 ],
                 1
@@ -33239,9 +33226,9 @@ var render = function() {
           _vm._v("Friends")
         ]),
         _vm._v(" "),
-        _vm.countValue
+        _vm.countValueChecker
           ? _c("span", { staticClass: "badge ml-auto bg-secondary" }, [
-              _vm._v(_vm._s(_vm.friendRequestCountValue))
+              _vm._v(_vm._s(_vm.countValue))
             ])
           : _vm._e()
       ])
@@ -50965,9 +50952,8 @@ _routes__WEBPACK_IMPORTED_MODULE_0__["default"].beforeEach(function (to, from, n
         _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('auth/setUserDetails').then(function (response) {
           next();
         })["catch"](function (err) {
-          localStorage.removeItem('Session'); //   location.replace("/user/login?auth=false")
-
-          _routes__WEBPACK_IMPORTED_MODULE_0__["default"].push({
+          localStorage.removeItem('Session');
+          _routes__WEBPACK_IMPORTED_MODULE_0__["default"].replace({
             name: 'login',
             query: {
               auth: false
@@ -51251,6 +51237,7 @@ __webpack_require__.r(__webpack_exports__);
   state: {
     friends: [],
     friendReceivedRequests: [],
+    friendRecievedRequestCount: '',
     friendSentRequests: []
   },
   mutations: {
@@ -51265,6 +51252,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     SET_RECIEVED_REQUEST: function SET_RECIEVED_REQUEST(state, data) {
       state.friendReceivedRequests = data;
+    },
+    SET_FRIEND_REQUEST_COUNT: function SET_FRIEND_REQUEST_COUNT(state, data) {
+      state.friendRecievedRequestCount = data;
     },
     SET_SENT_REQUESTS: function SET_SENT_REQUESTS(state, data) {
       state.friendSentRequests = data;
@@ -51307,8 +51297,19 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    acceptFriendRequest: function acceptFriendRequest(_ref4, friendToBeAccepted) {
+    fetchFriendReceivedRequestCount: function fetchFriendReceivedRequestCount(_ref4) {
       var commit = _ref4.commit;
+      return new Promise(function (resolve, reject) {
+        axios.get('/api/friends/request-count').then(function (res) {
+          resolve(res);
+          commit('SET_FRIEND_REQUEST_COUNT', res.data);
+        })["catch"](function (err) {
+          reject(err);
+        });
+      });
+    },
+    acceptFriendRequest: function acceptFriendRequest(_ref5, friendToBeAccepted) {
+      var commit = _ref5.commit;
       return new Promise(function (resolve, reject) {
         axios.put('/api/friend/any', {
           id: friendToBeAccepted.id
@@ -51320,8 +51321,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    deleteFriendRequest: function deleteFriendRequest(_ref5, data) {
-      var commit = _ref5.commit;
+    deleteFriendRequest: function deleteFriendRequest(_ref6, data) {
+      var commit = _ref6.commit;
       return new Promise(function (resolve, reject) {
         axios["delete"]('/api/friend/' + data.id).then(function (response) {
           resolve(response);
@@ -51331,8 +51332,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    fetchSentRequests: function fetchSentRequests(_ref6) {
-      var commit = _ref6.commit;
+    fetchSentRequests: function fetchSentRequests(_ref7) {
+      var commit = _ref7.commit;
       return new Promise(function (resolve, reject) {
         axios.get('/api/friends/sent-requests').then(function (response) {
           commit('SET_SENT_REQUESTS', response.data);
@@ -51341,8 +51342,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    deleteSentRequest: function deleteSentRequest(_ref7, data) {
-      var commit = _ref7.commit;
+    deleteSentRequest: function deleteSentRequest(_ref8, data) {
+      var commit = _ref8.commit;
       return new Promise(function (resolve, reject) {
         axios["delete"]('/api/friend/' + data.id).then(function (response) {
           resolve(response);
@@ -51359,6 +51360,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     friendReceivedRequests: function friendReceivedRequests(state) {
       return state.friendReceivedRequests;
+    },
+    friendRecievedRequestCount: function friendRecievedRequestCount(state) {
+      return state.friendRecievedRequestCount;
     },
     friendSentRequests: function friendSentRequests(state) {
       return state.friendSentRequests;

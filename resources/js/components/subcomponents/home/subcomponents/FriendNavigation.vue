@@ -4,7 +4,7 @@
 			<img src="/images/friendship.png" alt="marketplace" width="19px" height="19px">
 			<span class="ml-1 d-none d-lg-block">Friends</span>  
 
-			<span v-if="countValue" class="badge ml-auto bg-secondary">{{ friendRequestCountValue }}</span>
+			<span v-if="countValueChecker" class="badge ml-auto bg-secondary">{{ countValue }}</span>
 		</li>
 	</router-link>
 </template>
@@ -13,12 +13,6 @@
 export default {
 	name: 'FriendNavigation',
 
-	data(){
-		return{
-			friendRequestCountValue: 0
-		}
-	},
-
 	created(){
 		this.friendRequestCount()
 	},
@@ -26,33 +20,33 @@ export default {
 	mounted(){    
 		Echo.private('friendRequest.'+this.user.id)
 			.listen('NewFriendRequest', (e) => {
-				console.log(e.friendRequest);
-				this.setFriendRequestCountValue(1)
+				// console.log(e.friendRequest);
+				this.setFriendRequestCountValue()
 			});
 	},
 
 	methods: {
 		friendRequestCount(){
-			axios.get('/api/friends/request-count')
-			.then(res => {
-				this.setFriendRequestCountValue(res.data)
-			})
-			.catch(err => {
-				console.log('FriendNavigation Component, method: friendRequestCount' + err)
-			})
+			this.$store.dispatch('friends/fetchFriendReceivedRequestCount')
 		},
-		setFriendRequestCountValue(value){
-			// Set value to count, if count is greater to 99 set to string = "99+"
-			this.friendRequestCountValue += value
-			if(this.friendRequestCountValue > 99){
-				this.friendRequestCountValue = "99+"
+		setFriendRequestCountValue(){
+			// Add + 1 to count if request recieved realtime
+			// If count is greater than 99, set value to string = "99+"
+			this.$store.commit('friends/SET_FRIEND_REQUEST_COUNT', this.countValue+1)
+
+			if(this.countValue > 99){
+				this.$store.commit('SET_FRIEND_REQUEST_COUNT', "99+")
 			}
 		}
 	},
 
 	computed:{
+		countValueChecker(){
+			/// Display counter badge in UI if count > 0
+			return (this.$store.getters['friends/friendRecievedRequestCount'] != 0) ? true :false
+		},
 		countValue(){
-			return (this.friendRequestCountValue != 0) ? true : false
+			return this.$store.getters['friends/friendRecievedRequestCount']
 		},
 		user(){
 			return this.$store.getters['auth/user']

@@ -1,5 +1,10 @@
 const mix = require('laravel-mix');
 
+
+/// Bundle analyzer, checks what makes your files large
+// require('laravel-mix-bundle-analyzer');
+// mix.bundleAnalyzer();
+
 // For PurgeCss
 // require('laravel-mix-purgecss');
 
@@ -20,6 +25,6 @@ mix.webpackConfig({
 });
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/app.scss', 'public/css');
     // .purgeCss() // Remove unused css
-    .browserSync('localhost:8000');
+    // .browserSync('localhost:8000');

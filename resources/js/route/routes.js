@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 import Home from '../components/views/Home'
 
 // Components that should be loaded only when needed
+const Page404 =  () => import('../components/views/Page404')
 const Login =  () => import('../components/views/Login')
 const Register =  () => import('../components/views/Register')
 const EditProfile =  () => import('../components/views/EditProfile')
@@ -101,7 +102,21 @@ const router = new VueRouter({
                     }
                 }
             ]
-        }
+        },
+
+
+
+        // This route should be at the last/end part
+        // 404 Page
+        {
+            path: '/404',
+            component: Page404,
+        },
+        {
+            path: '*',
+            redirect: '/404'
+        },
+        
     ]
 });
 

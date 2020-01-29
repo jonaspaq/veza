@@ -26,9 +26,6 @@ export default {
 </script>
 
 <style scoped>
-.dummySpan{
-    color: transparent;
-}
 .dummyColHead{
     height: 12px;
     margin: 2px 12px;
@@ -38,7 +35,7 @@ export default {
     margin: 4px 12px;
 }
 
-/* This is the important animation */
+/* This is the important animation
 .load-placeholder{
   position:relative;
   overflow: hidden;
@@ -63,5 +60,5 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(150, 150, 150    , 0.2);
-}
+} */
 </style>

@@ -18,8 +18,7 @@ router.beforeEach((to, from, next) => {
               })
               .catch(err => {
                   localStorage.removeItem('Session')
-                //   location.replace("/user/login?auth=false")
-                  router.push({name: 'login', query: {auth: false} })
+                  router.replace({name: 'login', query: {auth: false} })
               })
           }
       }

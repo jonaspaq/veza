@@ -5,6 +5,7 @@ export default {
     state: {
         friends: [],
         friendReceivedRequests: [],
+        friendRecievedRequestCount: '',
         friendSentRequests: []
     },
     mutations:{
@@ -19,6 +20,9 @@ export default {
         },
         SET_RECIEVED_REQUEST(state, data){
             state.friendReceivedRequests = data
+        },
+        SET_FRIEND_REQUEST_COUNT(state, data){
+            state.friendRecievedRequestCount = data
         },
         SET_SENT_REQUESTS(state, data){
             state.friendSentRequests = data
@@ -60,6 +64,18 @@ export default {
                     commit('SET_RECIEVED_REQUEST', response.data)
                 })
                 .catch(err =>{
+                    reject(err)
+                })
+            })
+        },
+        fetchFriendReceivedRequestCount({commit}){
+            return new Promise((resolve, reject) =>{
+                axios.get('/api/friends/request-count')
+                .then(res => {
+                    resolve(res)
+                    commit('SET_FRIEND_REQUEST_COUNT', res.data)
+                })
+                .catch(err => {
                     reject(err)
                 })
             })
@@ -115,6 +131,7 @@ export default {
     getters: {
         friends: state => state.friends,
         friendReceivedRequests: state => state.friendReceivedRequests,
+        friendRecievedRequestCount: state => state.friendRecievedRequestCount,
         friendSentRequests: state => state.friendSentRequests
     }
 }

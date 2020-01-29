@@ -1,11 +1,11 @@
 {
-    "short_name": "Jonas",
-    "name": "Jonas",
+    "short_name": "Veza",
+    "name": "Veza",
     "icons": [
       {
-        "src": "/icons/192-Bluegreen.png",
+        "src": "/icons/512-Bluegreen.png",
         "type": "image/png",
-        "sizes": "192x192"
+        "sizes": "512x512"
       }
     ],
     "start_url": "/",

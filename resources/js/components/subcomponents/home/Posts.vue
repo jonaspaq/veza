@@ -1,5 +1,6 @@
 <template>
     <div class="container-fluid m-0 p-0 mb-2">
+
         <div v-if="Object.entries(posts).length !== 0">
             <div v-for="post in posts" :key="post.id" class="card-body bg-white border mt-2">
 
@@ -8,7 +9,7 @@
             
             </div>
         </div>
-        <div v-else>
+        <div v-else-if="Object.entries(posts).length === 0 && loading">
             <div v-for="n in 5" :key="n.id" class="card-body bg-white border mt-2">
                 <PostsLoader />
             </div>
@@ -20,6 +21,11 @@
 
             <!-- Post Edit Modal -->
             <PostEditModal />
+        
+        <div v-if="!loading&&posts==''" class="container-fluid mt-2 no-post-only">
+            <img src="/icons/192-Bluegreen.png" alt="">
+            <h2>Welcome to Veza</h2>
+        </div>
     </div>
 </template>
 
@@ -37,12 +43,18 @@ export default {
         this.getAllPost()
     },
 
+    data(){
+        return {
+            loading: true
+        }
+    },
+
     methods:{
         getAllPost(){
             let self = this
             this.$store.dispatch('posts/getAllPost')
-            .catch((err)=>{
-                console.log(err)
+            .then(response =>{
+                this.loading = false
             })
         }
     },
@@ -54,4 +66,18 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.no-post-only{
+    height: 45vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    h2{
+        color: var(--primary-color-nonlinear);
+    }
+}
+</style>
 

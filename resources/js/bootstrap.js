@@ -1,4 +1,4 @@
-// window._ = require('lodash');
+/// window._ = require('lodash');
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -6,14 +6,14 @@
  * code may be modified to fit the specific needs of your application.
  */
 
-import 'bootstrap'
+import 'bootstrap';
 
-// try {
-//     window.Popper = require('popper.js').default;
-//     window.$ = window.jQuery = require('jquery');
+/// try {
+///     window.Popper = require('popper.js').default;
+///     window.$ = window.jQuery = require('jquery');
 
-//     require('bootstrap');
-// } catch (e) {}
+///     require('bootstrap');
+/// } catch (e) {}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -25,6 +25,7 @@ import store from './store/store'
 
 window.axios = require('axios');
 
+/// Send access token to each request made
 axios.interceptors.request.use(
     (config) => {
       let token = store.getters['auth/token'];
@@ -56,8 +57,8 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    key: `${process.env.MIX_PUSHER_APP_KEY}`,
+    cluster: `${process.env.MIX_PUSHER_APP_CLUSTER}`,
     encrypted: true,
     authEndpoint: '/broadcasting/auth',
     auth:{

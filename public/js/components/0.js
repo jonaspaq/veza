@@ -73,6 +73,10 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _subcomponents_friendpage_FriendItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../subcomponents/friendpage/FriendItem */ "./resources/js/components/subcomponents/friendpage/FriendItem.vue");
+/* harmony import */ var _loading_animations_PleaseWaitLoader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../loading_animations/PleaseWaitLoader */ "./resources/js/components/loading_animations/PleaseWaitLoader.vue");
+//
+//
+//
 //
 //
 //
@@ -88,17 +92,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FriendList',
   components: {
-    FriendItem: _subcomponents_friendpage_FriendItem__WEBPACK_IMPORTED_MODULE_0__["default"]
+    FriendItem: _subcomponents_friendpage_FriendItem__WEBPACK_IMPORTED_MODULE_0__["default"],
+    PleaseWaitLoader: _loading_animations_PleaseWaitLoader__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      loading: false
+    };
   },
   created: function created() {
     this.fetchFriends();
   },
   methods: {
     fetchFriends: function fetchFriends() {
-      this.$store.dispatch('friends/fetchFriends');
+      var _this = this;
+
+      this.loading = true;
+      this.$store.dispatch('friends/fetchFriends').then(function (response) {
+        _this.loading = false;
+      });
     }
   },
   computed: {
@@ -205,7 +221,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "dropdown-menu",
+                staticClass: "dropdown-menu fadeIn animated",
                 attrs: { "aria-labelledby": "friendOptions" }
               },
               [
@@ -221,20 +237,6 @@ var render = function() {
                     }
                   },
                   [_vm._v("View Profile")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "dropdown-item",
-                    attrs: {
-                      to: {
-                        name: "message",
-                        query: { user: _vm.friendData.id }
-                      }
-                    }
-                  },
-                  [_vm._v("Send Message")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "dropdown-divider" }),
@@ -314,21 +316,36 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row no-gutters" },
-      _vm._l(_vm.friends.data, function(friend) {
-        return _c(
-          "div",
-          { key: friend.id, staticClass: "col-12 col-md-6 mb-2" },
-          [
-            _c(
+      [
+        _vm.loading && Object.entries(_vm.friends) == 0
+          ? _c(
               "div",
-              { staticClass: "mr-md-2" },
-              [_c("FriendItem", { attrs: { friend: friend } })],
+              { staticClass: "col-12 font-weight-bold" },
+              [
+                _c("PleaseWaitLoader", {
+                  staticClass: "justify-content-center py-5"
+                })
+              ],
               1
             )
-          ]
-        )
-      }),
-      0
+          : _vm._e(),
+        _vm._v(" "),
+        _vm._l(_vm.friends.data, function(friend) {
+          return _c(
+            "div",
+            { key: friend.id, staticClass: "col-12 col-md-6 mb-2" },
+            [
+              _c(
+                "div",
+                { staticClass: "mr-md-2" },
+                [_c("FriendItem", { attrs: { friend: friend } })],
+                1
+              )
+            ]
+          )
+        })
+      ],
+      2
     )
   ])
 }

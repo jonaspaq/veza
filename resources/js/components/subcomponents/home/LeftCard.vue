@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-12 mt-2">
                     <div class="col d-flex justify-content-center">
-                        <router-link to="/user/profile/" class="text-dark text-decoration-none"> <h5>{{user.name}} {{user.id}}</h5> </router-link>
+                        <router-link to="/user/profile/" class="text-dark text-decoration-none"> <h5>{{user.name}}</h5> </router-link>
                     </div>       
                     <div class="col d-flex justify-content-center">
                         <a href="javascript:;" class="anchorColor"></a>

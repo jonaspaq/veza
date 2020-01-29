@@ -8,9 +8,9 @@
             <button class="emptyBtn mr-1 px-1" type="button" id="friendOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v"></i>
             </button>
-            <div class="dropdown-menu" aria-labelledby="friendOptions">
+            <div class="dropdown-menu fadeIn animated" aria-labelledby="friendOptions">
                 <router-link :to="{name:'userProfile', query : {user: friendData.id}}" class="dropdown-item">View Profile</router-link>
-                <router-link :to="{name:'message', query : {user: friendData.id}}" class="dropdown-item">Send Message</router-link>
+                <!-- <router-link :to="{name:'message', query : {user: friendData.id}}" class="dropdown-item">Send Message</router-link> -->
                 <div class="dropdown-divider"></div>
                 <button class="emptyBtn dropdown-item"> Block </button>
                 <button class="emptyBtn dropdown-item" @click="unfriend(friend)"> Unfriend </button>

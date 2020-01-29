@@ -49613,7 +49613,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store/store */ "./resources/js/store/store.js");
-/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+/* harmony import */ var _route_routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./route/routes */ "./resources/js/route/routes.js");
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 /// window._ = require('lodash');
 
 /**
@@ -49634,6 +49635,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); /// Send access token to each request made
 
 axios.interceptors.request.use(function (config) {
@@ -49650,6 +49652,21 @@ axios.interceptors.request.use(function (config) {
   return config;
 }, function (error) {
   return Promise.reject(error);
+}); // Add a 401 response interceptor
+
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  // If user is authentication is expired redirect to login
+  if (401 === error.response.status) {
+    // Promise.reject(error);
+    localStorage.removeItem('Session');
+    console.log('nigana');
+    location.replace('/user/login'); // router.push({name:'login', query: {auth:false,expired:true} })
+  } // return Promise.reject(error);
+  //     else {
+  //   }
+
 });
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -49659,7 +49676,7 @@ axios.interceptors.request.use(function (config) {
 
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
+window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_3__["default"]({
   broadcaster: 'pusher',
   key: "".concat("62cb0f17ea48af2df261"),
   cluster: "".concat("ap1"),
@@ -51186,8 +51203,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     setUserDetails: function setUserDetails(_ref2) {
-      var commit = _ref2.commit,
-          getters = _ref2.getters;
+      var commit = _ref2.commit;
       return new Promise(function (resolve, reject) {
         axios.get('/api/user/authenticatedUserDetails').then(function (response) {
           commit('SET_USER_DETAILS', response.data);

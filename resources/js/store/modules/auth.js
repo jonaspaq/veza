@@ -57,7 +57,7 @@ export default {
                 });
             });
         },
-        setUserDetails({commit, getters}){
+        setUserDetails({commit}){
             return new Promise((resolve, reject)=>{
                 axios.get('/api/user/authenticatedUserDetails')
                 .then((response)=>{

@@ -20,7 +20,8 @@ Route::group(['middleware' => 'api', 'namespace' => 'Api'], function(){
 
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function(){
 
-    Route::get('user/authenticatedUserDetails', 'UserController@show');
+    Route::get('user/authDetails', 'UserController@authDetails');
+    Route::get('user/{id}', 'UserController@show');
 
     Route::apiResource('post', 'PostController');
     

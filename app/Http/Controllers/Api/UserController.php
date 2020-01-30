@@ -27,15 +27,20 @@ class UserController extends Controller
     }
 
     /**
-     * Show a specified resource according 
-     * to the owner of the access token
+     * Show a specified resource 
      * 
      * @param \Illuminate\Http\Request $request
      * @return User::class
      */
-    public function show(Request $request)
+    public function show($userId)
     {
-        return $request->user();
+        $data = User::find($userId);
+        
+        if($data){
+            return response()->json($data);
+        }
+
+        return response()->json(null, 404);
     }
 
     /**
@@ -86,6 +91,12 @@ class UserController extends Controller
         
     }
 
+
+    /**
+     * Register user, store the resource to database
+     * @param App\Http\Requests\UserRegistration  $request
+     * @return \Illuminate\Http\Response
+     */
     public function register(UserRegistration $request)
     {
         $data = $request->validated();
@@ -94,5 +105,12 @@ class UserController extends Controller
         $insertedData = User::create($data);
 
         return response()->json($insertedData, 201);
+    }
+
+    /**
+     * Return the details of the authenticated user
+    */
+    public function authDetails(){
+        return request()->user();
     }
 }

@@ -112,7 +112,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function get_details_of_a_specified_user_while_not_being_authenticated()
+    public function get_details_of_a_specified_user_while_not_authenticated()
     {
         $response = $this->getJson('/api/user/1');
 

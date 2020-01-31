@@ -111,6 +111,8 @@ class UserController extends Controller
      * Return the details of the authenticated user
     */
     public function authDetails(){
-        return request()->user();
+        $data = request()->user();
+
+        return response()->json($data, 200);
     }
 }

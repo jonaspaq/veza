@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 
-use App\User;
 use Tests\PassportAuth;
 
 class UserTest extends TestCase
@@ -49,7 +48,7 @@ class UserTest extends TestCase
             'password' => 'password'
         ]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     /** @test */
@@ -58,8 +57,8 @@ class UserTest extends TestCase
         $this->passportInstallCommando();
 
         $response = $this->postJson('/api/login', [
-            'email' => 'non_existing_email@unknow.unknow.com',
-            'password' => 'non_existing_password'
+            'email' => 'non_existing_email@unknown.unknown.com',
+            'password' => 'non_existing_password_at_all'
         ]);
 
         $response->assertStatus(404);
@@ -86,7 +85,7 @@ class UserTest extends TestCase
         $response = $this->actingAs($user, 'api')
                         ->getJson('/api/user/authDetails');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     /** @test */
@@ -108,7 +107,7 @@ class UserTest extends TestCase
         $response = $this->actingAs($user, 'api')
                         ->getJson('/api/user/-1');
 
-        $response->assertStatus(404);
+        $response->assertNotFound();
     }
 
     /** @test */

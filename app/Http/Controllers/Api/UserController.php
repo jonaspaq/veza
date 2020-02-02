@@ -44,14 +44,18 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
+     * Register user, store the resource to database
+     * @param App\Http\Requests\UserRegistration $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRegistration $request)
     {
-       return $request;
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+
+        $insertedData = User::create($data);
+
+        return response()->json($insertedData, 201);
     }
 
     /**
@@ -89,22 +93,6 @@ class UserController extends Controller
         
         return response()->json(['message' => 'Invalid Credentials'], 404);
         
-    }
-
-
-    /**
-     * Register user, store the resource to database
-     * @param App\Http\Requests\UserRegistration  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function register(UserRegistration $request)
-    {
-        $data = $request->validated();
-        $data['password'] = Hash::make($data['password']);
-
-        $insertedData = User::create($data);
-
-        return response()->json($insertedData, 201);
     }
 
     /**

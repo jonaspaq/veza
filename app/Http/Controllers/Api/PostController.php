@@ -10,7 +10,8 @@ use App\Http\Requests\Posts;
 class PostController extends Controller
 {
     /**
-     *
+     * Fetch all posts of the authenticated user
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -38,12 +39,12 @@ class PostController extends Controller
         $data['user_id'] = $request->user()->id;
 
         $dataInsert = Post::create($data);
+
+        // Retrieve the newly created post with user details
         $newData = Post::where('id', $dataInsert->id)->with('user:id,name')->first();
     
         if($newData)
             return response()->json(['message' => 'Successfully Posted', 'data' => $newData], 201);
-        
-        return response()->json(['message' => 'Something went wrong'], 400);
     }
 
     /**
@@ -65,14 +66,16 @@ class PostController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
+     * Warning! when using this function 
+     * please add (_method: PUT or PATCH) in data of http request
+     * 
      * @param  App\Post $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Posts $request, $id)
     {
-        //Warning! when using this function please add (_method: PUT or PATCH) in parameters of http request
+        // The validated data
         $dataUpdate = $request->validated();
 
         // Checks if post exist
@@ -84,12 +87,11 @@ class PostController extends Controller
 
         $presentData->update($dataUpdate);
 
+        // Fetch updated data along with user details
         $updatedData = Post::where('id', $presentData->id)->with('user:id,name')->first();
 
         if($updatedData)
             return response()->json(['message' => 'Successful Updating Post', 'data' => $updatedData], 200);
-        
-        return reponse()->json(['message' => 'Post not found or user unauthorized'], 401);
     }
 
     /**
@@ -102,9 +104,12 @@ class PostController extends Controller
     public function destroy(Request $request, $id)
     {   
         $user = $request->user();
+
+        // Check if post exists
+        $post = Post::findOrFail($id);
     
         // Check if the user that requested to delete is the owner of the post
-        $authorize = Post::where('user_id', $user->id)->where('id', $id)->first();
+        $authorize = $user->id == $post->user_id;
 
         // If $authorize is true or if user is an admin continue with post deletion
         if($authorize || $user->user_type == 'admin'){
@@ -113,6 +118,6 @@ class PostController extends Controller
                 return response()->json(['message' => 'Successfully Deleted'], 200);
         }
 
-        return response()->json(['message' => 'Error, post not found or user unauthorized'], 400);
+        return response()->json(['message' => 'Error,  User unauthorized'], 401);
     }
 }

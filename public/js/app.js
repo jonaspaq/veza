@@ -51013,6 +51013,10 @@ var Register = function Register() {
   return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/views/Register */ "./resources/js/components/views/Register.vue"));
 };
 
+var ProfilePage = function ProfilePage() {
+  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/views/ProfilePage */ "./resources/js/components/views/ProfilePage.vue"));
+};
+
 var EditProfile = function EditProfile() {
   return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/views/EditProfile */ "./resources/js/components/views/EditProfile.vue"));
 };
@@ -51059,8 +51063,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     }
   }, {
     path: '/user/profile',
-    name: 'userProfile',
-    component: EditProfile,
+    name: 'profilePage',
+    component: ProfilePage,
     meta: {
       requiresAuth: true
     }

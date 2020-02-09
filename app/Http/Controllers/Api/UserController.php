@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::all();
+        $data = User::paginate();
 
         return response()->json(['message' => 'Success', $data], 200);
     }
@@ -73,7 +73,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -97,6 +97,8 @@ class UserController extends Controller
 
     /**
      * Return the details of the authenticated user
+     * 
+     * @return \Illuminate\Http\Response
     */
     public function authDetails(){
         $data = request()->user();

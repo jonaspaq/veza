@@ -193,7 +193,7 @@ class PostControllerTest extends TestCase
         $response = $this->actingAs($randomUser, 'api')
                         ->deleteJson('/api/post/'.$post->id);
 
-        $response->assertUnauthorized();
+        $response->assertForbidden();
     }
 
     /** @test */

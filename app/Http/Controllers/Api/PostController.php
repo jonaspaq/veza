@@ -118,6 +118,6 @@ class PostController extends Controller
                 return response()->json(['message' => 'Successfully Deleted'], 200);
         }
 
-        return response()->json(['message' => 'Error,  User unauthorized'], 401);
+        return response()->json(['message' => 'Error, unauthorized to delete'], 403);
     }
 }

@@ -49661,8 +49661,8 @@ axios.interceptors.request.use(function (config) {
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
   broadcaster: 'pusher',
-  key: "".concat(""),
-  cluster: "".concat("mt1"),
+  key: "".concat("62cb0f17ea48af2df261"),
+  cluster: "".concat("ap1"),
   encrypted: true,
   authEndpoint: '/broadcasting/auth',
   auth: {
@@ -51002,23 +51002,23 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
  // Components that should be loaded only when needed
 
 var Page404 = function Page404() {
-  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../components/views/Page404 */ "./resources/js/components/views/Page404.vue"));
+  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/views/Page404 */ "./resources/js/components/views/Page404.vue"));
 };
 
 var Login = function Login() {
-  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/views/Login */ "./resources/js/components/views/Login.vue"));
+  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../components/views/Login */ "./resources/js/components/views/Login.vue"));
 };
 
 var Register = function Register() {
-  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/views/Register */ "./resources/js/components/views/Register.vue"));
+  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/views/Register */ "./resources/js/components/views/Register.vue"));
 };
 
 var ProfilePage = function ProfilePage() {
-  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/views/ProfilePage */ "./resources/js/components/views/ProfilePage.vue"));
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/views/ProfilePage */ "./resources/js/components/views/ProfilePage.vue"));
 };
 
 var EditProfile = function EditProfile() {
-  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/views/EditProfile */ "./resources/js/components/views/EditProfile.vue"));
+  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/views/EditProfile */ "./resources/js/components/views/EditProfile.vue"));
 };
 
 var FriendPage = function FriendPage() {

@@ -59,7 +59,7 @@ export default {
         },
         setUserDetails({commit}){
             return new Promise((resolve, reject)=>{
-                axios.get('/api/user/authenticatedUserDetails')
+                axios.get('/api/user/authDetails')
                 .then((response)=>{
                     commit('SET_USER_DETAILS', response.data)
                     resolve(response)

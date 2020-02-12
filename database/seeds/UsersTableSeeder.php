@@ -8,7 +8,7 @@ use App\FriendList;
 
 class UsersTableSeeder extends Seeder
 {
-    public $usersToSeed = 100;
+    public $usersToSeed = 50;
     /**
      * Run the database seeds.
      *
@@ -39,6 +39,7 @@ class UsersTableSeeder extends Seeder
             // For the user created, create 30 FriendList Random Data Per Row
             $user->friendReceived()->saveMany(factory(FriendList::class, 30))
             ->create([
+                'user_one' => rand(1, $this->usersToSeed),
                 'user_two' => $user->id
             ]);
         });

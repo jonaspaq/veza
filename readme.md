@@ -27,6 +27,9 @@ git clone https://github.com/jonaspaq/veza.git
 - [Vuex](http://vuex.vuejs.org/)
 - [Vue-router](https://router.vuejs.org/)
 
+## Date 
+
+- Initial commit : October 5, 2019
 
 ## License
 

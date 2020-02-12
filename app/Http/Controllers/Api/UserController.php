@@ -21,32 +21,41 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::all();
+        $data = User::paginate();
 
         return response()->json(['message' => 'Success', $data], 200);
     }
 
     /**
-     * Show a specified resource according 
-     * to the owner of the access token
+     * Show a specified resource 
      * 
      * @param \Illuminate\Http\Request $request
      * @return User::class
      */
-    public function show(Request $request)
+    public function show($userId)
     {
-        return $request->user();
+        $data = User::find($userId);
+        
+        if($data){
+            return response()->json($data);
+        }
+
+        return response()->json(null, 404);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
+     * Register user, store the resource to database
+     * @param App\Http\Requests\UserRegistration $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRegistration $request)
     {
-       return $request;
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+
+        $insertedData = User::create($data);
+
+        return response()->json($insertedData, 201);
     }
 
     /**
@@ -64,7 +73,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -86,13 +95,14 @@ class UserController extends Controller
         
     }
 
-    public function register(UserRegistration $request)
-    {
-        $data = $request->validated();
-        $data['password'] = Hash::make($data['password']);
+    /**
+     * Return the details of the authenticated user
+     * 
+     * @return \Illuminate\Http\Response
+    */
+    public function authDetails(){
+        $data = request()->user();
 
-        $insertedData = User::create($data);
-
-        return response()->json($insertedData, 201);
+        return response()->json($data, 200);
     }
 }

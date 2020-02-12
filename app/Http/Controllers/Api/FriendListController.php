@@ -96,9 +96,8 @@ class FriendListController extends Controller
         
         return response()->json(['message' => 'Request not found'], 404);
     }
-
+    
     /**
-     * Function fired when adding a friend
      * This will add a new friend request
      * @param Request $request
     */

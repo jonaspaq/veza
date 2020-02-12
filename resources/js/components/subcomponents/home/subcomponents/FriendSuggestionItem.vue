@@ -35,13 +35,13 @@ export default {
     methods: {
         addFriend(friend){
             axios.post('/api/friend', {id: friend.id})
-            .then( response => {
+            .then(response => {
                 this.requestStatus = true
                 setTimeout(e =>{
                     this.$emit('removeSuggestion', friend)
                 }, 2000)
             })
-            .catch( err => {
+            .catch(err => {
                 console.log(err)
             })
         },

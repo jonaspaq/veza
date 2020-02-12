@@ -21,8 +21,8 @@ export default {
             state.access_token = data
         },
         UNSET_ACCESS_TOKEN(state){
-            state.access_token = ''
             localStorage.removeItem('Session')
+            state.access_token = ''
         },
         SET_USER_DETAILS(state, data){
             state.user = data

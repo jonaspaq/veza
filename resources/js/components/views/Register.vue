@@ -50,10 +50,10 @@ export default {
 
     data(){
         return {
-            name:'',
-            email:'',
-            password:'',
-            password_confirmation:'',
+            name:'Test User',
+            email:'test@example.com',
+            password:'password',
+            password_confirmation:'password',
 
             loadingStatus: false,
             errors:''

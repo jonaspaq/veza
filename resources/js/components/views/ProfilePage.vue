@@ -21,9 +21,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container-fluid{
+    width: 100vw !important;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50.001%);
+}
 .profile-cover{
     background: var(--primary-color-linear);
-    height: 30vh;
+    height: 20vh;
     padding: 0;
 }
 </style>

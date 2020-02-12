@@ -12,7 +12,7 @@ use DB;
 class FriendListController extends Controller
 {
     /**
-     * Fetch all friend list which status is friends 
+     * Fetch all friend list which status is friends
      * Notice: This fetches the current user friends only
      * @param Request $request
     */
@@ -29,7 +29,7 @@ class FriendListController extends Controller
                 })
                 ->with('sender:id,name,email', 'receiver:id,name,email')
                 ->paginate();
-        
+
         return response()->json($data);
     }
 
@@ -44,9 +44,16 @@ class FriendListController extends Controller
             ->where('status', 'pending')
             ->with('sender:id,name,email')
             ->orderBy('id', 'desc')
-            ->paginate(15);
+            ->paginate();
 
-        return response()->json($data);
+        $data = json_encode($data);
+        $data = json_decode($data);
+
+        if(!empty($data->data))
+            return response()->json($data);
+
+        // If user has recieved 0 requests return 204
+        return response()->json($data, 204);
     }
 
     /**
@@ -62,12 +69,19 @@ class FriendListController extends Controller
             ->orderBy('id', 'desc')
             ->paginate();
 
-        return response()->json($data);
+        $data = json_encode($data);
+        $data = json_decode($data);
+
+        if(!empty($data->data))
+            return response()->json($data);
+
+        // If user has sent 0 requests return 204
+        return response()->json($data, 204);
     }
 
     /**
      * Accept a friend request
-     * Set status column to 'friends'
+     * Update status column to 'friends'
      * @param Request $request
     */
     public function update(Request $request)
@@ -93,22 +107,25 @@ class FriendListController extends Controller
 
             return response()->json(['message' => 'Request accepted'], 200);
         }
-        
+
         return response()->json(['message' => 'Request not found'], 404);
     }
-    
+
     /**
      * This will add a new friend request
      * @param Request $request
     */
     public function store(Request $request)
     {
+        if(!$request->id)
+            return response()->json('No data', 403);
+
         // The id to be requested to be a friend
         $id = $request->id;
 
         // Get the user id who made the request
         $authID = $request->user()->id;
-        
+
         // Checks if the user to be added exists
         $userToAdd = User::findOrFail($id);
 
@@ -122,7 +139,7 @@ class FriendListController extends Controller
             whereIn('user_one', [$authID, $id])
             ->whereIn('user_two', [$authID, $id])
             ->exists();
-        
+
         if(!$friendCheck){
             $toData = [
                 'user_one' => $authID,
@@ -135,7 +152,7 @@ class FriendListController extends Controller
 
             return response()->json($data, 201);
         }
-        
+
         return response()->json(['message' => 'Request pending or already friends with this user'], 403);
     }
 
@@ -159,7 +176,7 @@ class FriendListController extends Controller
      * @param Request $request
      */
     public function friendSuggestions(Request $request)
-    {  
+    {
         // Get the user id who made the request
         $authID = $request->user()->id;
 
@@ -177,19 +194,19 @@ class FriendListController extends Controller
             ->inRandomOrder()
             ->limit(20)
             ->get();
-            
-        if($data) 
+
+        if($data)
             return response()->json($data);
-        else 
-            return response()->json([], 204);  
+        else
+            return response()->json([], 204);
     }
 
     /**
      * Delete/decline friend request
      * When a friend request is declined/deleted, it will be deleted in the storage
-     * 
+     *
      * @param Request $request
-     * @param $id 
+     * @param $id
     */
     public function destroy(Request $request, $id)
     {
@@ -198,11 +215,11 @@ class FriendListController extends Controller
 
         // Checks if the friend record exists
         $checkExists = FriendList::findOrFail($id);
-        
+
         // Check if the user is either the requestor or the requested user
         if($checkExists->user_one == $authID || $checkExists->user_two == $authID)
             $checkExists->delete();
-        
+
         return response()->json([], 204);
     }
 }

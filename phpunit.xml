@@ -30,5 +30,6 @@
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
         <server name="BROADCAST_DRIVER" value="pusher"/>
+        <server name="DB_CONNECTION" value="mysql"/>
     </php>
 </phpunit>

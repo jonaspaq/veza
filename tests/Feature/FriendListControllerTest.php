@@ -196,9 +196,7 @@ class FriendListControllerTest extends TestCase
         $friendRequest = $this->createFriendRequest($user, $user2);
 
         $response = $this->actingAs($user, 'api')
-                        ->putJson('/api/friend/'.$friendRequest->id, [
-                            'id' => $user2
-                        ]);
+                        ->putJson('/api/friend/'.$friendRequest->id);
 
         $response->assertOk();
     }

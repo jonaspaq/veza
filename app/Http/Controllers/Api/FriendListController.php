@@ -95,7 +95,7 @@ class FriendListController extends Controller
                 where('id', $rowId)
                 ->where('user_two', $authID)
                 ->where('status', 'pending')
-                ->get();
+                ->exists();
 
         if($data)
         {
@@ -205,7 +205,7 @@ class FriendListController extends Controller
      * When a friend request is declined/deleted, it will be deleted in the storage
      *
      * @param Request $request
-     * @param $id
+     * @param $id (Primary key of FriendList to be deleted)
     */
     public function destroy(Request $request, $id)
     {

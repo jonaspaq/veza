@@ -200,4 +200,95 @@ class FriendListControllerTest extends TestCase
 
         $response->assertOk();
     }
+
+    /** @test */
+    public function accept_a_friend_request_passing_a_non_existing_id()
+    {
+        $user = $this->passportAndCreateUser();
+
+        $response = $this->actingAs($user, 'api')
+                        ->putJson('/api/friend/-1');
+
+        $response->assertNotFound();
+    }
+
+    /** @test */
+    public function accept_a_friend_request_while_not_authenticated()
+    {
+        $user = $this->passportAndCreateUser();
+        $user2 = $this->createRandomUser();
+        $friendRequest = $this->createFriendRequest($user, $user2);
+
+        $response = $this->putJson('/api/friend/'.$friendRequest->id);
+
+        $response->assertUnauthorized();
+    }
+
+    /** @test */
+    public function decline_a_friend_request()
+    {
+        $user = $this->passportAndCreateUser();
+        $user2 = $this->createRandomUser();
+        $friendRequest = $this->createFriendRequest($user, $user2);
+
+        $response = $this->actingAs($user, 'api')
+                        ->deleteJson('/api/friend/'.$friendRequest->id);
+
+        $response->assertStatus(204);
+    }
+
+    /** @test */
+    public function decline_a_friend_request_passing_a_non_existing_id()
+    {
+        $user = $this->passportAndCreateUser();
+
+        $response = $this->actingAs($user, 'api')
+                        ->deleteJson('/api/friend/-1');
+
+        $response->assertNotFound();
+    }
+
+    /** @test */
+    public function decline_a_friend_request_while_not_authenticated()
+    {
+        $response = $this->deleteJson('/api/friend/1');
+
+        $response->assertUnauthorized();
+    }
+
+    /** @test */
+    public function remove_a_friend()
+    {
+        $user = $this->passportAndCreateUser();
+        $user2 = $this->createRandomUser();
+        $friend = $this->createFriend($user, $user2);
+
+        $response = $this->actingAs($user, 'api')
+                        ->deleteJson('/api/friend/'.$friend->id);
+
+        $response->assertStatus(204);
+    }
+
+    /** @test */
+    public function remove_a_non_existing_friend()
+    {
+        $user = $this->passportAndCreateUser();
+
+        $response = $this->actingAs($user, 'api')
+                        ->deleteJson('/api/friend/-1');
+
+        $response->assertNotFound();
+    }
+
+    /** @test */
+    public function remove_a_friend_while_not_authenticated()
+    {
+        $user = $this->passportAndCreateUser();
+        $user2 = $this->createRandomUser();
+        $friend = $this->createFriend($user, $user2);
+
+        $response = $this->deleteJson('/api/friend/'.$friend->id);
+
+        $response->assertUnauthorized();
+    }
 }

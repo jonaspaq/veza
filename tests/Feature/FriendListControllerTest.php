@@ -196,31 +196,10 @@ class FriendListControllerTest extends TestCase
         $friendRequest = $this->createFriendRequest($user, $user2);
 
         $response = $this->actingAs($user, 'api')
-                        ->patchJson('/api/friend/'.$friendRequest->id);
+                        ->putJson('/api/friend/'.$friendRequest->id, [
+                            'id' => $user2
+                        ]);
 
         $response->assertOk();
-    }
-
-    /** @test */
-    public function accept_a_friend_request_that_is_not_existing()
-    {
-        $user = $this->passportAndCreateUser();
-
-        $response = $this->actingAs($user, 'api')
-                        ->patchJson('/api/friend/-1');
-
-        $response->assertNotFound();
-    }
-
-    /** @test */
-    public function accept_a_friend_request_while_not_authenticated()
-    {
-        $user = $this->passportAndCreateUser();
-        $user2 = $this->createRandomUser();
-        $friendRequest = $this->createFriendRequest($user, $user2);
-
-        $response = $this->patchJson('/api/friend/'.$friendRequest->id);
-
-        $response->assertUnauthorized();
     }
 }

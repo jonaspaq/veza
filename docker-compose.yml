@@ -1,40 +1,40 @@
 version: '3.6'
 
-networks:
+networks: 
   vezadocker:
 
 services:
-  php:
-    build:
+  php: 
+    build: 
       context: .
       dockerfile: .docker/Dockerfile
     working_dir: /app/veza
     container_name: php
-    volumes:
+    volumes: 
       - .:/app/veza
-    ports:
+    ports: 
       - "9000:9000"
-    environment:
+    environment: 
       DB_HOST: mysql
       DB_DATABASE: veza
       DB_USERNAME: veza
       DB_PASSWORD: password
-    networks:
+    networks: 
       - vezadocker
-
+  
   nginx:
     image: nginx:1.17
     container_name: nginx
     restart: always
-    ports:
+    ports: 
       - 8000:80
       - 8001:443
-    volumes:
+    volumes: 
       - .:/app/veza
       - .nginx/default.conf:/etc/nginx/conf.d/default.conf
       - .nginx/veza-app.crt:/etc/nginx/veza-app.crt
       - .nginx/veza-app.key:/etc/nginx/veza-app.key
-    networks:
+    networks: 
       - vezadocker
 
   mysql:
@@ -43,10 +43,10 @@ services:
     ports:
       - 3306:3306
     tty: true
-    depends_on:
+    depends_on: 
       - php
       # - nginx
-    volumes:
+    volumes: 
       - .:/app/veza
       - .mysql:/var/lib/mysql
     environment:
@@ -54,22 +54,22 @@ services:
       MYSQL_USER: veza
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
-    networks:
+    networks: 
       - vezadocker
-
+    
   phpadmin:
     image: phpmyadmin/phpmyadmin:5.0
     container_name: phpadmin
-    ports:
+    ports: 
       - 8080:80
-    depends_on:
+    depends_on: 
       - mysql
-    environment:
+    environment: 
       PMA_HOST: mysql
       MYSQL_USER: veza
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
-    networks:
+    networks: 
       - vezadocker
 
 # ------------------- OPTIONAL --------------------- #
@@ -77,16 +77,15 @@ services:
     image: composer:1.9
     container_name: composer
     tty: true
-    depends_on:
+    depends_on: 
       - php
     working_dir: /app/veza
-    volumes:
+    volumes: 
       - .:/app/veza
       - ./composer.json:/app/veza/composer.json
       - ./composer.lock:/app/veza/composer.lock
-    # The use of tail -F is to prevent container exiting
-    command: sh -c "composer install -n && tail -F /anything/can/be/placed/here"
-    networks:
+    command: sh -c "composer install"
+    networks: 
       - vezadocker
 
   node:
@@ -98,8 +97,7 @@ services:
       - .:/app/veza
       - ./package.json:/app/veza/package.json
       - ./package-lock.json:/app/veza/package-lock.json
-    # The use of tail -F is to prevent container exiting
-    command: sh -c "npm install --no-bin-links && tail -F /anything/can/be/placed/here"
+    command: sh -c "npm install --no-bin-links"
     networks:
       - vezadocker
 # ------------------ OPTIONAL --------------------- #

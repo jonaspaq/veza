@@ -83,26 +83,25 @@ class FriendListController extends Controller
      * Accept a friend request
      * Update status column to 'friends'
      * @param Request $request
+     * @param int $rowId (The row id of Friendlist)
     */
-    public function update(Request $request)
+    public function update(Request $request, $rowId)
     {
-        $toBeAcceptedID = $request->id;
-
         // Get the user id who made the request
         $authID = $request->user()->id;
 
         // Check if friend request exist
         $data = FriendList::
-                where('id', $toBeAcceptedID)
+                where('id', $rowId)
                 ->where('user_two', $authID)
                 ->where('status', 'pending')
-                ->get();
+                ->exists();
 
         if($data)
         {
             $update = FriendList::
                 where('user_two', $authID)
-                ->where('id', $toBeAcceptedID)
+                ->where('id', $rowId)
                 ->update(['status' => 'friends']);
 
             return response()->json(['message' => 'Request accepted'], 200);

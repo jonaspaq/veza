@@ -1,9 +1,9 @@
-name: Laravel
+name: Veza
 
 on: [push]
 
 jobs:
-  laravel-tests:
+  veza-tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

@@ -49613,8 +49613,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store/store */ "./resources/js/store/store.js");
-/* harmony import */ var _route_routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./route/routes */ "./resources/js/route/routes.js");
-/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 /// window._ = require('lodash');
 
 /**
@@ -49635,7 +49634,6 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); /// Send access token to each request made
 
 axios.interceptors.request.use(function (config) {
@@ -49652,21 +49650,6 @@ axios.interceptors.request.use(function (config) {
   return config;
 }, function (error) {
   return Promise.reject(error);
-}); // Add a 401 response interceptor
-
-axios.interceptors.response.use(function (response) {
-  return response;
-}, function (error) {
-  // If user is authentication is expired redirect to login
-  if (401 === error.response.status) {
-    // Promise.reject(error);
-    localStorage.removeItem('Session');
-    console.log('nigana');
-    location.replace('/user/login'); // router.push({name:'login', query: {auth:false,expired:true} })
-  } // return Promise.reject(error);
-  //     else {
-  //   }
-
 });
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -49676,7 +49659,7 @@ axios.interceptors.response.use(function (response) {
 
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_3__["default"]({
+window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
   broadcaster: 'pusher',
   key: "".concat("62cb0f17ea48af2df261"),
   cluster: "".concat("ap1"),
@@ -51019,19 +51002,23 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
  // Components that should be loaded only when needed
 
 var Page404 = function Page404() {
-  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../components/views/Page404 */ "./resources/js/components/views/Page404.vue"));
+  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/views/Page404 */ "./resources/js/components/views/Page404.vue"));
 };
 
 var Login = function Login() {
-  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/views/Login */ "./resources/js/components/views/Login.vue"));
+  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../components/views/Login */ "./resources/js/components/views/Login.vue"));
 };
 
 var Register = function Register() {
-  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/views/Register */ "./resources/js/components/views/Register.vue"));
+  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/views/Register */ "./resources/js/components/views/Register.vue"));
+};
+
+var ProfilePage = function ProfilePage() {
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/views/ProfilePage */ "./resources/js/components/views/ProfilePage.vue"));
 };
 
 var EditProfile = function EditProfile() {
-  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/views/EditProfile */ "./resources/js/components/views/EditProfile.vue"));
+  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/views/EditProfile */ "./resources/js/components/views/EditProfile.vue"));
 };
 
 var FriendPage = function FriendPage() {
@@ -51076,8 +51063,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     }
   }, {
     path: '/user/profile',
-    name: 'userProfile',
-    component: EditProfile,
+    name: 'profilePage',
+    component: ProfilePage,
     meta: {
       requiresAuth: true
     }
@@ -51205,7 +51192,7 @@ __webpack_require__.r(__webpack_exports__);
     setUserDetails: function setUserDetails(_ref2) {
       var commit = _ref2.commit;
       return new Promise(function (resolve, reject) {
-        axios.get('/api/user/authenticatedUserDetails').then(function (response) {
+        axios.get('/api/user/authDetails').then(function (response) {
           commit('SET_USER_DETAILS', response.data);
           resolve(response);
         })["catch"](function (err) {
@@ -51575,8 +51562,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Nexseed\Desktop\PersonalFolder\veza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Nexseed\Desktop\PersonalFolder\veza\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\User\Documents\MyProjects\veza\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\User\Documents\MyProjects\veza\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

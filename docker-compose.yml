@@ -97,7 +97,7 @@ services:
       - .:/app/veza
       - ./package.json:/app/veza/package.json
       - ./package-lock.json:/app/veza/package-lock.json
-    command: sh -c "npm install"
+    command: sh -c "npm install --no-bin-links"
     networks:
       - vezadocker
 # ------------------ OPTIONAL --------------------- #

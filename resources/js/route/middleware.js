@@ -17,8 +17,8 @@ router.beforeEach((to, from, next) => {
                   next()
               })
               .catch(err => {
-                  localStorage.removeItem('Session')
-                  router.replace({name: 'login', query: {auth: false} })
+                  store.dispatch('auth/initiateLogout')
+                  router.replace({name: 'login', query: {auth: false, authExpired: true} })
               })
           }
       }

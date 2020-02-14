@@ -10,6 +10,7 @@ import Home from '../components/views/Home'
 const Page404 =  () => import('../components/views/Page404')
 const Login =  () => import('../components/views/Login')
 const Register =  () => import('../components/views/Register')
+const ProfilePage =  () => import('../components/views/ProfilePage')
 const EditProfile =  () => import('../components/views/EditProfile')
 const FriendPage =  () => import('../components/views/FriendPage')
 const FriendList = () => import('../components/views/sub_views/FriendList')
@@ -46,8 +47,8 @@ const router = new VueRouter({
         },
         {
             path: '/user/profile',
-            name: 'userProfile',
-            component: EditProfile,
+            name: 'profilePage',
+            component: ProfilePage,
             meta:{
                 requiresAuth: true
             }

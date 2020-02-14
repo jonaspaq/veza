@@ -21,8 +21,8 @@ export default {
             state.access_token = data
         },
         UNSET_ACCESS_TOKEN(state){
-            state.access_token = ''
             localStorage.removeItem('Session')
+            state.access_token = ''
         },
         SET_USER_DETAILS(state, data){
             state.user = data
@@ -59,7 +59,7 @@ export default {
         },
         setUserDetails({commit}){
             return new Promise((resolve, reject)=>{
-                axios.get('/api/user/authenticatedUserDetails')
+                axios.get('/api/user/authDetails')
                 .then((response)=>{
                     commit('SET_USER_DETAILS', response.data)
                     resolve(response)

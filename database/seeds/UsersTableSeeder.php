@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
         factory(User::class, $this->usersToSeed)->create()
             ->each(function ($user) {
                 // For each user created, create 5 Posts related to user
@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
                 //     'user_two' => $user->id
                 // ]);
             });
-        
+
         // Create one user with these details
         factory(User::class, 1)->create([
             'email' => 'test@example.com',
@@ -39,10 +39,9 @@ class UsersTableSeeder extends Seeder
             // For the user created, create 30 FriendList Random Data Per Row
             $user->friendReceived()->saveMany(factory(FriendList::class, 30))
             ->create([
-                'user_one' => rand(1, $this->usersToSeed),
                 'user_two' => $user->id
             ]);
         });
-        
+
     }
 }

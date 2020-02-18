@@ -13,4 +13,14 @@ class MessageThreads extends Model
     {
         return $this;
     }
+
+    public function sender()
+    {
+        return $this->belongsTo('App\User', 'user_one');
+    }
+
+    public function receiver()
+    {
+        return $this->belongsTo('App\User', 'user_two');
+    }
 }

@@ -19,6 +19,24 @@ class MessageThreadsControllerTest extends TestCase
         $response = $this->actingAs($user, 'api')
                         ->getJson('/api/message-threads');
 
-        $response->assertStatus(200);
+        $response->assertOk();
+    }
+
+    /** @test */
+    public function fetch_most_recent_message_threads_and_has_empty_data()
+    {
+        $user = $this->passportAndCreateUser();
+
+        $response = $this->actingAs($user, 'api')
+                        ->getJson('/api/message-threads');
+
+        $response->assertStatus(204);
+    }
+
+    /** @test */
+    public function fetch_most_recent_message_threads_while_not_authenticated()
+    {
+        $response = $this->getJson('/api/message-threads');
+        $response->assertUnauthorized();
     }
 }

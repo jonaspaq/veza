@@ -36,4 +36,9 @@ class User extends Authenticatable
         return $this->hasMany('App\FriendList', 'user_two');
     }
 
+    public function message_threads()
+    {
+        return $this->hasMany('App\MessageThreads');
+    }
+
 }

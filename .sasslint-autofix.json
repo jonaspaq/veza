@@ -1,0 +1,19 @@
+{
+	"files": {
+		"include": "resources/sass/**/*.s+(a|c)ss",
+		"ignore": ["node_modules/**"]
+	},
+	"syntax": {
+		"include": ["scss", "sass"]
+	},
+	"resolvers": {
+		"empty-line-between-blocks": 1,
+		"indentation": 1,
+		"no-trailing-zero": 1,
+		"property-sort-order": 1,
+		"space-after-colon": 1,
+		"space-before-colon": 1,
+		"space-between-parens": 1,
+		"url-quotes": 1
+	}
+}

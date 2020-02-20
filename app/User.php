@@ -38,7 +38,7 @@ class User extends Authenticatable
 
     public function message_threads()
     {
-        return $this->hasMany('App\MessageThreads');
+        return $this->hasMany('App\MessageThread');
     }
 
 }

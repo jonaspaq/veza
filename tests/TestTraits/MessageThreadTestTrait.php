@@ -3,8 +3,9 @@
 namespace Tests\TestTraits;
 
 use App\MessageThread;
+use App\User;
 
-trait MessageThreadTrait
+trait MessageThreadTestTrait
 {
     public function createMessageThread(User $user, User $user2)
     {

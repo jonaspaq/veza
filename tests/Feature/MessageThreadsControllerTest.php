@@ -6,10 +6,11 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\PassportAuth;
+use Tests\TestTraits\MessageThreadTrait;
 
 class MessageThreadsControllerTest extends TestCase
 {
-    use RefreshDatabase, PassportAuth;
+    use RefreshDatabase, PassportAuth, MessageThreadTrait;
 
     /** @test */
     public function fetch_most_recent_message_threads()

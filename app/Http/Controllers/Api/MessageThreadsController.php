@@ -17,16 +17,11 @@ class MessageThreadsController extends Controller
     public function index()
     {
         $authenticatedUserId = request()->user()->id;
-        $date = Carbon::now()->format('Y-m-d H:i:s');
 
-        MessageThreads::create([
-            'user_one' => 1,
-            'user_two' => 52,
-            'last_activity' => $date
-            ]);
         $data = MessageThreads::where('user_one', $authenticatedUserId)
                         ->orWhere('user_two', $authenticatedUserId)
                         ->with('sender', 'receiver')
+                        ->orderBy('last_activity', 'asc')
                         ->paginate();
 
         $data = json_encode($data);

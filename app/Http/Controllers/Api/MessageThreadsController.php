@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use App\MessageThreads;
+use App\MessageThread;
 
 class MessageThreadsController extends Controller
 {
@@ -17,22 +17,22 @@ class MessageThreadsController extends Controller
     public function index()
     {
         $authenticatedUserId = request()->user()->id;
-        $date = Carbon::now()->format('Y-m-d H:i:s');
 
-        MessageThreads::create([
-            'user_one' => 1,
-            'user_two' => 52,
-            'last_activity' => $date
-            ]);
-        $data = MessageThreads::where('user_one', $authenticatedUserId)
+        $data = MessageThread::where('user_one', $authenticatedUserId)
                         ->orWhere('user_two', $authenticatedUserId)
                         ->with('sender', 'receiver')
+                        ->orderBy('last_activity', 'asc')
                         ->paginate();
 
         $data = json_encode($data);
         $data = json_decode($data);
 
-        return response()->json($data);
+        if(!empty($data->data))
+        {
+            return response()->json($data);
+        }
+
+        return response()->json($data, 204);
     }
 
     /**

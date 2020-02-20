@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MessageThreads extends Model
+class MessageThread extends Model
 {
     protected $table = 'message_threads';
     protected $guarded = [];

@@ -1,9 +1,17 @@
 
-:root {
-    --primary-color-linear: radial-gradient(circle, #163a3b 0%, #1d4d4f 52%, #0e2728 100%);
-    --primary-color-nonlinear: #1d4d4f;
-    --primary-color-darker: #163a3b;
-    --primary-color-lighter: #27787c;
+// We include this mixin to avoid errors in sass-lint
 
-    --danger-color: #ec3737;
+@mixin root-prop($prop: null, $value: null) {
+  @if ($prop and $value) {
+    #{$prop}: $value;
+	}
+}
+
+:root {
+  @include root-prop(--primary-color-linear, radial-gradient(circle, #163a3b 0%, #1d4d4f 52%, #0e2728 100%));
+  @include root-prop(--primary-color-nonlinear, #1d4d4f);
+  @include root-prop(--primary-color-darker, #163a3b);
+  @include root-prop(--primary-color-lighter, #27787c);
+
+  @include root-prop(--danger-color, #ec3737);
 }

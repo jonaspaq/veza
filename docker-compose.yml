@@ -84,7 +84,7 @@ services:
       - ./composer.json:/app/veza/composer.json
       - ./composer.lock:/app/veza/composer.lock
     # command tail -F is added so container won't exit
-    command: sh -c "composer install -n --prefer-dist && tail -F /anything/here"
+    command: sh -c "composer install -n && tail -F /anything/here"
     networks:
       - vezadocker
 
@@ -98,7 +98,7 @@ services:
       - ./package.json:/app/veza/package.json
       - ./package-lock.json:/app/veza/package-lock.json
     # command tail -F is added so container won't exit
-    command: sh -c "npm install --no-bin-links && tail -F /anything/here"
+    command: sh -c "npm install && tail -F /anything/here"
     networks:
       - vezadocker
 # ------------------ OPTIONAL --------------------- #

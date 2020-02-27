@@ -1,33 +1,36 @@
 
 /* This is the important animation */
 
-$load-placeholder-bg: #e9e9e9;
-$load-placeholder-color-slide: rgb(246, 246, 246); 
+@keyframes loadsimulate {
+  from {
+    background-position: -140% 0;
+  }
 
-.load-placeholder{
-  position:relative;
-  overflow: hidden;
-  background-color: $load-placeholder-bg;
-
-  &::before{
-    content:"";
-    position: absolute;
-    left:0;
-    top:0;
-    width: 100%;
-    height: 100%;
-    
-    background: linear-gradient(90deg, $load-placeholder-bg, $load-placeholder-color-slide, $load-placeholder-bg);
-  
-    background-size: 60% 100%;
-    background-repeat: no-repeat;
-    animation: loadsimulate 2s 1s infinite;
+  to {
+    background-position: 310% 0;
   }
 }
 
-@keyframes loadsimulate{
-    0%{ background-position: -140% 0; }
-    100%{
-      background-position: 310% 0;
-    }
+$load-placeholder-bg: #e9e9e9;
+$load-placeholder-color-slide: rgb(246, 246, 246);
+
+.load-placeholder {
+  background-color: $load-placeholder-bg;
+  overflow: hidden;
+  position: relative;
+
+
+  &::before {
+    animation: loadsimulate 2s 1s infinite;
+    background: linear-gradient(90deg, $load-placeholder-bg, $load-placeholder-color-slide, $load-placeholder-bg);
+    background-repeat: no-repeat;
+    background-size: 60% 100%;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
   }
+}
+

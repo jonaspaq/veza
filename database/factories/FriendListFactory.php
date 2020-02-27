@@ -10,6 +10,7 @@ $factory->define(FriendList::class, function (Faker $faker) {
     $chosen = array_rand($arrayToRandom, 1);
     return [
         'user_one' => rand(1, 50),
+        'user_two' => rand(1, 50),
         'status' => $arrayToRandom[$chosen]
     ];
 });

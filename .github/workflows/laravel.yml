@@ -3,7 +3,7 @@ name: Veza
 on: [push]
 
 jobs:
-  veza-tests:
+  phpunit-tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

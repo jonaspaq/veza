@@ -13,7 +13,7 @@ class User extends Authenticatable
     use Notifiable, HasApiTokens;
 
     protected $fillable = [
-        'name', 'email', 'password','current'
+        'name', 'email', 'password'
     ];
 
     protected $hidden = [
@@ -34,6 +34,11 @@ class User extends Authenticatable
     public function friendReceived()
     {
         return $this->hasMany('App\FriendList', 'user_two');
+    }
+
+    public function message_threads()
+    {
+        return $this->hasMany('App\MessageThread');
     }
 
 }

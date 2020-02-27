@@ -31,9 +31,9 @@ services:
       - 8001:443
     volumes:
       - .:/app/veza
-      - .nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - .nginx/veza-app.crt:/etc/nginx/veza-app.crt
-      - .nginx/veza-app.key:/etc/nginx/veza-app.key
+      - ./.docker/.nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./.docker/.nginx/veza-app.crt:/etc/nginx/veza-app.crt
+      - ./.docker/.nginx/veza-app.key:/etc/nginx/veza-app.key
     networks:
       - vezadocker
 
@@ -47,7 +47,7 @@ services:
       - php
     volumes:
       - .:/app/veza
-      - .mysql:/var/lib/mysql
+      - ./.docker/.mysql:/var/lib/mysql
     environment:
       MYSQL_DATABASE: veza
       MYSQL_USER: veza
@@ -98,7 +98,7 @@ services:
       - ./package.json:/app/veza/package.json
       - ./package-lock.json:/app/veza/package-lock.json
     # command tail -F is added so container won't exit
-    command: sh -c "npm install && tail -F /anything/here"
+    command: sh -c "yarn install"
     networks:
       - vezadocker
 # ------------------ OPTIONAL --------------------- #

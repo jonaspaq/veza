@@ -9,23 +9,22 @@ services:
       context: .
       dockerfile: .docker/Dockerfile
     working_dir: /app/veza
-    container_name: php
+    container_name: php_${APP_NAME}
     volumes:
       - .:/app/veza
     ports:
       - "9000:9000"
     environment:
       DB_HOST: mysql
-      DB_DATABASE: veza
-      DB_USERNAME: veza
-      DB_PASSWORD: password
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     networks:
       - vezadocker
 
   nginx:
     image: nginx:1.17
-    container_name: nginx
-    restart: always
+    container_name: nginx_${APP_NAME}
     ports:
       - 8000:80
       - 8001:443
@@ -39,7 +38,7 @@ services:
 
   mysql:
     image: mysql:5.7
-    container_name: mysql
+    container_name: mysql_${APP_NAME}
     ports:
       - 3306:3306
     tty: true
@@ -49,32 +48,32 @@ services:
       - .:/app/veza
       - ./.docker/.mysql:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: veza
-      MYSQL_USER: veza
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     networks:
       - vezadocker
 
   phpadmin:
     image: phpmyadmin/phpmyadmin:5.0
-    container_name: phpadmin
+    container_name: phpadmin_${APP_NAME}
     ports:
       - 8080:80
     depends_on:
       - mysql
     environment:
       PMA_HOST: mysql
-      MYSQL_USER: veza
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     networks:
       - vezadocker
 
 # ------------------- OPTIONAL --------------------- #
   composer:
     image: composer:1.9
-    container_name: composer
+    container_name: composer_${APP_NAME}
     tty: true
     depends_on:
       - php
@@ -90,7 +89,7 @@ services:
 
   node:
     image: node:13.6-alpine
-    container_name: node
+    container_name: node_${APP_NAME}
     tty: true
     working_dir: /app/veza
     volumes:
@@ -98,7 +97,7 @@ services:
       - ./package.json:/app/veza/package.json
       - ./package-lock.json:/app/veza/package-lock.json
     # command tail -F is added so container won't exit
-    command: sh -c "yarn install"
+    command: sh -c "yarn install && tail -F /anything/here"
     networks:
       - vezadocker
 # ------------------ OPTIONAL --------------------- #

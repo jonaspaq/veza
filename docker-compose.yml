@@ -88,15 +88,16 @@ services:
       - vezadocker
 
   node:
-    image: node:13.6-alpine
+    image: node:12.16-alpine
     container_name: node_${APP_NAME}
     tty: true
+    depends_on:
+      - php
     working_dir: /app/veza
     volumes:
       - .:/app/veza
-      - ./package.json:/app/veza/package.json
-      - ./package-lock.json:/app/veza/package-lock.json
     # command tail -F is added so container won't exit
+    # command: sh -c "npm install --prefer-offline --no-audit && tail -F /anything/here"
     command: sh -c "yarn install && tail -F /anything/here"
     networks:
       - vezadocker

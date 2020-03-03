@@ -32,8 +32,10 @@ jobs:
 
     - run: npm install
 
-    - name: Lint scss files
+    - name: Fix sass-lint errors
       run: npm run lint:fix
+
+    - name: Lint scss
       run: npm run lint
 
     - name: Test build for production

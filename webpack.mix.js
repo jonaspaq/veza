@@ -21,6 +21,9 @@ const mix = require('laravel-mix');
 mix.webpackConfig({
     output:{
         chunkFilename:'js/components/[name].js',
+    },
+    watchOptions: {
+        ignored: '/node_modules/'
     }
 });
 

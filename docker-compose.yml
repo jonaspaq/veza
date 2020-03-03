@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: .docker/Dockerfile
     working_dir: /app/veza
-    container_name: php_${APP_NAME}
+    container_name: php_${DB_DATABASE}
     volumes:
       - .:/app/veza
     ports:
@@ -24,7 +24,7 @@ services:
 
   nginx:
     image: nginx:1.17
-    container_name: nginx_${APP_NAME}
+    container_name: nginx_${DB_DATABASE}
     ports:
       - 8000:80
       - 8001:443
@@ -38,7 +38,7 @@ services:
 
   mysql:
     image: mysql:5.7
-    container_name: mysql_${APP_NAME}
+    container_name: mysql_${DB_DATABASE}
     ports:
       - 3306:3306
     tty: true
@@ -57,7 +57,7 @@ services:
 
   phpadmin:
     image: phpmyadmin/phpmyadmin:5.0
-    container_name: phpadmin_${APP_NAME}
+    container_name: phpadmin_${DB_DATABASE}
     ports:
       - 8080:80
     depends_on:
@@ -73,7 +73,7 @@ services:
 # ------------------- OPTIONAL --------------------- #
   composer:
     image: composer:1.9
-    container_name: composer_${APP_NAME}
+    container_name: composer_${DB_DATABASE}
     tty: true
     depends_on:
       - php
@@ -89,7 +89,7 @@ services:
 
   node:
     image: node:12.16-alpine
-    container_name: node_${APP_NAME}
+    container_name: node_${DB_DATABASE}
     tty: true
     depends_on:
       - php

@@ -1,4 +1,4 @@
-name: Sass-lint
+name: Veza
 
 on: [push]
 

@@ -16,7 +16,7 @@ jobs:
         cache-name: cache-vendor
       with:
         path: ~/.composer-vendor # composer cache files are stored in `~/.composer-vendor` on Linux/macOS
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer-lock.json') }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-

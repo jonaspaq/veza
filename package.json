@@ -1,6 +1,10 @@
 {
     "private": true,
-    "version": "0.0.0",
+    "version": "1.0.0",
+    "author": {
+        "name": "Jonas Paquibot",
+        "githubLink": "https://github.com/jonaspaq"
+    },
     "sasslintConfig": ".sass-lint.yml",
     "scripts": {
         "dev": "npm run development",
@@ -11,7 +15,7 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "lint": "sass-lint -v",
-        "lint:fix": "sass-lint-auto-fix -c ./.sasslint-autofix.json ./resources/sass/**/*.scss"
+        "lint:fix": "sass-lint-auto-fix -c .sasslint-autofix.json"
     },
     "devDependencies": {
         "axios": "^0.19",

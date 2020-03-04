@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 13.x]
+        node-version: [12.x, 13.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -24,16 +24,13 @@ jobs:
         cache-name: cache-node-modules
       with:
         path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
     - run: npm install
-
-    - name: Fix sass-lint errors
-      run: npm run lint:fix
 
     - name: Lint scss
       run: npm run lint

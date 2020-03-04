@@ -9,37 +9,36 @@ services:
       context: .
       dockerfile: .docker/Dockerfile
     working_dir: /app/veza
-    container_name: php
+    container_name: php_${DB_DATABASE}
     volumes:
       - .:/app/veza
     ports:
       - "9000:9000"
     environment:
       DB_HOST: mysql
-      DB_DATABASE: veza
-      DB_USERNAME: veza
-      DB_PASSWORD: password
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     networks:
       - vezadocker
 
   nginx:
     image: nginx:1.17
-    container_name: nginx
-    restart: always
+    container_name: nginx_${DB_DATABASE}
     ports:
       - 8000:80
       - 8001:443
     volumes:
       - .:/app/veza
-      - .nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - .nginx/veza-app.crt:/etc/nginx/veza-app.crt
-      - .nginx/veza-app.key:/etc/nginx/veza-app.key
+      - ./.docker/.nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./.docker/.nginx/veza-app.crt:/etc/nginx/veza-app.crt
+      - ./.docker/.nginx/veza-app.key:/etc/nginx/veza-app.key
     networks:
       - vezadocker
 
   mysql:
     image: mysql:5.7
-    container_name: mysql
+    container_name: mysql_${DB_DATABASE}
     ports:
       - 3306:3306
     tty: true
@@ -47,34 +46,34 @@ services:
       - php
     volumes:
       - .:/app/veza
-      - .mysql:/var/lib/mysql
+      - ./.docker/.mysql:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: veza
-      MYSQL_USER: veza
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     networks:
       - vezadocker
 
   phpadmin:
     image: phpmyadmin/phpmyadmin:5.0
-    container_name: phpadmin
+    container_name: phpadmin_${DB_DATABASE}
     ports:
       - 8080:80
     depends_on:
       - mysql
     environment:
       PMA_HOST: mysql
-      MYSQL_USER: veza
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     networks:
       - vezadocker
 
 # ------------------- OPTIONAL --------------------- #
   composer:
     image: composer:1.9
-    container_name: composer
+    container_name: composer_${DB_DATABASE}
     tty: true
     depends_on:
       - php
@@ -89,16 +88,17 @@ services:
       - vezadocker
 
   node:
-    image: node:13.6-alpine
-    container_name: node
+    image: node:12.16-alpine
+    container_name: node_${DB_DATABASE}
     tty: true
+    depends_on:
+      - php
     working_dir: /app/veza
     volumes:
       - .:/app/veza
-      - ./package.json:/app/veza/package.json
-      - ./package-lock.json:/app/veza/package-lock.json
     # command tail -F is added so container won't exit
-    command: sh -c "npm install && tail -F /anything/here"
+    # command: sh -c "npm install --prefer-offline --no-audit && tail -F /anything/here"
+    command: sh -c "yarn install && tail -F /anything/here"
     networks:
       - vezadocker
 # ------------------ OPTIONAL --------------------- #

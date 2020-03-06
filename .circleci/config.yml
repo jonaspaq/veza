@@ -68,9 +68,9 @@ jobs:
           paths:
             - node_modules
 
-      # - run:
-      #     name: Build assets
-      #     command: yarn run production
+      - run:
+          name: Build assets
+          command: yarn run production
 
         # prepare the database
       - run: cp .env.example .env

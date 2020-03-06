@@ -17,13 +17,13 @@ jobs:
       # - image: circleci/mysql:5.7-ram
       #
       # - image: redis:2.8.19
-    
+
       - image: circleci/mysql:5.7
         environment:
-          - MYSQL_USER=root
-          - MYSQL_PASSWORD=
+          - MYSQL_USER=example
+          - MYSQL_PASSWORD=example
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
-          - MYSQL_DATABASE=veza
+          - MYSQL_DATABASE=example
           # - MYSQL_ROOT_PASSWORD=password
 
     steps:
@@ -31,7 +31,7 @@ jobs:
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: sudo docker-php-ext-install zip
-      
+
       - run:
           name: Install PHP extensions
           command: sudo docker-php-ext-install pdo_mysql
@@ -67,6 +67,10 @@ jobs:
           key: node-v1-{{ checksum "package.json" }}
           paths:
             - node_modules
+
+      - run:
+          name: Build assets
+          command: yarn run production
 
         # prepare the database
       - run: cp .env.example .env

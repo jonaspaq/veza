@@ -80,15 +80,13 @@ services:
     working_dir: /app/veza
     volumes:
       - .:/app/veza
-      - ./composer.json:/app/veza/composer.json
-      - ./composer.lock:/app/veza/composer.lock
     # command tail -F is added so container won't exit
     command: sh -c "composer install -n && tail -F /anything/here"
     networks:
       - vezadocker
 
   node:
-    image: node:12.16-alpine
+    image: node:13.6-alpine
     container_name: node_${DB_DATABASE}
     tty: true
     depends_on:

@@ -20,10 +20,10 @@ jobs:
 
       - image: circleci/mysql:5.7
         environment:
-          - MYSQL_USER=root
-          - MYSQL_PASSWORD=
+          - MYSQL_USER=example
+          - MYSQL_PASSWORD=example
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
-          - MYSQL_DATABASE=veza
+          - MYSQL_DATABASE=example
           # - MYSQL_ROOT_PASSWORD=password
 
     steps:

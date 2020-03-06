@@ -80,8 +80,6 @@ services:
     working_dir: /app/veza
     volumes:
       - .:/app/veza
-      - ./composer.json:/app/veza/composer.json
-      - ./composer.lock:/app/veza/composer.lock
     # command tail -F is added so container won't exit
     command: sh -c "composer install -n && tail -F /anything/here"
     networks:

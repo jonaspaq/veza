@@ -33,10 +33,11 @@ abstract class DuskTestCase extends BaseTestCase
             '--disable-gpu',
             '--headless',
             '--window-size=1920,1080',
+            '--ignore-certificate-errors',
         ]);
 
         return RemoteWebDriver::create(
-            'http://localhost:9515', DesiredCapabilities::chrome()->setCapability(
+            'https://localhost:8001', DesiredCapabilities::chrome()->setCapability(
                 ChromeOptions::CAPABILITY, $options
             )
         );

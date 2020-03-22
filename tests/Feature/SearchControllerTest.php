@@ -22,7 +22,9 @@ class SearchControllerTest extends TestCase
         $searchData = $this->userSearchData;
 
         $response = $this->actingAs($user, 'api')
-                        ->postJson('/search/user', $searchData);
+                        ->postJson('/api/search/user', [
+                            'data' => 'testUser'
+                        ]);
 
         $response->assertOk();
     }
@@ -31,10 +33,9 @@ class SearchControllerTest extends TestCase
     public function search_for_a_user_with_empty_data_on_submit()
     {
         $user = $this->passportAndCreateUser();
-        $searchData = $this->userSearchData;
 
         $response = $this->actingAs($user, 'api')
-                        ->postJson('/search/user', $this->userSearchData);
+                        ->postJson('/api/search/user', ['data'=>'']);
 
         $response->assertStatus(422);
     }
@@ -43,7 +44,8 @@ class SearchControllerTest extends TestCase
     public function search_for_a_user_while_not_authenticated()
     {
         $searchData = $this->userSearchData;
-        $response = $this->postJson('/search/user', $searchData);
+
+        $response = $this->postJson('/api/search/user', $searchData);
 
         $response->assertUnauthorized();
     }

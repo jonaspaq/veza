@@ -5,6 +5,7 @@ networks:
 
 services:
   php:
+    container_name: php_veza
     build:
       context: .
       dockerfile: .docker/Dockerfile

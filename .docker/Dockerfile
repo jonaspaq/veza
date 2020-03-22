@@ -1,7 +1,7 @@
 
 FROM php:7.4-fpm-alpine
 
-# Set directory for docker container
+# Set directory for veza in docker container
 WORKDIR /app/veza
 
 # Install necessary php extensions

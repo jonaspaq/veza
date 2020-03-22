@@ -10,8 +10,7 @@ libzip-dev \
 # libonig-dev \
 oniguruma-dev
 
-RUN docker-php-ext-install \
-pdo \
+RUN docker-php-ext-install pdo \
 pdo_mysql \
 ctype \
 fileinfo \

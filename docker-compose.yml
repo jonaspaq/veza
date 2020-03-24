@@ -16,6 +16,8 @@ services:
     ports:
       - "9000:9000"
     command: sh -c "composer install && php-fpm"
+    environment:
+      DB_HOST: mysql
     networks:
       - vezadocker
 
@@ -37,7 +39,7 @@ services:
     image: mysql:5.7
     container_name: mysql_${DB_DATABASE}
     ports:
-      - 3306:3306
+      - ${DB_PORT}:3306
     tty: true
     depends_on:
       - php
@@ -78,7 +80,6 @@ services:
     volumes:
       - .:/app/veza
     # command tail -F is added so container won't exit
-    # command: sh -c "npm install --prefer-offline --no-audit && tail -F /anything/here"
     command: sh -c "yarn install && tail -F /anything/here"
     networks:
       - vezadocker

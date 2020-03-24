@@ -15,11 +15,7 @@ services:
       - .:/app/veza
     ports:
       - "9000:9000"
-    environment:
-      DB_HOST: mysql
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
+    command: sh -c "composer install && php-fpm"
     networks:
       - vezadocker
 
@@ -72,20 +68,6 @@ services:
       - vezadocker
 
 # ------------------- OPTIONAL --------------------- #
-  composer:
-    image: composer:1.9
-    container_name: composer_${DB_DATABASE}
-    tty: true
-    depends_on:
-      - php
-    working_dir: /app/veza
-    volumes:
-      - .:/app/veza
-    # command tail -F is added so container won't exit
-    command: sh -c "composer install -n && tail -F /anything/here"
-    networks:
-      - vezadocker
-
   node:
     image: node:13.6-alpine
     container_name: node_${DB_DATABASE}

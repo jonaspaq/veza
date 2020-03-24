@@ -1,4 +1,6 @@
 
+FROM composer:1.9 as composerTool
+
 FROM php:7.4-fpm-alpine
 
 # Set directory for veza in docker container
@@ -21,3 +23,6 @@ tokenizer \
 pcntl \
 simplexml \
 zip
+
+## Use composer for php container
+COPY --from=composerTool /usr/bin/composer /usr/bin/composer

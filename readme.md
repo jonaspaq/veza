@@ -21,11 +21,12 @@ git clone https://github.com/jonaspaq/veza.git
 ## Tools Used
 
 - [Laravel Framework](https://laravel.com)
+- [Docker](https://www.docker.com)
 - [Laravel Echo]()
-- [Pusher API](https://pusher.com/)
+- [Pusher API](https://pusher.com)
 - [VueJS](vuejs.org)
-- [Vuex](http://vuex.vuejs.org/)
-- [Vue-router](https://router.vuejs.org/)
+- [Vuex](http://vuex.vuejs.org)
+- [Vue-router](https://router.vuejs.org)
 
 ## Date 
 

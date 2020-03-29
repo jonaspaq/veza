@@ -24,12 +24,19 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function(){
     Route::get('user/{id}', 'UserController@show');
 
     Route::apiResource('post', 'PostController');
-    
+
     Route::apiResource('friend', 'FriendListController');
-    Route::get('friends/sent-requests', 'FriendListController@pendingSentRequests');
-    Route::get('friends/received-requests', 'FriendListController@pendingReceivedRequests');
-    Route::get('friends/request-count', 'FriendListController@pendingRequestCount');
-    Route::get('friends/suggestions', 'FriendListController@friendSuggestions');
+
+    Route::group(['prefix' => 'friends'], function() {
+        Route::get('sent-requests', 'FriendListController@pendingSentRequests');
+        Route::get('received-requests', 'FriendListController@pendingReceivedRequests');
+        Route::get('request-count', 'FriendListController@pendingRequestCount');
+        Route::get('suggestions', 'FriendListController@friendSuggestions');
+    });
+
+    Route::apiResource('message-threads', 'MessageThreadsController');
+
+    Route::post('search/user', 'SearchController@searchUser');
 });
 
 

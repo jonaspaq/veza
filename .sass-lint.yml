@@ -1,0 +1,40 @@
+files:
+  include:
+    - 'resources/sass/**/*.s+(a|c)ss'
+  ignore:
+    - 'node_modules/**'
+options:
+  merge-default-rules: false
+rules:
+  brace-style:
+    - 2
+    - style: '1tbs'
+    - allow-single-line: false
+  empty-line-between-blocks: 2
+  indentation:
+    - 2
+    - size: 2
+  max-line-length:
+    - 2
+    - length: 150
+  nesting-depth:
+    - 2
+    - max-depth: 3
+  no-debug: 2
+  no-empty-rulesets: 2
+  no-invalid-hex: 2
+  no-misspelled-properties: 2
+  no-trailing-zero: 2
+  one-declaration-per-line: 1
+  property-sort-order:
+    - 2
+    - order: 'alphabetical'
+  pseudo-element: 2
+  space-after-colon: 2
+  space-after-comma: 2
+  space-around-operator: 2
+  space-before-brace: 2
+  space-before-colon: 2
+  space-between-parens: 2
+  trailing-semicolon: 1
+  url-quotes: 1

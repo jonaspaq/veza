@@ -1,13 +1,13 @@
 
-.centerImage{
-    overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, .1);
-    background-color: white;
+.centerImage {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, .1);
+  overflow: hidden;
 
-    & > img{
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 100%;
-    }
+  & > img {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+  }
 }

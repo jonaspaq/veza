@@ -15,7 +15,6 @@ services:
       - .:/app/veza
     ports:
       - "9000:9000"
-    command: sh -c "composer install && php-fpm"
     environment:
       DB_HOST: mysql
     networks:
@@ -24,12 +23,15 @@ services:
   nginx:
     image: nginx:1.17
     container_name: nginx_${DB_DATABASE}
+    depends_on:
+      - php
     ports:
       - 8000:80
       - 8001:443
     volumes:
       - .:/app/veza
       - ./.docker/.nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./.docker/.nginx/frontend-gzip.conf:/etc/nginx/conf.d/compression.conf
       - ./.docker/.nginx/veza-app.crt:/etc/nginx/veza-app.crt
       - ./.docker/.nginx/veza-app.key:/etc/nginx/veza-app.key
     networks:
@@ -70,6 +72,20 @@ services:
       - vezadocker
 
 # ------------------- OPTIONAL --------------------- #
+  composer:
+    image: composer:1.9
+    container_name: composer_${DB_DATABASE}
+    tty: true
+    depends_on:
+      - php
+    working_dir: /app/veza
+    volumes:
+      - .:/app/veza
+    # command tail -F is added so container won't exit
+    command: sh -c "composer install -n --no-progress && tail -F /anything/here"
+    networks:
+      - vezadocker
+
   node:
     image: node:13.6-alpine
     container_name: node_${DB_DATABASE}
@@ -80,7 +96,7 @@ services:
     volumes:
       - .:/app/veza
     # command tail -F is added so container won't exit
-    command: sh -c "yarn install && tail -F /anything/here"
+    command: sh -c "yarn install && node"
     networks:
       - vezadocker
 # ------------------ OPTIONAL --------------------- #

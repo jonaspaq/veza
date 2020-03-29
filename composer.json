@@ -65,5 +65,14 @@
             "chmod -R 775 storage",
             "php artisan passport:keys"
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packagist.org"
+        },
+        {
+            "packagist": false
+        }
+    ]
 }

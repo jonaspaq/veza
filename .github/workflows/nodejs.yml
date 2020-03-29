@@ -30,7 +30,7 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - run: npm install
+    - run: yarn install
 
     - name: Lint scss
       run: npm run lint

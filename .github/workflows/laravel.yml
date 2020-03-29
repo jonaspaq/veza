@@ -22,6 +22,8 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
+		- run: composer global require hirak/prestissimo
+
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
     - name: Generate key

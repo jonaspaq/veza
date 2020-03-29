@@ -95,7 +95,6 @@ services:
     working_dir: /app/veza
     volumes:
       - .:/app/veza
-    # command tail -F is added so container won't exit
     command: sh -c "yarn install && node"
     networks:
       - vezadocker

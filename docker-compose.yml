@@ -8,7 +8,7 @@ services:
     container_name: php_veza
     build:
       context: .
-      dockerfile: .docker/Dockerfile
+      dockerfile: ./.docker/Dockerfile
     working_dir: /app/veza
     container_name: php_${DB_DATABASE}
     volumes:
@@ -73,7 +73,9 @@ services:
 
 # ------------------- OPTIONAL --------------------- #
   composer:
-    image: composer:1.9
+    build:
+      context: .
+      dockerfile: ./.docker/composer/Dockerfile
     container_name: composer_${DB_DATABASE}
     tty: true
     depends_on:

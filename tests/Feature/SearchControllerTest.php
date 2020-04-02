@@ -11,9 +11,7 @@ class SearchControllerTest extends TestCase
 {
     use RefreshDatabase, PassportAuth;
 
-    private $userSearchData = [
-        'data' => 'testUser'
-    ];
+    private $userSearchData = '?data=testUser';
 
     /** @test */
     public function search_for_a_user()
@@ -22,9 +20,7 @@ class SearchControllerTest extends TestCase
         $searchData = $this->userSearchData;
 
         $response = $this->actingAs($user, 'api')
-                        ->postJson('/api/search/user', [
-                            'data' => 'testUser'
-                        ]);
+                        ->getJson('/api/search/user'.$searchData);
 
         $response->assertOk();
     }
@@ -35,7 +31,7 @@ class SearchControllerTest extends TestCase
         $user = $this->passportAndCreateUser();
 
         $response = $this->actingAs($user, 'api')
-                        ->postJson('/api/search/user', ['data'=>'']);
+                        ->postJson('/api/search/user');
 
         $response->assertStatus(422);
     }
@@ -45,7 +41,7 @@ class SearchControllerTest extends TestCase
     {
         $searchData = $this->userSearchData;
 
-        $response = $this->postJson('/api/search/user', $searchData);
+        $response = $this->postJson('/api/search/user'.$searchData);
 
         $response->assertUnauthorized();
     }

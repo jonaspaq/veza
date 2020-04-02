@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function(){
 
     Route::apiResource('message-threads', 'MessageThreadsController');
 
-    Route::post('search/user', 'SearchController@searchUser');
+    Route::match(['get','post'],'search/user', 'SearchController@searchUser');
 });
 
 

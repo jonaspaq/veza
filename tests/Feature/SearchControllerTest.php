@@ -11,9 +11,7 @@ class SearchControllerTest extends TestCase
 {
     use RefreshDatabase, PassportAuth;
 
-    private $userSearchData = [
-        'data' => 'testUser'
-    ];
+    private $userSearchData = '?q=test@example.com';
 
     /** @test */
     public function search_for_a_user()
@@ -22,11 +20,29 @@ class SearchControllerTest extends TestCase
         $searchData = $this->userSearchData;
 
         $response = $this->actingAs($user, 'api')
-                        ->postJson('/api/search/user', [
-                            'data' => 'testUser'
-                        ]);
+                        ->getJson('/api/search/user'.$searchData);
 
-        $response->assertOk();
+        $response->assertOk()
+                ->assertJsonStructure([
+                    'current_page',
+                    'data' => [
+                        [
+                            'id',
+                            'name',
+                            'created_at'
+                        ]
+                    ],
+                    'first_page_url',
+                    'from',
+                    'last_page',
+                    'last_page_url',
+                    'next_page_url',
+                    'path',
+                    'per_page',
+                    'prev_page_url',
+                    'to',
+                    'total'
+                ]);
     }
 
     /** @test */
@@ -35,7 +51,7 @@ class SearchControllerTest extends TestCase
         $user = $this->passportAndCreateUser();
 
         $response = $this->actingAs($user, 'api')
-                        ->postJson('/api/search/user', ['data'=>'']);
+                        ->getJson('/api/search/user');
 
         $response->assertStatus(422);
     }
@@ -45,7 +61,7 @@ class SearchControllerTest extends TestCase
     {
         $searchData = $this->userSearchData;
 
-        $response = $this->postJson('/api/search/user', $searchData);
+        $response = $this->getJson('/api/search/user'.$searchData);
 
         $response->assertUnauthorized();
     }

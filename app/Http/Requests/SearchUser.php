@@ -24,7 +24,7 @@ class SearchUser extends FormRequest
     public function rules()
     {
         return [
-            'data' => 'required'
+            'q' => 'required|between:1,255'
         ];
     }
 }

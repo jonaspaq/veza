@@ -23,7 +23,40 @@ class FriendListControllerTest extends TestCase
         $response = $this->actingAs($user, 'api')
                         ->getJson('/api/friend');
 
-        $response->assertOk();
+        $response->assertOk()
+                ->assertJsonStructure([
+                    'current_page',
+                    'data' => [
+                        [
+                            'id',
+                            'user_one',
+                            'user_two',
+                            'status',
+                            'created_at',
+                            'updated_at',
+                            'sender' => [
+                                'id',
+                                'name',
+                                'email'
+                            ],
+                            'receiver' => [
+                                'id',
+                                'name',
+                                'email'
+                            ]
+                        ]
+                    ],
+                    'first_page_url',
+                    'from',
+                    'last_page',
+                    'last_page_url',
+                    'next_page_url',
+                    'path',
+                    'per_page',
+                    'prev_page_url',
+                    'to',
+                    'total'
+                ]);
     }
 
     /** @test */

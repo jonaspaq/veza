@@ -92,7 +92,7 @@ jobs:
       # - run: ./vendor/bin/codecept build
       # - run: ./vendor/bin/codecept run
 
-  workflows:
+workflows:
   version: 2
   build_and_test:
     jobs:

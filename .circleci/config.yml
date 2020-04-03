@@ -95,6 +95,7 @@ jobs:
       # - run: ./vendor/bin/codecept run
 
 workflows:
+  version: 2
   build_and_test:
     jobs:
       - build

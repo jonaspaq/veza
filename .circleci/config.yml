@@ -26,7 +26,7 @@ jobs:
           - MYSQL_DATABASE=example
           # - MYSQL_ROOT_PASSWORD=password
 
-    parallelism: 4
+    # parallelism: 4
 
     steps:
       - checkout

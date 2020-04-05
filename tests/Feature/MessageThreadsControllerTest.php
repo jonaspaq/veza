@@ -22,18 +22,38 @@ class MessageThreadsControllerTest extends TestCase
         $response = $this->actingAs($user, 'api')
                         ->getJson('/api/message-threads');
 
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function fetch_most_recent_message_threads_and_has_empty_data()
-    {
-        $user = $this->passportAndCreateUser();
-
-        $response = $this->actingAs($user, 'api')
-                        ->getJson('/api/message-threads');
-
-        $response->assertStatus(204);
+        $response->assertOk()
+                ->assertJsonStructure([
+                    'current_page',
+                    'data' => [
+                        [
+                            'id',
+                            'user_one',
+                            'user_two',
+                            'last_activity',
+                            'created_at',
+                            'updated_at',
+                            'sender' => [
+                                'id',
+                                'name'
+                            ],
+                            'receiver' => [
+                                'id',
+                                'name'
+                            ]
+                        ]
+                    ],
+                    'first_page_url',
+                    'from',
+                    'last_page',
+                    'last_page_url',
+                    'next_page_url',
+                    'path',
+                    'per_page',
+                    'prev_page_url',
+                    'to',
+                    'total'
+                ]);
     }
 
     /** @test */

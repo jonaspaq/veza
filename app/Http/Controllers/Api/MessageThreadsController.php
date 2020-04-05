@@ -20,41 +20,58 @@ class MessageThreadsController extends Controller
 
         $data = MessageThread::where('user_one', $authenticatedUserId)
                         ->orWhere('user_two', $authenticatedUserId)
-                        ->with('sender', 'receiver')
+                        ->with('sender:id,name', 'receiver:id,name')
                         ->orderBy('last_activity', 'asc')
                         ->paginate();
 
-        $data = json_encode($data);
-        $data = json_decode($data);
-
-        if(!empty($data->data))
-        {
-            return response()->json($data);
-        }
-
-        return response()->json($data, 204);
+        return response()->json($data);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a message thread
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  $receiver - I.D of the second user
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($receiver)
     {
-        //
+        $authenticatedUserId = request()->user()->id;
+
+        $data = MessageThread::create([
+            'user_one' => $authenticatedUserId,
+            'user_two' => $receiver,
+            'last_activity' => Carbon::now()
+        ]);
+
+        return response()->json($data);
     }
 
     /**
-     * Display the specified resource.
+     * Select the specified message thread.
+     * Create one if it doesn't exist
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        // Check if thread exists
+        $check = MessageThread::where('id', $id)->exists();
+
+        $messages = null;
+
+        if($check) {
+            $messages = MessageThread::where('id', $id)
+                                    ->with('messages')
+                                    ->get();
+        } else {
+            $data = $this->store($id);
+            $data->messages = [];
+            return $data;
+        }
+
+        return response()->json($messages);
     }
 
     /**
@@ -78,5 +95,36 @@ class MessageThreadsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Validate if a message thread exist
+     * If not, create a new message thread
+     *
+     * @param int $id - The id of the second user to message
+     * @return Boolean
+     */
+    public function validateMessageThread($id)
+    {
+        // Checks if the user exists
+        User::findOrFail($id);
+
+        $authenticatedUserId = request()->user()->id;
+        $secondUser = $id;
+
+        // Checks if a thread exists
+        $data = MessageThread::whereIn('user_one', [$authenticatedUserId, $secondUser])
+                            ->orWhereIn('user_two', [$authenticatedUserId, $secondUser])
+                            ->exists();
+
+        if(!$data) {
+            MessageThread::create([
+                'user_one' => $authenticatedUserId,
+                'user_two' => $secondUser,
+                'last_activity' => Carbon::now()
+            ]);
+        }
+
+        return $data;
     }
 }

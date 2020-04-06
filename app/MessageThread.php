@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Message;
 
 class MessageThread extends Model
 {
@@ -13,7 +12,7 @@ class MessageThread extends Model
 
     public function messages()
     {
-        return $this->morphMany('App\Message','messageable');
+        return $this->morphMany('App\Message', 'messageable');
     }
 
     public function sender()

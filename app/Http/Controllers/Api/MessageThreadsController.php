@@ -88,6 +88,14 @@ class MessageThreadsController extends Controller
      */
     public function destroy($id)
     {
-        // Check if message thread exist
+        $thread = MessageThread::findOrFail($id);
+
+        // Delete messages related to this thread
+        $thread->messages()->delete();
+
+        // Delete thread
+        $thread->delete();
+
+        return response()->json(['message'=>'Successfully deleted']);
     }
 }

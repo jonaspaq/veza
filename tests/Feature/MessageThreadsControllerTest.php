@@ -65,7 +65,7 @@ class MessageThreadsControllerTest extends TestCase
     }
 
     /** @test */
-    public function fetch_a_specific_message_thread()
+    public function fetch_a_specific_message_thread_with_the_messages()
     {
         $user = $this->passportAndCreateUser();
         $user2 = $this->createRandomUser();
@@ -108,5 +108,62 @@ class MessageThreadsControllerTest extends TestCase
         $response = $this->getJson('/api/message-threads/1');
 
         $response->assertUnauthorized();
+    }
+
+    /** @test */
+    public function fetch_a_specific_message_thread_that_does_not_exist()
+    {
+        $user = $this->passportAndCreateUser();
+
+        $response = $this->actingAs($user, 'api')
+                        ->getJson('/api/message-threads/-1');
+
+        $response->assertNotFound()
+                ->assertSee('Message Thread/Conversation not found');
+    }
+
+    /** @test */
+    public function delete_a_specific_message_thread()
+    {
+        $user = $this->passportAndCreateUser();
+        $user2 = $this->createRandomUser();
+        $thread = $this->createMessageThread($user, $user2);
+        $sendMessage = $this->sendMessageMany($thread, $user);
+
+        $response = $this->actingAs($user, 'api')
+                        ->deleteJson('/api/message-threads/'.$thread->id);
+
+        $response->assertOk()->assertSee('Successfully deleted');
+
+        // Check database if it is really deleted
+        $this->assertDatabaseMissing('message_threads',[
+                'id' => $thread->id
+            ])
+            ->assertDatabaseMissing('messages',[
+                'messageable_id' => $thread->id
+            ]);
+    }
+
+    /** @test */
+    public function delete_a_specific_message_thread_while_not_authenticated()
+    {
+        $user = $this->passportAndCreateUser();
+        $user2 = $this->createRandomUser();
+        $thread = $this->createMessageThread($user, $user2);
+
+        $response = $this->deleteJson('/api/message-threads/'.$thread->id);
+
+        $response->assertUnauthorized();
+    }
+
+    /** @test */
+    public function delete_a_specific_message_thread_that_does_not_exist()
+    {
+        $user = $this->passportAndCreateUser();
+
+        $response = $this->actingAs($user, 'api')
+                        ->deleteJson('/api/message-threads/-1');
+
+        $response->assertNotFound();
     }
 }

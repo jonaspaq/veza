@@ -56,14 +56,11 @@ class MessageThreadsController extends Controller
      */
     public function show($id)
     {
-        $data = MessageThread::find($id);
+        $data = MessageThread::with('sender:id,name','receiver:id,name')->find($id);
 
         // If thread does not exist, return 404
         if(!$data)
             return abort(404, 'Message Thread/Conversation not found');
-
-        // Paginate data
-        $data = $data->messages()->paginate();
 
         return response()->json($data);
     }

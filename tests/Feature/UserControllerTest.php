@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Artisan;
 
 use Tests\PassportAuth;
 
-class UserTest extends TestCase
+class UserControllerTest extends TestCase
 {
     use RefreshDatabase, PassportAuth;
 
@@ -103,7 +103,7 @@ class UserTest extends TestCase
     public function get_details_of_a_non_existent_specified_user()
     {
         $user = $this->passportAndCreateUser();
-        
+
         $response = $this->actingAs($user, 'api')
                         ->getJson('/api/user/-1');
 

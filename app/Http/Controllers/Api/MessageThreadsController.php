@@ -81,21 +81,25 @@ class MessageThreadsController extends Controller
     }
 
     /**
-     * Delete a message thread
+     * Delete a message thread if found
      *
      * @param  int  $id - I.D of the message thread
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $thread = MessageThread::findOrFail($id);
+        $authUser = request()->user()->id;
 
-        // Delete messages related to this thread
-        $thread->messages()->delete();
+        $thread = MessageThread::where('id', $id)
+                                ->where(function($query) use ($authUser) {
+                                    $query->where('user_one', $authUser)
+                                        ->orWhere('user_two', $authUser);
+                                })
+                                ->delete();
 
-        // Delete thread
-        $thread->delete();
+        if($thread)
+            return response()->json(['message'=>'Successfully deleted']);
 
-        return response()->json(['message'=>'Successfully deleted']);
+        return response()->json(['message'=>'Message thread not found'], 404);
     }
 }

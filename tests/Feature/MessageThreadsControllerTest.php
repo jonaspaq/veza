@@ -138,9 +138,6 @@ class MessageThreadsControllerTest extends TestCase
         // Check database if it is really deleted
         $this->assertDatabaseMissing('message_threads',[
                 'id' => $thread->id
-            ])
-            ->assertDatabaseMissing('messages',[
-                'messageable_id' => $thread->id
             ]);
     }
 
@@ -163,6 +160,20 @@ class MessageThreadsControllerTest extends TestCase
 
         $response = $this->actingAs($user, 'api')
                         ->deleteJson('/api/message-threads/-1');
+
+        $response->assertNotFound();
+    }
+
+    /** @test */
+    public function delete_a_specific_message_thread_that_is_not_owned_by_the_user()
+    {
+        $user = $this->passportAndCreateUser();
+        $user2 = $this->createRandomUser();
+        $user3 = $this->createRandomUser();
+        $thread = $this->createMessageThread($user2, $user3);
+
+        $response = $this->actingAs($user, 'api')
+                        ->deleteJson('/api/message-threads/'.$thread->id);
 
         $response->assertNotFound();
     }

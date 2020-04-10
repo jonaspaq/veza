@@ -25,9 +25,7 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function(){
 
     Route::apiResources([
         'post' => 'PostController',
-        'friend' => 'FriendListController',
-        'message-threads' => 'MessageThreadsController',
-        'thread/messages' => 'MessageController'
+        'friend' => 'FriendListController'
     ]);
 
     Route::group(['prefix' => 'friends'], function() {
@@ -36,6 +34,12 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function(){
         Route::get('request-count', 'FriendListController@pendingRequestCount');
         Route::get('suggestions', 'FriendListController@friendSuggestions');
     });
+
+    Route::apiResources([
+        'message-threads' => 'MessageThreadsController',
+        'thread/message' => 'MessageController'
+    ]);
+    Route::get('thread/messages/{id}', 'MessageController@messages');
 
     Route::get('search/user', 'SearchController@searchUserSpecific');
 });

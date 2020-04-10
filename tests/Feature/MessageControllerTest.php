@@ -92,7 +92,7 @@ class MessageControllerTest extends TestCase
         $thread = $this->createMessageThread($user, $user2);
 
         $response = $this->actingAs($user, 'api')
-                        ->postJson('/api/thread/messages', [
+                        ->postJson('/api/thread/message', [
                             'thread_id' => $thread->id,
                             'body' => 'This is my message'
                         ]);
@@ -108,6 +108,22 @@ class MessageControllerTest extends TestCase
     }
 
     /** @test */
+    public function send_a_new_message_to_a_thread_with_empty_inputs()
+    {
+        $user = $this->passportAndCreateUser();
+        $user2 = $this->createRandomUser();
+        $thread = $this->createMessageThread($user, $user2);
+
+        $response = $this->actingAs($user, 'api')
+                        ->postJson('/api/thread/message', [
+                            'thread_id' => null,
+                            'body' => null
+                        ]);
+
+        $response->assertStatus(422);
+    }
+
+    /** @test */
     public function send_a_new_message_to_a_thread_that_is_not_related_to_user()
     {
         $user = $this->passportAndCreateUser();
@@ -116,7 +132,7 @@ class MessageControllerTest extends TestCase
         $thread = $this->createMessageThread($user3, $user2);
 
         $response = $this->actingAs($user, 'api')
-                        ->postJson('/api/thread/messages', [
+                        ->postJson('/api/thread/message', [
                             'thread_id' => $thread->id,
                             'body' => 'This is my message'
                         ]);
@@ -133,13 +149,13 @@ class MessageControllerTest extends TestCase
         $message = $this->sendMessage($thread, $user);
 
         $response = $this->actingAs($user, 'api')
-                        ->deleteJson('/api/thread/messages/'.$message->id);
+                        ->deleteJson('/api/thread/message/'.$message->id);
 
         $response->assertOk();
     }
 
     /** @test */
-    public function delete_a_message_from_a_thread_that_is_not_owned_by_user()
+    public function delete_a_message_from_a_thread_that_is_not_related_to_user()
     {
         $user = $this->passportAndCreateUser();
         $user2 = $this->createRandomUser();
@@ -148,8 +164,8 @@ class MessageControllerTest extends TestCase
         $message = $this->sendMessage($thread, $user2);
 
         $response = $this->actingAs($user, 'api')
-                        ->deleteJson('/api/thread/messages/'.$message->id);
+                        ->deleteJson('/api/thread/message/'.$message->id);
 
-        $response->assertForbidden();
+        $response->assertNotFound();
     }
 }

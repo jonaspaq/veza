@@ -12,4 +12,9 @@ class Message extends Model
     {
         return $this->morphTo();
     }
+
+    public function sender()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 }

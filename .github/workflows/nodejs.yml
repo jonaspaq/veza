@@ -1,9 +1,9 @@
-name: SCSS
+name: Node
 
 on: [push]
 
 jobs:
-  lint-styles:
+  lint-scss:
 
     runs-on: ubuntu-latest
 
@@ -18,24 +18,66 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Cache node modules
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+
+    - name: Cache dependencies
       uses: actions/cache@v1
+      id: yarn-cache
       env:
-        cache-name: cache-node-modules
+        cache-name: cache-dependencies
       with:
-        path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - run: yarn install
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: yarn install --frozen-lockfile
 
     - name: Lint scss
       run: npm run lint
 
-    - name: Test build for production
-      run: npm run production
+  build-vue-files:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      id: yarn-cache
       env:
-        CI: true
+        cache-name: cache-dependencies
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: yarn install --frozen-lockfile
+
+    - name: Test build for production
+      run: yarn production

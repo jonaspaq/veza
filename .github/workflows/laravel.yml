@@ -1,4 +1,4 @@
-name: Veza
+name: Feature Tests
 
 on: [push]
 

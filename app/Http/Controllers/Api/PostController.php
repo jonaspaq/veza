@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     /**
      * Fetch all posts of the authenticated user
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -19,11 +19,11 @@ class PostController extends Controller
         $data = Post::where('user_id', $request->user()->id)
                 ->with('user:id,name')
                 ->orderBy('id', 'desc')
-                ->get(); 
+                ->get();
 
         if( count($data) >= 1 )
             return response()->json($data, 200);
-        
+
         return response()->json(['message' => 'No posts yet'], 204);
     }
 
@@ -42,7 +42,7 @@ class PostController extends Controller
 
         // Retrieve the newly created post with user details
         $newData = Post::where('id', $dataInsert->id)->with('user:id,name')->first();
-    
+
         if($newData)
             return response()->json(['message' => 'Successfully Posted', 'data' => $newData], 201);
     }
@@ -59,16 +59,16 @@ class PostController extends Controller
 
         if($data)
             return response()->json($data, 200);
-        
+
         return response()->json(['message' => 'Post not found'], 404);
-        
+
     }
 
     /**
      * Update the specified resource in storage.
-     * Warning! when using this function 
+     * Warning! when using this function
      * please add (_method: PUT or PATCH) in data of http request
-     * 
+     *
      * @param  App\Post $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -80,9 +80,9 @@ class PostController extends Controller
 
         // Checks if post exist
         $presentData = Post::findOrFail($id);
-        
+
         //Check if user is the owner of the post
-        if($presentData->user_id != $request->user()->id) 
+        if($presentData->user_id != $request->user()->id)
             return response()->json(['message' => 'User unauthorized'], 401);
 
         $presentData->update($dataUpdate);
@@ -102,12 +102,12 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id)
-    {   
+    {
         $user = $request->user();
 
         // Check if post exists
         $post = Post::findOrFail($id);
-    
+
         // Check if the user that requested to delete is the owner of the post
         $authorize = $user->id == $post->user_id;
 

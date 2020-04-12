@@ -9,9 +9,10 @@ class MessageThread extends Model
     protected $table = 'message_threads';
     protected $guarded = [];
 
+
     public function messages()
     {
-        return $this;
+        return $this->morphMany('App\Message', 'messageable');
     }
 
     public function sender()

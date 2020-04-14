@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\MessageThread;
+use App\Message;
 
 class MessageThreadsController extends Controller
 {
@@ -20,41 +21,48 @@ class MessageThreadsController extends Controller
 
         $data = MessageThread::where('user_one', $authenticatedUserId)
                         ->orWhere('user_two', $authenticatedUserId)
-                        ->with('sender', 'receiver')
+                        ->with('sender:id,name', 'receiver:id,name')
                         ->orderBy('last_activity', 'asc')
                         ->paginate();
 
-        $data = json_encode($data);
-        $data = json_decode($data);
-
-        if(!empty($data->data))
-        {
-            return response()->json($data);
-        }
-
-        return response()->json($data, 204);
+        return response()->json($data);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a message thread
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param $request - Data of the post request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $authUser = $request->user()->id;
+        $secondUser = $request->secondUser;
+
+        $data = MessageThread::create([
+            'user_one' => $authUser,
+            'user_two' => $secondUser,
+            'last_activity' => Carbon::now()
+        ]);
+
+       return response()->json($data);
     }
 
     /**
-     * Display the specified resource.
+     * Select the specified message thread.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $id - I.D of the message thread
+     * @return \Illuminate\Http\Response - return the paginated messages of this thread
      */
     public function show($id)
     {
-        //
+        $data = MessageThread::with('sender:id,name','receiver:id,name')->find($id);
+
+        // If thread does not exist, return 404
+        if(!$data)
+            return abort(404, 'Message Thread/Conversation not found');
+
+        return response()->json($data);
     }
 
     /**
@@ -70,13 +78,25 @@ class MessageThreadsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete a message thread if found
      *
-     * @param  int  $id
+     * @param  int  $id - I.D of the message thread
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $authUser = request()->user()->id;
+
+        $thread = MessageThread::where('id', $id)
+                                ->where(function($query) use ($authUser) {
+                                    $query->where('user_one', $authUser)
+                                        ->orWhere('user_two', $authUser);
+                                })
+                                ->delete();
+
+        if($thread)
+            return response()->json(['message'=>'Successfully deleted']);
+
+        return response()->json(['message'=>'Message thread not found'], 404);
     }
 }

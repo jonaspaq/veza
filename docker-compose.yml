@@ -89,7 +89,7 @@ services:
       - vezadocker
 
   node:
-    image: node:13.6-alpine
+    image: node:12.16.1-alpine
     container_name: node_${DB_DATABASE}
     tty: true
     depends_on:

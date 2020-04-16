@@ -10,6 +10,9 @@ use App\Message;
 
 class MessageThreadsController extends Controller
 {
+    protected $withSender = 'sender:id,first_name,last_name';
+    protected $withReceiver = 'receiver:id,first_name,last_name';
+
     /**
      * Display the most recent conversations of the authenticated user.
      *
@@ -21,7 +24,7 @@ class MessageThreadsController extends Controller
 
         $data = MessageThread::where('user_one', $authenticatedUserId)
                         ->orWhere('user_two', $authenticatedUserId)
-                        ->with('sender:id,name', 'receiver:id,name')
+                        ->with($this->withSender, $this->withReceiver)
                         ->orderBy('last_activity', 'asc')
                         ->paginate();
 
@@ -56,7 +59,8 @@ class MessageThreadsController extends Controller
      */
     public function show($id)
     {
-        $data = MessageThread::with('sender:id,name','receiver:id,name')->find($id);
+        $data = MessageThread::with($this->withSender, $this->withReceiver)
+                            ->find($id);
 
         // If thread does not exist, return 404
         if(!$data)

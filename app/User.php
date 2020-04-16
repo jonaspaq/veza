@@ -12,13 +12,17 @@ class User extends Authenticatable
 {
     use Notifiable, HasApiTokens;
 
-    protected $fillable = [
-        'name', 'email', 'password'
-    ];
+    protected $guarded = ['password_confirmation'];
 
     protected $hidden = [
         'password'
     ];
+
+    public function name()
+    {
+        $name = $this->first_name." ".$this->last_name;
+        return $name;
+    }
 
     // Relationships
     public function posts()

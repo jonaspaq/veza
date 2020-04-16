@@ -13,15 +13,20 @@ class UserControllerTest extends TestCase
 {
     use RefreshDatabase, PassportAuth;
 
+    protected $userRegisterData = [
+        'first_name' => 'Test',
+        'last_name' => 'User',
+        'email' => 'testuser@veza.com',
+        'password' => 'password',
+        'password_confirmation' => 'password'
+    ];
+
     /** @test */
     public function register_user_with_correct_details()
     {
-        $response = $this->postJson('/api/register', [
-                            'name' => 'Test User',
-                            'email' => 'testuser@veza.com',
-                            'password' => 'password',
-                            'password_confirmation' => 'password'
-                        ]);
+        $data = $this->userRegisterData;
+
+        $response = $this->postJson('/api/register', $data);
 
         $response->assertStatus(201);
     }
@@ -30,7 +35,8 @@ class UserControllerTest extends TestCase
     public function register_user_with_empty_data()
     {
         $response = $this->postJson('/api/register', [
-                            'name' => '',
+                            'first_name' => '',
+                            'last_name' => '',
                             'email' => '',
                             'password' => '',
                             'password_confirmation' => ''

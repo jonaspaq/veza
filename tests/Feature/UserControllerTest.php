@@ -87,7 +87,7 @@ class UserControllerTest extends TestCase
         $user = $this->passportAndCreateUser();
 
         $response = $this->actingAs($user, 'api')
-                        ->getJson('/api/user/authDetails');
+                        ->getJson('/api/user/auth-details');
 
         $response->assertOk()
                 ->assertJsonStructure([

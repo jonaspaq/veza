@@ -13,18 +13,16 @@ class UserControllerTest extends TestCase
 {
     use RefreshDatabase, PassportAuth;
 
-    protected $userRegisterData = [
-        'first_name' => 'Test',
-        'last_name' => 'User',
-        'email' => 'testuser@veza.com',
-        'password' => 'password',
-        'password_confirmation' => 'password'
-    ];
-
     /** @test */
     public function register_user_with_correct_details()
     {
-        $data = $this->userRegisterData;
+        $data = [
+            'first_name' => 'Test',
+            'last_name' => 'User',
+            'email' => 'testuser@veza.com',
+            'password' => 'password',
+            'password_confirmation' => 'password'
+        ];
 
         $response = $this->postJson('/api/register', $data);
 
@@ -91,7 +89,17 @@ class UserControllerTest extends TestCase
         $response = $this->actingAs($user, 'api')
                         ->getJson('/api/user/authDetails');
 
-        $response->assertOk();
+        $response->assertOk()
+                ->assertJsonStructure([
+                    'id',
+                    'first_name',
+                    'middle_name',
+                    'last_name',
+                    'email',
+                    'created_at',
+                    'updated_at',
+                    'full_name'
+                ]);
     }
 
     /** @test */
@@ -122,5 +130,78 @@ class UserControllerTest extends TestCase
         $response = $this->getJson('/api/user/1');
 
         $response->assertUnauthorized();
+    }
+
+    /** @test */
+    public function edit_details_of_a_specified_user()
+    {
+        $user = $this->passportAndCreateUser();
+
+        $editData = [
+            'first_name' => 'Updated',
+            'middle_name' => 'Values',
+            'last_name' => 'Ofuser',
+        ];
+
+        $response = $this->actingAs($user, 'api')
+                    ->postJson('/api/user/'.$user->id.'/edit', $editData);
+
+        $response->assertOk()
+                ->assertJson([
+                    'first_name' => $editData['first_name'],
+                    'middle_name' => $editData['middle_name'],
+                    'last_name' => $editData['last_name']
+                ]);
+    }
+
+    /** @test */
+    public function edit_details_of_a_specified_user_with_null_or_invalid_values()
+    {
+        $user = $this->passportAndCreateUser();
+
+        $editData = [
+            'first_name' => '',
+            'middle_name' => '',
+            'last_name' => '',
+        ];
+
+        $response = $this->actingAs($user, 'api')
+                    ->postJson('/api/user/'.$user->id.'/edit', $editData);
+
+        $response->assertStatus(422);
+    }
+
+    /** @test */
+    public function edit_details_of_a_specified_user_while_not_authenticated()
+    {
+        $user = $this->passportAndCreateUser();
+
+        $editData = [
+            'first_name' => '',
+            'middle_name' => '',
+            'last_name' => '',
+        ];
+
+        $response = $this->postJson('/api/user/'.$user->id.'/edit', $editData);
+
+        $response->assertUnauthorized();
+    }
+
+    /** @test */
+    public function edit_details_of_a_specified_user_that_is_not_owned_by_the_user()
+    {
+        $user = $this->passportAndCreateUser();
+        $user2 = $this->createRandomUser();
+
+        $editData = [
+            'first_name' => 'Update',
+            'middle_name' => 'Data',
+            'last_name' => 'User',
+        ];
+
+        $response = $this->actingAs($user, 'api')
+                        ->postJson('/api/user/'.$user2->id.'/edit', $editData);
+
+        $response->assertForbidden();
     }
 }

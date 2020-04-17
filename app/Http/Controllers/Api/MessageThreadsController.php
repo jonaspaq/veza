@@ -10,8 +10,8 @@ use App\Message;
 
 class MessageThreadsController extends Controller
 {
-    protected $withSender = 'sender:id,first_name,last_name';
-    protected $withReceiver = 'receiver:id,first_name,last_name';
+    protected $withSender = 'sender:id,first_name,middle_name,last_name';
+    protected $withReceiver = 'receiver:id,first_name,middle_name,last_name';
 
     /**
      * Display the most recent conversations of the authenticated user.

@@ -18,10 +18,12 @@ class User extends Authenticatable
         'password'
     ];
 
-    public function name()
+    public function fullName()
     {
-        $name = $this->first_name." ".$this->last_name;
-        return $name;
+        if($this->middle_name)
+            return $this->first_name." ".$this->middle_name." ".$this->last_name;
+
+        return $this->first_name." ".$this->last_name;
     }
 
     // Relationships

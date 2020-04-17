@@ -11,8 +11,8 @@ use DB;
 
 class FriendListController extends Controller
 {
-    protected $withSender = 'sender:id,first_name,last_name,email';
-    protected $withReceiver = 'receiver:id,first_name,last_name,email';
+    protected $withSender = 'sender:id,first_name,middle_name,last_name,email';
+    protected $withReceiver = 'receiver:id,first_name,middle_name,last_name,email';
 
     /**
      * Fetch all friend list which status is friends

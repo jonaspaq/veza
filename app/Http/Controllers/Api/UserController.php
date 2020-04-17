@@ -10,6 +10,7 @@ use Auth;
 use App\User;
 use App\Http\Requests\UserRegistration;
 use App\Http\Requests\UserLogin;
+use App\Http\Requests\UserUpdateDetails;
 
 class UserController extends Controller
 {
@@ -27,15 +28,15 @@ class UserController extends Controller
     }
 
     /**
-     * Show a specified resource 
-     * 
+     * Show a specified resource
+     *
      * @param \Illuminate\Http\Request $request
      * @return User::class
      */
     public function show($userId)
     {
         $data = User::find($userId);
-        
+
         if($data){
             return response()->json($data);
         }
@@ -65,9 +66,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateDetails $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->update($request->validated());
+
+        return response()->json($user);
     }
 
     /**
@@ -90,18 +95,19 @@ class UserController extends Controller
 
             return response()->json(['message' => 'Successful Authentication', 'access_token' => $access_token, 'user' => $user], 200);
         }
-        
+
         return response()->json(['message' => 'Invalid Credentials'], 404);
-        
+
     }
 
     /**
      * Return the details of the authenticated user
-     * 
+     *
      * @return \Illuminate\Http\Response
     */
     public function authDetails(){
         $data = request()->user();
+        $data->full_name = $data->fullName();
 
         return response()->json($data, 200);
     }

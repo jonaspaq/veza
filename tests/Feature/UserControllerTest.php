@@ -144,7 +144,7 @@ class UserControllerTest extends TestCase
         ];
 
         $response = $this->actingAs($user, 'api')
-                    ->putJson('/api/user/'.$user->id.'/edit', $editData);
+                    ->patchJson('/api/user/'.$user->id.'/edit', $editData);
 
         $response->assertOk()
                 ->assertJson([

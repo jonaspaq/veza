@@ -26,7 +26,7 @@ Route::group(['middleware' => ['auth:api', 'verified'], 'namespace' => 'Api'], f
     Route::group(['prefix' => 'user'], function() {
         Route::get('auth-details', 'UserController@authDetails');
         Route::get('{id}', 'UserController@show');
-        Route::put('{id}/edit', 'UserController@update');
+        Route::patch('{id}/edit', 'UserController@update');
     });
 
     Route::apiResources([

@@ -166,7 +166,7 @@ class UserControllerTest extends TestCase
         ];
 
         $response = $this->actingAs($user, 'api')
-                    ->putJson('/api/user/'.$user->id.'/edit', $editData);
+                    ->patchJson('/api/user/'.$user->id.'/edit', $editData);
 
         $response->assertStatus(422);
     }
@@ -182,7 +182,7 @@ class UserControllerTest extends TestCase
             'last_name' => '',
         ];
 
-        $response = $this->putJson('/api/user/'.$user->id.'/edit', $editData);
+        $response = $this->patchJson('/api/user/'.$user->id.'/edit', $editData);
 
         $response->assertUnauthorized();
     }
@@ -200,7 +200,7 @@ class UserControllerTest extends TestCase
         ];
 
         $response = $this->actingAs($user, 'api')
-                        ->putJson('/api/user/'.$user2->id.'/edit', $editData);
+                        ->patchJson('/api/user/'.$user2->id.'/edit', $editData);
 
         $response->assertForbidden();
     }

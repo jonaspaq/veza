@@ -204,4 +204,68 @@ class UserControllerTest extends TestCase
 
         $response->assertForbidden();
     }
+
+    /** @test */
+    public function edit_email_of_the_authenticated_user()
+    {
+        $user = $this->passportAndCreateUser();
+        $data = [
+            'email' => 'toChangeEmail@example.test',
+            'email_confirmation' => 'toChangeEmail@example.test',
+            'password' => 'password'
+        ];
+
+        $response = $this->actingAs($user, 'api')
+                    ->patchJson('/api/user/email/change', $data);
+
+        $response->assertOk();
+    }
+
+    /** @test */
+    public function edit_email_of_the_user_while_not_authenticated()
+    {
+        $data = [
+            'email' => 'toChangeEmail@example.test',
+            'email_confirmation' => 'toChangeEmail@example.test',
+            'password' => 'password'
+        ];
+
+        $response = $this->patchJson('/api/user/email/change', $data);
+
+        $response->assertUnauthorized();
+    }
+
+    /** @test */
+    public function edit_email_of_the_authenticated_user_while_each_field_is_empty()
+    {
+        $user = $this->passportAndCreateUser();
+
+        $data = [
+            'email' => '',
+            'email_confirmation' => '',
+            'password' => ''
+        ];
+
+        $response = $this->actingAs($user, 'api')
+                        ->patchJson('/api/user/email/change', $data);
+
+        $response->assertStatus(422);
+    }
+
+    /** @test */
+    public function edit_email_of_the_authenticated_user_with_wrong_password()
+    {
+        $user = $this->passportAndCreateUser();
+        $data = [
+            'email' => 'toChangeEmail@example.test',
+            'email_confirmation' => 'toChangeEmail@example.test',
+            'password' => 'wrong_password_in_the_house'
+        ];
+
+        $response = $this->actingAs($user, 'api')
+                    ->patchJson('/api/user/email/change', $data);
+
+        $response->assertForbidden()
+                ->assertSee('Invalid credentials');
+    }
 }

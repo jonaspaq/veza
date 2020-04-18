@@ -11,6 +11,7 @@ use App\User;
 use App\Http\Requests\UserRegistration;
 use App\Http\Requests\UserLogin;
 use App\Http\Requests\UserUpdateDetails;
+use App\Http\Requests\ChangeEmail;
 
 class UserController extends Controller
 {
@@ -30,7 +31,7 @@ class UserController extends Controller
     /**
      * Show a specified resource
      *
-     * @param \Illuminate\Http\Request $request
+     * @param $userId - I.D of a user
      * @return User::class
      */
     public function show($userId)
@@ -46,6 +47,7 @@ class UserController extends Controller
 
     /**
      * Register user, store the resource to database
+     *
      * @param App\Http\Requests\UserRegistration $request
      * @return \Illuminate\Http\Response
      */
@@ -62,8 +64,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  App\Http\Request\UserUpdateDetails  $request
+     * @param  int  $id - I.D of a user
      * @return \Illuminate\Http\Response
      */
     public function update(UserUpdateDetails $request, $id)
@@ -86,6 +88,12 @@ class UserController extends Controller
         //
     }
 
+    /**
+     * Attempt to login/authenticate a user.
+     *
+     * @param  App\Http\Request\UserLogin  $request
+     * @return \Illuminate\Http\Response
+     */
     public function login(UserLogin $request){
         $data = $request->validated();
 
@@ -110,5 +118,36 @@ class UserController extends Controller
         $data->full_name = $data->fullName();
 
         return response()->json($data, 200);
+    }
+
+    /**
+     * Change/Update the email of the authenticated user
+     *
+     * @param \App\Http\Requests\ChangeEmail $request
+     * @return \Illuminate\Http\Response
+     */
+    public function changeEmail(ChangeEmail $request)
+    {
+        $user = $request->user();
+        $data = $request->validated();
+        $updateData = [
+            'email' => $request->validated()['email'],
+            'email_verified_at' => null
+        ];
+
+        // Check if password is correct
+        if(!Hash::check($data['password'], $user->password))
+            return response()->json(['message' => 'Invalid credentials'], 403);
+
+        $user->update($updateData);
+
+        // Email a verification link to the new email
+        $req = Request::create(route('verification.resend'), 'GET');
+        $ret = app()->handle($req);
+
+        return response()->json([
+            'message' => 'A mail has been sent to verify the new email. Please check your inbox.',
+            'data' => $user,
+        ]);
     }
 }

@@ -19,6 +19,9 @@ Route::group(['middleware' => 'api', 'namespace' => 'Api'], function(){
 
     Route::get('email/verify', 'EmailVerificationController@resend')->name('verification.resend');
     Route::get('email/verify/{id}/{hash}', 'EmailVerificationController@verify')->name('verification.verify');
+
+    Route::get('email/send-verification', 'EmailVerificationController@send')->name('email.verification.send');
+    Route::get('email/verification', 'EmailVerificationController@verify')->name('email.verification.verify');
 });
 
 Route::group(['middleware' => ['auth:api', 'verified'], 'namespace' => 'Api'], function(){

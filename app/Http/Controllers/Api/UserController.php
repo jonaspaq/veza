@@ -56,7 +56,14 @@ class UserController extends Controller
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
 
+        // Create the user
         $insertedData = User::create($data);
+
+        // Insert a a primary email for the user
+        $insertedData->emails()->create([
+            'email' => $data['email'],
+            'is_primary' => 1
+        ]);
 
         return response()->json($insertedData, 201);
     }

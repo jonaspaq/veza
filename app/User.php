@@ -7,10 +7,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Laravel\Passport\HasApiTokens;
+use App\Traits\CustomEmailVerification;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens, CustomEmailVerification;
 
     protected $guarded = ['password_confirmation'];
 
@@ -26,7 +27,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->first_name." ".$this->last_name;
     }
 
+    public function primary_email()
+    {
+        return $this->emails()->where('is_primary', 1);
+    }
+
     // Relationships
+    public function emails()
+    {
+        return $this->hasMany('App\UserEmail');
+    }
+
     public function posts()
     {
         return $this->hasMany('App\Post');

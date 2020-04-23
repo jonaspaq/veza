@@ -18,6 +18,24 @@ class UserControllerTest extends TestCase
     {
         $data = [
             'first_name' => 'Test',
+            'middle_name' => 'MiddleTestName',
+            'last_name' => 'User',
+            'email' => 'testuser@veza.com',
+            'password' => 'password',
+            'password_confirmation' => 'password'
+        ];
+
+        $response = $this->postJson('/api/register', $data);
+
+        $response->assertStatus(201);
+    }
+
+    /** @test */
+    public function register_user_with_no_middle_name()
+    {
+        $data = [
+            'first_name' => 'Test',
+            'middle_name' => '',
             'last_name' => 'User',
             'email' => 'testuser@veza.com',
             'password' => 'password',
@@ -34,6 +52,7 @@ class UserControllerTest extends TestCase
     {
         $response = $this->postJson('/api/register', [
                             'first_name' => '',
+                            'middle_name' => '',
                             'last_name' => '',
                             'email' => '',
                             'password' => '',

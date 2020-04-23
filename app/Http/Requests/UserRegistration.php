@@ -25,6 +25,7 @@ class UserRegistration extends FormRequest
     {
         return [
             'first_name' => 'required|between:1,255',
+            'middle_name' => 'sometimes|between:0,255',
             'last_name' => 'required|between:1,255',
             'email' => 'required|unique:users,email|between:1,191',
             'password' => 'required|between:6,32',

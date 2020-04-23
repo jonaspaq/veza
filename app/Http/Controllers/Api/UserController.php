@@ -147,7 +147,7 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'A mail has been sent to verify the new email. Please check your inbox.',
-            'data' => $user,
+            'user' => $user,
         ]);
     }
 }

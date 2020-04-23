@@ -131,7 +131,7 @@ class UserController extends Controller
         $user = $request->user();
         $data = $request->validated();
         $updateData = [
-            'email' => $request->validated()['email'],
+            'email' => $data['email'],
             'email_verified_at' => null
         ];
 

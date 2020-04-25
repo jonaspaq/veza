@@ -8,13 +8,16 @@ use Hash;
 use Auth;
 
 use App\User;
+use App\Traits\PasswordMatchCheck;
 use App\Http\Requests\UserRegistration;
 use App\Http\Requests\UserLogin;
 use App\Http\Requests\UserUpdateDetails;
-use App\Http\Requests\ChangeEmail;
+use App\Http\Requests\UserChangeEmail;
+use App\Http\Requests\UserChangePassword;
 
 class UserController extends Controller
 {
+    use PasswordMatchCheck;
 
     /**
      * Display a listing of the resource.
@@ -126,7 +129,7 @@ class UserController extends Controller
      * @param \App\Http\Requests\ChangeEmail $request
      * @return \Illuminate\Http\Response
      */
-    public function changeEmail(ChangeEmail $request)
+    public function changeEmail(UserChangeEmail $request)
     {
         $user = $request->user();
         $data = $request->validated();
@@ -136,8 +139,7 @@ class UserController extends Controller
         ];
 
         // Check if password is correct
-        if(!Hash::check($data['password'], $user->password))
-            return response()->json(['message' => 'Invalid credentials'], 403);
+        $this->passwordMatchCheck($user->password, $data['password']);
 
         $user->update($updateData);
 
@@ -149,5 +151,24 @@ class UserController extends Controller
             'message' => 'A mail has been sent to verify the new email. Please check your inbox.',
             'user' => $user,
         ]);
+    }
+
+    /**
+     * Change the password of the user
+     *
+     * @param \App\Http|Requests\UserChangePassword $request
+     * @return \Illuminate\Http|Response
+     */
+    public function changePassword(UserChangePassword $request)
+    {
+        $user = $request->user();
+        $this->passwordMatchCheck($user->password, $request->old_password);
+
+        $newPassword = $request->only('password');
+        $newPassword['password'] = Hash::make($newPassword['password']);
+
+        $user->update($newPassword);
+
+        return response()->json(['message' => 'Password successfuly changed.']);
     }
 }

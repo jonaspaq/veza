@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth:api', 'verified'], 'namespace' => 'Api'], f
         Route::patch('{id}/edit', 'UserController@update');
 
         Route::patch('email/change', 'UserController@changeEmail');
+        Route::patch('password/change', 'UserController@changePassword');
     });
 
     Route::apiResources([

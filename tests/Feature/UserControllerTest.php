@@ -285,6 +285,88 @@ class UserControllerTest extends TestCase
                     ->patchJson('/api/user/email/change', $data);
 
         $response->assertForbidden()
-                ->assertSee('Invalid credentials');
+                ->assertSee('Password incorrect.');
+    }
+
+    /** @test */
+    public function change_password_of_authenticated_user()
+    {
+        $user = $this->passportAndCreateUser();
+        $data = [
+            'old_password' => 'password',
+            'password' => 'password_new',
+            'password_confirmation' => 'password_new'
+        ];
+
+        $response = $this->actingAs($user, 'api')
+                        ->patchJson('/api/user/password/change', $data);
+
+        $response->assertOk()
+                ->assertSee('Password successfuly changed.');
+    }
+
+    /** @test */
+    public function change_password_while_not_authenticated()
+    {
+        $data = [
+            'old_password' => 'password',
+            'password' => 'password_new',
+            'password_confirmation' => 'password_new'
+        ];
+
+        $response = $this->patchJson('/api/user/password/change', $data);
+
+        $response->assertUnauthorized();
+    }
+
+    /** @test */
+    public function change_password_while_old_password_is_incorrect()
+    {
+        $user = $this->passportAndCreateUser();
+        $data = [
+            'old_password' => 'password_incorrect',
+            'password' => 'password_new',
+            'password_confirmation' => 'password_new'
+        ];
+
+        $response = $this->actingAs($user, 'api')
+                        ->patchJson('/api/user/password/change', $data);
+
+        $response->assertForbidden()
+                ->assertSee('Password incorrect.');
+    }
+
+    /** @test */
+    public function change_password_with_empty_input_data()
+    {
+        $user = $this->passportAndCreateUser();
+        $data = [
+            'old_password' => '',
+            'password' => '',
+            'password_confirmation' => ''
+        ];
+
+        $response = $this->actingAs($user, 'api')
+                        ->patchJson('/api/user/password/change', $data);
+
+        $response->assertStatus(422)
+                ->assertSee('The given data was invalid.');
+    }
+
+    /** @test */
+    public function change_password_with_same_old_and_new_password()
+    {
+        $user = $this->passportAndCreateUser();
+        $data = [
+            'old_password' => 'password',
+            'password' => 'password',
+            'password_confirmation' => 'password'
+        ];
+
+        $response = $this->actingAs($user, 'api')
+                        ->patchJson('/api/user/password/change', $data);
+
+        $response->assertStatus(422)
+                ->assertSee('The given data was invalid.');
     }
 }

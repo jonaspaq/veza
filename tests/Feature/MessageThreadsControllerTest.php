@@ -36,11 +36,13 @@ class MessageThreadsControllerTest extends TestCase
                             'updated_at',
                             'sender' => [
                                 'id',
-                                'name'
+                                'first_name',
+                                'last_name'
                             ],
                             'receiver' => [
                                 'id',
-                                'name'
+                                'first_name',
+                                'last_name'
                             ]
                         ]
                     ],

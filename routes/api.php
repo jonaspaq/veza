@@ -16,12 +16,21 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => 'api', 'namespace' => 'Api'], function(){
     Route::post('register', 'UserController@store');
     Route::post('login', 'UserController@login')->name('login');
+
+    Route::get('email/verify', 'EmailVerificationController@resend')->name('verification.resend');
+    Route::get('email/verify/{id}/{hash}', 'EmailVerificationController@verify')->name('verification.verify');
 });
 
-Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function(){
+Route::group(['middleware' => ['auth:api', 'verified'], 'namespace' => 'Api'], function(){
 
-    Route::get('user/authDetails', 'UserController@authDetails');
-    Route::get('user/{id}', 'UserController@show');
+    Route::group(['prefix' => 'user'], function() {
+        Route::get('auth-details', 'UserController@authDetails');
+        Route::get('{id}', 'UserController@show');
+        Route::patch('{id}/edit', 'UserController@update');
+
+        Route::patch('email/change', 'UserController@changeEmail');
+        Route::patch('password/change', 'UserController@changePassword');
+    });
 
     Route::apiResources([
         'post' => 'PostController',

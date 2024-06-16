@@ -5,7 +5,7 @@
                 <img src="/images/user.png" :alt="post.user.name">
             </div>
             <div class="col-8 align-self-center">
-                <span class="d-block">{{post.user.name}}</span>
+                <span class="d-block">{{ name }}</span>
                 <small class="d-block text-muted">{{post.created_at}}</small>
             </div>
             <div class="ml-auto">
@@ -33,7 +33,7 @@ export default {
     name: 'PostItem',
     props: ['post'],
 
-    methods:{
+    methods: {
         deletePost(post){
             this.$store.dispatch('posts/toDeletePost', post)
         },
@@ -41,6 +41,12 @@ export default {
             this.$store.dispatch('posts/toEditPost', post)
         }
     },
+
+    computed: {
+        name(){
+            return this.post.user.first_name + " " + this.post.user.last_name
+        }
+    }
 }
 </script>
 

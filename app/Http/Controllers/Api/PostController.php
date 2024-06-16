@@ -55,7 +55,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $data = Post::where('id', $id)->with('user:id,name')->first();
+        $data = Post::where('id', $id)->with('user')->first();
 
         if($data)
             return response()->json($data, 200);
@@ -88,7 +88,7 @@ class PostController extends Controller
         $presentData->update($dataUpdate);
 
         // Fetch updated data along with user details
-        $updatedData = Post::where('id', $presentData->id)->with('user:id,name')->first();
+        $updatedData = Post::where('id', $presentData->id)->with('user')->first();
 
         if($updatedData)
             return response()->json(['message' => 'Successful Updating Post', 'data' => $updatedData], 200);

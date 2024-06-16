@@ -9,8 +9,8 @@
                 </div>
                 <div class="col-12 mt-2">
                     <div class="col d-flex justify-content-center">
-                        <router-link to="/user/profile/" class="text-dark text-decoration-none"> <h5>{{user.name}}</h5> </router-link>
-                    </div>       
+                        <router-link to="/user/profile/" class="text-dark text-decoration-none"> <h5>{{ name }}</h5> </router-link>
+                    </div>
                     <div class="col d-flex justify-content-center">
                         <a href="javascript:;" class="anchorColor"></a>
                         <router-link :to="{name:'editProfile', query : {user: user.id}}" class="anchorColor text-decoration-none"><small>Edit Profile</small></router-link>
@@ -26,18 +26,18 @@
                         <router-link :to="{name:'home'}" class="list-group-item anchorUnstyled">
                             <li class="d-flex align-items-center">
                                 <img src="/images/home.png" alt="home" width="19px" height="19px">
-                                <span class="ml-1 d-none d-lg-block">Home</span>  
-                            </li> 
+                                <span class="ml-1 d-none d-lg-block">Home</span>
+                            </li>
                         </router-link>
                         <FriendNavigation />
                         <li class="list-group-item d-flex align-items-center dropdown">
                             <img src="/images/bell.png" alt="bell" width="19px" height="19px">
-                            <span class="ml-1 d-none d-lg-block">Notifications</span>  
+                            <span class="ml-1 d-none d-lg-block">Notifications</span>
                             <!-- <span class="badge ml-auto bg-secondary">4</span> -->
-                        </li> 
+                        </li>
                         <li class="list-group-item d-flex align-items-center">
                             <img src="/images/store.png" alt="store" width="19px" height="19px">
-                            <span class="ml-1 d-none d-lg-block">Marketplace</span>  
+                            <span class="ml-1 d-none d-lg-block">Marketplace</span>
                             <!-- <span class="badge bg-secondary ml-auto">1</span> -->
                         </li>
                     </ul>
@@ -57,6 +57,10 @@ export default {
     computed:{
         user(){
             return this.$store.getters['auth/user']
+        },
+        name(){
+            let user = this.$store.getters['auth/user']
+            return user.first_name + " " + user.last_name
         }
     }
 }

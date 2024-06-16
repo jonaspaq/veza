@@ -6,7 +6,7 @@
         <div class="media-body pl-2">
             <div class="row">
                 <div class="col-10">
-                    <span>{{ friend.name }}</span>
+                    <span>{{ name }}</span>
                 </div>
                 <div class="col-1">
                     <span>
@@ -31,7 +31,7 @@ export default {
     data: () => ({
         requestStatus: false
     }),
-    
+
     methods: {
         addFriend(friend){
             axios.post('/api/friend', {id: friend.id})
@@ -50,6 +50,12 @@ export default {
             setTimeout(e =>{
                 this.$emit('removeSuggestion', friend)
             }, 1000)
+        }
+    },
+
+    computed: {
+        name(){
+            return this.friend.first_name + " " + this.friend.last_name
         }
     }
 }

@@ -1,7 +1,7 @@
 
 <!-- Development assets -->
 
-@php 
+@php
     $favicon = "icons/36-Bluegreen.png";
     $imagePath = "icons/192-Bluegreen.png";
     $manifestJSON = "manifest.json";

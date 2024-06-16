@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row profile-cover align-items-center">
             <div class="col-12">
-                <h2 class="text-white text-center">{{ user.name }}</h2>
+                <h2 class="text-white text-center">{{ name }}</h2>
             </div>
         </div>
     </div>
@@ -15,6 +15,10 @@ export default {
     computed:{
         user(){
             return this.$store.getters['auth/user']
+        },
+        name(){
+            let user = this.$store.getters['auth/user']
+            return user.first_name + " " + user.last_name
         }
     }
 }

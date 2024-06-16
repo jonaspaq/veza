@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
 
 use App\User;
 use App\Post;
@@ -35,6 +37,7 @@ class UsersTableSeeder extends Seeder
         // Create one user with these details
         factory(User::class, 1)->create([
             'email' => 'test@example.com',
+            'password' => Hash::make('password')
         ])->each(function ($user) {
             // For the user created, create 30 FriendList Random Data Per Row
             $user->friendReceived()->saveMany(factory(FriendList::class, 30))

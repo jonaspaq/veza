@@ -1,0 +1,26 @@
+- git clone https://github.com/jonaspaq/veza.git
+
+- cp .env.example .env
+ - setup env variables // Don't forget pusher api keys for realtime features
+
+- docker-compose build
+
+// Make sure no ports are currently used that will be used by the veza ports settings in docker-compose file
+- docker-compose up -d 
+
+// Check if php dependencies are done installing
+- docker container logs php_(value of DB_DATABASE in .env) -f
+
+// Access php container via sh or bash
+- docker exec -it php_(value of DB_DATABASE in .env) "sh or bash"
+ - php artisan key:generate
+ - php artisan migrate:fresh --seed
+ - php artisan passport:install // Needed so that authentication keys will be created
+ - exit
+
+// Check if npm packages are done installing 
+- docker container logs node_(value of DB_DATABASE in .env) -f
+
+// Compile dependencies 
+- docker exec -it node_(value of DB_DATABASE in .env) "sh or bash"
+ - npm run dev (for development, prod for production)

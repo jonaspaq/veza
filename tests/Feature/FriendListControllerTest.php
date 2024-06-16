@@ -36,12 +36,14 @@ class FriendListControllerTest extends TestCase
                             'updated_at',
                             'sender' => [
                                 'id',
-                                'name',
+                                'first_name',
+                                'last_name',
                                 'email'
                             ],
                             'receiver' => [
                                 'id',
-                                'name',
+                                'first_name',
+                                'last_name',
                                 'email'
                             ]
                         ]

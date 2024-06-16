@@ -8,17 +8,23 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Laravel\Passport\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasApiTokens;
 
-    protected $fillable = [
-        'name', 'email', 'password'
-    ];
+    protected $guarded = ['password_confirmation'];
 
     protected $hidden = [
         'password'
     ];
+
+    public function fullName()
+    {
+        if($this->middle_name)
+            return $this->first_name." ".$this->middle_name." ".$this->last_name;
+
+        return $this->first_name." ".$this->last_name;
+    }
 
     // Relationships
     public function posts()

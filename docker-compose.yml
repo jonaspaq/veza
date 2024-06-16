@@ -10,7 +10,6 @@ services:
       context: .
       dockerfile: ./.docker/Dockerfile
     working_dir: /app/veza
-    container_name: php_${DB_DATABASE}
     volumes:
       - .:/app/veza
     ports:

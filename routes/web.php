@@ -12,4 +12,7 @@
 */
 
 
+
+// Route for Single Page application
 Route::get('/{any}', 'SpaController')->where('any','.*');
+

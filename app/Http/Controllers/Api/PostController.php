@@ -17,7 +17,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $data = Post::where('user_id', $request->user()->id)
-                ->with('user:id,name')
+                ->with('user')
                 ->orderBy('id', 'desc')
                 ->get();
 
@@ -41,7 +41,7 @@ class PostController extends Controller
         $dataInsert = Post::create($data);
 
         // Retrieve the newly created post with user details
-        $newData = Post::where('id', $dataInsert->id)->with('user:id,name')->first();
+        $newData = Post::where('id', $dataInsert->id)->with('user')->first();
 
         if($newData)
             return response()->json(['message' => 'Successfully Posted', 'data' => $newData], 201);

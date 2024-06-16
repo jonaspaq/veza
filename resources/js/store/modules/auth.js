@@ -1,6 +1,6 @@
 
 export default {
-    namespaced: true, 
+    namespaced: true,
 
     state: {
         loginLoading: false,
@@ -59,7 +59,7 @@ export default {
         },
         setUserDetails({commit}){
             return new Promise((resolve, reject)=>{
-                axios.get('/api/user/authDetails')
+                axios.get('/api/user/auth-details')
                 .then((response)=>{
                     commit('SET_USER_DETAILS', response.data)
                     resolve(response)
@@ -73,7 +73,7 @@ export default {
             commit('UNSET_ACCESS_TOKEN')
         }
     },
-    
+
     getters: {
         user: function(state){
             return state.user
@@ -85,7 +85,7 @@ export default {
             return state.access_token
         },
         loginErrors: state => state.loginErrors,
-    
+
         loginStatus(state){
             return (state.user) ? true : false
         }

@@ -11,6 +11,9 @@ use DB;
 
 class FriendListController extends Controller
 {
+    protected $withSender = 'sender:id,first_name,middle_name,last_name,email';
+    protected $withReceiver = 'receiver:id,first_name,middle_name,last_name,email';
+
     /**
      * Fetch all friend list which status is friends
      * Notice: This fetches the current user friends only
@@ -27,7 +30,7 @@ class FriendListController extends Controller
                     $query->where('user_one', $authID)
                     ->orWhere('user_two', $authID);
                 })
-                ->with('sender:id,name,email', 'receiver:id,name,email')
+                ->with($this->withSender, $this->withReceiver)
                 ->paginate();
 
         return response()->json($data);
@@ -42,7 +45,7 @@ class FriendListController extends Controller
         $data = $request->user()->friendReceived()
             ->select('id', 'user_one', 'created_at')
             ->where('status', 'pending')
-            ->with('sender:id,name,email')
+            ->with($this->withSender)
             ->orderBy('id', 'desc')
             ->paginate();
 
@@ -65,7 +68,7 @@ class FriendListController extends Controller
         $data = $request->user()->friendSent()
             ->select('id', 'user_two', 'created_at')
             ->where('status', 'pending')
-            ->with('receiver:id,name,email')
+            ->with($this->withReceiver)
             ->orderBy('id', 'desc')
             ->paginate();
 

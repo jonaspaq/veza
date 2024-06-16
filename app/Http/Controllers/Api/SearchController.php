@@ -23,8 +23,10 @@ class SearchController extends Controller
         $toSearch = $data->validated()['q'];
         $toSearch = strtolower($toSearch);
 
-        $data = User::select('id','name','created_at')
-                    ->where('name','like','%'.$toSearch.'%')
+        $data = User::select('id','first_name','last_name','created_at')
+                    ->where('first_name','like','%'.$toSearch.'%')
+                    ->orWhere('middle_name','like','%'.$toSearch.'%')
+                    ->orWhere('last_name','like','%'.$toSearch.'%')
                     ->orWhere('email','like','%'.$toSearch.'%')
                     ->paginate();
 

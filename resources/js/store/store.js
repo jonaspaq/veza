@@ -12,7 +12,7 @@ const store = new Vuex.Store({
     modules: {
         // ES5 style
         auth: auth,
-        // ES6 style (only one propery if imported value is same name with property)
+        // ES6 style (only one property if imported value is same name with property)
         posts,
         friends
 
@@ -20,4 +20,4 @@ const store = new Vuex.Store({
 })
 
 // Store initialize
-export default store 
+export default store

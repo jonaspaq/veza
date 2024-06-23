@@ -1,9 +1,9 @@
 <template>
     <div class="d-flex align-items-center shadow-sm py-2 friendItem bg-white px-2">
         <div class="friendItemImg centerImage mr-1">
-            <img src="/images/user.png" :alt="friendData.name">
+            <img src="/images/user.png" :alt="name">
         </div>
-        <router-link :to="{name:'userProfile', query : {user: friendData.id}}" class="friendRecieverName anchorColor">{{ friendData.name }}</router-link>
+        <router-link :to="{name:'userProfile', query : {user: friendData.id}}" class="friendRecieverName anchorColor">{{ name }}</router-link>
         <div v-if="!loading" class="dropdown dropleft ml-auto">
             <button class="emptyBtn mr-1 px-1" type="button" id="friendOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v"></i>
@@ -39,7 +39,7 @@ export default {
     methods:{
         unfriend(friend){
             this.loading = true
-            
+
             this.$store.dispatch('friends/deleteFriend', friend)
         }
     },
@@ -50,6 +50,10 @@ export default {
             if (this.friend.sender.id == this.$store.getters['auth/user'].id)
                 return this.friend.receiver
             return this.friend.sender
+        },
+
+        name(){
+            return this.friendData.first_name + " " + this.friendData.last_name
         }
     }
 
@@ -73,7 +77,7 @@ export default {
 
 .friendItem{
     border-radius: 4px;
-    
+
     &Img{
         border-radius: 50px;
         width: 30px;

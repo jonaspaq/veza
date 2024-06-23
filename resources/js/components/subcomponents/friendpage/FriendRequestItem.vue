@@ -3,7 +3,7 @@
         <div class="friendItemImg centerImage mr-1">
             <img src="/images/user.png" :alt="friend.sender.name">
         </div>
-        <router-link :to="{name:'userProfile', query:{user: friend.sender.id}}" class="senderName anchorColor">{{ friend.sender.name }}</router-link>
+        <router-link :to="{name:'userProfile', query:{user: friend.sender.id}}" class="senderName anchorColor">{{ senderName }}</router-link>
 
         <button v-if="!warn&&!loading" class="emptyBtn ml-auto" @click="acceptRequest(friend)">
             <i class="fas fa-user-plus"></i>
@@ -60,6 +60,12 @@ export default {
         cancelDecline(){
             this.warn = false
         }
+    },
+
+    computed: {
+        senderName(){
+            return this.friend.sender.first_name + " " + this.friend.sender.last_name
+        }
     }
 }
 </script>
@@ -81,7 +87,7 @@ export default {
 
 .friendItem{
     border-radius: 4px;
-    
+
     &Img{
         border-radius: 50px;
         width: 30px;

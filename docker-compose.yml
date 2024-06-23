@@ -81,12 +81,13 @@ services:
     volumes:
       - .:/app/veza
     # command tail -F is added so container won't exit
-    command: sh -c "composer install -n --no-progress && tail -F /anything/here"
+    command: sh -c "tail -F /anything/here"
     networks:
       - vezadocker
 
   node:
-    image: node:12.16.1-alpine
+    # image: node:12.16.1-alpine
+    image: node:20.14-alpine3.19
     container_name: node_${DB_DATABASE}
     tty: true
     depends_on:
@@ -94,7 +95,7 @@ services:
     working_dir: /app/veza
     volumes:
       - .:/app/veza
-    command: sh -c "yarn install && node"
+    command: sh -c "node"
     networks:
       - vezadocker
 # ------------------ OPTIONAL --------------------- #

@@ -12,28 +12,12 @@ jobs:
         node-version: [20.x]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-
-    - name: Get npm cache directory path
-      id: npm-cache-dir-path
-      run: echo "::set-output name=dir::$(npm cache dir)"
-
-    - name: Cache dependencies
-      uses: actions/cache@v1
-      id: npm-cache
-      env:
-        cache-name: cache-dependencies
-      with:
-        path: ${{ steps.npm-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+        cache: 'npm'
 
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
@@ -48,32 +32,16 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [20.x]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-
-    - name: Get npm cache directory path
-      id: npm-cache-dir-path
-      run: echo "::set-output name=dir::$(npm cache dir)"
-
-    - name: Cache dependencies
-      uses: actions/cache@v1
-      id: npm-cache
-      env:
-        cache-name: cache-dependencies
-      with:
-        path: ${{ steps.npm-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+        cache: 'npm'
 
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'

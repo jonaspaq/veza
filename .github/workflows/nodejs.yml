@@ -18,18 +18,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+    - name: Get npm cache directory path
+      id: npm-cache-dir-path
+      run: echo "::set-output name=dir::$(npm cache dir)"
 
     - name: Cache dependencies
       uses: actions/cache@v1
-      id: yarn-cache
+      id: npm-cache
       env:
         cache-name: cache-dependencies
       with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+        path: ${{ steps.npm-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.lock') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
@@ -37,7 +37,7 @@ jobs:
 
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
-      run: yarn install --frozen-lockfile
+      run: npm install --frozen-lockfile
 
     - name: Lint scss
       run: npm run lint
@@ -58,18 +58,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+    - name: Get npm cache directory path
+      id: npm-cache-dir-path
+      run: echo "::set-output name=dir::$(npm cache dir)"
 
     - name: Cache dependencies
       uses: actions/cache@v1
-      id: yarn-cache
+      id: npm-cache
       env:
         cache-name: cache-dependencies
       with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+        path: ${{ steps.npm-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.lock') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
@@ -77,7 +77,7 @@ jobs:
 
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
-      run: yarn install --frozen-lockfile
+      run: npm install --frozen-lockfile
 
     - name: Test build for production
-      run: yarn production
+      run: npm production

@@ -66,7 +66,7 @@ jobs:
           keys:
             - node-v1-{{ checksum "package.json" }}
             - node-v1-
-      - run: yarn install
+      - run: npm install
       - save_cache:
           key: node-v1-{{ checksum "package.json" }}
           paths:
@@ -74,7 +74,7 @@ jobs:
 
       - run:
           name: Build assets
-          command: yarn run production
+          command: npm run production
 
         # prepare the database
       - run:

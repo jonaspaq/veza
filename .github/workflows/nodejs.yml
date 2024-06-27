@@ -48,4 +48,4 @@ jobs:
       run: npm install --frozen-lockfile
 
     - name: Test build for production
-      run: npm production
+      run: npm run production
